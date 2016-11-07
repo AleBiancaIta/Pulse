@@ -4,6 +4,12 @@ Pulse is an app to help managers stay on top of the "pulse" of their team. Users
 
 Time spent: **X** hours spent in total
 
+## Wireframe
+
+Here's a picture of the initial wireframe:
+
+<img src='http://i.imgur.com/t0MgcN0.jpg' title='Pulse Wireframe' width='' alt='Pulse Wireframe' />
+
 ## User Stories
 
 The following functionality is completed:
