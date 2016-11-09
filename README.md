@@ -9,6 +9,7 @@ Time spent: **X** hours spent in total
 Here's a picture of the initial wireframe:
 
 <img src='http://i.imgur.com/t0MgcN0.jpg' title='Pulse Wireframe' width='' alt='Pulse Wireframe' />
+<img src='http://i.imgur.com/YlbxRIO.jpg' title='Pulse Wireframe 2' width='' alt='Pulse Wireframe 2' />
 
 ## User Stories
 
