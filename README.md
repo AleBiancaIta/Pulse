@@ -1,4 +1,4 @@
-# CodePathGroupProject - Pulse
+# CodePath Group Project - Pulse
 
 Pulse is an app to help managers stay on top of the "pulse" of their team. Users can see a summary view of their teams "pulse" via happiness, engagement, and workload factors. Additional functionality allows users to maintain a schedule of their 1:1s, take notes and photos, access their app information using different devices, keep a history of their data, etc.
 
@@ -31,7 +31,7 @@ The following functionality is completed:
      - [] User must be able to sign up for an account  
 
      **optional**
-     - [] User can sign up using Google authentication
+     - [] User can sign up using Google or Facebook authentication
      - [] User can add their company to be able to sync up with other users within the company
 
 - [] Reset password page
@@ -44,9 +44,8 @@ The following functionality is completed:
      **required**
      - [] Contains a setting button - tapping on it should direct user to settings page 
      - [] Contains a logout button - tapping on it should log user out completely and show the login page
-     - [] Contains controls (tab bar) at the bottom to allow user to switch between Home, Team, ToDo pages
      - [] Contains a chart showing the history of the team pulse
-     - [] Contains an org chart showing the pulse at the moment
+     - [] Contains an org chart showing the pulse with the most recent survey results
 
      **optional**
      - [] Make the dashboard graphics interactive, for example: user can tap the chart pin to see pulse details
@@ -54,7 +53,7 @@ The following functionality is completed:
      - [] Allow user to see the same information in List view
      - [] Include filters, for example: search by date range
 
-- [] Team page
+- [] Team module 
 
      **required**
      - [] User must be able to see a list of everyone in his/her team and their current status (based on last 1:1)
@@ -70,7 +69,7 @@ The following functionality is completed:
 - [] Employee detail page
 
      **required**
-     - [] Contains employee's current pulse, next and upcoming 1:1s scheduled, manager's ToDos, and 1:1 history
+     - [] Contains employee's current pulse, next and upcoming 1:1s scheduled, manager's ToDos (this is its own module), and 1:1 history
      - [] Next 1:1 date can be entered in text field
      - [] Clicking on 1:1 date should:
          - [] Open a blank page if the note does not exist
