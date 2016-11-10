@@ -76,20 +76,22 @@ extension SkeletonViewController: UITableViewDataSource {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return SkeletonViewController.cards.count + 1
     }
+    
+    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
             SkeletonViewController.cards.remove(at: indexPath.section)
             tableView.reloadData()
         }
-    }
+    }*/
 }
 
 // MARK: - UITableViewDelegate
