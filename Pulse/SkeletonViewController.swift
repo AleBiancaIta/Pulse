@@ -68,7 +68,8 @@ extension SkeletonViewController: UITableViewDataSource {
         // TODO replace the cells with the actual view
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
-            cell.titleLabel.text = SkeletonViewController.cards[indexPath.section].name
+            cell.delegate = self
+            cell.card = SkeletonViewController.cards[indexPath.section]
             return cell
         }
     }
@@ -116,6 +117,28 @@ extension SkeletonViewController: SelectionViewControllerDelegate {
     }
     
     func selectionViewController(selectionViewController: SelectionViewController, didRemoveCard card: Card) {
+        // Remove card from table view
+        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+            if dashboardCard.id == card.id {
+                SkeletonViewController.cards.remove(at: index)
+            }
+        }
+        tableView.reloadData()
+    }
+}
+
+// MARK: - CardCellDelegate
+
+extension SkeletonViewController: CardCellDelegate {
+    func cardCell(cardCell: CardCell, didMoveUp card: Card) {
+        
+    }
+    
+    func cardCell(cardCell: CardCell, didMoveDown card: Card) {
+        
+    }
+    
+    func cardCell(cardCell: CardCell, didDelete card: Card) {
         // Remove card from table view
         for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
             if dashboardCard.id == card.id {

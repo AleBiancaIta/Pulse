@@ -8,9 +8,23 @@
 
 import UIKit
 
+protocol CardCellDelegate: class {
+    func cardCell(cardCell: CardCell, didMoveUp card: Card)
+    func cardCell(cardCell: CardCell, didMoveDown card: Card)
+    func cardCell(cardCell: CardCell, didDelete card: Card)
+}
+
 class CardCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    
+    weak var delegate: CardCellDelegate?
+    
+    var card: Card! {
+        didSet {
+            titleLabel.text = card.name
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,13 +39,16 @@ class CardCell: UITableViewCell {
     
     @IBAction func onUpButton(_ sender: AnyObject) {
         print("up")
+        delegate?.cardCell(cardCell: self, didMoveUp: card)
     }
 
     @IBAction func onDownButton(_ sender: AnyObject) {
         print("down")
+        delegate?.cardCell(cardCell: self, didMoveDown: card)
     }
     
     @IBAction func onDeleteButton(_ sender: AnyObject) {
         print("delete")
+        delegate?.cardCell(cardCell: self, didDelete: card)
     }
 }
