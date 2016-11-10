@@ -10,7 +10,8 @@ import UIKit
 
 class Card: NSObject {
 
-    var id: String?
+    //var index: String? // TODO add this?
+    var id: String? // TODO change to enum?
     var name: String?
     
     static let cards: [Card] = [

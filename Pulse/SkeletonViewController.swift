@@ -12,7 +12,7 @@ class SkeletonViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    let alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+    var alertController: UIAlertController?
     static var cards: [Card] = [] // TODO put in data controller, then abstract this so it's a true skeleton VC
     
     override func viewDidLoad() {
@@ -25,15 +25,17 @@ class SkeletonViewController: UIViewController {
 
         tableView.register(UINib(nibName: "CardCellNib", bundle: nil), forCellReuseIdentifier: "CardCell")
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
+        
+        alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+        alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
     }
     
     // MARK: - IBAction
     
     @IBAction func onAddCard(_ sender: UIBarButtonItem) {
         guard SkeletonViewController.cards.count != Card.cards.count else {
-            alertController.message = "You already have all the cards"
-            alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
-            present(alertController, animated: true)
+            alertController?.message = "You already have all the cards"
+            present(alertController!, animated: true)
             return
         }
         
@@ -131,11 +133,43 @@ extension SkeletonViewController: SelectionViewControllerDelegate {
 
 extension SkeletonViewController: CardCellDelegate {
     func cardCell(cardCell: CardCell, didMoveUp card: Card) {
-        
+        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+            if dashboardCard.id == card.id {
+                
+                // First card
+                guard index != 0 else {
+                    alertController?.message = "This card cannot move up further"
+                    present(alertController!, animated: true)
+                    return
+                }
+            
+                // Swap with card before
+                let cardBefore = SkeletonViewController.cards[index-1]
+                SkeletonViewController.cards[index-1] = card
+                SkeletonViewController.cards[index] = cardBefore
+                tableView.reloadData()
+            }
+        }
     }
     
     func cardCell(cardCell: CardCell, didMoveDown card: Card) {
-        
+        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+            if dashboardCard.id == card.id { // TODO find better way to do this
+                
+                // Last card
+                guard index < SkeletonViewController.cards.count - 1 else {
+                    alertController?.message = "This card cannot move down further"
+                    present(alertController!, animated: true)
+                    return
+                }
+                
+                // Swap with card after
+                let cardAfter = SkeletonViewController.cards[index+1]
+                SkeletonViewController.cards[index+1] = card
+                SkeletonViewController.cards[index] = cardAfter
+                tableView.reloadData()
+            }
+        }
     }
     
     func cardCell(cardCell: CardCell, didDelete card: Card) {
