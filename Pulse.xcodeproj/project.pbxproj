@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
+		678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* SkeletonViewController.swift */; };
 		67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */; };
 		67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AC1DCD8DA500BFD931 /* ViewController.swift */; };
 		67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 
 /* Begin PBXFileReference section */
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
+		678802901DD41540001338A8 /* SkeletonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewController.swift; sourceTree = "<group>"; };
 		67A364A71DCD8DA500BFD931 /* Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A364AC1DCD8DA500BFD931 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -40,6 +42,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		678802961DD41733001338A8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		678802971DD41739001338A8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		678802981DD41745001338A8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				678802901DD41540001338A8 /* SkeletonViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		67A3649E1DCD8DA400BFD931 = {
 			isa = PBXGroup;
 			children = (
@@ -61,6 +85,9 @@
 		67A364A91DCD8DA500BFD931 /* Pulse */ = {
 			isa = PBXGroup;
 			children = (
+				678802971DD41739001338A8 /* Views */,
+				678802961DD41733001338A8 /* Models */,
+				678802981DD41745001338A8 /* Controllers */,
 				67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */,
 				67A364AC1DCD8DA500BFD931 /* ViewController.swift */,
 				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
@@ -213,6 +240,7 @@
 			files = (
 				67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
+				678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
