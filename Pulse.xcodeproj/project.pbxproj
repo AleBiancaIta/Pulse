@@ -16,8 +16,8 @@
 		67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Main.storyboard */; };
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
-		67D8D61F1DD4655E00B6DE19 /* CardHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D61D1DD4655E00B6DE19 /* CardHeaderCell.swift */; };
-		67D8D6201DD4655E00B6DE19 /* CardHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D61E1DD4655E00B6DE19 /* CardHeaderCell.xib */; };
+		67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* MessageCell.swift */; };
+		67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +32,8 @@
 		67A364B11DCD8DA500BFD931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67A364B41DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A364B61DCD8DA500BFD931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		67D8D61D1DD4655E00B6DE19 /* CardHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHeaderCell.swift; sourceTree = "<group>"; };
-		67D8D61E1DD4655E00B6DE19 /* CardHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardHeaderCell.xib; sourceTree = "<group>"; };
+		67D8D6211DD4E28900B6DE19 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellNib.xib; sourceTree = "<group>"; };
 		7747767799B8936708691A8F /* Pods-Pulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.release.xcconfig"; sourceTree = "<group>"; };
 		EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -54,8 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				678802A71DD44A4C001338A8 /* Card.swift */,
-				67D8D61D1DD4655E00B6DE19 /* CardHeaderCell.swift */,
-				67D8D61E1DD4655E00B6DE19 /* CardHeaderCell.xib */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -63,6 +61,8 @@
 		678802971DD41739001338A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				67D8D6211DD4E28900B6DE19 /* MessageCell.swift */,
+				67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -190,8 +190,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
+				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
-				67D8D6201DD4655E00B6DE19 /* CardHeaderCell.xib in Resources */,
 				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,8 +255,8 @@
 				67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
-				67D8D61F1DD4655E00B6DE19 /* CardHeaderCell.swift in Sources */,
 				678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */,
+				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

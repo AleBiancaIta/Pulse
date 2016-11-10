@@ -20,6 +20,10 @@ class SkeletonViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
     }
     
     // MARK: - IBAction
@@ -41,7 +45,6 @@ class SkeletonViewController: UIViewController {
         
         present(selectionNavigationController, animated: true, completion: nil)
     }
-    
 }
 
 // MARK: - UITableViewDataSource
@@ -51,35 +54,39 @@ extension SkeletonViewController: UITableViewDataSource {
         
         // No cards
         if SkeletonViewController.cards.count == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Tap the + button to add a card"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.message = "Tap the + button to add cards"
             return cell
         
-        // Last cell
-        } else if SkeletonViewController.cards.count == indexPath.row {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Tap the + button to add a new 1:1 meeting, or \nlong press the + button to add a card"
+        // Last section
+        } else if indexPath.section == numberOfSections(in: tableView) - 1 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.message = "Tap the + button to add a new 1:1 meeting, or long press the + button to add cards"
             return cell
         
         // TODO replace the cells with the actual view
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = SkeletonViewController.cards[indexPath.row].name
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath)
+            cell.textLabel?.text = SkeletonViewController.cards[indexPath.section].name
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return SkeletonViewController.cards.count + 1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return SkeletonViewController.cards.count + 1
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            SkeletonViewController.cards.remove(at: indexPath.row)
+            SkeletonViewController.cards.remove(at: indexPath.section)
             tableView.reloadData()
         }
     }
