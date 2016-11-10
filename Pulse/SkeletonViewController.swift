@@ -22,7 +22,8 @@ class SkeletonViewController: UIViewController {
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
-        
+
+        tableView.register(UINib(nibName: "CardCellNib", bundle: nil), forCellReuseIdentifier: "CardCell")
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
     }
     
@@ -66,8 +67,8 @@ extension SkeletonViewController: UITableViewDataSource {
         
         // TODO replace the cells with the actual view
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath)
-            cell.textLabel?.text = SkeletonViewController.cards[indexPath.section].name
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
+            cell.titleLabel.text = SkeletonViewController.cards[indexPath.section].name
             return cell
         }
     }

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="122" id="KGk-i7-Jjw" customClass="CardCell" customModule="Pulse" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="560" height="123"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="560" height="122"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sx5-7Q-WER" userLabel="Action View">
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gpN-Oh-Jzp">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="gpN-Oh-Jzp" secondAttribute="bottom" constant="8" id="Buh-nf-vDX"/>
+                            <constraint firstAttribute="trailing" secondItem="gpN-Oh-Jzp" secondAttribute="trailing" constant="8" id="NVi-CT-7DY"/>
+                            <constraint firstItem="gpN-Oh-Jzp" firstAttribute="leading" secondItem="Sx5-7Q-WER" secondAttribute="leading" constant="8" id="Q3X-f9-1uI"/>
+                            <constraint firstItem="gpN-Oh-Jzp" firstAttribute="top" secondItem="Sx5-7Q-WER" secondAttribute="top" constant="8" id="gIx-Hq-wDD"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mXT-BK-Yhs" userLabel="Information View">
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1qo-ey-XFq">
+                                <state key="normal" title="Move Up">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onUpButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6qX-Cc-SlO"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L8T-As-nRK">
+                                <state key="normal" title="Move Down">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDownButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZDV-LQ-5nw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvm-1L-zTW">
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onDeleteButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="n6i-Cp-0oD"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Hvm-1L-zTW" firstAttribute="top" secondItem="L8T-As-nRK" secondAttribute="bottom" constant="8" id="Axs-1G-ZiV"/>
+                            <constraint firstAttribute="trailing" secondItem="L8T-As-nRK" secondAttribute="trailing" constant="8" id="Pbk-Zh-IPa"/>
+                            <constraint firstAttribute="bottom" secondItem="Hvm-1L-zTW" secondAttribute="bottom" constant="8" id="UtV-vN-Lpu"/>
+                            <constraint firstItem="1qo-ey-XFq" firstAttribute="top" secondItem="mXT-BK-Yhs" secondAttribute="top" constant="8" id="bud-Af-P3E"/>
+                            <constraint firstAttribute="trailing" secondItem="Hvm-1L-zTW" secondAttribute="trailing" constant="8" id="cag-qr-MkA"/>
+                            <constraint firstAttribute="trailing" secondItem="1qo-ey-XFq" secondAttribute="trailing" constant="8" id="ldy-CP-3bX"/>
+                            <constraint firstAttribute="width" constant="100" id="mYk-12-sQ9"/>
+                            <constraint firstItem="L8T-As-nRK" firstAttribute="top" secondItem="1qo-ey-XFq" secondAttribute="bottom" constant="8" id="rxO-le-iRO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                <constraints>
+                    <constraint firstItem="Sx5-7Q-WER" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="0DX-vZ-lfw"/>
+                    <constraint firstAttribute="bottom" secondItem="Sx5-7Q-WER" secondAttribute="bottom" id="66F-kU-v5e"/>
+                    <constraint firstItem="Sx5-7Q-WER" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="7OP-Ja-cBi"/>
+                    <constraint firstAttribute="trailing" secondItem="mXT-BK-Yhs" secondAttribute="trailing" id="IQH-rS-Wak"/>
+                    <constraint firstItem="mXT-BK-Yhs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="JYk-o0-qT1"/>
+                    <constraint firstItem="mXT-BK-Yhs" firstAttribute="leading" secondItem="Sx5-7Q-WER" secondAttribute="trailing" id="PbD-hy-1X3"/>
+                    <constraint firstAttribute="bottom" secondItem="mXT-BK-Yhs" secondAttribute="bottom" id="nL6-QY-kGS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLabel" destination="gpN-Oh-Jzp" id="aA5-eT-4CO"/>
+            </connections>
+            <point key="canvasLocation" x="226" y="138.5"/>
+        </tableViewCell>
+    </objects>
+</document>

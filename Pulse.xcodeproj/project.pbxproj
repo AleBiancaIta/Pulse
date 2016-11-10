@@ -18,6 +18,8 @@
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
 		67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* MessageCell.swift */; };
 		67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */; };
+		67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6271DD4F16800B6DE19 /* CardCell.swift */; };
+		67D8D62A1DD4F16800B6DE19 /* CardCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		67A364B61DCD8DA500BFD931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67D8D6211DD4E28900B6DE19 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellNib.xib; sourceTree = "<group>"; };
+		67D8D6271DD4F16800B6DE19 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCellNib.xib; sourceTree = "<group>"; };
 		7747767799B8936708691A8F /* Pods-Pulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.release.xcconfig"; sourceTree = "<group>"; };
 		EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -63,6 +67,8 @@
 			children = (
 				67D8D6211DD4E28900B6DE19 /* MessageCell.swift */,
 				67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */,
+				67D8D6271DD4F16800B6DE19 /* CardCell.swift */,
+				67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -191,6 +197,7 @@
 			files = (
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
 				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
+				67D8D62A1DD4F16800B6DE19 /* CardCellNib.xib in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
 				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
 			);
@@ -251,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */,
 				678802A31DD4469C001338A8 /* SelectionViewController.swift in Sources */,
 				67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
