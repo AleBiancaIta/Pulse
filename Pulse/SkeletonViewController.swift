@@ -8,43 +8,38 @@
 
 import UIKit
 
-enum Card: Int {
-    case meetings = 0, org_chart, photo_notes, pulse_graph, team, to_do
-    static var count: Int { return Card.to_do.hashValue + 1}
-}
-
 class SkeletonViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
     let alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
-    var cards: [Card] = []
+    static var cards: [Card] = [] // TODO put in data controller, then abstract this so it's a true skeleton VC
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
-
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - IBAction
     
     @IBAction func onAddCard(_ sender: UIBarButtonItem) {
-        guard cards.count != Card.count else {
+        guard SkeletonViewController.cards.count != Card.cards.count else {
             alertController.message = "You already have all the cards"
             alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
             present(alertController, animated: true)
             return
+        }
         
-        } /*else if cards.contains(.pulse_graph) {
-            // Error: Already have this card
-        }*/
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let selectionNavigationController = storyboard.instantiateViewController(withIdentifier: "SelectionNavigationController") as! UINavigationController
         
-        // Insert new card at the top of the table view
-        cards.insert(Card(rawValue: cards.count)!, at: 0)
-        tableView.reloadData()
+        if let selectionViewController = selectionNavigationController.topViewController as? SelectionViewController {
+            selectionViewController.delegate = self
+        }
+        
+        present(selectionNavigationController, animated: true, completion: nil)
     }
     
 }
@@ -53,37 +48,29 @@ class SkeletonViewController: UIViewController {
 
 extension SkeletonViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // No cards
+        if SkeletonViewController.cards.count == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+            cell.textLabel?.text = "Tap the + button to add a card"
+            return cell
+        
+        // Last cell
+        } else if SkeletonViewController.cards.count == indexPath.row {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
+            cell.textLabel?.text = "Tap the + button to add a new 1:1 meeting, or \nlong press the + button to add a card"
+            return cell
+        
         // TODO replace the cells with the actual view
-        switch cards[indexPath.row] {
-        case .meetings:
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Meetings"
-            return cell
-        case .org_chart:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Organizational Chart"
-            return cell
-        case .photo_notes:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Photo Notes"
-            return cell
-        case .pulse_graph:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Pulse Graph"
-            return cell
-        case .team:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "Team"
-            return cell
-        case .to_do:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath)
-            cell.textLabel?.text = "To Dos"
+            cell.textLabel?.text = SkeletonViewController.cards[indexPath.row].name
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cards.count
+        return SkeletonViewController.cards.count + 1
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -92,7 +79,7 @@ extension SkeletonViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            cards.remove(at: indexPath.row)
+            SkeletonViewController.cards.remove(at: indexPath.row)
             tableView.reloadData()
         }
     }
@@ -105,5 +92,26 @@ extension SkeletonViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+// MARK: - SelectionViewControllerDelegate
+
+extension SkeletonViewController: SelectionViewControllerDelegate {
+    
+    func selectionViewController(selectionViewController: SelectionViewController, didAddCard card: Card) {
+        // Insert new card at the top of the table view
+        SkeletonViewController.cards.insert(card, at: 0)
+        tableView.reloadData()
+    }
+    
+    func selectionViewController(selectionViewController: SelectionViewController, didRemoveCard card: Card) {
+        // Remove card from table view
+        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+            if dashboardCard.id == card.id {
+                SkeletonViewController.cards.remove(at: index)
+            }
+        }
+        tableView.reloadData()
     }
 }
