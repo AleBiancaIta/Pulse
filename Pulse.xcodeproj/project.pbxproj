@@ -21,7 +21,7 @@
 		678802A81DD44A4C001338A8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A71DD44A4C001338A8 /* Card.swift */; };
 		67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */; };
 		67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AC1DCD8DA500BFD931 /* ViewController.swift */; };
-		67A364B01DCD8DA500BFD931 /* LoginSignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* LoginSignUp.storyboard */; };
+		67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Main.storyboard */; };
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
 		67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* MessageCell.swift */; };
@@ -49,7 +49,7 @@
 		67A364A71DCD8DA500BFD931 /* Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A364AC1DCD8DA500BFD931 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		67A364AF1DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginSignUp.storyboard; sourceTree = "<group>"; };
+		67A364AF1DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		67A364B11DCD8DA500BFD931 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		67A364B41DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A364B61DCD8DA500BFD931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,14 +109,14 @@
 		431804A21DD5B0B700B279C6 /* SignUp/Login */ = {
 			isa = PBXGroup;
 			children = (
-				4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */,
 				4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */,
-				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
-				431804931DD5A8BE00B279C6 /* LoginViewController.xib */,
-				431804961DD5AD7500B279C6 /* SignUpViewController.swift */,
 				431804971DD5AD7500B279C6 /* SignUpViewController.xib */,
-				4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */,
+				431804931DD5A8BE00B279C6 /* LoginViewController.xib */,
 				4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */,
+				4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */,
+				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
+				431804961DD5AD7500B279C6 /* SignUpViewController.swift */,
+				4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */,
 			);
 			name = SignUp/Login;
 			sourceTree = "<group>";
@@ -148,7 +148,7 @@
 				67D8D6491DD56D9800B6DE19 /* Constants.swift */,
 				67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */,
 				67A364AC1DCD8DA500BFD931 /* ViewController.swift */,
-				67A364AE1DCD8DA500BFD931 /* LoginSignUp.storyboard */,
+				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
 				431804A21DD5B0B700B279C6 /* SignUp/Login */,
 				67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */,
@@ -324,12 +324,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		67A364AE1DCD8DA500BFD931 /* LoginSignUp.storyboard */ = {
+		67A364AE1DCD8DA500BFD931 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				67A364AF1DCD8DA500BFD931 /* Base */,
 			);
-			name = LoginSignUp.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */ = {
