@@ -10,25 +10,27 @@ import UIKit
 
 class Card: NSObject {
 
-    //var index: String? // TODO add this?
-    var id: String? // TODO change to enum?
+    var id: String?
     var name: String?
+    var cardType: CardType?
+    var pageType: PageType?
     
-    static let cards: [Card] = [
-        Card(dictionary: ["id" : "meetings", "name": "Meetings"]),
-        Card(dictionary: ["id" : "org_chart", "name": "Organizational Chart"]),
-        Card(dictionary: ["id" : "photo_notes", "name": "Photo Notes"]),
-        Card(dictionary: ["id" : "pulse_graph", "name": "Pulse Graph"]),
-        Card(dictionary: ["id" : "team", "name": "Team"]),
-        Card(dictionary: ["id" : "to_do", "name": "To Dos"])
-    ]
-    
-    init(dictionary: [String: String]) {
-        id = dictionary["id"]
-        name = dictionary["name"]
+    init(dictionary: [String: AnyObject]) {
+        if let id = dictionary["id"] as? String {
+            self.id = id
+        }
+        if let name = dictionary["name"] as? String {
+            self.name = name
+        }
+        if let cardType = dictionary["card_type"] as? CardType {
+            self.cardType = cardType
+        }
+        if let pageType = dictionary["page_type"] as? PageType {
+            self.pageType = pageType
+        }
     }
     
-    class func cardsWithArray(dictionaries: [ [String: String] ]) -> [Card] {
+    class func cardsWithArray(dictionaries: [ [String: AnyObject] ]) -> [Card] {
         var cardsArray: [Card] = []
         
         for dictionary in dictionaries {
@@ -38,5 +40,4 @@ class Card: NSObject {
         
         return cardsArray
     }
-
 }

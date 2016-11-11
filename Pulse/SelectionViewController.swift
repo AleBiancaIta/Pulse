@@ -39,7 +39,7 @@ class SelectionViewController: UIViewController {
 
 extension SelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let card = Card.cards[indexPath.row]
+        let card = Constants.cards[indexPath.row]
     
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
         cell.textLabel?.text = card.name
@@ -54,7 +54,7 @@ extension SelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Card.cards.count
+        return Constants.cards.count
     }
 }
 
@@ -66,7 +66,7 @@ extension SelectionViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let card = Card.cards[indexPath.row]
+        let card = Constants.cards[indexPath.row]
         
         if SkeletonViewController.cards.contains(card) {
             delegate?.selectionViewController(selectionViewController: self, didRemoveCard: card)

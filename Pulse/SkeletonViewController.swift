@@ -33,7 +33,7 @@ class SkeletonViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func onAddCard(_ sender: UIBarButtonItem) {
-        guard SkeletonViewController.cards.count != Card.cards.count else {
+        guard SkeletonViewController.cards.count != Constants.cards.count else {
             alertController?.message = "You already have all the cards"
             present(alertController!, animated: true)
             return
