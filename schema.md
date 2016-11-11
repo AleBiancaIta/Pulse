@@ -1,9 +1,6 @@
 # CodePath Group Project - Pulse - Schema
 
-## Card: describe the different cards and which pages they are allowed to be used
-- card_id: Int
-- name: String
-- page_type: String (TO BE DISCUSSED)
+Notes: Table with ### next to it are in sync with Heroku
 
 ## Meetings: contain the one-on-one meeting data
 
@@ -25,67 +22,84 @@ Meetings
 - deleted_date: Date (Nullable) (stored as String in Parse)
 
 Option 2: (might be more flexible for future expansion, if we want to allow user to have more than 3 survey items)
-Meetings
-- meeting_id: Int
-- person_id: Int
-- manager_id: Int
-- survey_id: Int (foreign key to Survey table - see below)
-- notes: String (Nullable)
-- notes_photo_url_string: String (Nullable)
-- meeting_date: Date
-- meeting_place: String (Nullable)
-- selected_cards: String (Nullable)
-- created_date: Date (stored as String in Parse)
-- updated_date: Date (stored as String in Parse)
-- deleted_date: Date (Nullable) (stored as String in Parse)
+### Meetings
+- _id: "Meetings"
+- objectId: string (default Parse)
+- createdAt: date (default Parse)
+- updatedAt: date (default Parse)
+- personId: string (FK to Person)
+- managerId: string (FK to Person)
+- surveyId: string (FK to Survey)
+- notes: string (Nullable)
+- notesPhotoUrlString: string (Nullable)
+- meetingDate: date
+- meetingPlace: string (Nullable)
+- selectedCards: string (Nullable)
+- deletedAt: date (Nullable) (stored as String in Parse)
 
-Survey
-- survey_id: Int
-- survey_desc_1: String
-- survey_value_id_1: Int
-- survey_desc_2: String
-- survey_value_id_2: Int
-- survey_desc_3: String
-- survey_value_id_3: Int
+### Survey: store information related to a particular user survey
+- _id: "Survey"
+- objectId: string (default Parse)
+- updatedAt: date (default Parse)
+- createdAt: date(default Parse)
+- surveyDesc1: string
+- surveyValueId1: number
+- surveyDesc2: string
+- surveyValueId2: number
+- surveyDesc3: string
+- surveyValueId3: number
 
-## Person: describe the app User (Manager) and Team Members 
-- person_id: Int
-- device_id: String (Nullable) - I.C. won't have this
-- email: String (Nullable)  - I.C. might not have this
-- password: String (Nullable)  - I.C. won't have this
-- first_name: String
-- last_name: String
-- position_id: Int
-- phone: String (Nullable)
-- manager_id: Int
-- is_user: Bool
-- is_anonymous: Bool
-- photo_url_string: String (Nullable)
-- selected_cards: String (Nullable)
-- created_at: Date (stored as String in Parse)
-- updated_at: Date (stored as String in Parse)
-- deleted_at: Date (stored as String in Parse)
+### Person: describe the app User (Manager) and Team Members 
+- _id: "Person"
+- objectId: string (default Parse)
+- updatedAt: date (default Parse)
+- createdAt: date (default Parse)
+- deviceId: string (Nullable) 
+- email: string (Nullable)
+- firstName: string
+- lastName: string
+- positionId: string
+- phone: string (Nullable)
+- managerId: string
+- isUser: Bool
+- isAnonymous: Bool
+- photoUrlString: string (Nullable)
+- selectedCards: string (Nullable)
+- deletedAt: date
 
-## Positions: describe the list of potential user positions
+### ToDo: store todo data
+- _id: "ToDo"
+- objectId: string (default Parse)
+- updatedAt: date (default Parse)
+- createdAt: Date (default Parse)
+- managerId: string (FK to Person)
+- personId: string (FK to Person)
+- text: string
+- isCompleted: bool
+- dueAt: date 
+- completedAt: date 
+- deletedAt: date
+
+### Dashboard: link the user ID with the chosen cards
+- _id: "Dashboard"
+- objectId: string (default Parse)
+- updatedAt: date (default Parse)
+- createdAt: date (default Parse)
+- userId: string
+- selectedCards: String (Nullable)
+
+### Card: describe the different cards and which pages they are allowed to be used (Do we need this?)
+- _id: "Card" (default Parse)
+- objectId: string (default Parse)
+- updatedAt: date (default Parse)
+- createdAt: date(default Parse)
+- name: string
+- pageType: string (TO BE DISCUSSED) - currently I follow the format of "dashboard-employee"
+
+## Positions: describe the list of potential user positions (Do we need this?)
 - position_id: Int
 - description: String
 
-## SurveyValues: store data for the survey scores
+## SurveyValues: store data for the survey scores (Do we need this?)
 - value_id: Int
 - value: Int
-
-## ToDo: store todo data
-- todo_id: Int
-- manager_id: Int
-- person_id: Int
-- text: String
-- is_completed: Bool
-- due_at: Date (stored as String in Parse)
-- completed_at: Date (stored as String in Parse)
-- created_at: Date (stored as String in Parse)
-- updated_at: Date (stored as String in Parse)
-- deleted_at: Date (stored as String in Parse)
-
-## Dashboard: link the user ID with the chosen cards
-- user_id: Int
-- selected_cards: String (Nullable)
