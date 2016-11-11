@@ -38,6 +38,27 @@ class CardCell: UITableViewCell {
             trailingSpaceConstraint = NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: newView, attribute: .trailing, multiplier: 1, constant: 20)
             newView.addConstraint(trailingSpaceConstraint)*/
             
+            if let cardType = card.cardType {
+                switch cardType {
+                case "meeting":
+                    let viewController = MeetingDetailsViewController()
+                    let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
+                    let objects = nib.instantiate(withOwner: viewController, options: nil)
+                    informationView = objects.first as! UIView
+                default:
+                    break
+                }
+            }
+            
+            informationView.frame = contentView.frame
+            
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(onPanGesture(_:)))
+            panGesture.delegate = self
+            informationView.addGestureRecognizer(panGesture)
+            
+            contentView.addSubview(informationView)
+            contentView.layoutIfNeeded()
+            
         }
     }
     
@@ -59,7 +80,7 @@ class CardCell: UITableViewCell {
                     } else { // Show action view
                         self.informationView.center = CGPoint(x: self.originalCenter.x - 100, y: self.originalCenter.y)
                     }
-                    //self.view.layoutIfNeeded()
+                    self.contentView.layoutIfNeeded()
                 }
             )
         }
@@ -68,18 +89,7 @@ class CardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        let testVC = MeetingDetailsViewController()
-        let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
-        let objects = nib.instantiate(withOwner: testVC, options: nil)
-        informationView = objects.first as! UIView
-        informationView.frame = contentView.frame
-        
-        let longPressGesture = UIPanGestureRecognizer(target: self, action: #selector(onPanGesture(_:)))
-        longPressGesture.delegate = self
-        informationView.addGestureRecognizer(longPressGesture)
-        
-        contentView.addSubview(informationView)
-        
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

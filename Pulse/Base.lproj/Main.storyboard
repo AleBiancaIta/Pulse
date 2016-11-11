@@ -101,7 +101,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Types of Cards" id="2Zs-uw-oIs">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="done" id="wA6-FR-O1h">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="wA6-FR-O1h">
                             <connections>
                                 <action selector="onDoneButton:" destination="Pig-nt-sQL" id="fgc-Lf-ftO"/>
                             </connections>

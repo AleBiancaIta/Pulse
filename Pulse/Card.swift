@@ -12,29 +12,25 @@ class Card: NSObject {
 
     var id: String?
     var name: String?
-    var cardType: CardType?
-    var pageType: PageType?
-    var view: UIView?
+    var cardType: String?
+    var pageType: String?
     
-    init(dictionary: [String: AnyObject]) {
-        if let id = dictionary["id"] as? String {
+    init(dictionary: [String: String]) {
+        if let id = dictionary["id"] {
             self.id = id
         }
-        if let name = dictionary["name"] as? String {
+        if let name = dictionary["name"] {
             self.name = name
         }
-        if let cardType = dictionary["card_type"] as? CardType {
+        if let cardType = dictionary["card_type"] {
             self.cardType = cardType
         }
-        if let pageType = dictionary["page_type"] as? PageType {
+        if let pageType = dictionary["page_type"] {
             self.pageType = pageType
-        }
-        if let view = dictionary["view"] as? UIView {
-            self.view = view
         }
     }
     
-    class func cardsWithArray(dictionaries: [ [String: AnyObject] ]) -> [Card] {
+    class func cardsWithArray(dictionaries: [ [String: String] ]) -> [Card] {
         var cardsArray: [Card] = []
         
         for dictionary in dictionaries {
