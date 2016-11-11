@@ -83,6 +83,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="actionView" destination="Sx5-7Q-WER" id="5jy-oa-JRq"/>
                 <outlet property="titleLabel" destination="gpN-Oh-Jzp" id="aA5-eT-4CO"/>
             </connections>
             <point key="canvasLocation" x="226" y="138.5"/>

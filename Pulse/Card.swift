@@ -14,6 +14,7 @@ class Card: NSObject {
     var name: String?
     var cardType: CardType?
     var pageType: PageType?
+    var view: UIView?
     
     init(dictionary: [String: AnyObject]) {
         if let id = dictionary["id"] as? String {
@@ -27,6 +28,9 @@ class Card: NSObject {
         }
         if let pageType = dictionary["page_type"] as? PageType {
             self.pageType = pageType
+        }
+        if let view = dictionary["view"] as? UIView {
+            self.view = view
         }
     }
     

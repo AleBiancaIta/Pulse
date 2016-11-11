@@ -16,12 +16,18 @@ protocol CardCellDelegate: class {
 
 class CardCell: UITableViewCell {
 
+    @IBOutlet weak var actionView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
     weak var delegate: CardCellDelegate?
     
     var card: Card! {
         didSet {
+            let testVC = MeetingDetailsViewController()
+            let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
+            let objects = nib.instantiate(withOwner: testVC, options: nil)
+            actionView.addSubview(objects.first as! UIView) // TODO should be actionview
+            
             titleLabel.text = card.name
         }
     }
@@ -29,6 +35,7 @@ class CardCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
