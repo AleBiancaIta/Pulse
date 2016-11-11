@@ -61,8 +61,7 @@ Option 2: (might be more flexible for future expansion, if we want to allow user
 - positionId: string
 - phone: string (Nullable)
 - managerId: string
-- isUser: Bool
-- isAnonymous: Bool
+- userId: string
 - photoUrlString: string (Nullable)
 - selectedCards: string (Nullable)
 - deletedAt: date
@@ -75,7 +74,6 @@ Option 2: (might be more flexible for future expansion, if we want to allow user
 - managerId: string (FK to Person)
 - personId: string (FK to Person)
 - text: string
-- isCompleted: bool
 - dueAt: date 
 - completedAt: date 
 - deletedAt: date
@@ -94,7 +92,7 @@ Option 2: (might be more flexible for future expansion, if we want to allow user
 - updatedAt: date (default Parse)
 - createdAt: date(default Parse)
 - name: string
-- pageType: string (TO BE DISCUSSED) - currently I follow the format of "dashboard-employee"
+- type: string (TO BE DISCUSSED) - currently I follow the format of "dashboard-employee"
 
 ## Positions: describe the list of potential user positions (Do we need this?)
 - position_id: Int
@@ -103,3 +101,6 @@ Option 2: (might be more flexible for future expansion, if we want to allow user
 ## SurveyValues: store data for the survey scores (Do we need this?)
 - value_id: Int
 - value: Int
+
+Most likely, any static values we need (such as Card, Position, and Survey Values) will be stored on the client side. 
+- Benefits: Autocomplete, easier to maintain, etc.
