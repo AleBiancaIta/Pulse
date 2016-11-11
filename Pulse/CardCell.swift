@@ -16,25 +16,69 @@ protocol CardCellDelegate: class {
 
 class CardCell: UITableViewCell {
 
-    @IBOutlet weak var actionView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    
     weak var delegate: CardCellDelegate?
+    
+    var informationView: UIView!
+    var originalCenter: CGPoint!
     
     var card: Card! {
         didSet {
-            let testVC = MeetingDetailsViewController()
+            /*let testVC = MeetingDetailsViewController()
             let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
             let objects = nib.instantiate(withOwner: testVC, options: nil)
-            actionView.addSubview(objects.first as! UIView) // TODO should be actionview
+            let newView = objects.first as! UIView
+            newView.frame = contentView.frame
+
+            let longPressGesture = UIPanGestureRecognizer(target: self, action: #selector(onPanGesture(_:)))
+            longPressGesture.delegate = self
+            newView.addGestureRecognizer(longPressGesture)
             
-            titleLabel.text = card.name
+            contentView.addSubview(newView)
+            
+            trailingSpaceConstraint = NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: newView, attribute: .trailing, multiplier: 1, constant: 20)
+            newView.addConstraint(trailingSpaceConstraint)*/
+            
+        }
+    }
+    
+    @objc fileprivate func onPanGesture(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: contentView)
+        let velocity = sender.velocity(in: contentView)
+        
+        if sender.state == UIGestureRecognizerState.began {
+            originalCenter = sender.view?.center
+            
+        } else if sender.state == UIGestureRecognizerState.changed {
+            sender.view?.center = CGPoint(x: originalCenter.x + translation.x, y: originalCenter.y)
+            
+        } else if sender.state == UIGestureRecognizerState.ended {
+            UIView.animate(withDuration: 0.3,
+                animations: {
+                    if velocity.x > 0 { // Hide action view
+                        self.informationView.center = self.contentView.center
+                    } else { // Show action view
+                        self.informationView.center = CGPoint(x: self.originalCenter.x - 100, y: self.originalCenter.y)
+                    }
+                    //self.view.layoutIfNeeded()
+                }
+            )
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        let testVC = MeetingDetailsViewController()
+        let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
+        let objects = nib.instantiate(withOwner: testVC, options: nil)
+        informationView = objects.first as! UIView
+        informationView.frame = contentView.frame
+        
+        let longPressGesture = UIPanGestureRecognizer(target: self, action: #selector(onPanGesture(_:)))
+        longPressGesture.delegate = self
+        informationView.addGestureRecognizer(longPressGesture)
+        
+        contentView.addSubview(informationView)
         
     }
 
