@@ -1,5 +1,5 @@
 //
-//  SkeletonViewController.swift
+//  DashboardViewController.swift
 //  Pulse
 //
 //  Created by Bianca Curutan on 11/9/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SkeletonViewController: UIViewController {
+class DashboardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -33,45 +33,47 @@ class SkeletonViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func onAddCard(_ sender: UIBarButtonItem) {
-        guard SkeletonViewController.cards.count != Constants.cards.count else {
+        guard DashboardViewController.cards.count != Constants.dashboardCards.count else {
             alertController?.message = "You already have all the cards"
             present(alertController!, animated: true)
             return
         }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let selectionNavigationController = storyboard.instantiateViewController(withIdentifier: "SelectionNavigationController") as! UINavigationController
+        let dashboardSelectionNavigationController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionNavigationController") as! UINavigationController
         
-        if let selectionViewController = selectionNavigationController.topViewController as? SelectionViewController {
-            selectionViewController.delegate = self
+        if let dashboardSelectionViewController = dashboardSelectionNavigationController.topViewController as? DashboardSelectionViewController {
+            dashboardSelectionViewController.delegate = self
         }
         
-        present(selectionNavigationController, animated: true, completion: nil)
+        present(dashboardSelectionNavigationController, animated: true, completion: nil)
     }
 }
 
 // MARK: - UITableViewDataSource
 
-extension SkeletonViewController: UITableViewDataSource {
+extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // No cards
-        if SkeletonViewController.cards.count == 0 {
+        if DashboardViewController.cards.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
             cell.message = "Tap the + button to add cards"
+            cell.isUserInteractionEnabled = false
             return cell
         
         // Last section
         } else if indexPath.section == numberOfSections(in: tableView) - 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
             cell.message = "Tap the + button to add a new 1:1 meeting, or long press the + button to add cards"
+            cell.isUserInteractionEnabled = false
             return cell
         
         // TODO replace the cells with the actual view
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
             cell.delegate = self
-            cell.card = SkeletonViewController.cards[indexPath.section]
+            cell.card = DashboardViewController.cards[indexPath.section]
             return cell
         }
     }
@@ -81,7 +83,7 @@ extension SkeletonViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return SkeletonViewController.cards.count + 1
+        return DashboardViewController.cards.count + 1
     }
     
     /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -92,37 +94,63 @@ extension SkeletonViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCellEditingStyle.delete {
-            SkeletonViewController.cards.remove(at: indexPath.section)
+            DashboardViewController.cards.remove(at: indexPath.section)
             tableView.reloadData()
         }
     }*/
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard DashboardViewController.cards.count > section else {
+            return nil
+        }
+        return DashboardViewController.cards[section].name
+    }
 }
 
 // MARK: - UITableViewDelegate
 
-extension SkeletonViewController: UITableViewDelegate {
+extension DashboardViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard nil != self.tableView(tableView, titleForHeaderInSection: section) else {
+            return 0
+        }
+        return UITableViewAutomaticDimension
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
+            let card = cell.card,
+            let cardType = card.cardType {
+            
+            switch cardType {
+            case "meeting":
+                navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)
+            default:
+                break
+            }
+        }
     }
 }
 
-// MARK: - SelectionViewControllerDelegate
+// MARK: - DashboardSelectionViewControllerDelegate
 
-extension SkeletonViewController: SelectionViewControllerDelegate {
+extension DashboardViewController: DashboardSelectionViewControllerDelegate {
     
-    func selectionViewController(selectionViewController: SelectionViewController, didAddCard card: Card) {
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card) {
         // Insert new card at the top of the table view
-        SkeletonViewController.cards.insert(card, at: 0)
+        DashboardViewController.cards.insert(card, at: 0)
         tableView.reloadData()
     }
     
-    func selectionViewController(selectionViewController: SelectionViewController, didRemoveCard card: Card) {
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card) {
         // Remove card from table view
-        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
             if dashboardCard.id == card.id {
-                SkeletonViewController.cards.remove(at: index)
+                DashboardViewController.cards.remove(at: index)
             }
         }
         tableView.reloadData()
@@ -131,9 +159,9 @@ extension SkeletonViewController: SelectionViewControllerDelegate {
 
 // MARK: - CardCellDelegate
 
-extension SkeletonViewController: CardCellDelegate {
+extension DashboardViewController: CardCellDelegate {
     func cardCell(cardCell: CardCell, didMoveUp card: Card) {
-        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
             if dashboardCard.id == card.id {
                 
                 // First card
@@ -144,29 +172,29 @@ extension SkeletonViewController: CardCellDelegate {
                 }
             
                 // Swap with card before
-                let cardBefore = SkeletonViewController.cards[index-1]
-                SkeletonViewController.cards[index-1] = card
-                SkeletonViewController.cards[index] = cardBefore
+                let cardBefore = DashboardViewController.cards[index-1]
+                DashboardViewController.cards[index-1] = card
+                DashboardViewController.cards[index] = cardBefore
                 tableView.reloadData()
             }
         }
     }
     
     func cardCell(cardCell: CardCell, didMoveDown card: Card) {
-        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
             if dashboardCard.id == card.id { // TODO find better way to do this
                 
                 // Last card
-                guard index < SkeletonViewController.cards.count - 1 else {
+                guard index < DashboardViewController.cards.count - 1 else {
                     alertController?.message = "This card cannot move down further"
                     present(alertController!, animated: true)
                     return
                 }
                 
                 // Swap with card after
-                let cardAfter = SkeletonViewController.cards[index+1]
-                SkeletonViewController.cards[index+1] = card
-                SkeletonViewController.cards[index] = cardAfter
+                let cardAfter = DashboardViewController.cards[index+1]
+                DashboardViewController.cards[index+1] = card
+                DashboardViewController.cards[index] = cardAfter
                 tableView.reloadData()
             }
         }
@@ -174,9 +202,9 @@ extension SkeletonViewController: CardCellDelegate {
     
     func cardCell(cardCell: CardCell, didDelete card: Card) {
         // Remove card from table view
-        for (index, dashboardCard) in SkeletonViewController.cards.enumerated() {
+        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
             if dashboardCard.id == card.id {
-                SkeletonViewController.cards.remove(at: index)
+                DashboardViewController.cards.remove(at: index)
             }
         }
         tableView.reloadData()

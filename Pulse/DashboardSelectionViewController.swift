@@ -1,5 +1,5 @@
 //
-//  SelectionViewController.swift
+//  DashboardSelectionViewController.swift
 //  Pulse
 //
 //  Created by Bianca Curutan on 11/9/16.
@@ -8,16 +8,16 @@
 
 import UIKit
 
-protocol SelectionViewControllerDelegate: class {
-    func selectionViewController(selectionViewController: SelectionViewController, didAddCard card: Card)
-    func selectionViewController(selectionViewController: SelectionViewController, didRemoveCard card: Card)
+protocol DashboardSelectionViewControllerDelegate: class {
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card)
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card)
 }
 
-class SelectionViewController: UIViewController {
-
+class DashboardSelectionViewController: UIViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     
-    weak var delegate: SelectionViewControllerDelegate?
+    weak var delegate: DashboardSelectionViewControllerDelegate?
     
     let alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
     
@@ -37,14 +37,14 @@ class SelectionViewController: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension SelectionViewController: UITableViewDataSource {
+extension DashboardSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let card = Constants.cards[indexPath.row]
+        let card = Constants.dashboardCards[indexPath.row]
     
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
         cell.textLabel?.text = card.name
         
-        if SkeletonViewController.cards.contains(card) {
+        if DashboardViewController.cards.contains(card) {
             cell.accessoryType =  .checkmark
         } else {
             cell.accessoryType = .none
@@ -54,27 +54,26 @@ extension SelectionViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Constants.cards.count
+        return Constants.dashboardCards.count
     }
 }
 
 // MARK: - UITableViewDelegate
 
-extension SelectionViewController: UITableViewDelegate {
+extension DashboardSelectionViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let card = Constants.cards[indexPath.row]
+        let card = Constants.dashboardCards[indexPath.row]
         
-        if SkeletonViewController.cards.contains(card) {
-            delegate?.selectionViewController(selectionViewController: self, didRemoveCard: card)
+        if DashboardViewController.cards.contains(card) {
+            delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didRemoveCard: card)
         } else {
-            delegate?.selectionViewController(selectionViewController: self, didAddCard: card)
+            delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didAddCard: card)
         }
         
         tableView.reloadData()
     }
-    
 }

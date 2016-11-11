@@ -18,8 +18,8 @@
 		431804A41DD6843700B279C6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431804A31DD6843700B279C6 /* Login.storyboard */; };
 		431804A71DD6975500B279C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804A61DD6975500B279C6 /* Extensions.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
-		678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* SkeletonViewController.swift */; };
-		678802A31DD4469C001338A8 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* SelectionViewController.swift */; };
+		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
+		678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */; };
 		678802A81DD44A4C001338A8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A71DD44A4C001338A8 /* Card.swift */; };
 		67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */; };
 		67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AC1DCD8DA500BFD931 /* ViewController.swift */; };
@@ -48,8 +48,8 @@
 		431804A51DD68A3C00B279C6 /* Pulse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pulse.entitlements; sourceTree = "<group>"; };
 		431804A61DD6975500B279C6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
-		678802901DD41540001338A8 /* SkeletonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewController.swift; sourceTree = "<group>"; };
-		678802A11DD4469C001338A8 /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
+		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardSelectionViewController.swift; sourceTree = "<group>"; };
 		678802A71DD44A4C001338A8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		67A364A71DCD8DA500BFD931 /* Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,8 +103,8 @@
 		678802981DD41745001338A8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				678802901DD41540001338A8 /* SkeletonViewController.swift */,
-				678802A11DD4469C001338A8 /* SelectionViewController.swift */,
+				678802901DD41540001338A8 /* DashboardViewController.swift */,
+				678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
 				67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */,
 			);
@@ -322,7 +322,7 @@
 			files = (
 				67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */,
 				67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */,
-				678802A31DD4469C001338A8 /* SelectionViewController.swift in Sources */,
+				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
@@ -330,7 +330,7 @@
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
 				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
-				678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */,
+				678802921DD41540001338A8 /* DashboardViewController.swift in Sources */,
 				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,
 				67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */,
 				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,

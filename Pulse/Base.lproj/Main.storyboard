@@ -8,7 +8,7 @@
         <!--Dashboard-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="DashboardViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -24,7 +24,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yl3-sD-UzU" id="sSE-V5-k5Q">
-                                            <frame key="frameInset" width="600" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -32,7 +32,7 @@
                                         <rect key="frame" x="0.0" y="136" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X4Y-gE-i3A" id="Qcn-7V-pVZ">
-                                            <frame key="frameInset" width="600" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -65,7 +65,7 @@
         <!--Types of Cards-->
         <scene sceneID="1KV-Ti-0ds">
             <objects>
-                <viewController storyboardIdentifier="SelectionViewController" id="Pig-nt-sQL" customClass="SelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DashboardSelectionViewController" id="Pig-nt-sQL" customClass="DashboardSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvX-1r-wuv"/>
                         <viewControllerLayoutGuide type="bottom" id="x0Z-hX-ffh"/>
@@ -81,7 +81,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDk-BY-3dG" id="7bV-E4-Cdg">
-                                            <frame key="frameInset" width="600" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -104,7 +104,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableView" destination="xge-BX-z5n" id="FCW-kG-H3E"/>
+                        <outlet property="tableView" destination="xge-BX-z5n" id="0Na-dk-P2t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bgp-i8-YzR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -139,7 +139,7 @@
         <!--Navigation Controller-->
         <scene sceneID="nEN-e6-9wX">
             <objects>
-                <navigationController storyboardIdentifier="SelectionNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fOb-D4-oZ9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DashboardSelectionNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fOb-D4-oZ9" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pm0-Cj-DUv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

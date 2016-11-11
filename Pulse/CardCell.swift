@@ -40,17 +40,17 @@ class CardCell: UITableViewCell {
             
             if let cardType = card.cardType {
                 switch cardType {
-                case "meeting":
+                /*case "meeting":
                     let viewController = MeetingDetailsViewController()
                     let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
                     let objects = nib.instantiate(withOwner: viewController, options: nil)
                     informationView = objects.first as! UIView
+                    informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())*/
                 default:
-                    break
+                    informationView = UIView(frame: contentView.frame)
+                    textLabel?.text = card.name
                 }
             }
-            
-            informationView.frame = contentView.frame
             
             let panGesture = UIPanGestureRecognizer(target: self, action: #selector(onPanGesture(_:)))
             panGesture.delegate = self

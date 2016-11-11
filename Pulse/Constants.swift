@@ -28,12 +28,17 @@ class Constants: NSObject {
         ["id" : "t" as AnyObject, "name": "Team" as AnyObject, "card_type": CardType.team as AnyObject, "page_type": PageType.dashboard as AnyObject],
         ["id" : "d" as AnyObject, "name": "To Dos" as AnyObject, "card_type": CardType.to_do as Any as AnyObject, "page_type": PageType.dashboard as AnyObject]
     ])*/
-    static let cards: [Card] = Card.cardsWithArray(dictionaries: [
+    static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "m", "name": "Meetings", "card_type": "meeting", "page_type": "dashboard"],
         ["id" : "o", "name": "Organizational Chart", "card_type": "org_chart", "page_type": "dashboard"],
-        ["id" : "n", "name": "Photo Notes", "card_type": "photo_note", "page_type": "dashboard"],
         ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
         ["id" : "t", "name": "Team", "card_type": "team", "page_type": "dashboard"],
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "dashboard"]
+    ])
+    
+    static let meetingCards: [Card] = Card.cardsWithArray(dictionaries: [
+        ["id" : "n", "name": "Photo Notes", "card_type": "photo_note", "page_type": "meeting"],
+        ["id" : "p", "name": "Photo Notes", "card_type": "photo_note", "page_type": "meeting"],
+        ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "meeting"]
     ])
 }
