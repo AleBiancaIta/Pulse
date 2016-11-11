@@ -73,6 +73,7 @@ Option 2: (might be more flexible for future expansion, if we want to allow user
 - createdAt: Date (default Parse)
 - managerId: string (FK to Person)
 - personId: string (FK to Person)
+- meetingId: string (FK to Meeting)
 - text: string
 - dueAt: date 
 - completedAt: date 
