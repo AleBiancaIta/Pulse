@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			})
 		)
 
+        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
+        self.window?.rootViewController = loginSignUpVC
 		return true
     }
 

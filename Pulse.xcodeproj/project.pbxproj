@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804921DD5A8BE00B279C6 /* LoginViewController.swift */; };
+		431804951DD5A8BE00B279C6 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431804931DD5A8BE00B279C6 /* LoginViewController.xib */; };
+		431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804961DD5AD7500B279C6 /* SignUpViewController.swift */; };
+		431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431804971DD5AD7500B279C6 /* SignUpViewController.xib */; };
+		4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */; };
+		4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */; };
+		431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */; };
+		431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* SkeletonViewController.swift */; };
 		678802A31DD4469C001338A8 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* SelectionViewController.swift */; };
@@ -26,6 +34,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		431804921DD5A8BE00B279C6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		431804931DD5A8BE00B279C6 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		431804961DD5AD7500B279C6 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		431804971DD5AD7500B279C6 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
+		4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSignUpViewController.xib; sourceTree = "<group>"; };
+		4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
+		4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* SkeletonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewController.swift; sourceTree = "<group>"; };
 		678802A11DD4469C001338A8 /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +104,21 @@
 				67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */,
 			);
 			name = Controllers;
+            sourceTree = "<group>";
+        };
+		431804A21DD5B0B700B279C6 /* SignUp/Login */ = {
+			isa = PBXGroup;
+			children = (
+				4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */,
+				4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */,
+				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
+				431804931DD5A8BE00B279C6 /* LoginViewController.xib */,
+				431804961DD5AD7500B279C6 /* SignUpViewController.swift */,
+				431804971DD5AD7500B279C6 /* SignUpViewController.xib */,
+				4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */,
+				4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */,
+			);
+			name = SignUp/Login;
 			sourceTree = "<group>";
 		};
 		67A3649E1DCD8DA400BFD931 = {
@@ -119,6 +150,7 @@
 				67A364AC1DCD8DA500BFD931 /* ViewController.swift */,
 				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
+				431804A21DD5B0B700B279C6 /* SignUp/Login */,
 				67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */,
 				67A364B61DCD8DA500BFD931 /* Info.plist */,
 			);
@@ -204,6 +236,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */,
+				431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */,
+				431804951DD5A8BE00B279C6 /* LoginViewController.xib in Resources */,
+				4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */,
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
 				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
 				67D8D62A1DD4F16800B6DE19 /* CardCellNib.xib in Resources */,
@@ -273,6 +309,10 @@
 				678802A31DD4469C001338A8 /* SelectionViewController.swift in Sources */,
 				67A364AD1DCD8DA500BFD931 /* ViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
+				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
+				4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */,
+				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
+				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
 				678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */,
 				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,
