@@ -9,8 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Pulse" customModuleProvider="target">
             <connections>
+                <outlet property="passwordTextField" destination="DJL-eq-quO" id="7rJ-08-htX"/>
+                <outlet property="usernameTextField" destination="4qG-AU-GyT" id="ccW-kT-El0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -43,16 +45,26 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" red="0.1137254902" green="0.63137254899999995" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="onLoginButtonTap:" destination="-1" eventType="touchUpInside" id="OTu-Hg-q8D"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="crc-S2-TkO">
                     <rect key="frame" x="167" y="426" width="48" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Cancel"/>
+                    <connections>
+                        <action selector="onCancelButtonTap:" destination="-1" eventType="touchUpInside" id="Nnw-us-Srs"/>
+                        <action selector="onForgetPasswordButtonTap:" destination="-1" eventType="touchUpInside" id="OmN-do-8hG"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="woj-SQ-3F8">
                     <rect key="frame" x="129" y="388" width="123" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Forgot Password?"/>
+                    <connections>
+                        <action selector="onForgetPasswordButtonTap:" destination="-1" eventType="touchUpInside" id="RY2-1s-qwQ"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

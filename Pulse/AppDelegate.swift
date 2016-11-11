@@ -25,16 +25,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				configuration.server = "https://pu1se.herokuapp.com/parse"
 			})
 		)
-
-        //let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
-        //self.window?.rootViewController = loginSignUpVC
         
         // TODO remove this chunk
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()
         self.window?.rootViewController = vc
         
-		return true
+        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
+        self.window?.rootViewController = loginSignUpVC
+
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
