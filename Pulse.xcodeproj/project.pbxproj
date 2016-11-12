@@ -15,6 +15,8 @@
 		4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */; };
 		431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */; };
 		431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */; };
+		431804A41DD6843700B279C6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431804A31DD6843700B279C6 /* Login.storyboard */; };
+		431804A71DD6975500B279C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804A61DD6975500B279C6 /* Extensions.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* SkeletonViewController.swift */; };
 		678802A31DD4469C001338A8 /* SelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* SelectionViewController.swift */; };
@@ -42,6 +44,9 @@
 		4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSignUpViewController.xib; sourceTree = "<group>"; };
 		4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
+		431804A31DD6843700B279C6 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		431804A51DD68A3C00B279C6 /* Pulse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pulse.entitlements; sourceTree = "<group>"; };
+		431804A61DD6975500B279C6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* SkeletonViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkeletonViewController.swift; sourceTree = "<group>"; };
 		678802A11DD4469C001338A8 /* SelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionViewController.swift; sourceTree = "<group>"; };
@@ -114,8 +119,8 @@
 				431804931DD5A8BE00B279C6 /* LoginViewController.xib */,
 				4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */,
 				4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */,
-				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
 				431804961DD5AD7500B279C6 /* SignUpViewController.swift */,
+				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
 				4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */,
 			);
 			name = SignUp/Login;
@@ -146,11 +151,14 @@
 				678802961DD41733001338A8 /* Models */,
 				678802981DD41745001338A8 /* Controllers */,
 				67D8D6491DD56D9800B6DE19 /* Constants.swift */,
+				431804A51DD68A3C00B279C6 /* Pulse.entitlements */,
 				67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */,
+				431804A61DD6975500B279C6 /* Extensions.swift */,
 				67A364AC1DCD8DA500BFD931 /* ViewController.swift */,
-				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
+				431804A31DD6843700B279C6 /* Login.storyboard */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
 				431804A21DD5B0B700B279C6 /* SignUp/Login */,
+				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
 				67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */,
 				67A364B61DCD8DA500BFD931 /* Info.plist */,
 			);
@@ -209,7 +217,13 @@
 				TargetAttributes = {
 					67A364A61DCD8DA400BFD931 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = EVW9447S78;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -236,6 +250,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431804A41DD6843700B279C6 /* Login.storyboard in Resources */,
 				431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */,
 				431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */,
 				431804951DD5A8BE00B279C6 /* LoginViewController.xib in Resources */,
@@ -318,6 +333,7 @@
 				678802921DD41540001338A8 /* SkeletonViewController.swift in Sources */,
 				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,
 				67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */,
+				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +455,8 @@
 			baseConfigurationReference = 4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Pulse/Pulse.entitlements;
+				DEVELOPMENT_TEAM = EVW9447S78;
 				INFOPLIST_FILE = Pulse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abi.Pulse;
@@ -452,6 +470,8 @@
 			baseConfigurationReference = 7747767799B8936708691A8F /* Pods-Pulse.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Pulse/Pulse.entitlements;
+				DEVELOPMENT_TEAM = EVW9447S78;
 				INFOPLIST_FILE = Pulse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abi.Pulse;

@@ -20,34 +20,40 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     // MARK: - Properties
     
     @IBAction func onSignUpButtonTap(_ sender: UIButton) {
+        //self.resignFirstResponder()
         
-        
-        
+        // check if textfields are empty
+        if (usernameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
+            showAlert(title: "Alert", message: "Username, Email, and Password fields cannot be empty", sender: nil)
+        } else {
+            // Initialize a user object
+            let newUser = PFUser()
+            
+            // Set user properties
+            newUser.username = usernameTextField.text
+            newUser.email = emailTextField.text
+            newUser.password = passwordTextField.text
+            
+            // Call sign up function on the object
+            newUser.signUpInBackground { (success: Bool, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in signing up new user: \(error.localizedDescription)")
+                } else {
+                    debugPrint("User Registered successfully")
+                    
+                    // Manually segue to login view
+                    self.performSegue(withIdentifier: "loginModalSegue", sender: nil)
+                }
+            }
+        }
     }
     
     @IBAction func onCancelButtonTap(_ sender: UIButton) {
+        //self.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

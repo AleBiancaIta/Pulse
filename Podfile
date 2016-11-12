@@ -6,5 +6,8 @@ target 'Pulse' do
 use_frameworks!
 
 pod 'Parse'
+pod 'ParseUI'
+pod 'SVProgressHUD'
+pod 'RKDropdownAlert'
 
 end

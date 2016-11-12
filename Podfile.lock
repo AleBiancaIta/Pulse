@@ -2,14 +2,25 @@ PODS:
   - Bolts/Tasks (1.8.4)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
+  - ParseUI (1.2.0):
+    - Bolts/Tasks (~> 1.3)
+    - Parse (~> 1.9)
+  - RKDropdownAlert (0.3.0)
+  - SVProgressHUD (2.0.3)
 
 DEPENDENCIES:
   - Parse
+  - ParseUI
+  - RKDropdownAlert
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
+  ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
+  RKDropdownAlert: f4b3364c251829ad439dc666836a1f2dad26f4c7
+  SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
 
-PODFILE CHECKSUM: c56b772f93e135c60e085e692be85bdb893c66d1
+PODFILE CHECKSUM: 15b48a05b506298caf2830d983c22864d12f0331
 
 COCOAPODS: 1.0.1
