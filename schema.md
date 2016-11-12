@@ -2,6 +2,28 @@
 
 This is the schema that currently reflects what's in Heroku/Parse.
 
+## User: Parse created table, set aside for User authentication
+ - _id: "_User"
+ - objectId: string
+ - updatedAt: date
+ - createdAt: date
+ - username: string
+ - email: string
+ - emailVerified: boolean
+ - authData: object
+
+## Sessions: Parse created table, set aside to track current open sessions
+ - _id: "_Session"
+ - objectId: string
+ - updatedAt: date
+ - createdAt: date
+ - restricted: boolean
+ - user: *_User (pointer to User Object)
+ - installationId: string
+ - sessionToken: string
+ - expiresAt: date
+ - createdWith: object
+
 ## Meetings: contain the one-on-one meeting data. Survey data is separated to allow further expansion (example: no. of surveys)
 - _id: "Meetings" (Parse object name)
 - objectId: string (default Parse)
@@ -79,11 +101,13 @@ Current plan is to stored them in a Constants.swift file.
 - name: string
 - type: string (format TBD) - currently I follow the format of "dashboard-employee"
 
+These tables are not included in Heroku schema as we most likely will set it up on the client side.
+
 ## Positions: describe the list of potential user positions
-- position_id: Int
+- positionId: Int
 - description: String
 
 ## SurveyValues: store data for the survey scores
-- value_id: Int
+- valueId: Int
 - value: Int
 
