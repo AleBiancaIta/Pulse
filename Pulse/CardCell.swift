@@ -56,7 +56,7 @@ class CardCell: UITableViewCell {
             panGesture.delegate = self
             informationView.addGestureRecognizer(panGesture)
             
-            contentView.addSubview(informationView)
+            //contentView.addSubview(informationView)
             contentView.layoutIfNeeded()
             
         }

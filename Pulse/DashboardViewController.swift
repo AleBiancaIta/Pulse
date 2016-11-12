@@ -6,6 +6,7 @@
 //  Copyright © 2016 ABI. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 class DashboardViewController: UIViewController {
@@ -14,6 +15,7 @@ class DashboardViewController: UIViewController {
 
     var alertController: UIAlertController?
     static var cards: [Card] = [] // TODO put in data controller, then abstract this so it's a true skeleton VC
+    var selectedCards: String! = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,19 @@ class DashboardViewController: UIViewController {
         
         alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
+        
+        /*let query = PFQuery(className: "Dashboard")
+        query.whereKey("userId", equalTo: UIDevice.current.identifierForVendor?.uuidString) // TODO logged in casePFUser.current()?.objectId
+        query.limit = 1
+        
+        // fetch data asynchronously
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                let a = 0
+            } else {
+                print(error?.localizedDescription)
+            }
+        }*/
     }
     
     // MARK: - IBAction
@@ -86,19 +101,6 @@ extension DashboardViewController: UITableViewDataSource {
         return DashboardViewController.cards.count + 1
     }
     
-    /*func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.delete {
-            DashboardViewController.cards.remove(at: indexPath.section)
-            tableView.reloadData()
-        }
-    }*/
-    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard DashboardViewController.cards.count > section else {
             return nil
@@ -141,12 +143,50 @@ extension DashboardViewController: UITableViewDelegate {
 extension DashboardViewController: DashboardSelectionViewControllerDelegate {
     
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card) {
+        
+        let query = PFQuery(className: "Dashboard")
+        query.whereKey("userId", equalTo: "BiancaTest") // TODO PFUser.current()?.objectId
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCards = self.selectedCards {
+                let post = posts[0]
+                post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
+                self.selectedCards = "\(id)\(selectedCards)"
+                post["selectedCards"] = self.selectedCards
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    print("successfully saved dashboard cards")
+                }
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+        
         // Insert new card at the top of the table view
         DashboardViewController.cards.insert(card, at: 0)
         tableView.reloadData()
     }
     
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card) {
+        
+        let query = PFQuery(className: "Dashboard")
+        query.whereKey("userId", equalTo: "BiancaTest") // TODO PFUser.current()?.objectId
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCards = self.selectedCards {
+                let post = posts[0]
+                post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
+                self.selectedCards = selectedCards.replacingOccurrences(of: id, with: "")
+                post["selectedCards"] = self.selectedCards
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    print("successfully removed dashboard cards")
+                }
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+        
         // Remove card from table view
         for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
             if dashboardCard.id == card.id {
@@ -201,6 +241,24 @@ extension DashboardViewController: CardCellDelegate {
     }
     
     func cardCell(cardCell: CardCell, didDelete card: Card) {
+        let query = PFQuery(className: "Dashboard")
+        query.whereKey("userId", equalTo: "BiancaTest") // TODO PFUser.current()?.objectId
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCards = self.selectedCards {
+                let post = posts[0]
+                post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
+                self.selectedCards = selectedCards.replacingOccurrences(of: id, with: "")
+                post["selectedCards"] = self.selectedCards
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    print("successfully removed dashboard cards")
+                }
+            } else {
+                print(error?.localizedDescription)
+            }
+        }
+        
         // Remove card from table view
         for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
             if dashboardCard.id == card.id {
