@@ -17,16 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-		Parse.initialize(with:
+		/* TODO uncomment
+ Parse.initialize(with:
 			ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
 				configuration.applicationId = "pulseAleBiancaIta"
 				configuration.clientKey = nil  // set to nil assuming you have not set clientKey
 				configuration.server = "https://pu1se.herokuapp.com/parse"
 			})
-		)
+		)*/
 
         //let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
         //self.window?.rootViewController = loginSignUpVC
+        
+        // TODO remove this chunk
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = vc
+        
 		return true
     }
 
