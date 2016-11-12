@@ -71,7 +71,8 @@ extension DashboardSelectionViewController: UITableViewDelegate {
         
         if selectedCards.contains(card) {
             for (index, dashboardCard) in selectedCards.enumerated() {
-                if dashboardCard.id == card.id {
+                // Double check to avoid index out of bounds
+                if dashboardCard.id == card.id && 0 <= index && selectedCards.count > index {
                     selectedCards.remove(at: index)
                 }
             }

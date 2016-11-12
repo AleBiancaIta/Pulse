@@ -91,6 +91,37 @@ class Meeting: NSObject {
 }
 
 
+//  Card.swift
+//  Pulse
+//
+//  Created by Bianca Curutan on 11/9/16.
+//  Copyright © 2016 ABI. All rights reserved.
+//
 
+/*import UIKit
 
-
+class Meeting: NSObject {
+    
+    var personName: String?
+    var meetingDate: String? // TODO Date type?
+    
+    init(dictionary: [String: String]) {
+        if let personName = dictionary["personName"] {
+            self.personName = personName
+        }
+        if let meetingDate = dictionary["meetingDate"] {
+            self.meetingDate = meetingDate
+        }
+    }
+    
+    class func meetingsWithArray(dictionaries: [ [String: String] ]) -> [Meeting] {
+        var meetingsArray: [Meeting] = []
+        
+        for dictionary in dictionaries {
+            let meeting = Meeting(dictionary: dictionary)
+            meetingsArray.append(meeting)
+        }
+        
+        return meetingsArray
+    }
+}*/
