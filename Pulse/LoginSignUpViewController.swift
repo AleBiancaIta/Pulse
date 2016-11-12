@@ -22,20 +22,20 @@ class LoginSignUpViewController: UIViewController {
     
     // MARK: - Actions
 
-    @IBAction func onSignUpButtonTap(_ sender: UIButton) {
-        let signUpVC = SignUpViewController(nibName: "SignUpViewController", bundle: nil)
-        self.present(signUpVC, animated: true, completion: nil)
-    }
-    
-    @IBAction func onLoginButtonTap(_ sender: UIButton) {
-        let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
-        self.present(loginVC, animated: true, completion: nil)
-    }
+//    @IBAction func onSignUpButtonTap(_ sender: UIButton) {
+//        let signUpVC = SignUpViewController(nibName: "SignUpViewController", bundle: nil)
+//        self.present(signUpVC, animated: true, completion: nil)
+//    }
+//    
+//    @IBAction func onLoginButtonTap(_ sender: UIButton) {
+//        let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
+//        self.present(loginVC, animated: true, completion: nil)
+//    }
     
     @IBAction func onSkipButtonTap(_ sender: UIButton) {
         // if first time login, get the device ID
-        
         // subsequent login, pull the data from Parse using device ID
+        debugPrint("Skip button tapped")
         
     }
 

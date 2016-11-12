@@ -36,6 +36,9 @@ class LoginViewController: UIViewController {
                         debugPrint("User logged in successfully")
                         // Segue to Dashboard view controller
                         // Pass User ID to dashboard VC
+                        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                        let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+                        self.present(dashboardNavVC, animated: true, completion: nil)
                     }
                 }
             }

@@ -26,13 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			})
 		)
         
-        // TODO remove this chunk
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController()
-        self.window?.rootViewController = vc
-        
-        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
-        self.window?.rootViewController = loginSignUpVC
+//        // TODO remove this chunk
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateInitialViewController()
+//        self.window?.rootViewController = vc
+//        
+//        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
+//        self.window?.rootViewController = loginSignUpVC
 
         return true
     }

@@ -42,3 +42,8 @@ class Constants: NSObject {
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "meeting"]
     ])
 }
+
+struct StoryboardID {
+    static let dashboardNavVC = "DashboardNavVC"
+}
+

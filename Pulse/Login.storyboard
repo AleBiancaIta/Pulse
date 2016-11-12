@@ -33,7 +33,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Ea4-eZ-k3f" kind="presentation" id="JlK-ng-a6s"/>
+                                    <segue destination="Ea4-eZ-k3f" kind="presentation" id="ZJk-RB-G2D"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vjk-1U-cWl">
@@ -44,13 +44,16 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="YdN-Yd-wjs" kind="presentation" id="ZMU-Rw-a6U"/>
+                                    <segue destination="YdN-Yd-wjs" kind="presentation" id="7lI-04-9Bb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2g-yc-uhs">
                                 <rect key="frame" x="172" y="589" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Skip"/>
+                                <connections>
+                                    <action selector="onSkipButtonTap:" destination="Wt5-AZ-fui" eventType="touchUpInside" id="hPV-xq-31w"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -277,6 +280,6 @@
         <image name="PulseLogo" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EVd-po-Ciy"/>
+        <segue reference="7lI-04-9Bb"/>
     </inferredMetricsTieBreakers>
 </document>
