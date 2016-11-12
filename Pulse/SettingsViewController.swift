@@ -7,9 +7,18 @@
 //
 
 import UIKit
+import Parse
 
 class SettingsViewController: UIViewController {
-
+    
+    fileprivate let settingsHeaderCell = "SettingsHeaderCell"
+    fileprivate let settingsContentCell = "SettingsContentCell"
+    
+    fileprivate let settingsContent = ["Change Password", "Sign Up", "Log Out"]
+    
+    @IBOutlet var settingsTableView: UITableView!
+    var user: PFUser! = PFUser.current()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

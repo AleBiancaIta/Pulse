@@ -18,6 +18,7 @@
 		431804A41DD6843700B279C6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431804A31DD6843700B279C6 /* Login.storyboard */; };
 		431804A71DD6975500B279C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804A61DD6975500B279C6 /* Extensions.swift */; };
 		431804AB1DD7C73500B279C6 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804AA1DD7C73400B279C6 /* SettingsViewController.swift */; };
+		431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
 		678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */; };
@@ -48,6 +49,7 @@
 		431804A51DD68A3C00B279C6 /* Pulse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pulse.entitlements; sourceTree = "<group>"; };
 		431804A61DD6975500B279C6 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		431804AA1DD7C73400B279C6 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardSelectionViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */,
 				67D8D6271DD4F16800B6DE19 /* CardCell.swift */,
 				67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */,
+				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */,
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
 				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
+				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
 				431804AB1DD7C73500B279C6 /* SettingsViewController.swift in Sources */,
 				678802921DD41540001338A8 /* DashboardViewController.swift in Sources */,
