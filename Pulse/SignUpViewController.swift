@@ -49,6 +49,8 @@ class SignUpViewController: UIViewController {
                     
                     // Manually segue to login view
                     self.performSegue(withIdentifier: "loginModalSegue", sender: nil)
+                    
+                    // TODO: instead of segue-ing to login, run login in the background and if successful, segue to dashboard vc
                 }
             }
         }

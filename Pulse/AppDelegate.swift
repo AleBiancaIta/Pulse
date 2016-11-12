@@ -16,7 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
     
         Parse.initialize(with:
 			ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
@@ -25,6 +24,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				configuration.server = "https://pu1se.herokuapp.com/parse"
 			})
 		)
+        
+        // Check if there's a current user, take them straight to dashboard
+        var currentUser = PFUser.current()
+        if currentUser != nil {
+            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+            self.window?.rootViewController = dashboardNavVC
+        } // else - Login view is already set up as initial vc so we don't have to do anything
+        
+        // Try anonymous user implementation
+        if currentUser != nil { PFUser.logOut() }
+        PFUser.enableAutomaticUser()
+        PFUser.current()?.saveInBackground(block: { (succes: Bool, error: Error?) in
+            let user = PFUser.current()
+            debugPrint("user is \(user), username is \(user?.username), id is \(user?.objectId)")
+        })
+        debugPrint("user is \(PFUser.current()), username is \(PFUser.current()?.username), id is \(PFUser.current()?.objectId)")
+        
         
 //        // TODO remove this chunk
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
