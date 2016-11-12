@@ -12,7 +12,7 @@ import UIKit
 class DashboardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-
+    
     var alertController: UIAlertController?
     var selectedCardsString: String? = ""
     var selectedCards: [Card] = [] // TODO put in data controller
@@ -79,6 +79,13 @@ class DashboardViewController: UIViewController {
         
         present(dashboardSelectionNavigationController, animated: true, completion: nil)
     }
+    
+    @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let settingsNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.settingsNavVC)
+        present(settingsNavVC, animated: true, completion: nil)
+    }
+    
 }
 
 // MARK: - UITableViewDataSource

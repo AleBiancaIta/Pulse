@@ -45,5 +45,7 @@ class Constants: NSObject {
 
 struct StoryboardID {
     static let dashboardNavVC = "DashboardNavVC"
+    static let settingsNavVC = "SettingsNavVC"
+    static let settingsVC = "SettingsVC"
 }
 

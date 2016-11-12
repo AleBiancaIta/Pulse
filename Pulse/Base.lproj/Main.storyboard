@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -53,11 +54,18 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="rhG-hT-WVt">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="hTh-qq-kWB">
-                            <connections>
-                                <action selector="onAddCard:" destination="BYZ-38-t0r" id="Qnx-fv-fd2"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="add" id="hTh-qq-kWB">
+                                <connections>
+                                    <action selector="onAddCard:" destination="BYZ-38-t0r" id="Qnx-fv-fd2"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Settings" id="z4O-Xw-Bd7">
+                                <connections>
+                                    <action selector="onSettingsButtonTap:" destination="BYZ-38-t0r" id="b8t-2j-uWh"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="apc-nX-wLz" id="U2A-Wd-dsw"/>
@@ -161,4 +169,7 @@
             <point key="canvasLocation" x="1842.4000000000001" y="-200.14992503748127"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Settings" width="29" height="29"/>
+    </resources>
 </document>
