@@ -119,3 +119,8 @@ struct CellReuseIdentifier {
         static let teamListCell = "TeamListCell"
     }
 }
+
+struct StoryboardID {
+    static let dashboardNavVC = "DashboardNavVC"
+}
+
