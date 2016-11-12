@@ -46,13 +46,15 @@ The following functionality is completed:
      - [] Contains a setting button - tapping on it should direct user to settings page 
      - [] Contains a logout button - tapping on it should log user out completely and show the login page
      - [] Contains a chart showing the history of the team pulse
-     - [] Contains an org chart showing the pulse with the most recent survey results
+     - [x] Contains cards which the user can add, remove, move up, and move down
+     - [x] Card configuration should be added to Parse and obtainable with future logged in use cases
 
      **optional**
      - [] Make the dashboard graphics interactive, for example: user can tap the chart pin to see pulse details
      - [] Make the org chart interactive, for example: user can tap a team member to see their details     
      - [] Allow user to see the same information in List view
      - [] Include filters, for example: search by date range
+     - [] Contains an org chart showing the pulse with the most recent survey results
 
 - [] Team module 
 
