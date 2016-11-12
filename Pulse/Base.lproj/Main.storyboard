@@ -63,7 +63,7 @@
             </objects>
             <point key="canvasLocation" x="930" y="-82"/>
         </scene>
-        <!--Types of Cards-->
+        <!--Dashboard Cards-->
         <scene sceneID="1KV-Ti-0ds">
             <objects>
                 <viewController storyboardIdentifier="DashboardSelectionViewController" id="Pig-nt-sQL" customClass="DashboardSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
@@ -97,7 +97,7 @@
                             <constraint firstAttribute="trailing" secondItem="xge-BX-z5n" secondAttribute="trailing" id="o2Q-wq-2eh"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Types of Cards" id="2Zs-uw-oIs">
+                    <navigationItem key="navigationItem" title="Dashboard Cards" id="2Zs-uw-oIs">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="wA6-FR-O1h">
                             <connections>
                                 <action selector="onDoneButton:" destination="Pig-nt-sQL" id="fgc-Lf-ftO"/>

@@ -17,14 +17,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-		/* TODO uncomment
- Parse.initialize(with:
+    
+        Parse.initialize(with:
 			ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
 				configuration.applicationId = "pulseAleBiancaIta"
 				configuration.clientKey = nil  // set to nil assuming you have not set clientKey
 				configuration.server = "https://pu1se.herokuapp.com/parse"
 			})
-		)*/
+		)
 
         //let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
         //self.window?.rootViewController = loginSignUpVC
