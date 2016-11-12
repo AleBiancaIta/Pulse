@@ -25,24 +25,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			})
 		)
         
+        // For testing only - take out after implementing Logout
+        PFUser.logOut()
+        
         // Check if there's a current user, take them straight to dashboard
         var currentUser = PFUser.current()
         if currentUser != nil {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
             self.window?.rootViewController = dashboardNavVC
+            debugPrint("current user inside the appDelegate \(currentUser)")
         } // else - Login view is already set up as initial vc so we don't have to do anything
         
-        // Try anonymous user implementation
-        if currentUser != nil { PFUser.logOut() }
-        PFUser.enableAutomaticUser()
-        PFUser.current()?.saveInBackground(block: { (succes: Bool, error: Error?) in
-            let user = PFUser.current()
-            debugPrint("user is \(user), username is \(user?.username), id is \(user?.objectId)")
-        })
-        debugPrint("user is \(PFUser.current()), username is \(PFUser.current()?.username), id is \(PFUser.current()?.objectId)")
+        // Enable automatic user
+        //PFUser.enableAutomaticUser()
+        let defaultACL = PFACL()
+        PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
         
-        
+        // Print out what's currently in current user
+        if let currentUser = PFUser.current() {
+            debugPrint("after enableAutomaticUser, currentUser is \(currentUser)")
+        }
+                
 //        // TODO remove this chunk
 //        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        let vc = storyboard.instantiateInitialViewController()
