@@ -40,6 +40,8 @@
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
 		67BCA14E1DD6C82800E7EE74 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCA14D1DD6C82800E7EE74 /* Meeting.swift */; };
+		67BCA1511DD6E66100E7EE74 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */; };
+		67BCA1521DD6E66100E7EE74 /* MeetingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67BCA1501DD6E66100E7EE74 /* MeetingsViewController.xib */; };
 		67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* MessageCell.swift */; };
 		67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */; };
 		67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6271DD4F16800B6DE19 /* CardCell.swift */; };
@@ -86,6 +88,8 @@
 		67A364B41DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A364B61DCD8DA500BFD931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67BCA14D1DD6C82800E7EE74 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsViewController.swift; sourceTree = "<group>"; };
+		67BCA1501DD6E66100E7EE74 /* MeetingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingsViewController.xib; sourceTree = "<group>"; };
 		67D8D6211DD4E28900B6DE19 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellNib.xib; sourceTree = "<group>"; };
 		67D8D6271DD4F16800B6DE19 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 			children = (
 				678802901DD41540001338A8 /* DashboardViewController.swift */,
 				678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */,
+				67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */,
+				67BCA1501DD6E66100E7EE74 /* MeetingsViewController.xib */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
 				67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */,
 				437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */,
@@ -312,6 +318,7 @@
 				67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */,
 				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
+				67BCA1521DD6E66100E7EE74 /* MeetingsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +392,7 @@
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
 				431804AB1DD7C73500B279C6 /* SettingsViewController.swift in Sources */,
+				67BCA1511DD6E66100E7EE74 /* MeetingsViewController.swift in Sources */,
 				678802921DD41540001338A8 /* DashboardViewController.swift in Sources */,
 				431804B11DD83A4A00B279C6 /* ChangePasswordViewController.swift in Sources */,
 				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,

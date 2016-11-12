@@ -29,7 +29,7 @@ class Constants: NSObject {
         ["id" : "d" as AnyObject, "name": "To Dos" as AnyObject, "card_type": CardType.to_do as Any as AnyObject, "page_type": PageType.dashboard as AnyObject]
     ])*/
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
-        ["id" : "m", "name": "Meetings", "card_type": "meetings", "page_type": "dashboard"],
+        ["id" : "m", "name": "Upcoming Meetings", "card_type": "meetings", "page_type": "dashboard"],
         // TODO optional for now ["id" : "o", "name": "Organizational Chart", "card_type": "org_chart", "page_type": "dashboard"],
         ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
         ["id" : "t", "name": "Team", "card_type": "team", "page_type": "dashboard"],

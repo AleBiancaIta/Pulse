@@ -23,7 +23,7 @@ class CardCell: UITableViewCell {
     
     var card: Card! {
         didSet {
-            /*let testVC = MeetingDetailsViewController()
+            /*let testVC = MeetingsViewController()
             let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
             let objects = nib.instantiate(withOwner: testVC, options: nil)
             let newView = objects.first as! UIView
@@ -40,12 +40,12 @@ class CardCell: UITableViewCell {
             
             if let cardType = card.cardType {
                 switch cardType {
-                /*case "meeting":
-                    let viewController = MeetingDetailsViewController()
-                    let nib = UINib(nibName: "MeetingDetailsViewController", bundle: nil)
-                    let objects = nib.instantiate(withOwner: viewController, options: nil)
-                    informationView = objects.first as! UIView
-                    informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())*/
+                case "meetings":
+                    let viewController = MeetingsViewController(nibName: "MeetingsViewController", bundle: nil)
+                    //let nib = UINib()
+                    //let objects = nib.instantiate(withOwner: viewController, options: nil)
+                    informationView = viewController.view //objects.first as! UIView
+                    informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())
                 default:
                     informationView = UIView(frame: contentView.frame)
                     textLabel?.text = card.name
@@ -56,7 +56,7 @@ class CardCell: UITableViewCell {
             panGesture.delegate = self
             informationView.addGestureRecognizer(panGesture)
             
-            //contentView.addSubview(informationView)
+            contentView.addSubview(informationView)
             contentView.layoutIfNeeded()
             
         }

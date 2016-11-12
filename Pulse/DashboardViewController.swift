@@ -108,7 +108,7 @@ extension DashboardViewController: UITableViewDataSource {
             cell.isUserInteractionEnabled = false
             return cell
         
-        // TODO replace the cells with the actual view
+        // The actual cards
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
             cell.delegate = self
