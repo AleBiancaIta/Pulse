@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class LoginViewController: UIViewController {
 
@@ -17,23 +18,38 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+    
+    // MARK: - Actions
     
     @IBAction func onLoginButtonTap(_ sender: UIButton) {
-        // Login to Parse        
-    }
-    
-    @IBAction func onForgetPasswordButtonTap(_ sender: UIButton) {
-        let forgetVC = ForgetPasswordViewController(nibName: "ForgetPasswordViewController", bundle: nil)
-        self.present(forgetVC, animated: true, completion: nil)
+        // Login to Parse   
+        
+        if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
+            showAlert(title: "Alert", message: "Username and password fields cannot be empty", sender: nil)
+        } else {
+            if let username = usernameTextField.text, let password = passwordTextField.text {
+                PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil)
+                    } else {
+                        debugPrint("User logged in successfully")
+                        // Segue to Dashboard view controller
+                        // Pass User ID to dashboard VC
+                    }
+                }
+            }
+        }
     }
     
     @IBAction func onCancelButtonTap(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
     }
     
+    //    @IBAction func onForgetPasswordButtonTap(_ sender: UIButton) {
+    //        let forgetVC = ForgetPasswordViewController(nibName: "ForgetPasswordViewController", bundle: nil)
+    //        self.present(forgetVC, animated: true, completion: nil)
+    //    }
     
     /*
     // MARK: - Navigation

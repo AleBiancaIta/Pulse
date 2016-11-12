@@ -42,8 +42,10 @@ class SignUpViewController: UIViewController {
             newUser.signUpInBackground { (success: Bool, error: Error?) in
                 if let error = error {
                     debugPrint("Error in signing up new user: \(error.localizedDescription)")
+                    self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil)
                 } else {
-                    debugPrint("User Registered successfully")
+                    debugPrint("User registered successfully")
+                    //self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) - need to update completion handler
                     
                     // Manually segue to login view
                     self.performSegue(withIdentifier: "loginModalSegue", sender: nil)

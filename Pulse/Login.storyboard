@@ -127,7 +127,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Forget Password?"/>
                                 <connections>
-                                    <action selector="onForgetPasswordButtonTap:" destination="YdN-Yd-wjs" eventType="touchUpInside" id="gkn-UW-MvN"/>
                                     <segue destination="ICY-o0-GUG" kind="presentation" id="SBu-ep-Xj7"/>
                                 </connections>
                             </button>

@@ -84,10 +84,7 @@
 		431804A21DD5B0B700B279C6 /* SignUp/Login */ = {
 			isa = PBXGroup;
 			children = (
-				4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */,
-				431804971DD5AD7500B279C6 /* SignUpViewController.xib */,
-				431804931DD5A8BE00B279C6 /* LoginViewController.xib */,
-				4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */,
+				431804A81DD69A5900B279C6 /* not currently used */,
 				4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */,
 				431804961DD5AD7500B279C6 /* SignUpViewController.swift */,
 				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
@@ -124,6 +121,17 @@
 				67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */,
 			);
 			name = Controllers;
+            sourceTree = "<group>";
+        };
+		431804A81DD69A5900B279C6 /* not currently used */ = {
+			isa = PBXGroup;
+			children = (
+				4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */,
+				431804971DD5AD7500B279C6 /* SignUpViewController.xib */,
+				431804931DD5A8BE00B279C6 /* LoginViewController.xib */,
+				4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */,
+			);
+			name = "not currently used";
 			sourceTree = "<group>";
 		};
 		67A3649E1DCD8DA400BFD931 = {
