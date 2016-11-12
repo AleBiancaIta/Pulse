@@ -28,7 +28,7 @@ class SignUpViewController: UIViewController {
         
         // check if textfields are empty
         if (usernameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
-            showAlert(title: "Alert", message: "Username, Email, and Password fields cannot be empty", sender: nil)
+            showAlert(title: "Alert", message: "Username, Email, and Password fields cannot be empty", sender: nil, handler: nil)
         } else {
             // Initialize a user object
             let newUser = PFUser()
@@ -42,15 +42,31 @@ class SignUpViewController: UIViewController {
             newUser.signUpInBackground { (success: Bool, error: Error?) in
                 if let error = error {
                     debugPrint("Error in signing up new user: \(error.localizedDescription)")
-                    self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil)
+                    self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
                 } else {
                     debugPrint("User registered successfully")
-                    //self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) - need to update completion handler
-                    
-                    // Manually segue to login view
-                    self.performSegue(withIdentifier: "loginModalSegue", sender: nil)
-                    
-                    // TODO: instead of segue-ing to login, run login in the background and if successful, segue to dashboard vc
+                    self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
+                        
+                        if alertAction.title == "OK" {
+                            // Manually segue to login view
+                            //self.performSegue(withIdentifier: "loginModalSegue", sender: nil)
+                            
+                            // TODO: instead of segue-ing to login, run login in the background and if successful, segue to dashboard vc
+                            // Run login the background and segue to dashboard vc
+                            PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
+                                if let error = error {
+                                    self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                                } else {
+                                    debugPrint("User logged in successfully after sign up")
+                                    
+                                    // Segue to Dashboard view controller
+                                    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+                                    let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+                                    self.present(dashboardNavVC, animated: true, completion: nil)
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
