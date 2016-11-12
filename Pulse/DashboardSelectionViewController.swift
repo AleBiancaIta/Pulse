@@ -18,8 +18,9 @@ class DashboardSelectionViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     weak var delegate: DashboardSelectionViewControllerDelegate?
+    var selectedCards: [Card] = []
     
-    let alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+    var alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +45,7 @@ extension DashboardSelectionViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
         cell.textLabel?.text = card.name
         
-        if DashboardViewController.cards.contains(card) {
+        if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark
         } else {
             cell.accessoryType = .none
@@ -68,9 +69,15 @@ extension DashboardSelectionViewController: UITableViewDelegate {
         
         let card = Constants.dashboardCards[indexPath.row]
         
-        if DashboardViewController.cards.contains(card) {
+        if selectedCards.contains(card) {
+            for (index, dashboardCard) in selectedCards.enumerated() {
+                if dashboardCard.id == card.id {
+                    selectedCards.remove(at: index)
+                }
+            }
             delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didRemoveCard: card)
         } else {
+            selectedCards.append(card)
             delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didAddCard: card)
         }
         

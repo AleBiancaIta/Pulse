@@ -14,8 +14,8 @@ class DashboardViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     var alertController: UIAlertController?
-    static var cards: [Card] = [] // TODO put in data controller, then abstract this so it's a true skeleton VC
-    var selectedCards: String! = ""
+    var selectedCardsString: String? = ""
+    var selectedCards: [Card] = [] // TODO put in data controller
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,24 +31,39 @@ class DashboardViewController: UIViewController {
         alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        /*let query = PFQuery(className: "Dashboard")
-        query.whereKey("userId", equalTo: UIDevice.current.identifierForVendor?.uuidString) // TODO logged in casePFUser.current()?.objectId
-        query.limit = 1
-        
-        // fetch data asynchronously
+        let query = PFQuery(className: "Dashboard")
+        query.whereKey("userId", equalTo: "BiancaTest") // TODO logged in casePFUser.current()?.objectId
+    
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
-                let a = 0
+                let post = posts[0]
+                self.selectedCardsString = post["selectedCards"] as? String
+                for c in (self.selectedCardsString?.characters)! {
+                    switch c {
+                    case "m":
+                        self.selectedCards.append(Constants.dashboardCards[0]) // TODO fix these
+                    case "g":
+                        self.selectedCards.append(Constants.dashboardCards[1])
+                    case "t":
+                        self.selectedCards.append(Constants.dashboardCards[2])
+                    case "d":
+                        self.selectedCards.append(Constants.dashboardCards[3])
+                    default:
+                        break
+                    }
+                }
+                self.tableView.reloadData()
+                
             } else {
                 print(error?.localizedDescription)
             }
-        }*/
+        }
     }
     
     // MARK: - IBAction
     
     @IBAction func onAddCard(_ sender: UIBarButtonItem) {
-        guard DashboardViewController.cards.count != Constants.dashboardCards.count else {
+        guard selectedCards.count != Constants.dashboardCards.count else {
             alertController?.message = "You already have all the cards"
             present(alertController!, animated: true)
             return
@@ -59,6 +74,7 @@ class DashboardViewController: UIViewController {
         
         if let dashboardSelectionViewController = dashboardSelectionNavigationController.topViewController as? DashboardSelectionViewController {
             dashboardSelectionViewController.delegate = self
+            dashboardSelectionViewController.selectedCards = selectedCards
         }
         
         present(dashboardSelectionNavigationController, animated: true, completion: nil)
@@ -71,7 +87,7 @@ extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // No cards
-        if DashboardViewController.cards.count == 0 {
+        if selectedCards.count == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
             cell.message = "Tap the + button to add cards"
             cell.isUserInteractionEnabled = false
@@ -88,7 +104,7 @@ extension DashboardViewController: UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
             cell.delegate = self
-            cell.card = DashboardViewController.cards[indexPath.section]
+            cell.card = selectedCards[indexPath.section]
             return cell
         }
     }
@@ -98,14 +114,14 @@ extension DashboardViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return DashboardViewController.cards.count + 1
+        return selectedCards.count + 1
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard DashboardViewController.cards.count > section else {
+        guard selectedCards.count > section else {
             return nil
         }
-        return DashboardViewController.cards[section].name
+        return selectedCards[section].name
     }
 }
 
@@ -149,13 +165,13 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
                 let id = card.id,
-                let selectedCards = self.selectedCards {
+                let selectedCardsString = self.selectedCardsString {
                 let post = posts[0]
                 post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
-                self.selectedCards = "\(id)\(selectedCards)"
-                post["selectedCards"] = self.selectedCards
+                self.selectedCardsString = "\(id)\(selectedCardsString)"
+                post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
-                    print("successfully saved dashboard cards")
+                    print("successfully saved dashboard card")
                 }
             } else {
                 print(error?.localizedDescription)
@@ -163,7 +179,7 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
         }
         
         // Insert new card at the top of the table view
-        DashboardViewController.cards.insert(card, at: 0)
+        selectedCards.insert(card, at: 0)
         tableView.reloadData()
     }
     
@@ -174,13 +190,13 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
                 let id = card.id,
-                let selectedCards = self.selectedCards {
+                let selectedCardsString = self.selectedCardsString {
                 let post = posts[0]
                 post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
-                self.selectedCards = selectedCards.replacingOccurrences(of: id, with: "")
-                post["selectedCards"] = self.selectedCards
+                self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
+                post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
-                    print("successfully removed dashboard cards")
+                    print("successfully removed dashboard card")
                 }
             } else {
                 print(error?.localizedDescription)
@@ -188,9 +204,9 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
         }
         
         // Remove card from table view
-        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
+        for (index, dashboardCard) in selectedCards.enumerated() {
             if dashboardCard.id == card.id {
-                DashboardViewController.cards.remove(at: index)
+                selectedCards.remove(at: index)
             }
         }
         tableView.reloadData()
@@ -201,7 +217,7 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
 
 extension DashboardViewController: CardCellDelegate {
     func cardCell(cardCell: CardCell, didMoveUp card: Card) {
-        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
+        for (index, dashboardCard) in selectedCards.enumerated() {
             if dashboardCard.id == card.id {
                 
                 // First card
@@ -211,30 +227,76 @@ extension DashboardViewController: CardCellDelegate {
                     return
                 }
             
+                let query = PFQuery(className: "Dashboard")
+                query.whereKey("userId", equalTo: "BiancaTest") // TODO PFUser.current()?.objectId
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                    if let posts = posts,
+                        let selectedCardsString = self.selectedCardsString {
+                        let post = posts[0]
+                        post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
+                        
+                        var characters = Array(selectedCardsString.characters)
+                        let charBefore = characters[index-1]
+                        characters[index-1] = characters[index]
+                        characters[index] = charBefore
+                        self.selectedCardsString = String(characters)
+                        
+                        post["selectedCards"] = self.selectedCardsString
+                        post.saveInBackground { (success: Bool, error: Error?) in
+                            print("successfully moved up dashboard card")
+                        }
+                    } else {
+                        print(error?.localizedDescription)
+                    }
+                }
+                
                 // Swap with card before
-                let cardBefore = DashboardViewController.cards[index-1]
-                DashboardViewController.cards[index-1] = card
-                DashboardViewController.cards[index] = cardBefore
+                let cardBefore = selectedCards[index-1]
+                selectedCards[index-1] = card
+                selectedCards[index] = cardBefore
                 tableView.reloadData()
             }
         }
     }
     
     func cardCell(cardCell: CardCell, didMoveDown card: Card) {
-        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
+        for (index, dashboardCard) in selectedCards.enumerated() {
             if dashboardCard.id == card.id { // TODO find better way to do this
                 
                 // Last card
-                guard index < DashboardViewController.cards.count - 1 else {
+                guard index < selectedCards.count - 1 else {
                     alertController?.message = "This card cannot move down further"
                     present(alertController!, animated: true)
                     return
                 }
                 
+                let query = PFQuery(className: "Dashboard")
+                query.whereKey("userId", equalTo: "BiancaTest") // TODO PFUser.current()?.objectId
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                    if let posts = posts,
+                        let selectedCardsString = self.selectedCardsString {
+                        let post = posts[0]
+                        post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
+                        
+                        var characters = Array(selectedCardsString.characters)
+                        let charAfter = characters[index+1]
+                        characters[index+1] = characters[index]
+                        characters[index] = charAfter
+                        self.selectedCardsString = String(characters)
+                        
+                        post["selectedCards"] = self.selectedCardsString
+                        post.saveInBackground { (success: Bool, error: Error?) in
+                            print("successfully moved up dashboard card")
+                        }
+                    } else {
+                        print(error?.localizedDescription)
+                    }
+                }
+                
                 // Swap with card after
-                let cardAfter = DashboardViewController.cards[index+1]
-                DashboardViewController.cards[index+1] = card
-                DashboardViewController.cards[index] = cardAfter
+                let cardAfter = selectedCards[index+1]
+                selectedCards[index+1] = card
+                selectedCards[index] = cardAfter
                 tableView.reloadData()
             }
         }
@@ -246,13 +308,13 @@ extension DashboardViewController: CardCellDelegate {
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
                 let id = card.id,
-                let selectedCards = self.selectedCards {
+                let selectedCardsString = self.selectedCardsString {
                 let post = posts[0]
                 post["userId"] = "BiancaTest" // TODO PFUser.current()?.objectId
-                self.selectedCards = selectedCards.replacingOccurrences(of: id, with: "")
-                post["selectedCards"] = self.selectedCards
+                self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
+                post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
-                    print("successfully removed dashboard cards")
+                    print("successfully removed dashboard card")
                 }
             } else {
                 print(error?.localizedDescription)
@@ -260,9 +322,9 @@ extension DashboardViewController: CardCellDelegate {
         }
         
         // Remove card from table view
-        for (index, dashboardCard) in DashboardViewController.cards.enumerated() {
+        for (index, dashboardCard) in selectedCards.enumerated() {
             if dashboardCard.id == card.id {
-                DashboardViewController.cards.remove(at: index)
+                selectedCards.remove(at: index)
             }
         }
         tableView.reloadData()
