@@ -14,6 +14,9 @@ class SettingsViewController: UIViewController {
     fileprivate let settingsHeaderCell = "SettingsHeaderCell"
     fileprivate let settingsContentCell = "SettingsContentCell"
     
+    fileprivate let changePasswordSegue = "changePasswordSegue"
+    fileprivate let updateProfileSegue = "updateProfileSegue"
+    
     // Note: Sign Up is for anonymous user who wants to sign up for the account
     fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
     
@@ -65,7 +68,16 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsContentCell, for: indexPath)
             cell.textLabel?.text = settingsContent[indexPath.row]
             
-            if indexPath.row == 2 { // Sign Up
+            if indexPath.row == 0 || indexPath.row == 1 {
+                // only enable if it's NOT anonymous user
+                if !(PFAnonymousUtils.isLinked(with: user)) {
+                    cell.isUserInteractionEnabled = true
+                    cell.textLabel?.textColor = UIColor.black
+                } else {
+                    cell.isUserInteractionEnabled = false
+                    cell.textLabel?.textColor = UIColor.lightGray
+                }
+            } else if indexPath.row == 2 { // Sign Up
                 // only enable if it's anonymous user
                 if PFAnonymousUtils.isLinked(with: user) {
                     cell.isUserInteractionEnabled = true
@@ -87,8 +99,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         } else if indexPath.section == 1 {
             if indexPath.row == 0 { // User Info
                 debugPrint("did select row User Info")
+                performSegue(withIdentifier: updateProfileSegue, sender: nil)
             } else if indexPath.row == 1 { // Change Password
                 debugPrint("did select row Change Password")
+                performSegue(withIdentifier: changePasswordSegue, sender: nil)
             } else if indexPath.row == 2 { // Sign Up
                 debugPrint("did select row Sign Up")
                 self.segueToStoryboard(id: StoryboardID.signupVC)

@@ -1,0 +1,98 @@
+//
+//  ChangePasswordViewController.swift
+//  Pulse
+//
+//  Created by Itasari on 11/12/16.
+//  Copyright © 2016 ABI. All rights reserved.
+//
+
+import UIKit
+import Parse
+
+class ChangePasswordViewController: UIViewController {
+    
+    // MARK: - Properties
+    
+    @IBOutlet weak var oldPasswordTextField: UITextField!
+    @IBOutlet weak var newPasswordTextField: UITextField!
+    @IBOutlet weak var confirmNewPasswordTextField: UITextField!
+    var user: PFUser! = PFUser.current()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    // MARK: - Actions
+    
+    @IBAction func onChangePasswordButtonTap(_ sender: UIButton) {
+        if validateEntry() {
+            debugPrint("current user username is \(user.username!)")
+            
+            // Re-login user to confirm they're entering the correct password
+            PFUser.logInWithUsername(inBackground: user.username!, password: oldPasswordTextField.text!) { (user: PFUser?, error: Error?) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "Your old password is incorrect: \(error.localizedDescription)", sender: nil, handler: nil)
+                } else {
+                    PFUser.current()?.password = self.newPasswordTextField.text!
+                    PFUser.current()?.saveInBackground(block: { (success: Bool, error: Error?) in
+                        if success {
+                            self.showAlert(title: "Success", message: "Password change successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+                                self.navigationController?.popViewController(animated: true)
+                            })
+                        } else {
+                            self.showAlert(title: "Error", message: "Changing password error: \(error?.localizedDescription)", sender: nil, handler: nil)
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
+    // MARK: - Helpers
+    
+    fileprivate func validateEntry() -> Bool {
+        // Check if old password is empty
+        guard !((oldPasswordTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "Old password field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if new password is empty
+        guard !((newPasswordTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "New Password field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if confirm password is empty
+        guard !((confirmNewPasswordTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "Confirm new password field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+//        // Check to make sure old password matches the record
+//        guard oldPasswordTextField.text == (PFUser.current()?.object(forKey: "password") as? String) else {
+//            debugPrint("old pswd : \(oldPasswordTextField.text!), user pswd: \(PFUser.current()?.object(forKey: "password") as? String)")
+//            showAlert(title: "Error", message: "Old password is incorrect", sender: nil, handler: nil)
+//            return false
+//        }
+//        
+        // Check to make sure password == confirm password
+        guard newPasswordTextField.text == confirmNewPasswordTextField.text else {
+            showAlert(title: "Error", message: "New Password and confirm new password must be the same", sender: nil, handler: nil)
+            return false
+        }
+        
+        return true
+    }
+    
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}
