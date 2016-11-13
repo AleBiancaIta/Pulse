@@ -41,6 +41,9 @@ class Constants: NSObject {
         ["id" : "p", "name": "Photo Notes", "card_type": "photo_note", "page_type": "meeting"],
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "meeting"]
     ])
+    
+    static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],
+                                                ["positionId": "2", "description": "Individual Contributor"]]
 }
 
 struct StoryboardID {
@@ -48,4 +51,3 @@ struct StoryboardID {
     static let settingsNavVC = "SettingsNavVC"
     static let settingsVC = "SettingsVC"
 }
-
