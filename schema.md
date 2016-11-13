@@ -66,7 +66,7 @@ This is the schema that currently reflects what's in Heroku/Parse.
 - userId: string (Nullable) (FK to Person) -> if the Person is also the user of the app (i.e. manager), this field will store the userId of the current app user
 - photoUrlString: string (Nullable)
 - selectedCards: string (Nullable)
-- deletedAt: date
+- deletedAt: date (Nullable)
 
 ## ToDo: store todo data
 - _id: "ToDo" (Parse object name)

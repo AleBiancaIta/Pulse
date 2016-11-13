@@ -51,3 +51,21 @@ struct StoryboardID {
     static let settingsNavVC = "SettingsNavVC"
     static let settingsVC = "SettingsVC"
 }
+
+struct ObjectKeys {
+    struct Person {
+        static let objectId = "objectId"
+        static let updatedAt = "updatedAt"
+        static let createdAt = "createdAt"
+        static let email = "email"
+        static let firstName = "firstName"
+        static let lastName = "lastName"
+        static let positionId = "positionId"
+        static let phone = "phone"
+        static let managerId = "managerId"
+        static let userId = "userId"
+        static let photoUrlString = "photoUrlString"
+        static let selectedCards = "selectedCards"
+        static let deletedAt = "deletedAt"
+    }
+}

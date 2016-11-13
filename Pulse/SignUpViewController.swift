@@ -26,12 +26,48 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    // MARK: - Properties
+    // MARK: - Actions
     
     @IBAction func onSignUpButtonTap(_ sender: UIButton) {
         //self.resignFirstResponder()
         
-        // check if textfields are empty
+        // Verify entry
+        if validateEntry() {
+            // Initialize a user object
+            let newUser = PFUser()
+            
+            // Set user properties
+            newUser.username = usernameTextField.text
+            newUser.email = emailTextField.text
+            newUser.password = passwordTextField.text
+            
+            // Call sign up function on the object
+            newUser.signUpInBackground { (success: Bool, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in signing up new user: \(error.localizedDescription)")
+                    self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
+                } else {
+                    debugPrint("User registered successfully")
+                    self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
+                        
+                        if alertAction.title == "OK" {
+                            
+                            // Run login the background and segue to dashboard vc
+                            PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
+                                if let error = error {
+                                    self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                                } else {
+                                    debugPrint("User logged in successfully after sign up")
+                                    self.segueToDashboardVC()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        /* OLD CODE
         if (usernameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
             showAlert(title: "Alert", message: "Username, Email, and Password fields cannot be empty", sender: nil, handler: nil)
         } else {
@@ -74,11 +110,60 @@ class SignUpViewController: UIViewController {
                     }
                 }
             }
-        }
+        }*/
     }
     
     @IBAction func onCancelButtonTap(_ sender: UIButton) {
         //self.resignFirstResponder()
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Helpers
+    
+    
+    fileprivate func segueToDashboardVC() {
+        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+        self.present(dashboardNavVC, animated: true, completion: nil)
+    }
+    
+    fileprivate func validateEntry() -> Bool {
+        // Check if username is empty
+        guard !((usernameTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "Username field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if password is empty
+        guard !((passwordTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if confirm password is empty
+        guard !((confirmPasswordTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "Confirm password field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check to make sure password == confirm password
+        guard passwordTextField.text == confirmPasswordTextField.text else {
+            showAlert(title: "Error", message: "Password and confirm password must be the same", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if first name is empty
+        guard !((firstNameTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if email is empty
+        guard !((emailTextField.text?.isEmpty)!) else {
+            showAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
+            return false
+        }
+        
+        return true
     }
 }
