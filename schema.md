@@ -12,7 +12,7 @@ This is the schema that currently reflects what's in Heroku/Parse.
  - emailVerified: boolean
  - authData: object
 
-## Sessions: Parse created table, set aside to track current open sessions
+## Session: Parse created table, set aside to track current open sessions
  - _id: "_Session"
  - objectId: string
  - updatedAt: date
@@ -56,14 +56,14 @@ This is the schema that currently reflects what's in Heroku/Parse.
 - objectId: string (default Parse)
 - updatedAt: date (default Parse)
 - createdAt: date (default Parse)
-- deviceId: string (Nullable) 
+- deviceId: string (Nullable) -> might not need this for anonymous login after all
 - email: string (Nullable)
 - firstName: string
 - lastName: string
 - positionId: string
 - phone: string (Nullable)
-- managerId: string (FK to Person)
-- userId: string (FK to Person)
+- managerId: string (Nullable) (FK to Person) -> if the Person is an Individual Contributor, this field will be populated; otherwise, it's null
+- userId: string (Nullable) (FK to Person) -> if the Person is also the user of the app (i.e. manager), this field will store the userId of the current app user
 - photoUrlString: string (Nullable)
 - selectedCards: string (Nullable)
 - deletedAt: date
