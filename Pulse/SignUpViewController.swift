@@ -54,6 +54,17 @@ class SignUpViewController: UIViewController {
                     
                     // Create a Person object and save it to Parse
                     let person = Person(dictionary: dictionary)
+                    
+                    // NEWLY ADDED
+                    PFUser.current()?["person"] = PFObject(className: "Person")
+                    PFUser.current()?.saveInBackground(block: { (success: Bool, error: Error?) in
+                        if let error = error {
+                            print("error saving person: \(error.localizedDescription)")
+                        } else {
+                            print("saved successfully")
+                        }
+                    })
+                    
                     Person.savePersonToParse(person: person) { (success: Bool, error: Error?) in
                         if success {
                             self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in

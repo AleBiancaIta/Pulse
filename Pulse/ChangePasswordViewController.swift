@@ -69,13 +69,6 @@ class ChangePasswordViewController: UIViewController {
             return false
         }
         
-//        // Check to make sure old password matches the record
-//        guard oldPasswordTextField.text == (PFUser.current()?.object(forKey: "password") as? String) else {
-//            debugPrint("old pswd : \(oldPasswordTextField.text!), user pswd: \(PFUser.current()?.object(forKey: "password") as? String)")
-//            showAlert(title: "Error", message: "Old password is incorrect", sender: nil, handler: nil)
-//            return false
-//        }
-//        
         // Check to make sure password == confirm password
         guard newPasswordTextField.text == confirmNewPasswordTextField.text else {
             showAlert(title: "Error", message: "New Password and confirm new password must be the same", sender: nil, handler: nil)
@@ -84,15 +77,4 @@ class ChangePasswordViewController: UIViewController {
         
         return true
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
