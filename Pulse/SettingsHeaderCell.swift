@@ -7,12 +7,26 @@
 //
 
 import UIKit
+import Parse
 
 class SettingsHeaderCell: UITableViewCell {
     
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    
+    var user: PFUser! {
+        didSet {
+            // Check if user is anonymous
+            if PFAnonymousUtils.isLinked(with: user) {
+                usernameLabel.text = "Hello, Anonymous"
+                emailLabel.isHidden = true
+            } else {
+                usernameLabel.text = "Hello, \(user.username!)"
+                emailLabel.text = user.email
+            }
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()

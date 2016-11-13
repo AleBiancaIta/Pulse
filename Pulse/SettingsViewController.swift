@@ -14,22 +14,20 @@ class SettingsViewController: UIViewController {
     fileprivate let settingsHeaderCell = "SettingsHeaderCell"
     fileprivate let settingsContentCell = "SettingsContentCell"
     
-    fileprivate let settingsContent = ["Change Password", "Sign Up", "Log Out"]
+    // Note: Sign Up is for anonymous user who wants to sign up for the account
+    fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
     
     @IBOutlet var settingsTableView: UITableView!
     var user: PFUser! = PFUser.current()
+    var person: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        settingsTableView.estimatedRowHeight = 50
+        settingsTableView.rowHeight = UITableViewAutomaticDimension
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -50,21 +48,34 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 0 {
+            return 1
+        } else {
+            return settingsContent.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsHeaderCell, for: indexPath) as! SettingsHeaderCell
+            cell.user = user // NEED TO CHANGE THIS TO PERSON
+            cell.isUserInteractionEnabled = false
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsContentCell, for: indexPath)
+            cell.textLabel?.text = settingsContent[indexPath.row]
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        debugPrint("did select row")
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == 0 {
+            // do nothing
+        } else {
+            debugPrint("did select row")
+        }
     }
     
 }
