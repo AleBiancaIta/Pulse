@@ -64,6 +64,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsContentCell, for: indexPath)
             cell.textLabel?.text = settingsContent[indexPath.row]
+            
+            if indexPath.row == 2 { // Sign Up
+                // only enable if it's anonymous user
+                if PFAnonymousUtils.isLinked(with: user) {
+                    cell.isUserInteractionEnabled = true
+                    cell.textLabel?.textColor = UIColor.black
+                } else {
+                    cell.isUserInteractionEnabled = false
+                    cell.textLabel?.textColor = UIColor.lightGray
+                }
+            }
             return cell
         }
     }
@@ -80,6 +91,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 debugPrint("did select row Change Password")
             } else if indexPath.row == 2 { // Sign Up
                 debugPrint("did select row Sign Up")
+                self.segueToStoryboard(id: StoryboardID.signupVC)
             } else if indexPath.row == 3 { // Log Out
                 logOut()
             }
