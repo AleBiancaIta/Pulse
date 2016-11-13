@@ -70,4 +70,9 @@ struct ObjectKeys {
         static let selectedCards = "selectedCards"
         static let deletedAt = "deletedAt"
     }
+    
+    struct User {
+        static let objectId = "objectId"
+        static let person = "Person"
+    }
 }

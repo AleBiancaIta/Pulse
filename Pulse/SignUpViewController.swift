@@ -54,33 +54,39 @@ class SignUpViewController: UIViewController {
                     
                     // Create a Person object and save it to Parse
                     let person = Person(dictionary: dictionary)
-                    
-                    // NEWLY ADDED
-                    PFUser.current()?["person"] = PFObject(className: "Person")
-                    PFUser.current()?.saveInBackground(block: { (success: Bool, error: Error?) in
-                        if let error = error {
-                            print("error saving person: \(error.localizedDescription)")
-                        } else {
-                            print("saved successfully")
-                        }
-                    })
-                    
                     Person.savePersonToParse(person: person) { (success: Bool, error: Error?) in
                         if success {
-                            self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
-                            
-                                if alertAction.title == "OK" {
-                                    // Run login the background and segue to dashboard vc
-                                    PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
+                            // Link Person to newUser
+                            var query = PFQuery(className: "Person")
+                            query.whereKey(ObjectKeys.Person.userId, equalTo: newUser.objectId)
+                            query.findObjectsInBackground(block: { (persons: [PFObject]?, error: Error?) in
+                                if let persons = persons {
+                                    let person = persons[0] // there should only be one match since Id is unique
+                                    newUser[ObjectKeys.User.person] = person
+                                    newUser.saveInBackground(block: { (success: Bool, error: Error?) in
                                         if let error = error {
-                                            self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                                            print("error saving person: \(error.localizedDescription)")
                                         } else {
-                                            debugPrint("User logged in successfully after sign up")
-                                            self.segueToDashboardVC()
+                                            print("saved successfully: \(newUser)")
+                                            
+                                            self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
+                                                
+                                                if alertAction.title == "OK" {
+                                                    // Run login the background and segue to dashboard vc
+                                                    PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
+                                                        if let error = error {
+                                                            self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                                                        } else {
+                                                            debugPrint("User logged in successfully after sign up")
+                                                            self.segueToDashboardVC()
+                                                        }
+                                                    }
+                                                }
+                                            }
                                         }
-                                    }
+                                    })
                                 }
-                            }
+                            })
                         } else {
                             debugPrint("Error creating or saving Person object in Parse")
                         }

@@ -20,26 +20,70 @@ class UpdateProfileViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     
     var user: PFUser! = PFUser.current()
+    var person: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        debugPrint("user contains \(user)")
+        getUserProfile()
     }
 
     // MARK: - Actions
     @IBAction func onUpdateProfileButtonTap(_ sender: UIButton) {
         if validateEntry() {
-            if (lastNameTextField.text?.isEmpty)! {
-                // last name gets the first name
+            let lastName = (lastNameTextField.text?.isEmpty)! ? firstNameTextField.text : lastNameTextField.text
+            let phone = (phoneTextField.text?.isEmpty)! ? "" : phoneTextField.text
+            
+            PFUser.logInWithUsername(inBackground: user.username!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "Your password is incorrect: \(error.localizedDescription)", sender: nil, handler: nil)
+                } else {
+                    self.person[ObjectKeys.Person.firstName] = self.firstNameTextField.text
+                    self.person[ObjectKeys.Person.lastName] = lastName
+                    self.person[ObjectKeys.Person.phone] = phone
+                    self.person[ObjectKeys.Person.email] =  self.emailTextField.text
+                    
+                    self.person.saveInBackground(block: { (success: Bool, error: Error?) in
+                        if success {
+                            self.showAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+                                self.navigationController?.popViewController(animated: true)
+                            })
+                        } else {
+                            self.showAlert(title: "Error", message: "Unable to update user profile with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+                        }
+                    })
+                }
             }
-            
-            
         }
     }
     
     
     // MARK: - Helpers
+    
+    fileprivate func getUserProfile() {
+        var query = PFQuery(className: "Person")
+        query.whereKey(ObjectKeys.Person.userId, equalTo: user.objectId!)
+        query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to find person associated with current user id, error: \(error.localizedDescription)")
+            } else {
+                if let persons = persons {
+                    let person = persons[0]
+                    self.person = person
+                    debugPrint("after query person is \(self.person)")
+                    self.configureTextFields()
+                }
+            }
+        }
+    }
+    
+    fileprivate func configureTextFields() {
+        if person != nil {
+            firstNameTextField.text = person[ObjectKeys.Person.firstName] as! String
+            lastNameTextField.text = person[ObjectKeys.Person.lastName] as! String
+            phoneTextField.text = person[ObjectKeys.Person.phone] as! String
+            emailTextField.text = person[ObjectKeys.Person.email] as! String
+        }
+    }
     
     fileprivate func validateEntry() -> Bool {
         // Check if password is empty
