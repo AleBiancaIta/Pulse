@@ -42,8 +42,8 @@ class Constants: NSObject {
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "meeting"]
     ])
     
-    static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],
-                                                ["positionId": "2", "description": "Individual Contributor"]]
+    //static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],["positionId": "2", "description": "Individual Contributor"]]
+    static let positions: [String: String] = ["1": "Manager", "2": "Individual Contributor"]
 }
 
 struct StoryboardID {

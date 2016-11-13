@@ -48,69 +48,35 @@ class SignUpViewController: UIViewController {
                     self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
                 } else {
                     debugPrint("User registered successfully")
-                    self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
-                        
-                        if alertAction.title == "OK" {
+                
+                    // Prep the dictionary for the Person object
+                    let dictionary = self.prepPersonDictionary()
+                    
+                    // Create a Person object and save it to Parse
+                    let person = Person(dictionary: dictionary)
+                    Person.savePersonToParse(person: person) { (success: Bool, error: Error?) in
+                        if success {
+                            self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
                             
-                            // Run login the background and segue to dashboard vc
-                            PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
-                                if let error = error {
-                                    self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
-                                } else {
-                                    debugPrint("User logged in successfully after sign up")
-                                    self.segueToDashboardVC()
+                                if alertAction.title == "OK" {
+                                    // Run login the background and segue to dashboard vc
+                                    PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
+                                        if let error = error {
+                                            self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                                        } else {
+                                            debugPrint("User logged in successfully after sign up")
+                                            self.segueToDashboardVC()
+                                        }
+                                    }
                                 }
                             }
+                        } else {
+                            debugPrint("Error creating or saving Person object in Parse")
                         }
                     }
                 }
             }
         }
-        
-        /* OLD CODE
-        if (usernameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
-            showAlert(title: "Alert", message: "Username, Email, and Password fields cannot be empty", sender: nil, handler: nil)
-        } else {
-            // Initialize a user object
-            let newUser = PFUser()
-            
-            // Set user properties
-            newUser.username = usernameTextField.text
-            newUser.email = emailTextField.text
-            newUser.password = passwordTextField.text
-            
-            // Call sign up function on the object
-            newUser.signUpInBackground { (success: Bool, error: Error?) in
-                if let error = error {
-                    debugPrint("Error in signing up new user: \(error.localizedDescription)")
-                    self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
-                } else {
-                    debugPrint("User registered successfully")
-                    self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
-                        
-                        if alertAction.title == "OK" {
-                            // Manually segue to login view
-                            //self.performSegue(withIdentifier: "loginModalSegue", sender: nil)
-                            
-                            // TODO: instead of segue-ing to login, run login in the background and if successful, segue to dashboard vc
-                            // Run login the background and segue to dashboard vc
-                            PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
-                                if let error = error {
-                                    self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
-                                } else {
-                                    debugPrint("User logged in successfully after sign up")
-                                    
-                                    // Segue to Dashboard view controller
-                                    let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-                                    let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
-                                    self.present(dashboardNavVC, animated: true, completion: nil)
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
     }
     
     @IBAction func onCancelButtonTap(_ sender: UIButton) {
@@ -120,6 +86,24 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Helpers
     
+    fileprivate func prepPersonDictionary() -> [String: String] {
+        // If last name is empty, last name = first name
+        let lastName = (lastNameTextField.text?.isEmpty)! ? firstNameTextField.text! : lastNameTextField.text!
+        let phone = (phoneTextField.text?.isEmpty)! ? "" : phoneTextField.text!
+        
+        var dictionary = [String : String]()
+        
+        // Position ID is hardcoded for now
+        if let userId = PFUser.current()?.objectId {
+            dictionary = [ObjectKeys.Person.firstName: firstNameTextField.text!,
+                          ObjectKeys.Person.lastName: lastName,
+                          ObjectKeys.Person.positionId: "1",
+                          ObjectKeys.Person.email: emailTextField.text!,
+                          ObjectKeys.Person.phone: phone,
+                          ObjectKeys.Person.userId: userId]
+        }
+        return dictionary
+    }
     
     fileprivate func segueToDashboardVC() {
         let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
@@ -167,3 +151,48 @@ class SignUpViewController: UIViewController {
         return true
     }
 }
+
+/* OLD CODE
+ if (usernameTextField.text?.isEmpty)! || (emailTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
+ showAlert(title: "Alert", message: "Username, Email, and Password fields cannot be empty", sender: nil, handler: nil)
+ } else {
+ // Initialize a user object
+ let newUser = PFUser()
+ 
+ // Set user properties
+ newUser.username = usernameTextField.text
+ newUser.email = emailTextField.text
+ newUser.password = passwordTextField.text
+ 
+ // Call sign up function on the object
+ newUser.signUpInBackground { (success: Bool, error: Error?) in
+ if let error = error {
+ debugPrint("Error in signing up new user: \(error.localizedDescription)")
+ self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
+ } else {
+ debugPrint("User registered successfully")
+ self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
+ 
+ if alertAction.title == "OK" {
+ // Manually segue to login view
+ //self.performSegue(withIdentifier: "loginModalSegue", sender: nil)
+ 
+ // TODO: instead of segue-ing to login, run login in the background and if successful, segue to dashboard vc
+ // Run login the background and segue to dashboard vc
+ PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
+ if let error = error {
+ self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+ } else {
+ debugPrint("User logged in successfully after sign up")
+ 
+ // Segue to Dashboard view controller
+ let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+ let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+ self.present(dashboardNavVC, animated: true, completion: nil)
+ }
+ }
+ }
+ }
+ }
+ }
+ }*/
