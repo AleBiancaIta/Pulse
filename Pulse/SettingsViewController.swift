@@ -19,14 +19,12 @@ class SettingsViewController: UIViewController {
     
     @IBOutlet var settingsTableView: UITableView!
     var user: PFUser! = PFUser.current()
-    var person: PFObject!
+    var person: Person!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         settingsTableView.estimatedRowHeight = 50
         settingsTableView.rowHeight = UITableViewAutomaticDimension
-        
     }
 
     /*
@@ -40,6 +38,8 @@ class SettingsViewController: UIViewController {
     */
 
 }
+
+// MARK: - SettingsViewController: UITableViewDelegate, UITableViewDataSource
 
 extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -73,9 +73,60 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             // do nothing
-        } else {
-            debugPrint("did select row")
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 { // User Info
+                debugPrint("did select row User Info")
+            } else if indexPath.row == 1 { // Change Password
+                debugPrint("did select row Change Password")
+            } else if indexPath.row == 2 { // Sign Up
+                debugPrint("did select row Sign Up")
+            } else if indexPath.row == 3 { // Log Out
+                logOut()
+            }
         }
     }
     
+    // MARK: - Helpers
+
+    fileprivate func logOut() {
+        
+        // If anonymous user, give them a heads up that their data will be deleted if they don't sign up
+        if PFAnonymousUtils.isLinked(with: user) {
+            debugPrint("user is anonymous, give them a warning")
+            showAlertWithActions(title: "Alert", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
+                if alertAction1.title == "Sign Up" {
+                    debugPrint("Sign Up is being clicked")
+                    self.segueToStoryboard(id: StoryboardID.signupVC)
+                }
+            }, handler2: { (alertAction2: UIAlertAction) in
+                if alertAction2.title == "Log Out" {
+                    debugPrint("Log Out is being clicked")
+                    PFUser.logOutInBackground(block: { (error: Error?) in
+                        if let error = error {
+                            debugPrint("Log out failed with error: \(error.localizedDescription)")
+                        } else {
+                            debugPrint("User log out successfully")
+                            self.segueToStoryboard(id: StoryboardID.loginSignupVC)
+                        }
+                    })
+                }
+            })
+        } else {
+            // If not anonymous, log out user and take them back to the sign up page
+            PFUser.logOutInBackground(block: { (error: Error?) in
+                if let error = error {
+                    debugPrint("Log out failed with error: \(error.localizedDescription)")
+                } else {
+                    debugPrint("User log out successfully")
+                    self.segueToStoryboard(id: StoryboardID.loginSignupVC)
+                }
+            })
+        }
+    }
+
+    fileprivate func segueToStoryboard(id: String) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginSignUpVC = storyboard.instantiateViewController(withIdentifier: id)
+        self.present(loginSignUpVC, animated: true, completion: nil)
+    }
 }

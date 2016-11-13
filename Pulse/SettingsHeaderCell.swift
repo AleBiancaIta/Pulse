@@ -15,6 +15,8 @@ class SettingsHeaderCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
+    var person: Person!
+    
     var user: PFUser! {
         didSet {
             // Check if user is anonymous

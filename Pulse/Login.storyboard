@@ -13,7 +13,7 @@
         <!--Login Sign Up View Controller-->
         <scene sceneID="zla-pu-ers">
             <objects>
-                <viewController id="Wt5-AZ-fui" customClass="LoginSignUpViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginSignupVC" id="Wt5-AZ-fui" customClass="LoginSignUpViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9ji-Nd-EpE"/>
                         <viewControllerLayoutGuide type="bottom" id="VS3-7I-sv7"/>
@@ -318,7 +318,7 @@
         <!--Sign Up View Controller-->
         <scene sceneID="ioL-Rq-dlY">
             <objects>
-                <viewController id="Ea4-eZ-k3f" customClass="SignUpViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupVC" id="Ea4-eZ-k3f" customClass="SignUpViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Htj-Ng-xOa"/>
                         <viewControllerLayoutGuide type="bottom" id="feP-1Z-Ln2"/>

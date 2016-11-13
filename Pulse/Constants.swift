@@ -50,6 +50,8 @@ struct StoryboardID {
     static let dashboardNavVC = "DashboardNavVC"
     static let settingsNavVC = "SettingsNavVC"
     static let settingsVC = "SettingsVC"
+    static let loginSignupVC = "LoginSignupVC"
+    static let signupVC = "SignupVC"
 }
 
 struct ObjectKeys {

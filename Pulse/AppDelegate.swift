@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		)
         
         // For testing only - take out after implementing Logout
-        PFUser.logOut()
+        //PFUser.logOut()
         
         // Check if there's a current user, take them straight to dashboard
         var currentUser = PFUser.current()
