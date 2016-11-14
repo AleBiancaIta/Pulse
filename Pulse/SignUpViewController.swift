@@ -54,7 +54,7 @@ class SignUpViewController: UIViewController {
                     
                     // Create a Person object and save it to Parse
                     let person = Person(dictionary: dictionary)
-					person.saveToParse() { (success: Bool, error: Error?) in
+					Person.savePersonToParse(person: person) { (success: Bool, error: Error?) in
                         if success {
                             // Link Person to newUser
                             var query = PFQuery(className: "Person")

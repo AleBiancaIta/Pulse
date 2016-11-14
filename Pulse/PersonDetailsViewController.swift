@@ -138,10 +138,10 @@ class PersonDetailsViewController: UIViewController {
 		person.phone = phoneTextField.text
 		person.photo = photoData
 
-		person.saveToParse(withCompletion: {
+        Person.savePersonToParse(person: person) {
 			(success: Bool, error: Error?) in
 			NSLog("Created ok!")
-		})
+		}
 	}
 
 	// MARK: - Image
