@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
         Parse.initialize(with:
@@ -58,10 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
                 
 //        // TODO remove this chunk
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController()
-        self.window?.rootViewController = vc
-        
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = storyboard.instantiateInitialViewController()
+//        self.window?.rootViewController = vc
+//        
 
 //        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
 //        self.window?.rootViewController = loginSignUpVC
