@@ -58,17 +58,48 @@ class TeamViewDataSource: NSObject {
             }
         }
     }
+    
+    func fetchLatestMeetingForTeam(personId: String, orderBy: String, limit: Int, completion: @escaping (PFObject?, Error?) -> ()) {
+        
+        parseClient.getCurrentPerson { (manager: PFObject?, error: Error?) in
+            if let error = error {
+                debugPrint("Error getting current person with error: \(error.localizedDescription)")
+            } else {
+                if let manager = manager {
+                    let predicate = NSPredicate(format: "\(ObjectKeys.Meeting.meetingDate) <= '\(NSDate())'")
+                    
+                    debugPrint("predicate in manager is \(predicate)")
+                    debugPrint("manager is \(manager)")
+                    
+                    self.parseClient.fetchMeetingsFor(personId: personId, managerId: manager.objectId!, orderBy: orderBy , limit: limit, predicate: nil, completion: { (meetings: [PFObject]?, error: Error?) in
+                        if let error = error {
+                            debugPrint("Failed in fetching meetings: \(error.localizedDescription)")
+                            completion(nil, error)
+                        } else {
+                            debugPrint("Success in fetching meetings, \(meetings?.count)")
+                            if let meetings = meetings {
+                                let meeting = meetings[0]
+                                completion(meeting, nil)
+                                
+                                for meeting in meetings {
+                                    debugPrint("meeting is \(meeting)")
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        }
+    }
 }
 
 extension TeamViewDataSource: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        // PLACEHOLDER
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // PLACEHOLDER
         return teamMembers.count
     }
     
@@ -91,12 +122,17 @@ extension TeamViewDataSource: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell, for: indexPath) as! TeamCollectionCell
         cell.profileImageView.image = UIImage(named: "DefaultPhoto")
         cell.nameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
+        
+        fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
+            if let error = error {
+                debugPrint("error: \(error.localizedDescription)")
+            } else {
+                debugPrint("meeting is \(meeting)")
+            }
+        }
+    
         debugPrint("indexPath.row \(indexPath.row)")
         return cell
-        
-        
     }
-    
-    
 }
 

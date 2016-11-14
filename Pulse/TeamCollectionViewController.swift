@@ -15,20 +15,15 @@ class TeamCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         collectionView.register(UINib(nibName: "TeamCollectionCell", bundle: nil), forCellWithReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell)
         collectionView.delegate = self
-        
-        
         subscribeToNotifications()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         collectionView.dataSource = self.dataSource
-        
         dataSource.fetchTeamMembersForCurrentPerson { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")

@@ -36,7 +36,7 @@ class ParseClient: NSObject {
                 } else {
                     if let persons = persons {
                         let person = persons[0]
-                        debugPrint("person is \(person)")
+                        //debugPrint("person is \(person)")
                         completion(person, nil)
                     }
                 }
@@ -63,18 +63,35 @@ class ParseClient: NSObject {
         }
     }
     
-    func fetchMeetingsFor(personId: String, managerId: String, orderBy: String, limit: Int, completion: @escaping ([PFObject]?, Error?) -> ()) {
-        let query = PFQuery(className: "Meetings")
-        query.order(byDescending: orderBy)
-        query.limit = limit
-        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
-        query.whereKey(ObjectKeys.Meeting.managerId, equalTo: managerId)
-        query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
+    // Order descending
+    
+    func fetchMeetingsFor(personId: String, managerId: String, orderBy: String?, limit: Int?, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
+        
+        var query = PFQuery(className: "Meetings")
+        
+//        if let predicate = predicate {
+//            query = PFQuery(className: "Meetings", predicate: predicate)
+//        } else {
+//            query = PFQuery(className: "Meetings")
+//        }
+        
+//        if let orderBy = orderBy {
+//            query.order(byDescending: orderBy)
+//        }
+//        
+//        if let limit = limit {
+//            query.limit = limit
+//        }
+//        
+//        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
+//        query.whereKey(ObjectKeys.Meeting.managerId, equalTo: managerId)
+          query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
             if let error = error {
                 debugPrint("Unable to fetch meetings for person: \(personId), manager: \(managerId)")
                 completion(nil, error)
             } else {
                 if let meetings = meetings {
+                    debugPrint("Find meetings, \(meetings.count)")
                     completion(meetings, nil)
                 }
             }
