@@ -8,26 +8,8 @@
 
 import Foundation
 
-/*enum CardType: Int {
-    case meeting = 0, org_chart, photo_notes, pulse_graph, team, to_do
-    static var count: Int { return CardType.to_do.hashValue + 1}
-}
-
-enum PageType: Int {
-    case dashboard = 0, meeting, person
-    static var count: Int { return PageType.person.hashValue + 1}
-}*/
-
 class Constants: NSObject {
 
-    /*static let cards: [Card] = Card.cardsWithArray(dictionaries: [
-        ["id" : "m" as AnyObject, "name": "Meetings" as AnyObject, "card_type": CardType(rawValue: 0) as AnyObject, "page_type": PageType.dashboard as AnyObject],
-        ["id" : "o" as AnyObject, "name": "Organizational Chart" as AnyObject, "card_type": CardType.org_chart as AnyObject, "page_type": PageType.dashboard as AnyObject],
-        ["id" : "n" as AnyObject, "name": "Photo Notes" as AnyObject, "card_type": CardType.photo_notes as AnyObject, "page_type": PageType.dashboard as AnyObject],
-        ["id" : "g" as AnyObject, "name": "Pulse Graph" as AnyObject, "card_type": CardType.pulse_graph as AnyObject, "page_type": PageType.dashboard as AnyObject],
-        ["id" : "t" as AnyObject, "name": "Team" as AnyObject, "card_type": CardType.team as AnyObject, "page_type": PageType.dashboard as AnyObject],
-        ["id" : "d" as AnyObject, "name": "To Dos" as AnyObject, "card_type": CardType.to_do as Any as AnyObject, "page_type": PageType.dashboard as AnyObject]
-    ])*/
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "m", "name": "Upcoming Meetings", "card_type": "meetings", "page_type": "dashboard"],
         // TODO optional for now ["id" : "o", "name": "Organizational Chart", "card_type": "org_chart", "page_type": "dashboard"],
@@ -46,11 +28,11 @@ class Constants: NSObject {
     static let positions: [String: String] = ["1": "Manager", "2": "Individual Contributor"]
     
     // TODO remove this test data
-    static let meetings: [Meeting] = Meeting.meetingsWithArray(dictionaries: [
+    /*static let meetings: [Meeting] = Meeting.meetingsWithArray(dictionaries: [
         ["personName": "Bianca Name", "meetingDate": "2016-12-01"],
         ["personName": "Bianca Name2", "meetingDate": "2017-01-01"],
         ["personName": "Bianca Name3", "meetingDate": "2016-06-01"],
-        ])
+        ])*/
 }
 
 struct StoryboardID {
@@ -119,8 +101,3 @@ struct CellReuseIdentifier {
         static let teamListCell = "TeamListCell"
     }
 }
-
-struct StoryboardID {
-    static let dashboardNavVC = "DashboardNavVC"
-}
-

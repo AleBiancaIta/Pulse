@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if currentUser != nil {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
-            self.window?.rootViewController = dashboardNavVC
+            //self.window?.rootViewController = dashboardNavVC
             debugPrint("current user inside the appDelegate \(currentUser)")
         } // else - Login view is already set up as initial vc so we don't have to do anything
         
@@ -48,10 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
                 
 //        // TODO remove this chunk
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateInitialViewController()
-//        self.window?.rootViewController = vc
-//        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController()
+        self.window?.rootViewController = vc
+        
 
 //        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
 //        self.window?.rootViewController = loginSignUpVC

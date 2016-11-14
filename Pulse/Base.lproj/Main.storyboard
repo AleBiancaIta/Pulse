@@ -2,12 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="NTb-5u-QEm">
     <dependencies>
         <deployment identifier="iOS"/>
-<<<<<<< HEAD:Pulse/Base.lproj/Main.storyboard
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
-=======
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
->>>>>>> d8b26d2... code cleanup:Pulse/Base.lproj/Dashboard.storyboard
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -28,47 +24,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CardCell" id="yl3-sD-UzU" customClass="CardCell" customModule="Pulse" customModuleProvider="target">
-<<<<<<< HEAD
-<<<<<<< HEAD:Pulse/Base.lproj/Main.storyboard
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yl3-sD-UzU" id="sSE-V5-k5Q">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-=======
-                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yl3-sD-UzU" id="sSE-V5-k5Q">
-                                            <frame key="frameInset" width="375" height="43"/>
->>>>>>> d8b26d2... code cleanup:Pulse/Base.lproj/Dashboard.storyboard
-=======
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yl3-sD-UzU" id="sSE-V5-k5Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
->>>>>>> e8d9d22... Fix buttons on login page, set up segue to dashboard view controller upon login
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="X4Y-gE-i3A" customClass="MessageCell" customModule="Pulse" customModuleProvider="target">
-<<<<<<< HEAD
-<<<<<<< HEAD:Pulse/Base.lproj/Main.storyboard
                                         <rect key="frame" x="0.0" y="72" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X4Y-gE-i3A" id="Qcn-7V-pVZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-=======
-                                        <rect key="frame" x="0.0" y="136" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X4Y-gE-i3A" id="Qcn-7V-pVZ">
-                                            <frame key="frameInset" width="375" height="43"/>
->>>>>>> d8b26d2... code cleanup:Pulse/Base.lproj/Dashboard.storyboard
-=======
-                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="X4Y-gE-i3A" id="Qcn-7V-pVZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
->>>>>>> e8d9d22... Fix buttons on login page, set up segue to dashboard view controller upon login
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -121,25 +87,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionCell" id="pDk-BY-3dG">
-<<<<<<< HEAD
-<<<<<<< HEAD:Pulse/Base.lproj/Main.storyboard
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDk-BY-3dG" id="7bV-E4-Cdg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-=======
-                                        <rect key="frame" x="0.0" y="92" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDk-BY-3dG" id="7bV-E4-Cdg">
-                                            <frame key="frameInset" width="375" height="43"/>
->>>>>>> d8b26d2... code cleanup:Pulse/Base.lproj/Dashboard.storyboard
-=======
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pDk-BY-3dG" id="7bV-E4-Cdg">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
->>>>>>> e8d9d22... Fix buttons on login page, set up segue to dashboard view controller upon login
-                                            <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
