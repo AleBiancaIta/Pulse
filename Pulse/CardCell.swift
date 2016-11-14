@@ -38,14 +38,19 @@ class CardCell: UITableViewCell {
             trailingSpaceConstraint = NSLayoutConstraint(item: contentView, attribute: .trailing, relatedBy: .equal, toItem: newView, attribute: .trailing, multiplier: 1, constant: 20)
             newView.addConstraint(trailingSpaceConstraint)*/
             
-            if let cardType = card.cardType {
-                switch cardType {
-                case "meetings":
+            if let cardID = card.id {
+                switch cardID {
+                case "m":
                     let viewController = MeetingsViewController(nibName: "MeetingsViewController", bundle: nil)
-                    //let nib = UINib()
-                    //let objects = nib.instantiate(withOwner: viewController, options: nil)
                     informationView = viewController.view //objects.first as! UIView
                     informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())
+                    
+                case "t":
+                    let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                    let viewController = storyboard.instantiateInitialViewController() as! TeamCollectionViewController
+                    informationView = viewController.view //objects.first as! UIView
+                    informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())
+                    
                 default:
                     informationView = UIView(frame: contentView.frame)
                     textLabel?.text = card.name

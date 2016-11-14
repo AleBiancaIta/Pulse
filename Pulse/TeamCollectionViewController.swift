@@ -30,6 +30,10 @@ class TeamCollectionViewController: UIViewController {
     @IBAction func onAddButtonTap(_ sender: UIButton) {
         debugPrint("Add button tapped")
     }
+    
+    func heightForView() -> CGFloat {
+        return CGFloat(44 * 3) // TODO
+    }
 }
 
 extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
