@@ -39,7 +39,9 @@ class MeetingDetailsViewController: UIViewController {
         title = "Meeting"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
-        
+
+        // TODO
+        tableView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
