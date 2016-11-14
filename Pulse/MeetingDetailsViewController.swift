@@ -95,14 +95,11 @@ class MeetingDetailsViewController: UIViewController {
     
     func onSaveButton(_ sender: UIBarButtonItem) {
         
-        /*var query = PFQuery(className: "Person")
+        var query = PFQuery(className: "Person")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
-            if nil != error {
-                print("Error: \(error?.localizedDescription)")
-            }
             if let posts = posts {
                 let person = posts[0]
-                let personId = person["userId"]*/
+                let personId = person["userId"]
         
         // Survey
         let post = PFObject(className: "Survey")
@@ -138,8 +135,8 @@ class MeetingDetailsViewController: UIViewController {
             }
         })
         
-            //}
-        //}
+            }
+        }
         
     }
     
