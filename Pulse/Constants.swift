@@ -67,6 +67,7 @@ struct ObjectKeys {
         static let managerId = "managerId"
         static let userId = "userId"
         static let photoUrlString = "photoUrlString"
+		static let photo = "photo"
         static let selectedCards = "selectedCards"
         static let deletedAt = "deletedAt"
     }

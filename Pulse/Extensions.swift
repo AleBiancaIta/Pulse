@@ -23,3 +23,15 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 }
+
+extension UIApplication {
+
+	func callNumber(phoneNumber: String) {
+		if let phoneCallURL = URL(string:"tel://\(phoneNumber)") {
+			if (self.canOpenURL(phoneCallURL)) {
+				self.open(phoneCallURL, options: [:], completionHandler: nil)
+			}
+		}
+	}
+}
+

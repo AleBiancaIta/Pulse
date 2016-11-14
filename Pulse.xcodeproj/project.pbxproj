@@ -37,6 +37,9 @@
 		67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6491DD56D9800B6DE19 /* Constants.swift */; };
 		67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */; };
 		67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */; };
+		71ACDE611DD94AC4005D85DE /* Person.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71ACDE601DD94AC4005D85DE /* Person.storyboard */; };
+		71ACDE631DD94AF0005D85DE /* PersonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ACDE621DD94AF0005D85DE /* PersonDetailsViewController.swift */; };
+		71ACDE651DD9534A005D85DE /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ACDE641DD9534A005D85DE /* ImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +76,9 @@
 		67D8D6491DD56D9800B6DE19 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingDetailsViewController.xib; sourceTree = "<group>"; };
+		71ACDE601DD94AC4005D85DE /* Person.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person.storyboard; sourceTree = "<group>"; };
+		71ACDE621DD94AF0005D85DE /* PersonDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsViewController.swift; sourceTree = "<group>"; };
+		71ACDE641DD9534A005D85DE /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		7747767799B8936708691A8F /* Pods-Pulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.release.xcconfig"; sourceTree = "<group>"; };
 		EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -143,6 +149,8 @@
 				678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
 				67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */,
+				71ACDE621DD94AF0005D85DE /* PersonDetailsViewController.swift */,
+				71ACDE641DD9534A005D85DE /* ImageViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -178,6 +186,7 @@
 				431804A61DD6975500B279C6 /* Extensions.swift */,
 				431804A31DD6843700B279C6 /* Login.storyboard */,
 				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
+				71ACDE601DD94AC4005D85DE /* Person.storyboard */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
 				67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */,
 				67A364B61DCD8DA500BFD931 /* Info.plist */,
@@ -237,7 +246,7 @@
 				TargetAttributes = {
 					67A364A61DCD8DA400BFD931 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = EVW9447S78;
+						DevelopmentTeam = 9E9S6TC92M;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -272,6 +281,7 @@
 			files = (
 				431804A41DD6843700B279C6 /* Login.storyboard in Resources */,
 				431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */,
+				71ACDE611DD94AC4005D85DE /* Person.storyboard in Resources */,
 				431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */,
 				431804951DD5A8BE00B279C6 /* LoginViewController.xib in Resources */,
 				4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */,
@@ -342,6 +352,7 @@
 			files = (
 				67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */,
 				67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */,
+				71ACDE651DD9534A005D85DE /* ImageViewController.swift in Sources */,
 				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
@@ -350,6 +361,7 @@
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
 				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
+				71ACDE631DD94AF0005D85DE /* PersonDetailsViewController.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
 				431804AB1DD7C73500B279C6 /* SettingsViewController.swift in Sources */,
 				678802921DD41540001338A8 /* DashboardViewController.swift in Sources */,
@@ -480,10 +492,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pulse/Pulse.entitlements;
-				DEVELOPMENT_TEAM = EVW9447S78;
+				DEVELOPMENT_TEAM = 9E9S6TC92M;
 				INFOPLIST_FILE = Pulse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.abi.Pulse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anegrete.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -495,10 +507,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pulse/Pulse.entitlements;
-				DEVELOPMENT_TEAM = EVW9447S78;
+				DEVELOPMENT_TEAM = 9E9S6TC92M;
 				INFOPLIST_FILE = Pulse/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.abi.Pulse;
+				PRODUCT_BUNDLE_IDENTIFIER = com.anegrete.Twitter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
