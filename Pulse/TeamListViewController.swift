@@ -12,8 +12,7 @@ class TeamListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        subscribeToNotifications()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +30,24 @@ class TeamListViewController: UIViewController {
         debugPrint("Add button tapped")
     }
     
-
+    // MARK: - deinit
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Helpers
+    @objc fileprivate func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(addTeamMemberSuccessful(notification:)), name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: nil)
+    }
+    
+    @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
+        debugPrint("Get notifications: add team member successful")
+    }
+    
+    
     /*
     // MARK: - Navigation
 

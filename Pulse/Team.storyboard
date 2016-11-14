@@ -12,7 +12,7 @@
         <!--Team Collection View Controller-->
         <scene sceneID="5cM-DZ-7LJ">
             <objects>
-                <viewController id="p0f-yH-iaE" customClass="TeamCollectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TeamCollectionVC" id="p0f-yH-iaE" customClass="TeamCollectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9PD-MW-oph"/>
                         <viewControllerLayoutGuide type="bottom" id="EJE-hl-VKs"/>
@@ -160,6 +160,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N94-VY-hLD">
                                 <rect key="frame" x="163" y="617" width="49" height="30"/>
                                 <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="onSubmitButtonTap:" destination="djl-Ab-rW6" eventType="touchUpInside" id="1Cf-oH-xzW"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -184,6 +187,13 @@
                             <constraint firstItem="VYv-7M-NIs" firstAttribute="top" secondItem="WIr-o1-Nou" secondAttribute="bottom" constant="16" id="xUy-nd-UBY"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="aUk-oa-epH" id="bpq-MJ-HDe"/>
+                        <outlet property="firstNameTextField" destination="VYv-7M-NIs" id="KHS-dy-lT4"/>
+                        <outlet property="lastNameTextField" destination="5va-V4-Mf8" id="Bqc-E2-qmi"/>
+                        <outlet property="phoneTextField" destination="zmC-ws-OBf" id="XQz-eK-0fb"/>
+                        <outlet property="profileImageView" destination="WIr-o1-Nou" id="Nta-NG-Sdq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="la8-k3-tXu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -265,6 +275,6 @@
         <image name="DefaultPhoto" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NX7-2r-fVF"/>
+        <segue reference="GyB-AX-oAR"/>
     </inferredMetricsTieBreakers>
 </document>

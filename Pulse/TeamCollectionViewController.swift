@@ -20,17 +20,32 @@ class TeamCollectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self.dataSource
         
+        subscribeToNotifications()
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    // MARK: - Actions
     
     @IBAction func onAddButtonTap(_ sender: UIButton) {
         debugPrint("Add button tapped")
     }
-
+    
+    // MARK: - deinit
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Helpers
+    @objc fileprivate func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(self, selector: #selector(addTeamMemberSuccessful(notification:)), name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: nil)
+    }
+    
+    @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
+        debugPrint("Get notifications: add team member successful")
+    }
     
     /*
     // MARK: - Navigation
