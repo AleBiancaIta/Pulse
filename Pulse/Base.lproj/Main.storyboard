@@ -50,7 +50,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="rhG-hT-WVt">
                         <rightBarButtonItems>
-                            <barButtonItem style="plain" systemItem="add" id="hTh-qq-kWB">
+                            <barButtonItem systemItem="add" id="hTh-qq-kWB">
                                 <connections>
                                     <action selector="onAddCard:" destination="BYZ-38-t0r" id="Qnx-fv-fd2"/>
                                 </connections>
@@ -105,7 +105,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard Cards" id="2Zs-uw-oIs">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="wA6-FR-O1h">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="wA6-FR-O1h">
                             <connections>
                                 <action selector="onDoneButton:" destination="Pig-nt-sQL" id="fgc-Lf-ftO"/>
                             </connections>

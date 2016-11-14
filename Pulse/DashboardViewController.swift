@@ -70,7 +70,7 @@ class DashboardViewController: UIViewController {
             return
         }
         
-        let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dashboardSelectionNavigationController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionNavigationController") as! UINavigationController
         
         if let dashboardSelectionViewController = dashboardSelectionNavigationController.topViewController as? DashboardSelectionViewController {
@@ -148,7 +148,7 @@ extension DashboardViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        /*if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
+        if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
             let card = cell.card,
             let cardType = card.cardType {
             
@@ -158,7 +158,7 @@ extension DashboardViewController: UITableViewDelegate {
             default:
                 break
             }
-        }*/
+        }
     }
 }
 

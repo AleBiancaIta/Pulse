@@ -13,7 +13,7 @@ class Constants: NSObject {
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "m", "name": "Upcoming Meetings", "card_type": "meetings", "page_type": "dashboard"],
         // TODO optional for now ["id" : "o", "name": "Organizational Chart", "card_type": "org_chart", "page_type": "dashboard"],
-        ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
+        // TODO optional for now ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
         ["id" : "t", "name": "Team", "card_type": "team", "page_type": "dashboard"],
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "dashboard"]
     ])
@@ -26,13 +26,6 @@ class Constants: NSObject {
     
     //static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],["positionId": "2", "description": "Individual Contributor"]]
     static let positions: [String: String] = ["1": "Manager", "2": "Individual Contributor"]
-    
-    // TODO remove this test data
-    /*static let meetings: [Meeting] = Meeting.meetingsWithArray(dictionaries: [
-        ["personName": "Bianca Name", "meetingDate": "2016-12-01"],
-        ["personName": "Bianca Name2", "meetingDate": "2017-01-01"],
-        ["personName": "Bianca Name3", "meetingDate": "2016-06-01"],
-        ])*/
 }
 
 struct StoryboardID {

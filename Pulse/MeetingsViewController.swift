@@ -30,7 +30,7 @@ class MeetingsViewController: UIViewController {
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
                 for post in posts {
-                    /*let dict = [post["personName"] as! String, post["meetingDate"] as! String]
+                    /* TODO Bianca let dict = [post["personName"] as! String, post["meetingDate"] as! String]
                     let meeting = Meeting(dictionary: dict)
                     self.meetings.append(meeting)*/
                 }
@@ -52,7 +52,7 @@ extension MeetingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
         if 0 < meetings.count {
-            /*if let personName = meetings[indexPath.row].personName,
+            /* TODO Bianca if let personName = meetings[indexPath.row].personName,
                 let meetingDate = meetings[indexPath.row].meetingDate {
                 cell.messageLabel.text = "\(personName) (\(meetingDate))"
             }*/

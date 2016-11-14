@@ -13,7 +13,6 @@ class Card: NSObject {
     var id: String?
     var name: String?
     var cardType: String?
-    //var pageType: String? TODO remove??
     
     init(dictionary: [String: String]) {
         if let id = dictionary["id"] {
@@ -25,9 +24,6 @@ class Card: NSObject {
         if let cardType = dictionary["card_type"] {
             self.cardType = cardType
         }
-        /*if let pageType = dictionary["page_type"] {
-            self.pageType = pageType
-        }*/
     }
     
     class func cardsWithArray(dictionaries: [ [String: String] ]) -> [Card] {
