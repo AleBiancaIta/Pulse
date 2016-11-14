@@ -32,6 +32,8 @@
 		437DE0621DD9648000B08988 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0611DD9648000B08988 /* Meeting.swift */; };
 		437DE0641DD976F000B08988 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0631DD976F000B08988 /* ToDo.swift */; };
 		437DE0671DD9A7FF00B08988 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0661DD9A7FF00B08988 /* ParseClient.swift */; };
+		437DE06A1DD9C40600B08988 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */; };
+		437DE06B1DD9C40600B08988 /* TeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
 		678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */; };
@@ -76,6 +78,8 @@
 		437DE0611DD9648000B08988 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		437DE0631DD976F000B08988 /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		437DE0661DD9A7FF00B08988 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
+		437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamTableViewCell.xib; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardSelectionViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 				67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */,
 				437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */,
 				437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */,
+				437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */,
+				437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */,
 				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 			);
 			name = Views;
@@ -309,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				431804A41DD6843700B279C6 /* Login.storyboard in Resources */,
+				437DE06B1DD9C40600B08988 /* TeamTableViewCell.xib in Resources */,
 				431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */,
 				431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */,
 				431804951DD5A8BE00B279C6 /* LoginViewController.xib in Resources */,
@@ -396,6 +403,7 @@
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
 				431804AB1DD7C73500B279C6 /* SettingsViewController.swift in Sources */,
+				437DE06A1DD9C40600B08988 /* TeamTableViewCell.swift in Sources */,
 				678802921DD41540001338A8 /* DashboardViewController.swift in Sources */,
 				431804B11DD83A4A00B279C6 /* ChangePasswordViewController.swift in Sources */,
 				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,

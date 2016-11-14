@@ -73,7 +73,9 @@ extension TeamViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Team.teamListCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Team.teamListCell, for: indexPath) as! TeamTableViewCell
+        cell.firstNameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
+        cell.emailLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.email] as? String
         return cell
     }
 }

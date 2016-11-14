@@ -248,9 +248,19 @@
                                     <constraint firstItem="e6W-AL-YLc" firstAttribute="centerY" secondItem="9WS-pU-8qy" secondAttribute="centerY" constant="8" id="wDr-Ld-wg0"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-au-NY0">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="72" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-au-NY0">
                                 <rect key="frame" x="0.0" y="60" width="375" height="607"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamListCell" rowHeight="72" id="ZnN-Ym-Aiq" customClass="TeamTableViewCell" customModule="Pulse" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZnN-Ym-Aiq" id="zgX-4b-Te7">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -265,16 +275,19 @@
                             <constraint firstItem="9WS-pU-8qy" firstAttribute="top" secondItem="cXG-y6-5IS" secondAttribute="top" id="yfd-Nm-TQk"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="hPa-au-NY0" id="PRB-wp-jZ2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGW-dq-I8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="852" y="198"/>
+            <point key="canvasLocation" x="852" y="197.45127436281859"/>
         </scene>
     </scenes>
     <resources>
         <image name="DefaultPhoto" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GyB-AX-oAR"/>
+        <segue reference="NX7-2r-fVF"/>
     </inferredMetricsTieBreakers>
 </document>
