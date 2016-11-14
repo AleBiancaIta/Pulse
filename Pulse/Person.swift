@@ -23,7 +23,7 @@ class Person: NSObject {
     var deletedAt: Date?
 	var photo: Data?
 
-
+    // TODO - this needs to be changed later since positionId is not always 2
 	init(firstName: String, lastName: String) {
 		self.firstName = firstName
 		self.lastName = lastName
@@ -87,6 +87,10 @@ class Person: NSObject {
         
         if let deletedAt = person.deletedAt {
             parsePerson[ObjectKeys.Person.deletedAt] = deletedAt
+        }
+        
+        if let photo = person.photo {
+            parsePerson[ObjectKeys.Person.photo] = PFFile(data: photo)
         }
         
         parsePerson.saveInBackground(block: completion)
