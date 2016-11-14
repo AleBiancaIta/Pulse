@@ -30,12 +30,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Check if there's a current user, take them straight to dashboard
         var currentUser = PFUser.current()
+        debugPrint("in app delegate, current user is \(currentUser)")
+
+        // For testing Team only
         if currentUser != nil {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
-            //self.window?.rootViewController = dashboardNavVC
+            self.window?.rootViewController = dashboardNavVC
             debugPrint("current user inside the appDelegate \(currentUser)")
-        } // else - Login view is already set up as initial vc so we don't have to do anything
+        }
+//
+//        if currentUser != nil {
+//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+//            self.window?.rootViewController = dashboardNavVC
+//            debugPrint("current user inside the appDelegate \(currentUser)")
+//        } // else - Login view is already set up as initial vc so we don't have to do anything
         
         // Enable automatic user
         //PFUser.enableAutomaticUser()
