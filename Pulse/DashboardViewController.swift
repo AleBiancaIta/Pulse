@@ -111,9 +111,12 @@ extension DashboardViewController: UITableViewDataSource {
         
         // The actual cards
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
+            /*let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
             cell.delegate = self
             cell.card = selectedCards[indexPath.section]
+            return cell*/
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TempCell", for: indexPath)
+            cell.textLabel?.text = selectedCards[indexPath.section].name
             return cell
         }
     }
@@ -139,10 +142,10 @@ extension DashboardViewController: UITableViewDataSource {
 extension DashboardViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard nil != self.tableView(tableView, titleForHeaderInSection: section) else {
+        //guard nil != self.tableView(tableView, titleForHeaderInSection: section) else {
             return 0
-        }
-        return UITableViewAutomaticDimension
+        //}
+        //return UITableViewAutomaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -154,7 +157,17 @@ extension DashboardViewController: UITableViewDelegate {
             return
         }
         
-        if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Upcoming Meetings"{
+                navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)
+            } else if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Team Members"{
+                let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                let viewController = storyboard.instantiateInitialViewController()
+                navigationController?.pushViewController(viewController!, animated: true)
+            }
+        }
+        
+        /*if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
             let card = cell.card,
             let cardType = card.cardType {
             
@@ -164,7 +177,7 @@ extension DashboardViewController: UITableViewDelegate {
             default:
                 break
             }
-        }
+        }*/
     }
 }
 

@@ -42,7 +42,7 @@ class AddTeamMemberViewController: UIViewController {
                 } else {
                     if let dictionary = dictionary {
                         let person = Person(dictionary: dictionary)
-                        Person.savePersonToParse(person: person, withCompletion: { (success: Bool, error: Error?) in
+                        /* TODO Person.savePersonToParse(person: person, withCompletion: { (success: Bool, error: Error?) in
                             if success {
                                 self.showAlert(title: "Success", message: "Successfully adding \(person.firstName) to the team list", sender: nil, handler: { (alertAction: UIAlertAction) in
                                     self.dismiss(animated: true, completion: nil)
@@ -53,7 +53,7 @@ class AddTeamMemberViewController: UIViewController {
                                     self.showAlert(title: "Error", message: "Failed with error: \(error.localizedDescription). Please try again later", sender: nil, handler: nil)
                                 }
                             }
-                        })
+                        })*/
                     }
                 }
             })
