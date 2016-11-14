@@ -319,6 +319,7 @@
 				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 				67BCA1521DD6E66100E7EE74 /* MeetingsViewController.xib in Resources */,
+				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,12 +410,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		67A364AE1DCD8DA500BFD931 /* Dashboard.storyboard */ = {
+		67A364AE1DCD8DA500BFD931 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				67A364AF1DCD8DA500BFD931 /* Base */,
 			);
-			name = Dashboard.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */ = {
