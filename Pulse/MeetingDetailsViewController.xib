@@ -10,7 +10,7 @@
             <connections>
                 <outlet property="survey1High" destination="j3U-5Z-OVW" id="bFz-iB-RS4"/>
                 <outlet property="survey1Low" destination="9Z0-YD-rUd" id="H3g-u2-NRW"/>
-                <outlet property="survey1Med" destination="j3U-5Z-OVW" id="7WI-an-zt8"/>
+                <outlet property="survey1Med" destination="iz1-Fh-aN6" id="ly0-qH-gaj"/>
                 <outlet property="survey2High" destination="7XC-fb-ync" id="PM8-gg-aVg"/>
                 <outlet property="survey2Low" destination="67N-gJ-0av" id="n8K-XL-lxm"/>
                 <outlet property="survey2Med" destination="zVY-da-qJQ" id="2B5-Hf-AvL"/>
@@ -53,38 +53,65 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Z0-YD-rUd">
                     <frame key="frameInset" minX="8" minY="128" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey1LowSwitch:" destination="-1" eventType="valueChanged" id="hsI-eh-YBt"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iz1-Fh-aN6">
                     <frame key="frameInset" minX="65" minY="128" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey1MedSwitch:" destination="-1" eventType="valueChanged" id="UTt-fj-FX6"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-5Z-OVW">
                     <frame key="frameInset" minX="122" minY="128" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey1HighSwitch:" destination="-1" eventType="valueChanged" id="TtO-ar-GAW"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="67N-gJ-0av">
                     <frame key="frameInset" minX="8" minY="195" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey2LowSwitch:" destination="-1" eventType="valueChanged" id="Yak-Wl-6fd"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVY-da-qJQ">
                     <frame key="frameInset" minX="65" minY="195" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey2MedSwitch:" destination="-1" eventType="valueChanged" id="wuX-hC-bAu"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7XC-fb-ync">
                     <frame key="frameInset" minX="122" minY="196" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey2HighSwitch:" destination="-1" eventType="valueChanged" id="vHX-eJ-IMm"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YpD-Z5-HXW">
                     <frame key="frameInset" minX="8" minY="254" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey3LowSwitch:" destination="-1" eventType="valueChanged" id="30F-LL-ngn"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrK-97-wX7">
                     <frame key="frameInset" minX="65" minY="254" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey3MedSwitch:" destination="-1" eventType="valueChanged" id="yLR-VD-QHS"/>
+                    </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fKE-Af-skv">
                     <frame key="frameInset" minX="128" minY="254" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <action selector="onSurvey3HighSwitch:" destination="-1" eventType="valueChanged" id="ImS-xQ-tlV"/>
+                    </connections>
                 </switch>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

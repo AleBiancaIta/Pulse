@@ -13,9 +13,9 @@ class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var survey1Low: UISwitch!
-    @IBOutlet weak var survey1Med: UISwitch!
-    @IBOutlet weak var survey1High: UISwitch!
+    @IBOutlet weak var survey1Low: UISwitch! // 0
+    @IBOutlet weak var survey1Med: UISwitch! // 1
+    @IBOutlet weak var survey1High: UISwitch! // 2
     
     @IBOutlet weak var survey2Low: UISwitch!
     @IBOutlet weak var survey2Med: UISwitch!
@@ -94,16 +94,16 @@ class MeetingDetailsViewController: UIViewController {
         // Survey
         let post = PFObject(className: "Survey")
         post["surveyDesc1"] = "happiness"
-        post["surveyValueId1"] = 1 // TODO - default med
+        post["surveyValueId1"] = (survey1Low.isOn ? 0 : (survey1High.isOn ? 2 : 1))
         post["surveyDesc2"] = "engagement"
-        post["surveyValueId2"] = 1 // TODO
+        post["surveyValueId2"] = (survey2Low.isOn ? 0 : (survey2High.isOn ? 2 : 1))
         post["surveyDesc3"] = "workload"
-        post["surveyValueId3"] = 1 // TODO
+        post["surveyValueId3"] = (survey3Low.isOn ? 0 : (survey3High.isOn ? 2 : 1))
         post.saveInBackground(block: { (success: Bool, error: Error?) in
             if success {
                 let dictionary: [String: Any] = [
                     "personId": "123" as Any, // TODO
-                    "managerId": "BiancaTest",
+                    "managerId": "BiancaTest", // TODO
                     "surveyId": post.objectId!,
                     "meetingDate": NSDate() as Any
                 ]
@@ -131,6 +131,72 @@ class MeetingDetailsViewController: UIViewController {
         return 100
     }*/
     
+    // MARK: - IBAction
+    
+    @IBAction func onSurvey1LowSwitch(_ sender: AnyObject) {
+        // survey1Low.isOn = !survey1Low.isOn not working properly
+        
+        if survey1Low.isOn {
+            survey1Med.isOn = false
+            survey1High.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey1MedSwitch(_ sender: AnyObject) {
+        if survey1Med.isOn {
+            survey1Low.isOn = false
+            survey1High.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey1HighSwitch(_ sender: AnyObject) {
+        if survey1High.isOn {
+            survey1Low.isOn = false
+            survey1Med.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey2LowSwitch(_ sender: AnyObject) {
+        if survey2Low.isOn {
+            survey2Med.isOn = false
+            survey2High.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey2MedSwitch(_ sender: AnyObject) {
+        if survey2Med.isOn {
+            survey2Low.isOn = false
+            survey2High.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey2HighSwitch(_ sender: AnyObject) {
+        if survey2High.isOn {
+            survey2Low.isOn = false
+            survey2Med.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey3LowSwitch(_ sender: AnyObject) {
+        if survey3Low.isOn {
+            survey3Med.isOn = false
+            survey3High.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey3MedSwitch(_ sender: AnyObject) {
+        if survey3Med.isOn {
+            survey3Low.isOn = false
+            survey3High.isOn = false
+        }
+    }
+    
+    @IBAction func onSurvey3HighSwitch(_ sender: AnyObject) {
+        if survey3High.isOn {
+            survey3Low.isOn = false
+            survey3Med.isOn = false
+        }
+    }
 }
 
 // MARK: - SelectionViewControllerDelegate
