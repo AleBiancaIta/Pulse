@@ -45,7 +45,7 @@ class TeamListViewController: UIViewController {
     }
     
     @IBAction func onAddButtonTap(_ sender: UIButton) {
-        debugPrint("Add button tapped")
+		showPersonViewController(person: nil)
     }
     
     // MARK: - deinit

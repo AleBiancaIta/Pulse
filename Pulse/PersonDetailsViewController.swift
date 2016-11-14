@@ -17,9 +17,10 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var lastNameTextField: UITextField!
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var phoneTextField: UITextField!
-
 	@IBOutlet weak var callButton: UIButton!
 	@IBOutlet weak var rightBarButtonItem: UIBarButtonItem!
+	@IBOutlet weak var scheduleMeetingLabel: UILabel!
+	@IBOutlet weak var scheduleMeetingDatePicker: UIDatePicker!
 
 	let imagePicker = UIImagePickerController()
 	var photoData: Data?
@@ -49,29 +50,19 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func initPerson() {
-
-		let query = PFQuery(className: "Person")
-		query.whereKey("userId", equalTo: "WJNoqNBKyz")
-		query.findObjectsInBackground(block: { (persons: [PFObject]?, error: Error?) in
-			if let persons = persons {
-				let personDictionary = persons[0]
-				let email = personDictionary["email"] as? String
-				print(email)
-			}
-
-//			let personDictionary = persons?[0]
-//			print(personDictionary)
-
-		})
-
 		if let person = person {
 			firstNameTextField.text = person.firstName
 			lastNameTextField.text = person.lastName
 			phoneTextField.text = person.phone
 			emailTextField.text = person.email
-		}
 
-		setEditing(false, animated: false)
+			navigationItem.title = person.firstName + " " + person.lastName
+			setEditing(false, animated: true)
+		}
+		else {
+			navigationItem.title = "New team member"
+			setEditing(true, animated: true)
+		}
 	}
 
 	func initViews() {
@@ -81,7 +72,6 @@ class PersonDetailsViewController: UIViewController {
 	// MARK: - UI Actions
 
 	@IBAction func didTapCallButton(_ sender: UIButton) {
-//	@IBAction func didTapPhoneTextField(_ sender: UITapGestureRecognizer) {
 
 		let okAction = UIAlertAction(title: "Phone", style: .default, handler: {
 			(UIAlertAction) in
@@ -104,15 +94,38 @@ class PersonDetailsViewController: UIViewController {
 	@IBAction func onRightBarButtonTap(_ sender: UIBarButtonItem) {
 
 		if isEditing {
-			setEditing(false, animated: true)
-			rightBarButtonItem.title = "Edit"
-			savePerson()
+			if isValid() {
+				setEditing(false, animated: true)
+				savePerson()
+			}
 		}
 		else {
 			setEditing(true, animated: true)
-			rightBarButtonItem.title = "Save"
 		}
 	}
+
+	func isValid() -> Bool {
+		if (firstNameTextField.text?.isEmpty)! {
+			showAlert(title: "Error!",
+			          message: "First Name cannot be empty", sender: nil, handler: nil)
+			return false
+		}
+
+		if (lastNameTextField.text?.isEmpty)! {
+			showAlert(title: "Error!",
+			          message: "Last Name cannot be empty", sender: nil, handler: nil)
+			return false
+		}
+
+		if (emailTextField.text?.isEmpty)! {
+			showAlert(title: "Error!",
+			          message: "Email cannot be empty", sender: nil, handler: nil)
+			return false
+		}
+
+		return true
+	}
+
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
@@ -129,18 +142,31 @@ class PersonDetailsViewController: UIViewController {
 		firstNameTextField.borderStyle = isEditing ? .roundedRect : .none
 
 		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
+		scheduleMeetingLabel.isHidden = person == nil
+		scheduleMeetingDatePicker.isHidden = person == nil
+
+		rightBarButtonItem.title = isEditing ? "Save" : "Edit"
 	}
 
 
 	func savePerson() {
-		let person = Person(firstName: firstNameTextField.text!, lastName: lastNameTextField.text!)
-		person.email = emailTextField.text
-		person.phone = phoneTextField.text
-		person.photo = photoData
 
-        Person.savePersonToParse(person: person) {
-			(success: Bool, error: Error?) in
-			NSLog("Created ok!")
+		if let person = person {
+			NSLog("Editing current person")
+			// TODO: Save current person to Parse
+		}
+		else {
+			NSLog("Creating new person")
+			person = Person(firstName: firstNameTextField.text!,
+			                lastName: lastNameTextField.text!)
+			person?.email = emailTextField.text
+			person?.phone = phoneTextField.text
+			person?.photo = photoData
+
+			Person.savePersonToParse(person: person!) {
+				(success: Bool, error: Error?) in
+				NSLog("Created ok!")
+			}
 		}
 	}
 

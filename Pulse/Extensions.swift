@@ -22,6 +22,15 @@ extension UIViewController {
         alertController.addAction(UIAlertAction(title: actionTitle2, style: .default, handler: handler2))
         self.present(alertController, animated: true, completion: nil)
     }
+
+	func showPersonViewController(person: Person?) {
+		navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+		let personViewController = UIStoryboard(name: "Person", bundle: nil).instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
+		if let person = person {
+			personViewController.person = person
+		}
+		show(personViewController, sender: nil)
+	}
 }
 
 extension UIApplication {
