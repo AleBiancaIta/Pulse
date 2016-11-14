@@ -105,11 +105,11 @@ class MeetingDetailsViewController: UIViewController {
         post.saveInBackground(block: { (success: Bool, error: Error?) in
             
             if success {
-                let objectId = (PFUser.current()?.objectId)! as String
+                let managerId = PFUser.current()?["userId"] as! String
                 
                 let dictionary: [String: Any] = [
                     "personId": personId, // TODO
-                    "managerId": objectId,
+                    "managerId": managerId,
                     "surveyId": post.objectId!,
                     "meetingDate": Date(),
                     "notes": self.notesTextView.text

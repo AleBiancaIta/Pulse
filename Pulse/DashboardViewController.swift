@@ -33,8 +33,8 @@ class DashboardViewController: UIViewController {
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         let query = PFQuery(className: "Dashboard")
-        let objectId = (PFUser.current()?.objectId)! as String
-        query.whereKey("userId", equalTo: objectId)
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
     
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
@@ -57,7 +57,7 @@ class DashboardViewController: UIViewController {
                     }
                 } else {
                     let post = PFObject(className: "Dashboard")
-                    post["userId"] = objectId
+                    post["userId"] = userId
                     post["selectedCards"] = ""
                     post.saveInBackground()
                 }
@@ -190,14 +190,14 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card) {
         
         let query = PFQuery(className: "Dashboard")
-        let objectId = (PFUser.current()?.objectId)! as String
-        query.whereKey("userId", equalTo: objectId)
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
                 let id = card.id,
                 let selectedCardsString = self.selectedCardsString {
                 let post = posts[0]
-                post["userId"] = objectId
+                post["userId"] = userId
                 self.selectedCardsString = "\(id)\(selectedCardsString)"
                 post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
@@ -220,14 +220,14 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card) {
         
         let query = PFQuery(className: "Dashboard")
-        let objectId = (PFUser.current()?.objectId)! as String
-        query.whereKey("userId", equalTo: objectId)
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
                 let id = card.id,
                 let selectedCardsString = self.selectedCardsString {
                 let post = posts[0]
-                post["userId"] = objectId
+                post["userId"] = userId
                 self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
                 post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
@@ -263,13 +263,13 @@ extension DashboardViewController: CardCellDelegate {
                 }
             
                 let query = PFQuery(className: "Dashboard")
-                let objectId = (PFUser.current()?.objectId)! as String
-                query.whereKey("userId", equalTo: objectId)
+                let userId = (PFUser.current()?.objectId)! as String
+                query.whereKey("userId", equalTo: userId)
                 query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
                     if let posts = posts,
                         let selectedCardsString = self.selectedCardsString {
                         let post = posts[0]
-                        post["userId"] = objectId
+                        post["userId"] = userId
                         
                         var characters = Array(selectedCardsString.characters)
                         let charBefore = characters[index-1]
@@ -307,13 +307,13 @@ extension DashboardViewController: CardCellDelegate {
                 }
                 
                 let query = PFQuery(className: "Dashboard")
-                let objectId = (PFUser.current()?.objectId)! as String
-                query.whereKey("userId", equalTo: objectId)
+                let userId = (PFUser.current()?.objectId)! as String
+                query.whereKey("userId", equalTo: userId)
                 query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
                     if let posts = posts,
                         let selectedCardsString = self.selectedCardsString {
                         let post = posts[0]
-                        post["userId"] = objectId
+                        post["userId"] = userId
                         
                         var characters = Array(selectedCardsString.characters)
                         let charAfter = characters[index+1]
@@ -341,14 +341,14 @@ extension DashboardViewController: CardCellDelegate {
     
     func cardCell(cardCell: CardCell, didDelete card: Card) {
         let query = PFQuery(className: "Dashboard")
-        let objectId = (PFUser.current()?.objectId)! as String
-        query.whereKey("userId", equalTo: objectId)
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
                 let id = card.id,
                 let selectedCardsString = self.selectedCardsString {
                 let post = posts[0]
-                post["userId"] = objectId
+                post["userId"] = userId
                 self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
                 post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
