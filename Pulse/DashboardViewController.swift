@@ -68,12 +68,6 @@ class DashboardViewController: UIViewController {
     }
     
     func onAddCard() {
-        guard selectedCards.count != Constants.dashboardCards.count else {
-            alertController?.message = "You already have all the cards"
-            present(alertController!, animated: true)
-            return
-        }
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dashboardSelectionNavigationController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionNavigationController") as! UINavigationController
         
@@ -87,8 +81,8 @@ class DashboardViewController: UIViewController {
     
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let settingsNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.settingsNavVC)
-        present(settingsNavVC, animated: true, completion: nil)
+        let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
 }
