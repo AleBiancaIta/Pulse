@@ -13,6 +13,9 @@ class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var personLabel: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
+    
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
     @IBOutlet weak var survey1High: UISwitch! // 2
@@ -36,7 +39,9 @@ class MeetingDetailsViewController: UIViewController {
         title = "Meeting"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
-        
+
+        // TODO
+        tableView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
@@ -91,21 +96,29 @@ class MeetingDetailsViewController: UIViewController {
     }*/
     
     func onSaveButton(_ sender: UIBarButtonItem) {
+        
+        var query = PFQuery(className: "Person")
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
+            if let posts = posts {
+                let person = posts[0]
+                let personId = person["objectId"]
+        
         // Survey
         let post = PFObject(className: "Survey")
         post["surveyDesc1"] = "happiness"
-        post["surveyValueId1"] = (survey1Low.isOn ? 0 : (survey1High.isOn ? 2 : 1))
+        post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
         post["surveyDesc2"] = "engagement"
-        post["surveyValueId2"] = (survey2Low.isOn ? 0 : (survey2High.isOn ? 2 : 1))
+        post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
         post["surveyDesc3"] = "workload"
-        post["surveyValueId3"] = (survey3Low.isOn ? 0 : (survey3High.isOn ? 2 : 1))
+        post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
         post.saveInBackground(block: { (success: Bool, error: Error?) in
             if success {
                 let dictionary: [String: Any] = [
-                    "personId": "123" as Any, // TODO
+                    "personId": personId,
                     "managerId": "BiancaTest", // TODO
                     "surveyId": post.objectId!,
-                    "meetingDate": NSDate() as Any
+                    "meetingDate": NSDate() as Any,
+                    "notes": self.notesTextView.text
                 ]
                 self.meeting = Meeting(dictionary: dictionary)
                 print("survey saved successfully")
@@ -124,12 +137,10 @@ class MeetingDetailsViewController: UIViewController {
             }
         })
         
+            }
+        }
         
     }
-    
-    /*func heightForView() -> CGFloat {
-        return 100
-    }*/
     
     // MARK: - IBAction
     

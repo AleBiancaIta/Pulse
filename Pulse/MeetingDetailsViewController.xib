@@ -8,6 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeetingDetailsViewController" customModule="Pulse" customModuleProvider="target">
             <connections>
+                <outlet property="notesTextView" destination="xQE-Qz-A2n" id="3Iu-3Y-3bc"/>
+                <outlet property="personLabel" destination="vFA-BD-mnh" id="jzt-Wp-f96"/>
                 <outlet property="survey1High" destination="j3U-5Z-OVW" id="bFz-iB-RS4"/>
                 <outlet property="survey1Low" destination="9Z0-YD-rUd" id="H3g-u2-NRW"/>
                 <outlet property="survey1Med" destination="iz1-Fh-aN6" id="ly0-qH-gaj"/>
@@ -32,92 +34,120 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Engagement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5k-Q0-RaN">
-                    <frame key="frameInset" minX="8" minY="167" width="359" height="21"/>
+                    <frame key="frameInset" minX="8" minY="211" width="359" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Workload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGQ-zm-8bO">
-                    <frame key="frameInset" minX="8" minY="234" width="359" height="21"/>
+                    <frame key="frameInset" minX="8" minY="278" width="359" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3YK-gE-oi4">
-                    <frame key="frameInset" minY="301" width="375" height="366"/>
+                    <frame key="frameInset" minY="545" width="375" height="122"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </tableView>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Z0-YD-rUd">
-                    <frame key="frameInset" minX="8" minY="128" width="51" height="31"/>
+                    <frame key="frameInset" minX="8" minY="172" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey1LowSwitch:" destination="-1" eventType="valueChanged" id="hsI-eh-YBt"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iz1-Fh-aN6">
-                    <frame key="frameInset" minX="65" minY="128" width="51" height="31"/>
+                    <frame key="frameInset" minX="65" minY="172" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey1MedSwitch:" destination="-1" eventType="valueChanged" id="UTt-fj-FX6"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="j3U-5Z-OVW">
-                    <frame key="frameInset" minX="122" minY="128" width="51" height="31"/>
+                    <frame key="frameInset" minX="122" minY="172" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey1HighSwitch:" destination="-1" eventType="valueChanged" id="TtO-ar-GAW"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="67N-gJ-0av">
-                    <frame key="frameInset" minX="8" minY="195" width="51" height="31"/>
+                    <frame key="frameInset" minX="8" minY="239" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey2LowSwitch:" destination="-1" eventType="valueChanged" id="Yak-Wl-6fd"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zVY-da-qJQ">
-                    <frame key="frameInset" minX="65" minY="195" width="51" height="31"/>
+                    <frame key="frameInset" minX="65" minY="239" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey2MedSwitch:" destination="-1" eventType="valueChanged" id="wuX-hC-bAu"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="7XC-fb-ync">
-                    <frame key="frameInset" minX="122" minY="196" width="51" height="31"/>
+                    <frame key="frameInset" minX="122" minY="240" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey2HighSwitch:" destination="-1" eventType="valueChanged" id="vHX-eJ-IMm"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YpD-Z5-HXW">
-                    <frame key="frameInset" minX="8" minY="254" width="51" height="31"/>
+                    <frame key="frameInset" minX="8" minY="298" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey3LowSwitch:" destination="-1" eventType="valueChanged" id="30F-LL-ngn"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lrK-97-wX7">
-                    <frame key="frameInset" minX="65" minY="254" width="51" height="31"/>
+                    <frame key="frameInset" minX="65" minY="298" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey3MedSwitch:" destination="-1" eventType="valueChanged" id="yLR-VD-QHS"/>
                     </connections>
                 </switch>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fKE-Af-skv">
-                    <frame key="frameInset" minX="128" minY="254" width="51" height="31"/>
+                    <frame key="frameInset" minX="128" minY="298" width="51" height="31"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <connections>
                         <action selector="onSurvey3HighSwitch:" destination="-1" eventType="valueChanged" id="ImS-xQ-tlV"/>
                     </connections>
                 </switch>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vFA-BD-mnh">
+                    <frame key="frameInset" minX="8" minY="106" width="351" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Person Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eAb-RP-HVV">
+                    <frame key="frameInset" minX="8" minY="77" width="359" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xQE-Qz-A2n">
+                    <frame key="frameInset" minX="16" minY="387" width="325" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Ug-zx-Hls">
+                    <frame key="frameInset" minX="8" minY="358" width="359" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="1yj-EZ-XML" secondAttribute="trailing" constant="8" id="Cjq-ER-vLz"/>
-                <constraint firstItem="1yj-EZ-XML" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="100" id="hFy-ay-dIy"/>
+                <constraint firstItem="1yj-EZ-XML" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="144" id="hFy-ay-dIy"/>
                 <constraint firstItem="1yj-EZ-XML" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="rgo-mg-JeP"/>
             </constraints>
             <point key="canvasLocation" x="-20.5" y="47.5"/>

@@ -49,7 +49,7 @@ class Meeting: NSObject {
     }
     
     class func saveMeetingToParse(meeting: Meeting, withCompletion completion: PFBooleanResultBlock?) {
-        let parseMeeting = PFObject(className: "Meeting")
+        let parseMeeting = PFObject(className: "Meetings")
         
         // Add relevant fields to the object
         parseMeeting[ObjectKeys.Meeting.personId] = meeting.personId
