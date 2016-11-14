@@ -101,8 +101,14 @@ class MeetingDetailsViewController: UIViewController {
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
                 let person = posts[0]
-                let personId = person["objectId"]
+                let personId = person.objectId
         
+                debugPrint("no of items in posts: \(posts.count)")
+                for post in posts {
+                    debugPrint("post contains \(post.objectId!)")
+                }
+                
+                
         // Survey
         let post = PFObject(className: "Survey")
         post["surveyDesc1"] = "happiness"

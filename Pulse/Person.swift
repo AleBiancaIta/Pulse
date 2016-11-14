@@ -53,46 +53,42 @@ class Person: NSObject {
 		photo = dictionary[ObjectKeys.Person.photo] as? Data
     }
 
-    func saveToParse(withCompletion completion: PFBooleanResultBlock?) {
+    class func savePersonToParse(person: Person, withCompletion completion: PFBooleanResultBlock?) {
         let parsePerson = PFObject(className: "Person")
         
         // Add relevant fields to the object
-        parsePerson[ObjectKeys.Person.firstName] = firstName
-        parsePerson[ObjectKeys.Person.lastName] = lastName
-        parsePerson[ObjectKeys.Person.positionId] = positionId
+        parsePerson[ObjectKeys.Person.firstName] = person.firstName
+        parsePerson[ObjectKeys.Person.lastName] = person.lastName
+        parsePerson[ObjectKeys.Person.positionId] = person.positionId
         
-        if let email = email {
+        if let email = person.email {
             parsePerson[ObjectKeys.Person.email] = email
         }
         
-        if let phone = phone {
+        if let phone = person.phone {
             parsePerson[ObjectKeys.Person.phone] = phone
         }
         
-        if let managerId = managerId {
+        if let managerId = person.managerId {
             parsePerson[ObjectKeys.Person.managerId] = managerId
         }
         
-        if let userId = userId {
+        if let userId = person.userId {
             parsePerson[ObjectKeys.Person.userId] = userId
         }
         
-        if let photoUrlString = photoUrlString {
+        if let photoUrlString = person.photoUrlString {
             parsePerson[ObjectKeys.Person.photoUrlString] = photoUrlString
         }
-
-        if let selectedCards = selectedCards {
+        
+        if let selectedCards = person.selectedCards {
             parsePerson[ObjectKeys.Person.selectedCards] = selectedCards
         }
         
-        if let deletedAt = deletedAt {
+        if let deletedAt = person.deletedAt {
             parsePerson[ObjectKeys.Person.deletedAt] = deletedAt
         }
-
-		if let photo = photo {
-			parsePerson[ObjectKeys.Person.photo] = PFFile(data: photo)
-		}
-
+        
         parsePerson.saveInBackground(block: completion)
     }
 }
