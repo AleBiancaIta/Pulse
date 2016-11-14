@@ -76,3 +76,10 @@ struct ObjectKeys {
         static let person = "Person"
     }
 }
+
+struct CellReuseIdentifier {
+    struct Team {
+        static let teamCollectionCell = "TeamCollectionCell"
+        static let teamListCell = "TeamListCell"
+    }
+}

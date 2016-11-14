@@ -22,6 +22,13 @@
 		431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804AE1DD7F2CC00B279C6 /* Person.swift */; };
 		431804B11DD83A4A00B279C6 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */; };
 		431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */; };
+		437DE04B1DD90F0100B08988 /* TeamCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */; };
+		437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */; };
+		437DE0581DD936C200B08988 /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 437DE0571DD936C200B08988 /* Team.storyboard */; };
+		437DE05A1DD9371800B08988 /* TeamCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */; };
+		437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */; };
+		437DE05E1DD9433E00B08988 /* TeamViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE05D1DD9433E00B08988 /* TeamViewDataSource.swift */; };
+		437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE05F1DD9523D00B08988 /* AddTeamMemberViewController.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
 		678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */; };
@@ -56,6 +63,13 @@
 		431804AE1DD7F2CC00B279C6 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
+		437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCollectionCell.swift; sourceTree = "<group>"; };
+		437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCollectionCell.xib; sourceTree = "<group>"; };
+		437DE0571DD936C200B08988 /* Team.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Team.storyboard; sourceTree = "<group>"; };
+		437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCollectionViewController.swift; sourceTree = "<group>"; };
+		437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamListViewController.swift; sourceTree = "<group>"; };
+		437DE05D1DD9433E00B08988 /* TeamViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewDataSource.swift; sourceTree = "<group>"; };
+		437DE05F1DD9523D00B08988 /* AddTeamMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTeamMemberViewController.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardSelectionViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +134,7 @@
 			children = (
 				678802A71DD44A4C001338A8 /* Card.swift */,
 				431804AE1DD7F2CC00B279C6 /* Person.swift */,
+				437DE05D1DD9433E00B08988 /* TeamViewDataSource.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -131,6 +146,8 @@
 				67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */,
 				67D8D6271DD4F16800B6DE19 /* CardCell.swift */,
 				67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */,
+				437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */,
+				437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */,
 				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 			);
 			name = Views;
@@ -143,6 +160,9 @@
 				678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
 				67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */,
+				437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */,
+				437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */,
+				437DE05F1DD9523D00B08988 /* AddTeamMemberViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -176,6 +196,7 @@
 				431804A51DD68A3C00B279C6 /* Pulse.entitlements */,
 				67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */,
 				431804A61DD6975500B279C6 /* Extensions.swift */,
+				437DE0571DD936C200B08988 /* Team.storyboard */,
 				431804A31DD6843700B279C6 /* Login.storyboard */,
 				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
@@ -278,10 +299,12 @@
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
 				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
 				67D8D62A1DD4F16800B6DE19 /* CardCellNib.xib in Resources */,
+				437DE0581DD936C200B08988 /* Team.storyboard in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
 				67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */,
 				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
 				67A364B01DCD8DA500BFD931 /* Main.storyboard in Resources */,
+				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,10 +367,12 @@
 				67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */,
 				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
+				437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
 				4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */,
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
+				437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */,
 				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
@@ -357,7 +382,10 @@
 				67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */,
 				67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */,
 				431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */,
+				437DE05E1DD9433E00B08988 /* TeamViewDataSource.swift in Sources */,
 				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,
+				437DE04B1DD90F0100B08988 /* TeamCollectionCell.swift in Sources */,
+				437DE05A1DD9371800B08988 /* TeamCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
