@@ -14,6 +14,7 @@ class MeetingDetailsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var personLabel: UITextField!
+    @IBOutlet weak var notesTextView: UITextView!
     
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
@@ -94,14 +95,14 @@ class MeetingDetailsViewController: UIViewController {
     
     func onSaveButton(_ sender: UIBarButtonItem) {
         
-        var query = PFQuery(className: "Person")
+        /*var query = PFQuery(className: "Person")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if nil != error {
                 print("Error: \(error?.localizedDescription)")
             }
             if let posts = posts {
                 let person = posts[0]
-                let personId = person["userId"]
+                let personId = person["userId"]*/
         
         // Survey
         let post = PFObject(className: "Survey")
@@ -114,10 +115,11 @@ class MeetingDetailsViewController: UIViewController {
         post.saveInBackground(block: { (success: Bool, error: Error?) in
             if success {
                 let dictionary: [String: Any] = [
-                    "personId": personId,
+                    "personId": "123", // tODO
                     "managerId": "BiancaTest", // TODO
                     "surveyId": post.objectId!,
-                    "meetingDate": NSDate() as Any
+                    "meetingDate": NSDate() as Any,
+                    "notes": self.notesTextView.text
                 ]
                 self.meeting = Meeting(dictionary: dictionary)
                 print("survey saved successfully")
@@ -136,8 +138,8 @@ class MeetingDetailsViewController: UIViewController {
             }
         })
         
-            }
-        }
+            //}
+        //}
         
     }
     
