@@ -53,24 +53,9 @@ class MeetingDetailsViewController: UIViewController {
         alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        // New meeting
+        // Existing meeting
         if nil != meeting {
-            /* TODO let query = PFQuery(className: "Person")
-            query.whereKey("userId", equalTo: "BiancaTest" /*PFUser.current()?.objectId)!*/)
-            query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
-                if let error = error {
-                    print(error.localizedDescription)
-                } else {
-                    if let persons = persons {
-                        let person = persons[0] //  There should only be 1 match*/
             
-            
-            
-                    /*}
-                }
-            }*/
-        
-        } else { // Existing meeting
             // TODO
         }
     }
@@ -97,7 +82,7 @@ class MeetingDetailsViewController: UIViewController {
     
     func onSaveButton(_ sender: UIBarButtonItem) {
         
-        var query = PFQuery(className: "Person")
+        let query = PFQuery(className: "Person")
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
                 let person = posts[0]
@@ -118,12 +103,15 @@ class MeetingDetailsViewController: UIViewController {
         post["surveyDesc3"] = "workload"
         post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
         post.saveInBackground(block: { (success: Bool, error: Error?) in
+            
             if success {
+                let objectId = (PFUser.current()?.objectId)! as String
+                
                 let dictionary: [String: Any] = [
-                    "personId": personId,
-                    "managerId": "BiancaTest", // TODO
+                    "personId": personId, // TODO
+                    "managerId": objectId,
                     "surveyId": post.objectId!,
-                    "meetingDate": NSDate() as Any,
+                    "meetingDate": Date(),
                     "notes": self.notesTextView.text
                 ]
                 self.meeting = Meeting(dictionary: dictionary)

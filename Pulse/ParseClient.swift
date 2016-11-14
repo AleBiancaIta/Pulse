@@ -14,7 +14,7 @@ class ParseClient: NSObject {
     // MARK: - Properties
     
     //var currentUser = PFUser.current()
-    //var currentPerson: Person?
+    //var currentPerson: Person
 
     // MARK: - Shared instance
     

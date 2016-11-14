@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //PFUser.logOut()
         
         // Check if there's a current user, take them straight to dashboard
-        var currentUser = PFUser.current()
+        let currentUser = PFUser.current()
         debugPrint("in app delegate, current user is \(currentUser)")
 
         // For testing Team only
@@ -56,12 +56,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debugPrint("after enableAutomaticUser, currentUser is \(currentUser)")
         }
                 
-//        // TODO remove this chunk
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = storyboard.instantiateInitialViewController()
-//        self.window?.rootViewController = vc
-//        
-
 //        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
 //        self.window?.rootViewController = loginSignUpVC
 

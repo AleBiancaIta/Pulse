@@ -25,43 +25,53 @@ class MeetingsViewController: UIViewController {
         
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
-        let query = PFQuery(className: "Meetings")
-        query.whereKey("managerId", equalTo: "xyz") // TODO logged in casePFUser.current()?.objectId
-        //query.whereKey("meetingDate", equalTo: "2016-12-01")
-        
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let posts = posts {
-                //TODO - remove below also... self.meetings = Meeting.meetingsWithArray(dictionaries: posts)
+        ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
+            if let person = person {
                 
-                let post = posts[0]
+                let query = PFQuery(className: "Meetings")
+                let managerId = person.objectId! as String
+                query.whereKey("managerId", equalTo: managerId)
                 
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let meetingDate = dateFormatter.date(from: post["meetingDate"] as! String)
-                
-                if let meetingDate = meetingDate {
-                    let dictionary = [
-                        "personId": post["personId"],
-                        "managerId": post["managerId"],
-                        "surveyId": post["surveyId"],
-                        "meetingDate": meetingDate
-                    ]
-                    
-                    let meeting = Meeting(dictionary: dictionary)
-                    self.meetings.append(meeting)
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                    if let posts = posts {
+                        
+                        for post in posts {
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateFormat = "yyyy-MM-dd"
+                            if let meetingDateString = post["meetingDate"] as? String,
+                                let meetingDate = dateFormatter.date(from: meetingDateString) {
+                                let dictionary = [
+                                    "personId": post["personId"],
+                                    "managerId": post["managerId"],
+                                    "surveyId": post["surveyId"],
+                                    "meetingDate": meetingDate
+                                ]
+                                
+                                let meeting = Meeting(dictionary: dictionary)
+                                self.meetings.append(meeting)
+                            }
+                            
+                            if let meetingDate = post["meetingDate"] as? Date {
+                                let dictionary = [
+                                    "personId": post["personId"],
+                                    "managerId": post["managerId"],
+                                    "surveyId": post["surveyId"],
+                                    "meetingDate": meetingDate
+                                ]
+                                
+                                let meeting = Meeting(dictionary: dictionary)
+                                self.meetings.append(meeting)
+                            }
+                        }
+                        
+                        self.tableView.reloadData()
+                        
+                    } else {
+                        print(error?.localizedDescription)
+                    }
                 }
-                // end TODO remove
-                
-                self.tableView.reloadData()
-                
-            } else {
-                print(error?.localizedDescription)
             }
         }
-    }
-    
-    func heightForView() -> CGFloat {
-        return CGFloat(3*44) //CGFloat(self.tableView(tableView, numberOfRowsInSection: 0) * 44)
     }
 }
 
@@ -85,5 +95,8 @@ extension MeetingsViewController: UITableViewDataSource {
 }
 
 extension MeetingsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Deselect row appearance after it has been selected
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }

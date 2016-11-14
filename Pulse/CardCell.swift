@@ -40,7 +40,7 @@ class CardCell: UITableViewCell {
             
             if let cardID = card.id {
                 switch cardID {
-                case "m":
+                /*case "m":
                     let viewController = MeetingsViewController(nibName: "MeetingsViewController", bundle: nil)
                     informationView = viewController.view //objects.first as! UIView
                     informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())
@@ -49,7 +49,7 @@ class CardCell: UITableViewCell {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
                     let viewController = storyboard.instantiateInitialViewController() as! TeamCollectionViewController
                     informationView = viewController.view //objects.first as! UIView
-                    informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())
+                    informationView.frame = CGRect(x: 0, y: contentView.frame.origin.y, width: contentView.frame.size.width, height: viewController.heightForView())*/
                     
                 default:
                     informationView = UIView(frame: contentView.frame)
