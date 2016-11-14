@@ -29,6 +29,8 @@
 		437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */; };
 		437DE05E1DD9433E00B08988 /* TeamViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE05D1DD9433E00B08988 /* TeamViewDataSource.swift */; };
 		437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE05F1DD9523D00B08988 /* AddTeamMemberViewController.swift */; };
+		437DE0621DD9648000B08988 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0611DD9648000B08988 /* Meeting.swift */; };
+		437DE0641DD976F000B08988 /* ToDo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0631DD976F000B08988 /* ToDo.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
 		678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */; };
@@ -70,6 +72,8 @@
 		437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamListViewController.swift; sourceTree = "<group>"; };
 		437DE05D1DD9433E00B08988 /* TeamViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamViewDataSource.swift; sourceTree = "<group>"; };
 		437DE05F1DD9523D00B08988 /* AddTeamMemberViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTeamMemberViewController.swift; sourceTree = "<group>"; };
+		437DE0611DD9648000B08988 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		437DE0631DD976F000B08988 /* ToDo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDo.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardSelectionViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 			children = (
 				678802A71DD44A4C001338A8 /* Card.swift */,
 				431804AE1DD7F2CC00B279C6 /* Person.swift */,
+				437DE0611DD9648000B08988 /* Meeting.swift */,
+				437DE0631DD976F000B08988 /* ToDo.swift */,
 				437DE05D1DD9433E00B08988 /* TeamViewDataSource.swift */,
 			);
 			name = Models;
@@ -364,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */,
+				437DE0621DD9648000B08988 /* Meeting.swift in Sources */,
 				67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */,
 				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
@@ -383,6 +390,7 @@
 				67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */,
 				431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */,
 				437DE05E1DD9433E00B08988 /* TeamViewDataSource.swift in Sources */,
+				437DE0641DD976F000B08988 /* ToDo.swift in Sources */,
 				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,
 				437DE04B1DD90F0100B08988 /* TeamCollectionCell.swift in Sources */,
 				437DE05A1DD9371800B08988 /* TeamCollectionViewController.swift in Sources */,

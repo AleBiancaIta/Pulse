@@ -34,10 +34,11 @@ This is the schema that currently reflects what's in Heroku/Parse.
 - surveyId: string (FK to Survey)
 - notes: string (Nullable)
 - notesPhotoUrlString: string (Nullable)
+- notesPhotoUrl: URL (Nullable)
 - meetingDate: date
 - meetingPlace: string (Nullable)
 - selectedCards: string (Nullable)
-- deletedAt: date (Nullable) (stored as String in Parse)
+- deletedAt: date (Nullable)
 
 ## Survey: store information related to a particular user survey
 - _id: "Survey" (Parse object name)
@@ -63,7 +64,7 @@ This is the schema that currently reflects what's in Heroku/Parse.
 - positionId: string
 - phone: string (Nullable)
 - managerId: string (Nullable) (FK to Person) -> if the Person is an Individual Contributor, this field will be populated; otherwise, it's null
-- userId: string (Nullable) (FK to Person) -> if the Person is also the user of the app (i.e. manager), this field will store the userId of the current app user
+- userId: string (Nullable) (FK to _User) -> if the Person is also the user of the app (i.e. manager), this field will store the userId of the current app user
 - photoUrlString: string (Nullable)
 - selectedCards: string (Nullable)
 - deletedAt: date (Nullable)
@@ -72,7 +73,7 @@ This is the schema that currently reflects what's in Heroku/Parse.
 - _id: "ToDo" (Parse object name)
 - objectId: string (default Parse)
 - updatedAt: date (default Parse)
-- createdAt: Date (default Parse)
+- createdAt: date (default Parse)
 - managerId: string (FK to Person)
 - personId: string (FK to Person)
 - meetingId: string (FK to Meeting)

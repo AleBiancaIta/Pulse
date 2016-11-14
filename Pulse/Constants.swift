@@ -71,6 +71,35 @@ struct ObjectKeys {
         static let deletedAt = "deletedAt"
     }
     
+    struct Meeting {
+        static let objectId = "objectId"
+        static let createdAt = "createdAt"
+        static let updatedAt = "updatedAt"
+        static let personId = "personId"
+        static let managerId = "managerId"
+        static let surveyId = "surveyId"
+        static let notes = "notes"
+        static let notesPhotoUrlString = "notesPhotoUrlString"
+        static let notesPhotoUrl = "notesPhotoUrl"
+        static let meetingDate = "meetingDate"
+        static let meetingPlace = "meetingPlace"
+        static let selectedCards = "selectedCards"
+        static let deletedAt = "deletedAt"
+    }
+    
+    struct ToDo {
+        static let objectId = "objectId"
+        static let updatedAt = "updatedAt"
+        static let createdAt = "createdAt"
+        static let managerId = "managerId"
+        static let personId = "personId"
+        static let meetingId = "meetingId"
+        static let text = "text"
+        static let dueAt = "dueAt"
+        static let completedAt = "completedAt"
+        static let deletedAt = "deletedAt"
+    }
+    
     struct User {
         static let objectId = "objectId"
         static let person = "Person"

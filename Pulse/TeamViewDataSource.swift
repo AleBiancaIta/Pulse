@@ -7,10 +7,16 @@
 //
 
 import UIKit
+import Parse
 
 class TeamViewDataSource: NSObject {
     
     // MARK: - Properties
+    
+    var teamMembers = [Person]()
+    var meetings = [Meeting]()
+    
+    
     
     // MARK: - Shared instance
     class func sharedInstance() -> TeamViewDataSource {
