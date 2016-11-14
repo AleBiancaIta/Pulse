@@ -103,7 +103,7 @@ struct ObjectKeys {
     
     struct User {
         static let objectId = "objectId"
-        static let person = "Person"
+        static let person = "person"
     }
 }
 

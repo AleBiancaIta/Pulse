@@ -18,10 +18,26 @@ class TeamCollectionViewController: UIViewController {
 
         collectionView.register(UINib(nibName: "TeamCollectionCell", bundle: nil), forCellWithReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell)
         collectionView.delegate = self
-        collectionView.dataSource = self.dataSource
+        
         
         subscribeToNotifications()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView.dataSource = self.dataSource
+        
+        dataSource.fetchTeamMembersForCurrentPerson { (success: Bool, error: Error?) in
+            if success {
+                debugPrint("successfully fetching team members")
+                self.collectionView.reloadData()
+            } else {
+                debugPrint("Unable to load data with error: \(error?.localizedDescription)")
+                //self.showAlert(title: "Error", message: "Unable to load data", sender: nil, handler: nil)
+            }
+        }
     }
 
     // MARK: - Actions
@@ -45,6 +61,7 @@ class TeamCollectionViewController: UIViewController {
     
     @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
         debugPrint("Get notifications: add team member successful")
+        // refresh and reload data
     }
     
     /*

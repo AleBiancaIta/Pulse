@@ -45,6 +45,7 @@ class TeamListViewController: UIViewController {
     
     @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
         debugPrint("Get notifications: add team member successful")
+        // refresh and reload data
     }
     
     

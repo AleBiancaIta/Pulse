@@ -11,6 +11,7 @@ This is the schema that currently reflects what's in Heroku/Parse.
  - email: string
  - emailVerified: boolean
  - authData: object
+ - person: *Person (pointer to Person)
 
 ## Session: Parse created table, set aside to track current open sessions
  - _id: "_Session"
