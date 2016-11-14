@@ -13,7 +13,8 @@ class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var personLabel: UITextField!
+    @IBOutlet weak var personTextField: UITextField!
+    
     @IBOutlet weak var notesTextView: UITextView!
     
     @IBOutlet weak var survey1Low: UISwitch! // 0
@@ -83,6 +84,8 @@ class MeetingDetailsViewController: UIViewController {
     func onSaveButton(_ sender: UIBarButtonItem) {
         
         let query = PFQuery(className: "Person")
+        let firstName = personTextField.text! as String
+        query.whereKey("firstName", equalTo: firstName)
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
                 let person = posts[0]
@@ -105,29 +108,31 @@ class MeetingDetailsViewController: UIViewController {
         post.saveInBackground(block: { (success: Bool, error: Error?) in
             
             if success {
-                let managerId = PFUser.current()?["userId"] as! String
-                
-                let dictionary: [String: Any] = [
-                    "personId": personId, // TODO
-                    "managerId": managerId,
-                    "surveyId": post.objectId!,
-                    "meetingDate": Date(),
-                    "notes": self.notesTextView.text
-                ]
-                self.meeting = Meeting(dictionary: dictionary)
-                print("survey saved successfully")
-                
-                Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
-                    if success {
-                        print("Successfully saved meeting")
-                        self.navigationController?.popViewController(animated: true)
-                    } else {
-                        self.alertController?.message = "Meeting was unable to be saved"
-                        self.present(self.alertController!, animated: true)
+                ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
+                    if let person = person {
+                        let managerId = person["userId"]
+                        
+                        let dictionary: [String: Any] = [
+                            "personId": personId, // TODO
+                            "managerId": managerId,
+                            "surveyId": post.objectId!,
+                            "meetingDate": Date(),
+                            "notes": self.notesTextView.text
+                        ]
+                        self.meeting = Meeting(dictionary: dictionary)
+                        print("survey saved successfully")
+                        
+                        Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
+                            if success {
+                                print("Successfully saved meeting")
+                                self.navigationController?.popViewController(animated: true)
+                            } else {
+                                self.alertController?.message = "Meeting was unable to be saved"
+                                self.present(self.alertController!, animated: true)
+                            }
+                        }
                     }
-                }
-            } else {
-                print("Error: \(error?.localizedDescription)")
+                })
             }
         })
         
