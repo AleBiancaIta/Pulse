@@ -43,8 +43,8 @@ class DashboardViewController: UIViewController {
                     switch c {
                     case "m":
                         self.selectedCards.append(Constants.dashboardCards[0]) // TODO fix these
-                    case "g":
-                        self.selectedCards.append(Constants.dashboardCards[1])
+                    /* TODO case "g":
+                        self.selectedCards.append(Constants.dashboardCards[1])*/
                     case "t":
                         self.selectedCards.append(Constants.dashboardCards[2])
                     case "d":
@@ -63,7 +63,11 @@ class DashboardViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @IBAction func onAddCard(_ sender: UIBarButtonItem) {
+    @IBAction func onAddMeeting(_ sender: UIBarButtonItem) {
+        print("TESTTEST")
+    }
+    
+    func onAddCard() {
         guard selectedCards.count != Constants.dashboardCards.count else {
             alertController?.message = "You already have all the cards"
             present(alertController!, animated: true)
@@ -89,23 +93,20 @@ class DashboardViewController: UIViewController {
     
 }
 
+// MARK: - UIGestureRecognizerDelegate
+
+extension DashboardViewController: UIGestureRecognizerDelegate {
+    // Do nothing
+}
+
 // MARK: - UITableViewDataSource
 
 extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // No cards
-        if selectedCards.count == 0 {
+        if indexPath.section == numberOfSections(in: tableView) - 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-            cell.message = "Tap the + button to add cards"
-            cell.isUserInteractionEnabled = false
-            return cell
-        
-        // Last section
-        } else if indexPath.section == numberOfSections(in: tableView) - 1 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-            cell.message = "Tap the + button to add a new 1:1 meeting, or long press the + button to add cards"
-            cell.isUserInteractionEnabled = false
+            cell.message = "Tap here to manage cards"
             return cell
         
         // The actual cards
@@ -147,6 +148,11 @@ extension DashboardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == numberOfSections(in: tableView) - 1 {
+            onAddCard()
+            return
+        }
         
         if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
             let card = cell.card,
