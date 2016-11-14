@@ -24,8 +24,10 @@ class SettingsHeaderCell: UITableViewCell {
                 usernameLabel.text = "Hello, Anonymous"
                 emailLabel.isHidden = true
             } else {
-                usernameLabel.text = "Hello, \(user.username!)"
-                emailLabel.text = user.email
+                if let user = user {
+                    usernameLabel.text = "Hello, \(user.username!)"
+                    emailLabel.text = user.email
+                }
             }
         }
     }
