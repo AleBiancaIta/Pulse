@@ -101,7 +101,7 @@ class MeetingDetailsViewController: UIViewController {
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
                 let person = posts[0]
-                let personId = person["userId"]
+                let personId = person["objectId"]
         
         // Survey
         let post = PFObject(className: "Survey")
@@ -114,7 +114,7 @@ class MeetingDetailsViewController: UIViewController {
         post.saveInBackground(block: { (success: Bool, error: Error?) in
             if success {
                 let dictionary: [String: Any] = [
-                    "personId": "123", // tODO
+                    "personId": personId,
                     "managerId": "BiancaTest", // TODO
                     "surveyId": post.objectId!,
                     "meetingDate": NSDate() as Any,

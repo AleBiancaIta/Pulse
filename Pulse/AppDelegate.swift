@@ -33,14 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if currentUser != nil {
             let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
             let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
-            //self.window?.rootViewController = dashboardNavVC
+            self.window?.rootViewController = dashboardNavVC
             debugPrint("current user inside the appDelegate \(currentUser)")
         } // else - Login view is already set up as initial vc so we don't have to do anything
         
         // Enable automatic user
         //PFUser.enableAutomaticUser()
-        let defaultACL = PFACL()
-        PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
+        //let defaultACL = PFACL()
+       // PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
         
         // Print out what's currently in current user
         if let currentUser = PFUser.current() {
@@ -48,9 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
                 
 //        // TODO remove this chunk
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        /*let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateInitialViewController()
-        self.window?.rootViewController = vc
+        self.window?.rootViewController = vc*/
         
 
 //        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
