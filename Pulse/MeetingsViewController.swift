@@ -17,6 +17,8 @@ class MeetingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Meetings"
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -34,7 +36,7 @@ class MeetingsViewController: UIViewController {
                 let post = posts[0]
                 
                 let dateFormatter = DateFormatter()
-                // dateFormatter.dateFormat =
+                dateFormatter.dateFormat = "yyyy-MM-dd"
                 let meetingDate = dateFormatter.date(from: post["meetingDate"] as! String)
                 
                 if let meetingDate = meetingDate {
@@ -72,7 +74,7 @@ extension MeetingsViewController: UITableViewDataSource {
             cell.messageLabel.text = "\(personId) (\(meetingDate))"
 
         } else {
-            cell.messageLabel.text = "No upcoming meetings"
+            cell.messageLabel.text = "No meetings"
         }
         return cell
     }

@@ -152,8 +152,8 @@ extension DashboardViewController: UITableViewDelegate {
         }
         
         if let cell = tableView.cellForRow(at: indexPath) {
-            if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Upcoming Meetings"{
-                navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)
+            if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Meetings" {
+                navigationController?.pushViewController(MeetingsViewController(), animated: true)
             } else if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Team Members"{
                 let storyboard = UIStoryboard(name: "Team", bundle: nil)
                 let viewController = storyboard.instantiateInitialViewController()
