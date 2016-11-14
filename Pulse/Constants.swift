@@ -11,7 +11,7 @@ import Foundation
 class Constants: NSObject {
 
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
-        ["id" : "m", "name": "Upcoming Meetings", "card_type": "meetings", "page_type": "dashboard"],
+        // TODO required ["id" : "m", "name": "Upcoming Meetings", "card_type": "meetings", "page_type": "dashboard"],
         // TODO optional for now ["id" : "o", "name": "Organizational Chart", "card_type": "org_chart", "page_type": "dashboard"],
         // TODO optional for now ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
         ["id" : "t", "name": "Team", "card_type": "team", "page_type": "dashboard"],

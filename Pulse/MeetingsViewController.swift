@@ -25,16 +25,31 @@ class MeetingsViewController: UIViewController {
         
         let query = PFQuery(className: "Meetings")
         query.whereKey("managerId", equalTo: "xyz") // TODO logged in casePFUser.current()?.objectId
-        query.whereKey("meetingDate", equalTo: "2016-12-01")
+        //query.whereKey("meetingDate", equalTo: "2016-12-01")
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
-                for post in posts {
-                    /* TODO Bianca let dict = [post["personName"] as! String, post["meetingDate"] as! String]
-                    let meeting = Meeting(dictionary: dict)
-                    self.meetings.append(meeting)*/
+                //TODO - remove below also... self.meetings = Meeting.meetingsWithArray(dictionaries: posts)
+                
+                let post = posts[0]
+                
+                let dateFormatter = DateFormatter()
+                // dateFormatter.dateFormat =
+                let meetingDate = dateFormatter.date(from: post["meetingDate"] as! String)
+                
+                if let meetingDate = meetingDate {
+                    let dictionary = [
+                        "personId": post["personId"],
+                        "managerId": post["managerId"],
+                        "surveyId": post["surveyId"],
+                        "meetingDate": meetingDate
+                    ]
+                    
+                    let meeting = Meeting(dictionary: dictionary)
+                    self.meetings.append(meeting)
                 }
-                    // TODO Meeting.meetingsWithArray(dictionaries: posts) function for PFObject
+                // end TODO remove
+                
                 self.tableView.reloadData()
                 
             } else {
@@ -44,7 +59,7 @@ class MeetingsViewController: UIViewController {
     }
     
     func heightForView() -> CGFloat {
-        return CGFloat(self.tableView(tableView, numberOfRowsInSection: 0) * 44)
+        return CGFloat(3*44) //CGFloat(self.tableView(tableView, numberOfRowsInSection: 0) * 44)
     }
 }
 
@@ -52,10 +67,10 @@ extension MeetingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
         if 0 < meetings.count {
-            /* TODO Bianca if let personName = meetings[indexPath.row].personName,
-                let meetingDate = meetings[indexPath.row].meetingDate {
-                cell.messageLabel.text = "\(personName) (\(meetingDate))"
-            }*/
+            let personId = meetings[indexPath.row].personId // TODO should be person name
+            let meetingDate = meetings[indexPath.row].meetingDate
+            cell.messageLabel.text = "\(personId) (\(meetingDate))"
+
         } else {
             cell.messageLabel.text = "No upcoming meetings"
         }

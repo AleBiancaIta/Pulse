@@ -84,6 +84,34 @@ class Meeting: NSObject {
         parseMeeting.saveInBackground(block: completion)
     }
     
+    /* TODO fix - code doesn't compile when this is uncommented. why?
+     class func meetingsWithArray(dictionaries: [PFObject]) -> [Meeting] {
+        let meetingsArray: [Meeting] = []
+        
+        for pfObject in dictionaries {
+            let dictionary = [
+                "objectId": pfObject["_id"],
+                "createdAt": pfObject["_created_at"],
+                "updatedAt": pfObject["_updated_at"],
+                
+                "personId": pfObject["personId"],
+                "managerId": pfObject["managerId"],
+                "surveyId": pfObject["surveyId"],
+                "notes": pfObject["notes"],
+                "notesPhotoUrlString": pfObject["notesPhotoUrlString"],
+                "notesPhotoUrl": pfObject["meetingDate"],
+                "meetingPlace": pfObject["meetingPlace"],
+                "selectedCards": pfObject["selectedCards"],
+                "deletedAt": pfObject["deletedAt"],
+            ]
+            let meeting = Meeting(dictionary: dictionary)
+            meetingsArray.append(meeting)
+        }
+        
+        return meetingsArray
+    }*/
+
+    
     // Fetch functions
     // query.getObjectInBackgroundWithId:block
     // query.findObjectsInBackgroundWithBlock:

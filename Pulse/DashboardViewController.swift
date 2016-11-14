@@ -41,14 +41,14 @@ class DashboardViewController: UIViewController {
                 self.selectedCardsString = post["selectedCards"] as? String
                 for c in (self.selectedCardsString?.characters)! {
                     switch c {
-                    case "m":
-                        self.selectedCards.append(Constants.dashboardCards[0]) // TODO fix these
+                    /* TODO case "m":
+                        self.selectedCards.append(Constants.dashboardCards[0])*/
                     /* TODO case "g":
                         self.selectedCards.append(Constants.dashboardCards[1])*/
                     case "t":
-                        self.selectedCards.append(Constants.dashboardCards[2])
+                        self.selectedCards.append(Constants.dashboardCards[1])
                     case "d":
-                        self.selectedCards.append(Constants.dashboardCards[3])
+                        self.selectedCards.append(Constants.dashboardCards[2])
                     default:
                         break
                     }
@@ -64,7 +64,7 @@ class DashboardViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func onAddMeeting(_ sender: UIBarButtonItem) {
-        print("TESTTEST")
+        navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)
     }
     
     func onAddCard() {
@@ -159,8 +159,8 @@ extension DashboardViewController: UITableViewDelegate {
             let cardType = card.cardType {
             
             switch cardType {
-            case "meetings":
-                navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)
+            /* TODO case "meetings":
+                navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)*/
             default:
                 break
             }
