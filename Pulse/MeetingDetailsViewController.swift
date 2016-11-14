@@ -6,22 +6,36 @@
 //  Copyright © 2016 ABI. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    static var cards: [Card] = [] // TODO put in data controller
+    @IBOutlet weak var survey1Low: UISwitch!
+    @IBOutlet weak var survey1Med: UISwitch!
+    @IBOutlet weak var survey1High: UISwitch!
+    
+    @IBOutlet weak var survey2Low: UISwitch!
+    @IBOutlet weak var survey2Med: UISwitch!
+    @IBOutlet weak var survey2High: UISwitch!
+    
+    @IBOutlet weak var survey3Low: UISwitch!
+    @IBOutlet weak var survey3Med: UISwitch!
+    @IBOutlet weak var survey3High: UISwitch!
+    
+    static var cards: [Card] = [] // TODO
     
     var alertController: UIAlertController?
+    var meeting: Meeting!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Meeting"
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAddButton(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -33,11 +47,32 @@ class MeetingDetailsViewController: UIViewController {
         
         alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
+        
+        // New meeting
+        if nil != meeting {
+            /* TODO let query = PFQuery(className: "Person")
+            query.whereKey("userId", equalTo: "BiancaTest" /*PFUser.current()?.objectId)!*/)
+            query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    if let persons = persons {
+                        let person = persons[0] //  There should only be 1 match*/
+            
+            
+            
+                    /*}
+                }
+            }*/
+        
+        } else { // Existing meeting
+            // TODO
+        }
     }
     
     // MARK: - Private Methods
     
-    func onAddButton(_ sender: UIBarButtonItem) {
+    /*func onAddButton(_ sender: UIBarButtonItem) {
         guard MeetingDetailsViewController.cards.count != Constants.dashboardCards.count else {
             alertController?.message = "You already have all the cards"
             present(alertController!, animated: true)
@@ -53,6 +88,43 @@ class MeetingDetailsViewController: UIViewController {
         }*/
         
         present(selectionNavigationController, animated: true, completion: nil)
+    }*/
+    
+    func onSaveButton(_ sender: UIBarButtonItem) {
+        // Survey
+        let post = PFObject(className: "Survey")
+        post["surveyDesc1"] = "happiness"
+        post["surveyValueId1"] = 1 // TODO - default med
+        post["surveyDesc2"] = "engagement"
+        post["surveyValueId2"] = 1 // TODO
+        post["surveyDesc3"] = "workload"
+        post["surveyValueId3"] = 1 // TODO
+        post.saveInBackground(block: { (success: Bool, error: Error?) in
+            if success {
+                let dictionary: [String: Any] = [
+                    "personId": "123" as Any, // TODO
+                    "managerId": "BiancaTest",
+                    "surveyId": post.objectId!,
+                    "meetingDate": NSDate() as Any
+                ]
+                self.meeting = Meeting(dictionary: dictionary)
+                print("survey saved successfully")
+                
+                Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
+                    if success {
+                        print("Successfully saved meeting")
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        self.alertController?.message = "Meeting was unable to be saved"
+                        self.present(self.alertController!, animated: true)
+                    }
+                }
+            } else {
+                print("Error: \(error?.localizedDescription)")
+            }
+        })
+        
+        
     }
     
     /*func heightForView() -> CGFloat {

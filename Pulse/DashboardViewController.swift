@@ -46,9 +46,9 @@ class DashboardViewController: UIViewController {
                     /* TODO case "g":
                         self.selectedCards.append(Constants.dashboardCards[1])*/
                     case "t":
-                        self.selectedCards.append(Constants.dashboardCards[1])
+                        self.selectedCards.append(Constants.dashboardCards[0])
                     case "d":
-                        self.selectedCards.append(Constants.dashboardCards[2])
+                        self.selectedCards.append(Constants.dashboardCards[1])
                     default:
                         break
                     }
@@ -185,7 +185,11 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
                 self.selectedCardsString = "\(id)\(selectedCardsString)"
                 post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
-                    print("successfully saved dashboard card")
+                    if success {
+                        print("successfully saved dashboard card")
+                    } else {
+                        print(error?.localizedDescription)
+                    }
                 }
             } else {
                 print(error?.localizedDescription)
