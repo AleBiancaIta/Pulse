@@ -67,10 +67,12 @@ class UpdateProfileViewController: UIViewController {
                 debugPrint("Unable to find person associated with current user id, error: \(error.localizedDescription)")
             } else {
                 if let persons = persons {
-                    let person = persons[0]
-                    self.person = person
-                    debugPrint("after query person is \(self.person)")
-                    self.configureTextFields()
+                    if persons.count > 0 {
+                        let person = persons[0]
+                        self.person = person
+                        debugPrint("after query person is \(self.person)")
+                        self.configureTextFields()
+                    }
                 }
             }
         }
