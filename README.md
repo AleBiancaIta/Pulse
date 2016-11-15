@@ -144,7 +144,6 @@ Icon made by [Retinaicons](http://www.flaticon.com/authors/retinaicons) from [Fl
 
 Describe any challenges encountered while building the app.
 
-
 ## License
 
     Copyright 2016 ABI
