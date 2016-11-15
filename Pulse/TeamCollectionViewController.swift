@@ -58,9 +58,9 @@ class TeamCollectionViewController: UIViewController {
     
     @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
         debugPrint("Get notifications: add team member successful")
-        // refresh and reload data
+		collectionView.reloadData()
     }
-    
+
     func heightForView() -> CGFloat {
         return CGFloat(44 * 3) // TODO
     }

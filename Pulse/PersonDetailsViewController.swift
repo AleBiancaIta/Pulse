@@ -51,26 +51,44 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func initPerson() {
-		if let person = person {
-			firstNameTextField.text = person.firstName
-			lastNameTextField.text = person.lastName
-			phoneTextField.text = person.phone
-			emailTextField.text = person.email
 
-			navigationItem.title = person.firstName + " " + person.lastName
-			setEditing(false, animated: true)
-        } else if let pfObject = personPFObject {
-            let firstName = pfObject[ObjectKeys.Person.firstName] as! String
-            let lastName = pfObject[ObjectKeys.Person.lastName] as! String
-            
+//		if let person = person {
+//
+//			firstNameTextField.text = person.firstName
+//			lastNameTextField.text = person.lastName
+//			phoneTextField.text = person.phone
+//			emailTextField.text = person.email
+//
+//			navigationItem.title = person.firstName + " " + person.lastName
+//			setEditing(false, animated: true)
+//        }
+//		else
+
+		if let pfObject = personPFObject {
+
+			let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
+			let lastName = pfObject[ObjectKeys.Person.lastName] as! String
+
             firstNameTextField.text = firstName
             lastNameTextField.text = lastName
             phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
-            
+
+			if let pffileData = pfObject[ObjectKeys.Person.photo] as? PFFile {
+				do {
+					if let data = try? pffileData.getData() {
+						photoData = data
+						if let image = UIImage(data: data) {
+							self.profileImageView.image = image
+						}
+					}
+				}
+			}
+
             navigationItem.title = firstName + " " + lastName
             setEditing(false, animated: true)
-        } else {
+        }
+		else {
 			navigationItem.title = "New team member"
 			setEditing(true, animated: true)
 		}
@@ -108,6 +126,12 @@ class PersonDetailsViewController: UIViewController {
 			if isValid() {
 				setEditing(false, animated: true)
 				savePerson()
+
+				if let pfObject = personPFObject {
+					let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
+					let lastName = pfObject[ObjectKeys.Person.lastName] as! String
+					navigationItem.title = firstName + " " + lastName
+				}
 			}
 		}
 		else {
@@ -172,14 +196,15 @@ class PersonDetailsViewController: UIViewController {
             NSLog("Editing current person")
             
             pfPerson[ObjectKeys.Person.firstName] = self.firstNameTextField.text
-            pfPerson[ObjectKeys.Person.lastName] = self.firstNameTextField.text
-            pfPerson[ObjectKeys.Person.email] = self.firstNameTextField.text
-            pfPerson[ObjectKeys.Person.phone] = self.firstNameTextField.text
-            
+            pfPerson[ObjectKeys.Person.lastName] = self.lastNameTextField.text
+            pfPerson[ObjectKeys.Person.email] = self.emailTextField.text
+            pfPerson[ObjectKeys.Person.phone] = self.phoneTextField.text
+			pfPerson[ObjectKeys.Person.photo] = photoData
+
             pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
                 if success {
                     self.showAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-                        self.navigationController?.popViewController(animated: true)
+						self.navigationController?.popViewController(animated: true)
                     })
                 } else {
                     self.showAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
@@ -198,12 +223,13 @@ class PersonDetailsViewController: UIViewController {
                     debugPrint("Error finding the person matching current user, error: \(error.localizedDescription)")
                 } else {
                     self.person?.managerId = manager?.objectId
-                    Person.savePersonToParse(person: self.person!) {
+
+					Person.savePersonToParse(person: self.person!) {
                         (success: Bool, error: Error?) in
                         NSLog("Created ok!")
                         
-                        self.navigationController!.popViewController(animated: true)
-                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+                        self.navigationController?.popViewController(animated: true)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
                     }
                 }
             })
@@ -259,7 +285,7 @@ extension PersonDetailsViewController : UIImagePickerControllerDelegate {
 
 	public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
 		let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-		profileImageView.contentMode = .scaleAspectFill
+		profileImageView.contentMode = .scaleAspectFit
 		profileImageView.image = chosenImage
 		profileImageView.layer.cornerRadius = 3
 		profileImageView.clipsToBounds = true

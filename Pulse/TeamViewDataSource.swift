@@ -114,7 +114,17 @@ extension TeamViewDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Team.teamListCell, for: indexPath) as! TeamTableViewCell
         cell.firstNameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
         cell.emailLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.email] as? String
-        
+
+		if let pffileData = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile {
+			do {
+				if let data = try? pffileData.getData() {
+					if let image = UIImage(data: data) {
+						cell.profileImageView.image = image
+					}
+				}
+			}
+		}
+
         fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")
@@ -138,7 +148,17 @@ extension TeamViewDataSource: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell, for: indexPath) as! TeamCollectionCell
         cell.profileImageView.image = UIImage(named: "DefaultPhoto")
         cell.nameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
-        
+
+		if let pffileData = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile {
+			do {
+				if let data = try? pffileData.getData() {
+					if let image = UIImage(data: data) {
+						cell.profileImageView.image = image
+					}
+				}
+			}
+		}
+
         fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")
