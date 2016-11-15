@@ -45,12 +45,12 @@ class DashboardViewController: UIViewController {
                         switch c {
                         case "m":
                             self.selectedCards.append(Constants.dashboardCards[0])
-                        /* TODO case "g":
-                            self.selectedCards.append(Constants.dashboardCards[1])*/
-                        case "t":
+                        case "g":
                             self.selectedCards.append(Constants.dashboardCards[1])
-                        /*case "d":
-                            self.selectedCards.append(Constants.dashboardCards[1])*/
+                        case "t":
+                            self.selectedCards.append(Constants.dashboardCards[2])
+                        case "d":
+                            self.selectedCards.append(Constants.dashboardCards[3])
                         default:
                             break
                         }
