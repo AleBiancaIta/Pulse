@@ -45,7 +45,7 @@ class UpdateProfileViewController: UIViewController {
                     self.person.saveInBackground(block: { (success: Bool, error: Error?) in
                         if success {
                             self.showAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-                                self.navigationController?.popViewController(animated: true)
+                                let _ = self.navigationController?.popViewController(animated: true)
                             })
                         } else {
                             self.showAlert(title: "Error", message: "Unable to update user profile with error: \(error?.localizedDescription)", sender: nil, handler: nil)
@@ -60,7 +60,7 @@ class UpdateProfileViewController: UIViewController {
     // MARK: - Helpers
     
     fileprivate func getUserProfile() {
-        var query = PFQuery(className: "Person")
+        let query = PFQuery(className: "Person")
         query.whereKey(ObjectKeys.Person.userId, equalTo: user.objectId!)
         query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
             if let error = error {
@@ -80,10 +80,18 @@ class UpdateProfileViewController: UIViewController {
     
     fileprivate func configureTextFields() {
         if person != nil {
-            firstNameTextField.text = person[ObjectKeys.Person.firstName] as! String
-            lastNameTextField.text = person[ObjectKeys.Person.lastName] as! String
-            phoneTextField.text = person[ObjectKeys.Person.phone] as! String
-            emailTextField.text = person[ObjectKeys.Person.email] as! String
+            if let firstName = person[ObjectKeys.Person.firstName] as? String {
+                firstNameTextField.text = firstName
+            }
+            if let lastName = person[ObjectKeys.Person.lastName] as? String {
+                lastNameTextField.text = lastName
+            }
+            if let phone = person[ObjectKeys.Person.phone] as? String {
+                phoneTextField.text = phone
+            }
+            if let email = person[ObjectKeys.Person.email] as? String {
+                emailTextField.text = email
+            }
         }
     }
     

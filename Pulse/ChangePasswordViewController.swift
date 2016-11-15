@@ -37,7 +37,7 @@ class ChangePasswordViewController: UIViewController {
                     PFUser.current()?.saveInBackground(block: { (success: Bool, error: Error?) in
                         if success {
                             self.showAlert(title: "Success", message: "Password change successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-                                self.navigationController?.popViewController(animated: true)
+                                let _ = self.navigationController?.popViewController(animated: true)
                             })
                         } else {
                             self.showAlert(title: "Error", message: "Changing password error: \(error?.localizedDescription)", sender: nil, handler: nil)

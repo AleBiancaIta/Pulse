@@ -15,6 +15,8 @@ class TeamCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Team Members"
+
         collectionView.register(UINib(nibName: "TeamCollectionCell", bundle: nil), forCellWithReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell)
         collectionView.delegate = self
         subscribeToNotifications()

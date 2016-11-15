@@ -71,6 +71,11 @@ class MeetingDetailsViewController: UIViewController {
                         if surveys.count > 0 {
                             let survey = surveys[0]
                             
+                            // Reset
+                            self.survey1Med.isOn = false
+                            self.survey2Med.isOn = false
+                            self.survey3Med.isOn = false
+                            
                             let survey1Value = survey[ObjectKeys.Survey.surveyValueId1] as! Int
                             if survey1Value == 0 {
                                 self.survey1Low.isOn = true
@@ -167,7 +172,7 @@ class MeetingDetailsViewController: UIViewController {
                         Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
                             if success {
                                 print("Successfully saved meeting")
-                                self.navigationController?.popViewController(animated: true)
+                                let _ = self.navigationController?.popViewController(animated: true)
                             } else {
                                 self.alertController?.message = "Meeting was unable to be saved"
                                 self.present(self.alertController!, animated: true)
