@@ -46,7 +46,8 @@ class MeetingsViewController: UIViewController {
                                         "personId": post["personId"],
                                         "managerId": post["managerId"],
                                         "surveyId": post["surveyId"],
-                                        "meetingDate": meetingDate
+                                        "meetingDate": meetingDate,
+                                        "notes": post["notes"]
                                     ]
                                     
                                     let meeting = Meeting(dictionary: dictionary)
@@ -82,10 +83,11 @@ extension MeetingsViewController: UITableViewDataSource {
         if 0 < meetings.count {
             let personId = meetings[indexPath.row].personId // TODO should be person name
             let meetingDate = meetings[indexPath.row].meetingDate
+            cell.accessoryType = .disclosureIndicator
             cell.messageLabel.text = "\(personId) (\(meetingDate))"
 
         } else {
-            cell.messageLabel.text = "No meetings"
+            cell.messageLabel.text = "You have no upcoming meetings"
         }
         return cell
     }
@@ -99,5 +101,9 @@ extension MeetingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let viewController = MeetingDetailsViewController()
+        viewController.meeting = meetings[indexPath.row]
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

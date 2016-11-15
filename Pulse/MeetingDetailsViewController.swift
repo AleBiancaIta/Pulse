@@ -13,7 +13,7 @@ class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var personTextField: UITextField!
+    @IBOutlet weak var personTextField: UITextField! // Person ID // TODO should be name
     
     @IBOutlet weak var notesTextView: UITextView!
     
@@ -56,8 +56,9 @@ class MeetingDetailsViewController: UIViewController {
         
         // Existing meeting
         if nil != meeting {
-            
-            // TODO
+            personTextField.text = meeting.personId
+            notesTextView.text = meeting.notes
+            // TODO survey
         }
     }
     
