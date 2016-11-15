@@ -29,6 +29,7 @@ class MeetingsViewController: UIViewController {
             if let person = person {
                 
                 let query = PFQuery(className: "Meetings")
+
                 let managerId = person.objectId! as String
                 query.whereKey("managerId", equalTo: managerId)
                 

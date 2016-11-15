@@ -69,6 +69,8 @@ class ParseClient: NSObject {
     
     func fetchMeetingsFor(personId: String, managerId: String, orderBy: String?, limit: Int?, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
         
+        // TODO: Need to filter out deleted meetings at some point
+        
         var query = PFQuery(className: "Meetings")
         
 //        if let predicate = predicate {
@@ -77,17 +79,18 @@ class ParseClient: NSObject {
 //            query = PFQuery(className: "Meetings")
 //        }
         
-//        if let orderBy = orderBy {
-//            query.order(byDescending: orderBy)
-//        }
-//        
-//        if let limit = limit {
-//            query.limit = limit
-//        }
-//        
-//        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
-//        query.whereKey(ObjectKeys.Meeting.managerId, equalTo: managerId)
-          query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
+        if let orderBy = orderBy {
+            query.order(byDescending: orderBy)
+        }
+        
+        if let limit = limit {
+            query.limit = limit
+        }
+        
+        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
+        query.whereKey(ObjectKeys.Meeting.managerId, equalTo: managerId)
+        query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
+            debugPrint("query is \(query)")
             if let error = error {
                 debugPrint("Unable to fetch meetings for person: \(personId), manager: \(managerId)")
                 completion(nil, error)

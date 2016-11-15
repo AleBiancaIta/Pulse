@@ -76,12 +76,8 @@ extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionVi
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let storyboard = UIStoryboard(name: "Person", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController")
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
+        viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    
-    
-    
-    
 }

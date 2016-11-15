@@ -25,6 +25,7 @@ class PersonDetailsViewController: UIViewController {
 	let imagePicker = UIImagePickerController()
 	var photoData: Data?
 	var person: Person?
+    var personPFObject: PFObject?
 
 	// MARK: - View Lifecycle
 
@@ -58,8 +59,18 @@ class PersonDetailsViewController: UIViewController {
 
 			navigationItem.title = person.firstName + " " + person.lastName
 			setEditing(false, animated: true)
-		}
-		else {
+        } else if let pfObject = personPFObject {
+            let firstName = pfObject[ObjectKeys.Person.firstName] as! String
+            let lastName = pfObject[ObjectKeys.Person.lastName] as! String
+            
+            firstNameTextField.text = firstName
+            lastNameTextField.text = lastName
+            phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
+            emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
+            
+            navigationItem.title = firstName + " " + lastName
+            setEditing(false, animated: true)
+        } else {
 			navigationItem.title = "New team member"
 			setEditing(true, animated: true)
 		}
@@ -151,11 +162,30 @@ class PersonDetailsViewController: UIViewController {
 
 	func savePerson() {
 
-		if let person = person {
-			NSLog("Editing current person")
-			// TODO: Save current person to Parse
-		}
-		else {
+        // ALE: this is just a hack for now so that we're checking for PFObject instead
+        // of person. Feel free to change this later
+//		if let person = person {
+//			NSLog("Editing current person")
+//			// TODO: Save current person to Parse
+//		}
+        if let pfPerson = personPFObject {
+            NSLog("Editing current person")
+            
+            pfPerson[ObjectKeys.Person.firstName] = self.firstNameTextField.text
+            pfPerson[ObjectKeys.Person.lastName] = self.firstNameTextField.text
+            pfPerson[ObjectKeys.Person.email] = self.firstNameTextField.text
+            pfPerson[ObjectKeys.Person.phone] = self.firstNameTextField.text
+            
+            pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
+                if success {
+                    self.showAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+                        self.navigationController?.popViewController(animated: true)
+                    })
+                } else {
+                    self.showAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+                }
+            })
+        } else {
 			NSLog("Creating new person")
 			person = Person(firstName: firstNameTextField.text!,
 			                lastName: lastNameTextField.text!)
@@ -163,11 +193,21 @@ class PersonDetailsViewController: UIViewController {
 			person?.phone = phoneTextField.text
 			person?.photo = photoData
 
-			Person.savePersonToParse(person: person!) {
-				(success: Bool, error: Error?) in
-				NSLog("Created ok!")
-			}
-		}
+            ParseClient.sharedInstance().getCurrentPerson(completion: { (manager: PFObject?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error finding the person matching current user, error: \(error.localizedDescription)")
+                } else {
+                    self.person?.managerId = manager?.objectId
+                    Person.savePersonToParse(person: self.person!) {
+                        (success: Bool, error: Error?) in
+                        NSLog("Created ok!")
+                        
+                        self.navigationController!.popViewController(animated: true)
+                        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+                    }
+                }
+            })
+ 		}
 	}
 
 	// MARK: - Image

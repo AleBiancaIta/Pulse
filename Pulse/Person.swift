@@ -22,6 +22,7 @@ class Person: NSObject {
     var selectedCards: String?
     var deletedAt: Date?
 	var photo: Data?
+    var pfObject: PFObject? // TODO: need to figure out how to do this better
 
     // TODO - this needs to be changed later since positionId is not always 2
 	init(firstName: String, lastName: String) {
@@ -54,6 +55,12 @@ class Person: NSObject {
     }
 
     class func savePersonToParse(person: Person, withCompletion completion: PFBooleanResultBlock?) {
+        
+        // TODO: have a check if it's a current user or team member, we need to handle
+        // the managerId or userId field population here
+        // Maybe separate this function into saveUser and saveTeamMember
+        // update positionId, managerId, and userId
+        
         let parsePerson = PFObject(className: "Person")
         
         // Add relevant fields to the object

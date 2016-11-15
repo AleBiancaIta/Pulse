@@ -66,12 +66,15 @@ class TeamViewDataSource: NSObject {
                 debugPrint("Error getting current person with error: \(error.localizedDescription)")
             } else {
                 if let manager = manager {
-                    let predicate = NSPredicate(format: "\(ObjectKeys.Meeting.meetingDate) <= '\(NSDate())'")
+                    //let predicate = NSPredicate(format: "\(ObjectKeys.Meeting.meetingDate) <= '\(NSDate())'")
                     
-                    debugPrint("predicate in manager is \(predicate)")
-                    debugPrint("manager is \(manager)")
+                    //debugPrint("predicate in manager is \(predicate)")
+                    //debugPrint("manager is \(manager)")
                     
                     self.parseClient.fetchMeetingsFor(personId: personId, managerId: manager.objectId!, orderBy: orderBy , limit: limit, predicate: nil, completion: { (meetings: [PFObject]?, error: Error?) in
+                        
+                        debugPrint("in fetch latest: personId: \(personId), managerId: \(manager.objectId!)")
+                        
                         if let error = error {
                             debugPrint("Failed in fetching meetings: \(error.localizedDescription)")
                             completion(nil, error)
@@ -91,6 +94,10 @@ class TeamViewDataSource: NSObject {
             }
         }
     }
+    
+    func getSelectedPersonObjectAt(indexPath: IndexPath) -> PFObject? {
+        return teamMembers[indexPath.row] ?? nil
+    }
 }
 
 extension TeamViewDataSource: UITableViewDataSource {
@@ -107,6 +114,15 @@ extension TeamViewDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Team.teamListCell, for: indexPath) as! TeamTableViewCell
         cell.firstNameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
         cell.emailLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.email] as? String
+        
+        fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
+            if let error = error {
+                debugPrint("error: \(error.localizedDescription)")
+            } else {
+                debugPrint("meeting is \(meeting)")
+            }
+        }
+
         return cell
     }
 }

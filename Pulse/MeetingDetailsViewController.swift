@@ -154,7 +154,6 @@ class MeetingDetailsViewController: UIViewController {
                 ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
                     if let person = person {
                         let managerId = person.objectId
-                        
                         let dictionary: [String: Any] = [
                             "personId": personId, // TODO
                             "managerId": managerId,

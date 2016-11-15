@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable automatic user
         //PFUser.enableAutomaticUser()
         //let defaultACL = PFACL()
-       // PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
+        //PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
         
         // Print out what's currently in current user
         if let currentUser = PFUser.current() {
