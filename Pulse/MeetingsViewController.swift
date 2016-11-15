@@ -18,7 +18,7 @@ class MeetingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Upcoming Meetings"
+        self.title = "Meetings"
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -41,7 +41,7 @@ class MeetingsViewController: UIViewController {
                             if let meetingDateString = post["meetingDate"] as? String,
                                 let meetingDate = dateFormatter.date(from: meetingDateString) {
                                 
-                                if meetingDate >= Date() {
+                                // TODO use this later for Upcoming meetings -- if meetingDate >= Date() {
                                     let dictionary = [
                                         "personId": post["personId"],
                                         "managerId": post["managerId"],
@@ -52,11 +52,11 @@ class MeetingsViewController: UIViewController {
                                     
                                     let meeting = Meeting(dictionary: dictionary)
                                     self.meetings.append(meeting)
-                                }
+                                //}
                             }
                             
                             if let meetingDate = post["meetingDate"] as? Date {
-                                if meetingDate >= Date() {
+                                // TODO if meetingDate >= Date() {
                                     let dictionary = [
                                         "personId": post["personId"],
                                         "managerId": post["managerId"],
@@ -66,7 +66,7 @@ class MeetingsViewController: UIViewController {
                                     
                                     let meeting = Meeting(dictionary: dictionary)
                                     self.meetings.append(meeting)
-                                }
+                                //}
                             }
                         }
                     }
@@ -87,7 +87,7 @@ extension MeetingsViewController: UITableViewDataSource {
             cell.messageLabel.text = "\(personId) (\(meetingDate))"
 
         } else {
-            cell.messageLabel.text = "You have no upcoming meetings"
+            cell.messageLabel.text = "You have no meetings"
         }
         return cell
     }
