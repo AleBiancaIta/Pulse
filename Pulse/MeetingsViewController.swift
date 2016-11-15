@@ -29,7 +29,7 @@ class MeetingsViewController: UIViewController {
             if let person = person {
                 
                 let query = PFQuery(className: "Meetings")
-                let managerId = person["userId"] as! String
+                let managerId = person.objectId! as String
                 query.whereKey("managerId", equalTo: managerId)
                 
                 query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
