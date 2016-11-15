@@ -15,13 +15,13 @@ Here's a picture of the initial wireframe:
 
 The following functionality is completed:
 
-- [] Login page
+- [X] Login page
 
      **required**
-     - [] User must be able to login using their username and password
-     - [] Link to go to sign up page if user does not have an account
+     - [X] User must be able to login using their username and password
+     - [X] Link to go to sign up page if user does not have an account
      - [] Link to go to a page to reset password 
-     - [] User can skip login and use the app anonymously, locally, without signing up     
+     - [X] User can skip login and use the app anonymously, locally, without signing up     
 
      **optional**
      - [] User can login using touch ID
@@ -29,7 +29,7 @@ The following functionality is completed:
 - [] Sign up page
 
      **required**
-     - [] User must be able to sign up for an account  
+     - [X] User must be able to sign up for an account  
 
      **optional**
      - [] User can sign up using Google or Facebook authentication
@@ -40,34 +40,36 @@ The following functionality is completed:
      **required**
      - [] User must be able to reset their password
 
-- [] Home page (dashboard)
+- [] Dashboard 
+     - [ ] Home page
 
-     **required**
-     - [] Contains a setting button - tapping on it should direct user to settings page 
-     - [] Contains a logout button - tapping on it should log user out completely and show the login page
-     - [] Contains a chart showing the history of the team pulse
-     - [x] Contains cards which the user can add, remove, move up, and move down
-     - [x] Card configuration should be added to Parse and obtainable with future logged in use cases
+         **required**
+         - [X] Contains a setting button - tapping on it should direct user to settings page 
+         - [] Contains a chart showing the history of the team pulse
+         - [X] Contains cards which the user can add, remove, move up, and move down
+         - [X] Card configuration should be added to Parse and obtainable with future logged in use cases
 
-     **optional**
-     - [] Make the dashboard graphics interactive, for example: user can tap the chart pin to see pulse details
-     - [] Make the org chart interactive, for example: user can tap a team member to see their details     
-     - [] Allow user to see the same information in List view
-     - [] Include filters, for example: search by date range
-     - [] Contains an org chart showing the pulse with the most recent survey results
+         **optional**
+         - [] Make the dashboard graphics interactive, for example: user can tap the chart pin to see pulse details
+         - [] Make the org chart interactive, for example: user can tap a team member to see their details     
+         - [] Allow user to see the same information in List view
+         - [] Include filters, for example: search by date range
+         - [] Contains an org chart showing the pulse with the most recent survey results
 
-- [] Team module 
+     - [] Team module
 
-     **required**
-     - [] User must be able to see a list of everyone in his/her team and their current status (based on last 1:1)
-     - [] User must be able to add, edit and delete their team members 
-     - [] Selecting a user should direct user to the employee detail page
+         **required**
+         - [X] User must be able to see a list of everyone in his/her team
+         - [] User must be able to see the team members current status (based on last 1:1)
+         - [] User must be able to add, edit and delete their team members 
+             - [X] User must be able to add and edit their team members
+         - [X] Selecting a user should direct user to the employee detail page
 
-     **optional**
-     - [] Implement swipe to delete user
-     - [] User can customize and edit page (similar to cards in the "today" app), for example: add an Upcoming section, ToDo section, etc.
-     - [] Customizable page, for example: add/remove cards
-     - [] Set up ToDos due date and get Notifications/reminders when the due date is coming up
+         **optional**
+         - [] Implement swipe to delete user
+         - [] User can customize and edit page (similar to cards in the "today" app), for example: add an Upcoming section, ToDo section, etc.
+         - [] Customizable page, for example: add/remove cards
+         - [] Set up ToDos due date and get Notifications/reminders when the due date is coming up
 
 - [] Employee detail page
 
@@ -82,18 +84,18 @@ The following functionality is completed:
      **optional**
      - [] User can schedule next 1:1 using calendar date picker and it will send notifications to both user and employee
      - [] Include filters, for example: search by date range     
-     - [] Tap to call team member     
+     - [X] Tap to call team member     
 
 - [] 1:1 page
 
      **required**
      - [] If note does not exist:
-         - [] Contains the pulse questions with radio buttons (3 options: no, neutral, yes)
+         - [X] Contains the pulse questions with radio buttons (3 options: no, neutral, yes)
          - [] Contains controls to add sections: Notes, Photos, ToDos 
      - [] If note exists:
          - [] Must be able to edit historical entries
          - [] Contains controls to edit sections: Notes, Photos, ToDos
-     - [] Clicking on Notes should allow user to enter notes or edit old notes
+     - [X] Clicking on Notes should allow user to enter notes or edit old notes
      - [] Clicking on Photos should open photo picker, allow user to take photos/select existing photos, and save the photo in employee's 1:1 data
      - [] Clicking on ToDos should allow user to add/edit/complete ToDos on a separate page
      - [] Adding ToDos and upcoming meeting in 1:1 notes should sync up to the employee's detail page as well as Team's page     
@@ -107,7 +109,8 @@ The following functionality is completed:
 - [] Settings page 
 
      **required**
-     - [] Ability to edit own user profile, for example: login and password
+     - [X] Ability to edit own user profile, for example: login and password
+     - [X] Contains a logout button - tapping on it should log user out completely and show the login page
 
      **optional**
      - [] Notifications permissions
@@ -129,7 +132,7 @@ The following functionality is completed:
 
 Here's a walkthrough of implemented user stories:
 
-[User stories]()
+[User Stories Sprint 1](http://giphy.com/gifs/l3vQXtADvtwnTsdHO?status=200)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
