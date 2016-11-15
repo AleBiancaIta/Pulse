@@ -106,7 +106,7 @@ class AddTeamMemberViewController: UIViewController {
     
     // THIS FUNCTION SHOULD BE MOVED TO THE "PERSON" CLASS AT SOME POINT
     fileprivate func getPersonFromParseMatchingCurrentUserId(completion: @escaping (PFObject?, Error?) -> ()) {
-        var query = PFQuery(className: "Person")
+        let query = PFQuery(className: "Person")
         query.whereKey(ObjectKeys.Person.userId, equalTo: (PFUser.current()?.objectId)!)
         query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
             if let error = error {

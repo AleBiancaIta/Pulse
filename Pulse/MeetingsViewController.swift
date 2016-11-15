@@ -18,7 +18,7 @@ class MeetingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Meetings"
+        self.title = "Upcoming Meetings"
 
         tableView.dataSource = self
         tableView.delegate = self
@@ -34,41 +34,42 @@ class MeetingsViewController: UIViewController {
                 
                 query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
                     if let posts = posts {
-                        
                         for post in posts {
+                            
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd"
                             if let meetingDateString = post["meetingDate"] as? String,
                                 let meetingDate = dateFormatter.date(from: meetingDateString) {
-                                let dictionary = [
-                                    "personId": post["personId"],
-                                    "managerId": post["managerId"],
-                                    "surveyId": post["surveyId"],
-                                    "meetingDate": meetingDate
-                                ]
                                 
-                                let meeting = Meeting(dictionary: dictionary)
-                                self.meetings.append(meeting)
+                                if meetingDate >= Date() {
+                                    let dictionary = [
+                                        "personId": post["personId"],
+                                        "managerId": post["managerId"],
+                                        "surveyId": post["surveyId"],
+                                        "meetingDate": meetingDate
+                                    ]
+                                    
+                                    let meeting = Meeting(dictionary: dictionary)
+                                    self.meetings.append(meeting)
+                                }
                             }
                             
                             if let meetingDate = post["meetingDate"] as? Date {
-                                let dictionary = [
-                                    "personId": post["personId"],
-                                    "managerId": post["managerId"],
-                                    "surveyId": post["surveyId"],
-                                    "meetingDate": meetingDate
-                                ]
-                                
-                                let meeting = Meeting(dictionary: dictionary)
-                                self.meetings.append(meeting)
+                                if meetingDate >= Date() {
+                                    let dictionary = [
+                                        "personId": post["personId"],
+                                        "managerId": post["managerId"],
+                                        "surveyId": post["surveyId"],
+                                        "meetingDate": meetingDate
+                                    ]
+                                    
+                                    let meeting = Meeting(dictionary: dictionary)
+                                    self.meetings.append(meeting)
+                                }
                             }
                         }
-                        
-                        self.tableView.reloadData()
-                        
-                    } else {
-                        print(error?.localizedDescription)
                     }
+                    self.tableView.reloadData()
                 }
             }
         }
