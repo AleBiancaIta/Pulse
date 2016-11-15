@@ -62,7 +62,8 @@ class MeetingsViewController: UIViewController {
                                         "personId": post["personId"],
                                         "managerId": post["managerId"],
                                         "surveyId": post["surveyId"],
-                                        "meetingDate": meetingDate
+                                        "meetingDate": meetingDate,
+                                        "notes": post["notes"]
                                     ]
                                     
                                     let meeting = Meeting(dictionary: dictionary)

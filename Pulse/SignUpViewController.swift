@@ -58,7 +58,8 @@ class SignUpViewController: UIViewController {
                         if success {
                             // Link Person to newUser
                             let query = PFQuery(className: "Person")
-                            query.whereKey(ObjectKeys.Person.userId, equalTo: newUser.objectId)
+                            let objectId = newUser.objectId! as String
+                            query.whereKey(ObjectKeys.Person.userId, equalTo: objectId)
                             query.findObjectsInBackground(block: { (persons: [PFObject]?, error: Error?) in
                                 if let persons = persons {
                                     let person = persons[0] // there should only be one match since Id is unique
