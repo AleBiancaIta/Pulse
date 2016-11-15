@@ -12,10 +12,9 @@ class Constants: NSObject {
 
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "m", "name": "Meetings", "card_type": "meetings", "page_type": "dashboard"],
-        // TODO optional for now ["id" : "o", "name": "Organizational Chart", "card_type": "org_chart", "page_type": "dashboard"],
-        // TODO optional for now ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
+        ["id" : "g" , "name": "Pulse Graph", "card_type": "pulse_graph", "page_type": "dashboard"],
         ["id" : "t", "name": "Team Members", "card_type": "team", "page_type": "dashboard"],
-        //["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "dashboard"]
+        ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "dashboard"]
     ])
     
     static let meetingCards: [Card] = Card.cardsWithArray(dictionaries: [
@@ -87,6 +86,18 @@ struct ObjectKeys {
     struct User {
         static let objectId = "objectId"
         static let person = "person"
+    }
+    
+    struct Survey {
+        static let objectId = "objectId"
+        static let createdAt = "createdAt"
+        static let updatedAt = "updatedAt"
+        static let surveyDesc1 = "surveyDesc1"
+        static let surveyValueId1 = "surveyValueId1"
+        static let surveyDesc2 = "surveyDesc2"
+        static let surveyValueId2 = "surveyValueId2"
+        static let surveyDesc3 = "surveyDesc3"
+        static let surveyValueId3 = "surveyValueId3"
     }
 }
 

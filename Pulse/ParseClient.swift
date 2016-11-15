@@ -35,9 +35,11 @@ class ParseClient: NSObject {
                     completion(nil, error)
                 } else {
                     if let persons = persons {
-                        let person = persons[0]
-                        //debugPrint("person is \(person)")
-                        completion(person, nil)
+                        if persons.count > 0 {
+                            let person = persons[0]
+                            debugPrint("person is \(person)")
+                            completion(person, nil)
+                        }
                     }
                 }
             })

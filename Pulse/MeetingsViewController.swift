@@ -29,46 +29,48 @@ class MeetingsViewController: UIViewController {
             if let person = person {
                 
                 let query = PFQuery(className: "Meetings")
-                let managerId = person["userId"] as! String
+                let managerId = person.objectId! as String
                 query.whereKey("managerId", equalTo: managerId)
                 
                 query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
                     if let posts = posts {
-                        
                         for post in posts {
+                            
                             let dateFormatter = DateFormatter()
                             dateFormatter.dateFormat = "yyyy-MM-dd"
                             if let meetingDateString = post["meetingDate"] as? String,
                                 let meetingDate = dateFormatter.date(from: meetingDateString) {
-                                let dictionary = [
-                                    "personId": post["personId"],
-                                    "managerId": post["managerId"],
-                                    "surveyId": post["surveyId"],
-                                    "meetingDate": meetingDate
-                                ]
                                 
-                                let meeting = Meeting(dictionary: dictionary)
-                                self.meetings.append(meeting)
+                                // TODO use this later for Upcoming meetings -- if meetingDate >= Date() {
+                                    let dictionary = [
+                                        "personId": post["personId"],
+                                        "managerId": post["managerId"],
+                                        "surveyId": post["surveyId"],
+                                        "meetingDate": meetingDate,
+                                        "notes": post["notes"]
+                                    ]
+                                    
+                                    let meeting = Meeting(dictionary: dictionary)
+                                    self.meetings.append(meeting)
+                                //}
                             }
                             
                             if let meetingDate = post["meetingDate"] as? Date {
-                                let dictionary = [
-                                    "personId": post["personId"],
-                                    "managerId": post["managerId"],
-                                    "surveyId": post["surveyId"],
-                                    "meetingDate": meetingDate
-                                ]
-                                
-                                let meeting = Meeting(dictionary: dictionary)
-                                self.meetings.append(meeting)
+                                // TODO if meetingDate >= Date() {
+                                    let dictionary = [
+                                        "personId": post["personId"],
+                                        "managerId": post["managerId"],
+                                        "surveyId": post["surveyId"],
+                                        "meetingDate": meetingDate
+                                    ]
+                                    
+                                    let meeting = Meeting(dictionary: dictionary)
+                                    self.meetings.append(meeting)
+                                //}
                             }
                         }
-                        
-                        self.tableView.reloadData()
-                        
-                    } else {
-                        print(error?.localizedDescription)
                     }
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -81,10 +83,11 @@ extension MeetingsViewController: UITableViewDataSource {
         if 0 < meetings.count {
             let personId = meetings[indexPath.row].personId // TODO should be person name
             let meetingDate = meetings[indexPath.row].meetingDate
+            cell.accessoryType = .disclosureIndicator
             cell.messageLabel.text = "\(personId) (\(meetingDate))"
 
         } else {
-            cell.messageLabel.text = "No meetings"
+            cell.messageLabel.text = "You have no meetings"
         }
         return cell
     }
@@ -98,5 +101,9 @@ extension MeetingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let viewController = MeetingDetailsViewController()
+        viewController.meeting = meetings[indexPath.row]
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
