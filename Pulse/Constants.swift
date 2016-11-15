@@ -87,6 +87,18 @@ struct ObjectKeys {
         static let objectId = "objectId"
         static let person = "person"
     }
+    
+    struct Survey {
+        static let objectId = "objectId"
+        static let createdAt = "createdAt"
+        static let updatedAt = "updatedAt"
+        static let surveyDesc1 = "surveyDesc1"
+        static let surveyValueId1 = "surveyValueId1"
+        static let surveyDesc2 = "surveyDesc2"
+        static let surveyValueId2 = "surveyValueId2"
+        static let surveyDesc3 = "surveyDesc3"
+        static let surveyValueId3 = "surveyValueId3"
+    }
 }
 
 struct CellReuseIdentifier {

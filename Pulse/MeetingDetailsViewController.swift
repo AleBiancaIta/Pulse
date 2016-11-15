@@ -17,6 +17,7 @@ class MeetingDetailsViewController: UIViewController {
     
     @IBOutlet weak var notesTextView: UITextView!
     
+    // TODO use objectkey.survey to display on labels
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
     @IBOutlet weak var survey1High: UISwitch! // 2
@@ -33,6 +34,7 @@ class MeetingDetailsViewController: UIViewController {
     
     var alertController: UIAlertController?
     var meeting: Meeting!
+    // var survey: Survey!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +60,47 @@ class MeetingDetailsViewController: UIViewController {
         if nil != meeting {
             personTextField.text = meeting.personId
             notesTextView.text = meeting.notes
-            // TODO survey
+            
+            let query = PFQuery(className: "Survey")
+            query.whereKey(ObjectKeys.Survey.objectId, equalTo: meeting.surveyId)
+            query.findObjectsInBackground { (surveys: [PFObject]?, error: Error?) in
+                if let error = error {
+                    print("Unable to find survey associated with survey id, error: \(error.localizedDescription)")
+                } else {
+                    if let surveys = surveys {
+                        if surveys.count > 0 {
+                            let survey = surveys[0]
+                            
+                            let survey1Value = survey[ObjectKeys.Survey.surveyValueId1] as! Int
+                            if survey1Value == 0 {
+                                self.survey1Low.isOn = true
+                            } else if survey1Value == 1 {
+                                self.survey1Med.isOn = true
+                            } else if survey1Value == 2 {
+                                self.survey1High.isOn = true
+                            }
+                            
+                            let survey2Value = survey[ObjectKeys.Survey.surveyValueId2] as! Int
+                            if survey2Value == 0 {
+                                self.survey2Low.isOn = true
+                            } else if survey2Value == 1 {
+                                self.survey2Med.isOn = true
+                            } else if survey2Value == 2 {
+                                self.survey2High.isOn = true
+                            }
+                            
+                            let survey3Value = survey[ObjectKeys.Survey.surveyValueId3] as! Int
+                            if survey3Value == 0 {
+                                self.survey3Low.isOn = true
+                            } else if survey3Value == 1 {
+                                self.survey3Med.isOn = true
+                            } else if survey3Value == 2 {
+                                self.survey3High.isOn = true
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
     
