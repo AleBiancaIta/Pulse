@@ -26,7 +26,6 @@ class DashboardViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
 
-        tableView.register(UINib(nibName: "CardCellNib", bundle: nil), forCellReuseIdentifier: "CardCell")
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
         alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
@@ -106,36 +105,36 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
 extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.section == numberOfSections(in: tableView) - 1 {
+        if indexPath.row == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
             cell.message = "Tap here to manage cards"
             return cell
         
         // The actual cards
         } else {
-            /*let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as! CardCell
-            cell.delegate = self
-            cell.card = selectedCards[indexPath.section]
-            return cell*/
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TempCell", for: indexPath)
-            cell.textLabel?.text = selectedCards[indexPath.section].name
-            return cell
+            switch selectedCards[indexPath.row].id! {
+            case "t":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC")
+                self.addChildViewController(vc)
+                cell.contentView.addSubview(vc.view)
+                return cell
+
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                for subview in cell.contentView.subviews  {
+                    subview.removeFromSuperview() // Reset subviews
+                }
+                cell.textLabel?.text = selectedCards[indexPath.row].name
+                return cell
+            }
+            
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
         return selectedCards.count + 1
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard selectedCards.count > section else {
-            return nil
-        }
-        return selectedCards[section].name
     }
 }
 
@@ -143,41 +142,28 @@ extension DashboardViewController: UITableViewDataSource {
 
 extension DashboardViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        //guard nil != self.tableView(tableView, titleForHeaderInSection: section) else {
-            return 0
-        //}
-        //return UITableViewAutomaticDimension
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        guard indexPath.row < selectedCards.count else {
+            return 44
+        }
+        
+        switch selectedCards[indexPath.row].id! {
+        case "t":
+            return 240
+        default:
+            return 44
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == numberOfSections(in: tableView) - 1 {
+        if indexPath.row == selectedCards.count {
             onAddCard()
-            return
         }
-        
-        if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Meetings" {
-            navigationController?.pushViewController(MeetingsViewController(), animated: true)
-        } else if self.tableView(tableView, titleForHeaderInSection: indexPath.section) == "Team Members"{
-            let storyboard = UIStoryboard(name: "Team", bundle: nil)
-            let viewController = storyboard.instantiateInitialViewController()
-            navigationController?.pushViewController(viewController!, animated: true)
-        }
-        
-        /*if let cell = tableView.cellForRow(at: indexPath) as? CardCell,
-            let card = cell.card,
-            let cardType = card.cardType {
-            
-            switch cardType {
-            /* TODO case "meetings":
-                navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)*/
-            default:
-                break
-            }
-        }*/
     }
 }
 
@@ -213,6 +199,7 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
         // Insert new card at the top of the table view
         selectedCards.insert(card, at: 0)
         tableView.reloadData()
+        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
     
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card) {
@@ -243,12 +230,13 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
             }
         }
         tableView.reloadData()
+        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
 }
 
 // MARK: - CardCellDelegate
 
-extension DashboardViewController: CardCellDelegate {
+/*extension DashboardViewController: CardCellDelegate {
     func cardCell(cardCell: CardCell, didMoveUp card: Card) {
         for (index, dashboardCard) in selectedCards.enumerated() {
             if dashboardCard.id == card.id {
@@ -365,4 +353,4 @@ extension DashboardViewController: CardCellDelegate {
         }
         tableView.reloadData()
     }
-}
+}*/

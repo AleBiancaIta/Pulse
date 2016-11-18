@@ -314,13 +314,15 @@ extension MeetingDetailsViewController: UITableViewDataSource {
         
             // TODO replace the cells with the actual view
         } else {
-            var cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as? CardCell
+            /*var cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as? CardCell
             if nil == cell {
                 cell = (UITableViewCell(style: .default, reuseIdentifier: "CardCell") as? CardCell)!
             }
             cell?.delegate = self
             cell?.card = MeetingDetailsViewController.cards[indexPath.section]
-            return cell!
+            return cell!*/
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+            return cell
         }
         
     }
@@ -335,7 +337,7 @@ extension MeetingDetailsViewController: UITableViewDelegate {
 
 // MARK: - CardCellDelegate
 
-extension MeetingDetailsViewController: CardCellDelegate {
+/*extension MeetingDetailsViewController: CardCellDelegate {
     func cardCell(cardCell: CardCell, didMoveUp card: Card) {
         for (index, meetingCard) in MeetingDetailsViewController.cards.enumerated() {
             if meetingCard.id == card.id {
@@ -385,5 +387,5 @@ extension MeetingDetailsViewController: CardCellDelegate {
         }
         tableView.reloadData()
     }
-}
+}*/
 
