@@ -47,8 +47,6 @@
 		67BCA1531DD9964100E7EE74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Main.storyboard */; };
 		67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* MessageCell.swift */; };
 		67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */; };
-		67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6271DD4F16800B6DE19 /* CardCell.swift */; };
-		67D8D62A1DD4F16800B6DE19 /* CardCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */; };
 		67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6491DD56D9800B6DE19 /* Constants.swift */; };
 		67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */; };
 		67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */; };
@@ -101,8 +99,6 @@
 		67BCA1501DD6E66100E7EE74 /* MeetingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingsViewController.xib; sourceTree = "<group>"; };
 		67D8D6211DD4E28900B6DE19 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
 		67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCellNib.xib; sourceTree = "<group>"; };
-		67D8D6271DD4F16800B6DE19 /* CardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
-		67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardCellNib.xib; sourceTree = "<group>"; };
 		67D8D6491DD56D9800B6DE19 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailsViewController.swift; sourceTree = "<group>"; };
 		67D8D65A1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingDetailsViewController.xib; sourceTree = "<group>"; };
@@ -177,8 +173,6 @@
 			children = (
 				67D8D6211DD4E28900B6DE19 /* MessageCell.swift */,
 				67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */,
-				67D8D6271DD4F16800B6DE19 /* CardCell.swift */,
-				67D8D6281DD4F16800B6DE19 /* CardCellNib.xib */,
 				437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */,
 				437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */,
 				437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */,
@@ -341,7 +335,6 @@
 				4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */,
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
 				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
-				67D8D62A1DD4F16800B6DE19 /* CardCellNib.xib in Resources */,
 				437DE0581DD936C200B08988 /* Team.storyboard in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
 				67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */,
@@ -408,7 +401,6 @@
 			files = (
 				67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */,
 				437DE0621DD9648000B08988 /* Meeting.swift in Sources */,
-				67D8D6291DD4F16800B6DE19 /* CardCell.swift in Sources */,
 				71ACDE651DD9534A005D85DE /* ImageViewController.swift in Sources */,
 				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
