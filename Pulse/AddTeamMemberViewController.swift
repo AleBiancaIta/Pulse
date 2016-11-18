@@ -94,7 +94,7 @@ class AddTeamMemberViewController: UIViewController {
                     // Position Id is hardcoded for now
                     dictionary = [ObjectKeys.Person.firstName: self.firstNameTextField.text!,
                                   ObjectKeys.Person.lastName: lastName,
-                                  ObjectKeys.Person.positionId: "2",
+                                  ObjectKeys.Person.positionId: "1",
                                   ObjectKeys.Person.email: self.emailTextField.text!,
                                   ObjectKeys.Person.phone: phone,
                                   ObjectKeys.Person.managerId: person.objectId!]

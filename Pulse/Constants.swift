@@ -24,7 +24,7 @@ class Constants: NSObject {
     ])
     
     //static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],["positionId": "2", "description": "Individual Contributor"]]
-    static let positions: [String: String] = ["1": "Manager", "2": "Individual Contributor"]
+    static let positions: [String: String] = ["1": "Individual Contributor", "2": "Manager", "3": "Director", "4": "Vice President", "5": "CEO"]
 }
 
 struct StoryboardID {
@@ -52,6 +52,7 @@ struct ObjectKeys {
 		static let photo = "photo"
         static let selectedCards = "selectedCards"
         static let deletedAt = "deletedAt"
+        static let companyId = "companyId"
     }
     
     struct Meeting {

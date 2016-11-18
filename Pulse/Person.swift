@@ -23,12 +23,13 @@ class Person: NSObject {
     var deletedAt: Date?
 	var photo: Data?
     var pfObject: PFObject? // TODO: need to figure out how to do this better
+    var companyId: String?
 
     // TODO - this needs to be changed later since positionId is not always 2
 	init(firstName: String, lastName: String) {
 		self.firstName = firstName
 		self.lastName = lastName
-		self.positionId = "2"
+		self.positionId = "1"
 	}
 
     init(dictionary: [String: Any]) {

@@ -115,10 +115,11 @@ class SignUpViewController: UIViewController {
         if let userId = PFUser.current()?.objectId {
             dictionary = [ObjectKeys.Person.firstName: firstNameTextField.text!,
                           ObjectKeys.Person.lastName: lastName,
-                          ObjectKeys.Person.positionId: "1",
+                          ObjectKeys.Person.positionId: "2",
                           ObjectKeys.Person.email: emailTextField.text!,
                           ObjectKeys.Person.phone: phone,
-                          ObjectKeys.Person.userId: userId]
+                          ObjectKeys.Person.userId: userId,
+                          ObjectKeys.Person.companyId: "Pulse2"]
         }
         return dictionary
     }
