@@ -33,6 +33,8 @@ class LoginSignUpViewController: UIViewController {
 //        self.present(loginVC, animated: true, completion: nil)
 //    }
     
+    
+    /*
     @IBAction func onSkipButtonTap(_ sender: UIButton) {
         // if first time login, get the device ID
         // subsequent login, pull the data from Parse using device ID
@@ -66,5 +68,5 @@ class LoginSignUpViewController: UIViewController {
 //        debugPrint("user is \(PFUser.current()), username is \(PFUser.current()?.username), id is \(PFUser.current()?.objectId)")
 //        
 
-    }
+    }*/
 }

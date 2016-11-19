@@ -18,7 +18,8 @@ class SettingsViewController: UIViewController {
     fileprivate let updateProfileSegue = "updateProfileSegue"
     
     // Note: Sign Up is for anonymous user who wants to sign up for the account
-    fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
+    //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
+    fileprivate let settingsContent = ["User Info", "Change Password", "Log Out"]
     
     @IBOutlet var settingsTableView: UITableView!
     var user: PFUser! = PFUser.current()
@@ -57,6 +58,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsContentCell, for: indexPath)
             cell.textLabel?.text = settingsContent[indexPath.row]
             
+            /*
             if indexPath.row == 0 || indexPath.row == 1 {
                 // only enable if it's NOT anonymous user
                 if !(PFAnonymousUtils.isLinked(with: user)) {
@@ -75,7 +77,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     cell.isUserInteractionEnabled = false
                     cell.textLabel?.textColor = UIColor.lightGray
                 }
-            }
+            }*/
             return cell
         }
     }
@@ -92,10 +94,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 1 { // Change Password
                 debugPrint("did select row Change Password")
                 performSegue(withIdentifier: changePasswordSegue, sender: nil)
-            } else if indexPath.row == 2 { // Sign Up
-                debugPrint("did select row Sign Up")
-                self.segueToStoryboard(id: StoryboardID.signupVC)
-            } else if indexPath.row == 3 { // Log Out
+            //} else if indexPath.row == 2 { // Sign Up
+              //  debugPrint("did select row Sign Up")
+              //  self.segueToStoryboard(id: StoryboardID.signupVC)
+            } else if indexPath.row == 2 { // Log Out
                 logOut()
             }
         }
@@ -105,6 +107,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 
     fileprivate func logOut() {
         
+        /*
         // If anonymous user, give them a heads up that their data will be deleted if they don't sign up
         if PFAnonymousUtils.isLinked(with: user) {
             debugPrint("user is anonymous, give them a warning")
@@ -126,7 +129,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     })
                 }
             })
-        } else {
+        } else { */
             // If not anonymous, log out user and take them back to the sign up page
             PFUser.logOutInBackground(block: { (error: Error?) in
                 if let error = error {
@@ -136,7 +139,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     self.segueToStoryboard(id: StoryboardID.loginSignupVC)
                 }
             })
-        }
+        //}
     }
 
     fileprivate func segueToStoryboard(id: String) {

@@ -57,23 +57,14 @@
                                     <segue destination="YdN-Yd-wjs" kind="presentation" id="7lI-04-9Bb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j2g-yc-uhs">
-                                <rect key="frame" x="172.5" y="589" width="30" height="30"/>
-                                <state key="normal" title="Skip"/>
-                                <connections>
-                                    <action selector="onSkipButtonTap:" destination="Wt5-AZ-fui" eventType="touchUpInside" id="hPV-xq-31w"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rh5-li-nPL" firstAttribute="top" secondItem="m7J-aK-oy5" secondAttribute="bottom" constant="46" id="3xM-Iy-cQR"/>
-                            <constraint firstItem="j2g-yc-uhs" firstAttribute="centerX" secondItem="u1o-uO-cWC" secondAttribute="centerX" id="Pdt-NL-M9O"/>
                             <constraint firstItem="m7J-aK-oy5" firstAttribute="centerX" secondItem="u1o-uO-cWC" secondAttribute="centerX" id="YQx-5z-42E"/>
                             <constraint firstAttribute="trailingMargin" secondItem="vjk-1U-cWl" secondAttribute="trailing" constant="52" id="aNY-5K-Pmr"/>
                             <constraint firstItem="vjk-1U-cWl" firstAttribute="top" secondItem="m7J-aK-oy5" secondAttribute="bottom" constant="46" id="bR5-S0-VKM"/>
                             <constraint firstItem="m7J-aK-oy5" firstAttribute="top" secondItem="9ji-Nd-EpE" secondAttribute="bottom" constant="133" id="kiW-oO-bQr"/>
-                            <constraint firstItem="VS3-7I-sv7" firstAttribute="top" secondItem="j2g-yc-uhs" secondAttribute="bottom" constant="48" id="nxh-qh-iGh"/>
                             <constraint firstItem="rh5-li-nPL" firstAttribute="leading" secondItem="u1o-uO-cWC" secondAttribute="leadingMargin" constant="51" id="pGy-X0-OaY"/>
                         </constraints>
                     </view>
@@ -166,7 +157,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z2g-eh-Xk0" id="9fQ-cz-nFC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-Cs-g9e">
@@ -212,11 +203,11 @@
                                 <rect key="frame" x="0.0" y="188" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i6Q-SB-APD" id="9FX-de-z1W">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="46.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="46"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aqd-fE-BF2">
-                                            <rect key="frame" x="15" y="0.0" width="325" height="46.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="325" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -600,6 +591,6 @@
         <image name="PulseLogo" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EVd-po-Ciy"/>
+        <segue reference="7lI-04-9Bb"/>
     </inferredMetricsTieBreakers>
 </document>
