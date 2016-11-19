@@ -66,7 +66,7 @@ class SignUpViewController: UIViewController {
                 if let error = error {
                     debugPrint("Error in signing up new user: \(error.localizedDescription)")
                     SVProgressHUD.dismiss()
-                    self.showAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
+                    self.ABIShowAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
                 } else {
                     debugPrint("User registered successfully")
                 
@@ -93,13 +93,13 @@ class SignUpViewController: UIViewController {
                                         } else {
                                             print("saved successfully: \(newUser)")
                                             SVProgressHUD.dismiss()
-                                            self.showAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
+                                            self.ABIShowAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
                                                 
                                                 if alertAction.title == "OK" {
                                                     // Run login the background and segue to dashboard vc
                                                     PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
                                                         if let error = error {
-                                                            self.showAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                                                            self.ABIShowAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
                                                         } else {
                                                             debugPrint("User logged in successfully after sign up")
                                                             self.segueToDashboardVC()
@@ -163,43 +163,43 @@ class SignUpViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if email is empty
         guard !((emailTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if password is empty
         guard !((passwordTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if confirm password is empty
         guard !((confirmPasswordTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Confirm password field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Confirm password field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check to make sure password == confirm password
         guard passwordTextField.text == confirmPasswordTextField.text else {
-            showAlert(title: "Error", message: "Password and confirm password must be the same", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Password and confirm password must be the same", sender: nil, handler: nil)
             return false
         }
         
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if company name field is empty
         guard !((companyNameTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Company name field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Company name field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if position field is empty
         guard !((positionTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Position field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Position field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
@@ -257,19 +257,20 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        //let chosenImageData = NSData(data: UIImagePNGRepresentation(chosenImage)!)
-        //let imageSize = chosenImageData.length
+        let chosenImageData = UIImagePNGRepresentation(chosenImage)!
+        let imageSize = (chosenImageData as NSData).length
         
         profileImageView.contentMode = .scaleAspectFit
         profileImageView.image = chosenImage
         profileImageView.layer.cornerRadius = 3
         profileImageView.clipsToBounds = true
         
-        let scaledImage = scaleImageWith(newImage: chosenImage, newSize: CGSize(width: 120, height: 120))
-        photoData = UIImagePNGRepresentation(scaledImage)
+        //let scaledImage = scaleImageWith(newImage: chosenImage, newSize: CGSize(width: 120, height: 120))
+        let scaledImage = chosenImage.ABIResizeWith(percentage: 0.1)
+        photoData = UIImagePNGRepresentation(scaledImage!)
         
         //let photoData2 = NSData(data: photoData!)
-        //let photoSize = photoData2.length
+        let photoSize = (photoData as! NSData).length
         
         dismiss(animated: true, completion: nil)
     }
@@ -278,10 +279,11 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true, completion: nil)
     }
     
-    func scaleImageWith(newImage:UIImage, newSize:CGSize) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        newImage.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-        UIGraphicsEndImageContext()
-        return newImage
-    }
+//    func scaleImageWith(newImage:UIImage, newSize:CGSize) -> UIImage {
+//        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+//        newImage.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+//        UIGraphicsEndImageContext()
+//        return newImage
+//    }
 }
+

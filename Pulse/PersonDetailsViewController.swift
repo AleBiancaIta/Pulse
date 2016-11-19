@@ -141,19 +141,19 @@ class PersonDetailsViewController: UIViewController {
 
 	func isValid() -> Bool {
 		if (firstNameTextField.text?.isEmpty)! {
-			showAlert(title: "Error!",
+			ABIShowAlert(title: "Error!",
 			          message: "First Name cannot be empty", sender: nil, handler: nil)
 			return false
 		}
 
 		if (lastNameTextField.text?.isEmpty)! {
-			showAlert(title: "Error!",
+			ABIShowAlert(title: "Error!",
 			          message: "Last Name cannot be empty", sender: nil, handler: nil)
 			return false
 		}
 
 		if (emailTextField.text?.isEmpty)! {
-			showAlert(title: "Error!",
+			ABIShowAlert(title: "Error!",
 			          message: "Email cannot be empty", sender: nil, handler: nil)
 			return false
 		}
@@ -203,11 +203,11 @@ class PersonDetailsViewController: UIViewController {
 
             pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
                 if success {
-                    self.showAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+                    self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
 						self.navigationController?.popViewController(animated: true)
                     })
                 } else {
-                    self.showAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+                    self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
                 }
             })
         } else {
@@ -226,10 +226,13 @@ class PersonDetailsViewController: UIViewController {
 
 					Person.savePersonToParse(person: self.person!) {
                         (success: Bool, error: Error?) in
-                        NSLog("Created ok!")
-                        
-                        self.navigationController?.popViewController(animated: true)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+                        if let error = error {
+                            debugPrint("Error in adding team member: \(error.localizedDescription)")
+                        } else {
+                            NSLog("Created ok!")
+                            self.navigationController?.popViewController(animated: true)
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+                        }
                     }
                 }
             })

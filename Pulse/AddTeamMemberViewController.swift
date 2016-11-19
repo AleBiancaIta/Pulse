@@ -44,13 +44,13 @@ class AddTeamMemberViewController: UIViewController {
                         let person = Person(dictionary: dictionary)
                         Person.savePersonToParse(person: person, withCompletion: { (success: Bool, error: Error?) in
                             if success {
-                                self.showAlert(title: "Success", message: "Successfully adding \(person.firstName) to the team list", sender: nil, handler: { (alertAction: UIAlertAction) in
+                                self.ABIShowAlert(title: "Success", message: "Successfully adding \(person.firstName) to the team list", sender: nil, handler: { (alertAction: UIAlertAction) in
                                     self.dismiss(animated: true, completion: nil)
                                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
                                 })
                             } else {
                                 if let error = error {
-                                    self.showAlert(title: "Error", message: "Failed with error: \(error.localizedDescription). Please try again later", sender: nil, handler: nil)
+                                    self.ABIShowAlert(title: "Error", message: "Failed with error: \(error.localizedDescription). Please try again later", sender: nil, handler: nil)
                                 }
                             }
                         })
@@ -65,13 +65,13 @@ class AddTeamMemberViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if email is empty
         guard !((emailTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
             return false
         }
         

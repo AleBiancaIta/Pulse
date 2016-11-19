@@ -47,7 +47,7 @@ class TeamListViewController: UIViewController {
     }
     
     @IBAction func onAddButtonTap(_ sender: UIButton) {
-		showPersonViewController(person: nil)
+		ABIShowPersonViewController(person: nil)
     }
     
     // MARK: - deinit

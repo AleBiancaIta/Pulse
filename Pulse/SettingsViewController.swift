@@ -108,7 +108,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         // If anonymous user, give them a heads up that their data will be deleted if they don't sign up
         if PFAnonymousUtils.isLinked(with: user) {
             debugPrint("user is anonymous, give them a warning")
-            showAlertWithActions(title: "Alert", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
+            ABIShowAlertWithActions(title: "Alert", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
                 if alertAction1.title == "Sign Up" {
                     debugPrint("Sign Up is being clicked")
                     self.segueToStoryboard(id: StoryboardID.signupVC)

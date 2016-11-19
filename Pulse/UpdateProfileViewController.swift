@@ -35,7 +35,7 @@ class UpdateProfileViewController: UIViewController {
             
             PFUser.logInWithUsername(inBackground: user.username!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
                 if let error = error {
-                    self.showAlert(title: "Error", message: "Your password is incorrect: \(error.localizedDescription)", sender: nil, handler: nil)
+                    self.ABIShowAlert(title: "Error", message: "Your password is incorrect: \(error.localizedDescription)", sender: nil, handler: nil)
                 } else {
                     self.person[ObjectKeys.Person.firstName] = self.firstNameTextField.text
                     self.person[ObjectKeys.Person.lastName] = lastName
@@ -44,11 +44,11 @@ class UpdateProfileViewController: UIViewController {
                     
                     self.person.saveInBackground(block: { (success: Bool, error: Error?) in
                         if success {
-                            self.showAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+                            self.ABIShowAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
                                 let _ = self.navigationController?.popViewController(animated: true)
                             })
                         } else {
-                            self.showAlert(title: "Error", message: "Unable to update user profile with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+                            self.ABIShowAlert(title: "Error", message: "Unable to update user profile with error: \(error?.localizedDescription)", sender: nil, handler: nil)
                         }
                     })
                 }
@@ -98,19 +98,19 @@ class UpdateProfileViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if password is empty
         guard !((passwordTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
             return false
         }
         
         // Check if email is empty
         guard !((emailTextField.text?.isEmpty)!) else {
-            showAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
+            ABIShowAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
             return false
         }
         

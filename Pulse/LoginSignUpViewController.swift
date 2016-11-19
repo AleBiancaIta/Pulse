@@ -46,7 +46,7 @@ class LoginSignUpViewController: UIViewController {
 
         PFAnonymousUtils.logIn { (user: PFUser?, error: Error?) in
             if let error = error {
-                self.showAlert(title: "Error", message: "Failed to log in anonymously: \(error.localizedDescription)", sender: nil, handler: nil)
+                self.ABIShowAlert(title: "Error", message: "Failed to log in anonymously: \(error.localizedDescription)", sender: nil, handler: nil)
             } else {
                 debugPrint("Anonymous user logged in")
                 debugPrint("Anonymous user is \(PFUser.current()), username is \(PFUser.current()?.username), id is \(PFUser.current()?.objectId)")

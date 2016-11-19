@@ -40,7 +40,7 @@ class TeamCollectionViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func onAddButtonTap(_ sender: UIButton) {
-		showPersonViewController(person: nil)
+		ABIShowPersonViewController(person: nil)
     }
     
     // MARK: - deinit
