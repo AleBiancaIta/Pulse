@@ -34,6 +34,7 @@
 		437DE0671DD9A7FF00B08988 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0661DD9A7FF00B08988 /* ParseClient.swift */; };
 		437DE06A1DD9C40600B08988 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */; };
 		437DE06B1DD9C40600B08988 /* TeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */; };
+		43ED9E2D1DDFB0A200AB49E1 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED9E2C1DDFB0A200AB49E1 /* Company.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		672A891F1DDA9B6400935085 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A891E1DDA9B6400935085 /* Survey.swift */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
@@ -84,6 +85,7 @@
 		437DE0661DD9A7FF00B08988 /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamTableViewCell.xib; sourceTree = "<group>"; };
+		43ED9E2C1DDFB0A200AB49E1 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		672A891E1DDA9B6400935085 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				678802A71DD44A4C001338A8 /* Card.swift */,
+				43ED9E2C1DDFB0A200AB49E1 /* Company.swift */,
 				431804AE1DD7F2CC00B279C6 /* Person.swift */,
 				437DE0611DD9648000B08988 /* Meeting.swift */,
 				672A891E1DDA9B6400935085 /* Survey.swift */,
@@ -429,6 +432,7 @@
 				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,
 				437DE04B1DD90F0100B08988 /* TeamCollectionCell.swift in Sources */,
 				437DE05A1DD9371800B08988 /* TeamCollectionViewController.swift in Sources */,
+				43ED9E2D1DDFB0A200AB49E1 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

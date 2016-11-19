@@ -66,12 +66,11 @@ class ParseClient: NSObject {
     }
     
     // Order descending
-    
     func fetchMeetingsFor(personId: String, managerId: String, orderBy: String?, limit: Int?, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
         
         // TODO: Need to filter out deleted meetings at some point
         
-        var query = PFQuery(className: "Meetings")
+        let query = PFQuery(className: "Meetings")
         
 //        if let predicate = predicate {
 //            query = PFQuery(className: "Meetings", predicate: predicate)
@@ -98,6 +97,28 @@ class ParseClient: NSObject {
                 if let meetings = meetings {
                     debugPrint("Find meetings, \(meetings.count)")
                     completion(meetings, nil)
+                }
+            }
+        }
+    }
+    
+    func createNewCompany(company: Company, completion: PFBooleanResultBlock?) {
+        let parseCompany = PFObject(className: "Company")
+        parseCompany[ObjectKeys.Company.companyName] = company.companyName
+        parseCompany.saveInBackground(block: completion)
+    }
+    
+    func fetchCompaniesFor(company: Company, completion: @escaping ([PFObject]?, Error?) -> ()) {
+        let query = PFQuery(className: "Company")
+        query.whereKey(ObjectKeys.Company.companyName, equalTo: company.companyName)
+        query.findObjectsInBackground { (companies: [PFObject]?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to fetch companies for company: \(company.companyName)")
+                completion(nil, error)
+            } else {
+                if let companies = companies {
+                    debugPrint("Query returns \(companies.count) companies")
+                    completion(companies, nil)
                 }
             }
         }

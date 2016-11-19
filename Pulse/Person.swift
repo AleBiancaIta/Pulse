@@ -53,6 +53,7 @@ class Person: NSObject {
         selectedCards = dictionary[ObjectKeys.Person.selectedCards] as? String
         deletedAt = dictionary[ObjectKeys.Person.deletedAt] as? Date
 		photo = dictionary[ObjectKeys.Person.photo] as? Data
+        companyId = dictionary[ObjectKeys.Person.companyId] as? String
     }
 
     class func savePersonToParse(person: Person, withCompletion completion: PFBooleanResultBlock?) {
@@ -99,6 +100,10 @@ class Person: NSObject {
         
         if let photo = person.photo {
             parsePerson[ObjectKeys.Person.photo] = PFFile(data: photo)
+        }
+        
+        if let companyId = person.companyId {
+            parsePerson[ObjectKeys.Person.companyId] = companyId
         }
         
         parsePerson.saveInBackground(block: completion)
