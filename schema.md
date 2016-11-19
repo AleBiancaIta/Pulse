@@ -66,6 +66,8 @@ This is the schema that currently reflects what's in Heroku/Parse.
 - phone: string (Nullable)
 - managerId: string (Nullable) (FK to Person) -> if the Person is an Individual Contributor, this field will be populated; otherwise, it's null
 - userId: string (Nullable) (FK to _User) -> if the Person is also the user of the app (i.e. manager), this field will store the userId of the current app user
+- companyId: string
+- photo: PFFile (Nullable)
 - photoUrlString: string (Nullable)
 - selectedCards: string (Nullable)
 - deletedAt: date (Nullable)
