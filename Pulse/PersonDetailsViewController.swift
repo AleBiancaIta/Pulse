@@ -226,13 +226,10 @@ class PersonDetailsViewController: UIViewController {
 
 					Person.savePersonToParse(person: self.person!) {
                         (success: Bool, error: Error?) in
-                        if let error = error {
-                            debugPrint("Error in adding team member: \(error.localizedDescription)")
-                        } else {
-                            NSLog("Created ok!")
-                            self.navigationController?.popViewController(animated: true)
-                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
-                        }
+                        NSLog("Created ok!")
+                        
+                        self.navigationController?.popViewController(animated: true)
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
                     }
                 }
             })
