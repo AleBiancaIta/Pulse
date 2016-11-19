@@ -266,7 +266,7 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
         profileImageView.clipsToBounds = true
         
         //let scaledImage = scaleImageWith(newImage: chosenImage, newSize: CGSize(width: 120, height: 120))
-        let scaledImage = chosenImage.ABIResizeWith(percentage: 0.1)
+        let scaledImage = chosenImage.ABIResizeWith(percentage: 0.01)
         photoData = UIImagePNGRepresentation(scaledImage!)
         
         //let photoData2 = NSData(data: photoData!)
