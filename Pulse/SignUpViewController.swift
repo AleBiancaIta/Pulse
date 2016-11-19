@@ -25,15 +25,19 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var companyNameTextField: UITextField!
     @IBOutlet weak var positionTextField: UITextField!
     
-    let imagePicker = UIImagePickerController()
-    var photoData: Data?
+    //let imagePicker = UIImagePickerController()
+    //var photoData: Data?
     var person: Person!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initImage()
+        //Default photo for now
+        profileImageView.image = UIImage(named: "DefaultPhoto")
+        
+        //initImage()
     }
     
+    /*
     // MARK: - Initializations
     
     func initImage() {
@@ -42,7 +46,7 @@ class SignUpViewController: UIViewController {
         profileImageView.layer.cornerRadius = 3
         profileImageView.clipsToBounds = true
         profileImageView.image = UIImage(named: "DefaultPhoto")
-    }
+    }*/
     
     // MARK: - Actions
     
@@ -75,7 +79,7 @@ class SignUpViewController: UIViewController {
                     
                     // Create a Person object and save it to Parse
                     self.person = Person(dictionary: dictionary)
-                    self.person.photo = self.photoData
+                    //self.person.photo = self.photoData
 					Person.savePersonToParse(person: self.person) { (success: Bool, error: Error?) in
                         if success {
                             // Link Person to newUser
@@ -209,9 +213,11 @@ class SignUpViewController: UIViewController {
     // MARK: - Image
     
     @IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
-        showAlertAction()
+        //showAlertAction()
     }
+}
     
+/*
     func showAlertAction() {
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -248,8 +254,9 @@ class SignUpViewController: UIViewController {
         present(imagePicker, animated: true, completion: nil)
     }
     
-}
+}*/
 
+/*
 // MARK: - UIImagePickerControllerDelegate
 
 extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -285,5 +292,5 @@ extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationCo
 //        UIGraphicsEndImageContext()
 //        return newImage
 //    }
-}
+}*/
 

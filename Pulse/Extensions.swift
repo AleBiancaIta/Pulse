@@ -44,6 +44,7 @@ extension UIApplication {
 	}
 }
 
+/*
 extension UIImage {
     
     func ABIResizeWith(percentage: CGFloat) -> UIImage? {
@@ -68,6 +69,6 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return result
     }
-}
+}*/
 
 

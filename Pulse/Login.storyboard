@@ -166,7 +166,7 @@
                                 <rect key="frame" x="0.0" y="56" width="375" height="132"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z2g-eh-Xk0" id="9fQ-cz-nFC">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="132"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="jPE-Cs-g9e">
@@ -212,11 +212,11 @@
                                 <rect key="frame" x="0.0" y="188" width="375" height="47"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i6Q-SB-APD" id="9FX-de-z1W">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="46"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="46.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="aqd-fE-BF2">
-                                            <rect key="frame" x="15" y="0.0" width="325" height="46"/>
+                                            <rect key="frame" x="15" y="0.0" width="325" height="46.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
@@ -590,11 +590,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHF-Z0-DBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="wN8-Ft-sK0">
-                    <connections>
-                        <action selector="didTapProfileImageView:" destination="Ea4-eZ-k3f" id="nIX-if-xJ6"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="wN8-Ft-sK0"/>
             </objects>
             <point key="canvasLocation" x="312.80000000000001" y="-466.41679160419795"/>
         </scene>
