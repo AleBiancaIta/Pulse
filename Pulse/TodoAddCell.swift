@@ -8,15 +8,22 @@
 
 import UIKit
 
+@objc protocol TodoAddCellDelegate {
+    @objc optional func todoAddCell(_ todoAddCell: TodoAddCell, todoString: String)
+}
+
 class TodoAddCell: UITableViewCell {
     
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var todoTextField: UITextField!
     
+    weak var delegate: TodoAddCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         todoTextField.placeholder = "Add a follow-up item..."
         configureCellBackgroundView()
+        todoTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -33,6 +40,24 @@ class TodoAddCell: UITableViewCell {
         cellBackgroundView.layer.shadowColor = UIColor.black.cgColor
         cellBackgroundView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
     }
+}
 
+extension TodoAddCell: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
+        return true
+    }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.resignFirstResponder()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.resignFirstResponder()
+        if !((todoTextField.text?.isEmpty)!) {
+            delegate?.todoAddCell?(self, todoString: todoTextField.text!)
+            todoTextField.text = ""
+        }
+        return true
+    }   
 }

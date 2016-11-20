@@ -31,20 +31,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let currentUser = PFUser.current()
         debugPrint("in app delegate, current user is \(currentUser)")
 
-        // For testing Team only
-        if currentUser != nil {
-            let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
-            let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
-            self.window?.rootViewController = dashboardNavVC
-            debugPrint("current user inside the appDelegate \(currentUser)")
-        }
-//
 //        if currentUser != nil {
 //            let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
 //            let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
 //            self.window?.rootViewController = dashboardNavVC
 //            debugPrint("current user inside the appDelegate \(currentUser)")
-//        } // else - Login view is already set up as initial vc so we don't have to do anything
+//        }
+
+        // For testing Todo only
+        if currentUser != nil {
+            let storyboard = UIStoryboard.init(name: "Todo", bundle: nil)
+            let todoVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoVC)
+            self.window?.rootViewController = todoVC
+        } // else - Login view is already set up as initial vc so we don't have to do anything
         
         // Enable automatic user
         //PFUser.enableAutomaticUser()

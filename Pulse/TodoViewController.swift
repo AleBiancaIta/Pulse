@@ -14,8 +14,9 @@ enum CellTypes: Int {
 }
 
 enum ViewTypes: String {
-    case dashboard = "Dashboard"
-    case employeeDetail = "Employee Detail"
+    case dashboard = "Dashboard View"
+    case employeeDetail = "Employee Detail View"
+    case meeting = "Meeting View"
 }
 
 class TodoViewController: UIViewController {
@@ -23,13 +24,19 @@ class TodoViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    
     fileprivate let CellSections = ["Add Todo", "List Todo", "Show Completed"]
-    var todoItems: [PFObject]!
+    fileprivate let parseClient = ParseClient.sharedInstance()
+    
+    var todoItems = [PFObject]()
+    var viewTypes: ViewTypes! = .dashboard // FOR TESTING ONLY
+    var currentPerson: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellNibs()
         configureRowHeight()
+        getCurrentPerson()
     }
 
     // MARK: - Helpers
@@ -43,6 +50,20 @@ class TodoViewController: UIViewController {
         tableView.register(UINib(nibName: "TodoAddCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoAddCell)
         tableView.register(UINib(nibName: "TodoListCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoListCell)
         tableView.register(UINib(nibName: "TodoShowCompletedCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell)
+    }
+    
+    fileprivate func getCurrentPerson() {
+        ParseClient.sharedInstance().getCurrentPerson { (manager: PFObject?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to retrieve current person")
+            } else {
+                if let manager = manager {
+                    self.currentPerson = manager
+                } else {
+                    debugPrint("Manager is nil")
+                }
+            }
+        }
     }
 
     /*
@@ -69,8 +90,7 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .add:
             return 1
         case .list:
-            //return todoItems.count ?? 0
-            return 1
+            return todoItems.count
         case .showCompleted:
             return 1
         }
@@ -80,11 +100,13 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         switch CellTypes(rawValue: indexPath.section)! {
         case .add:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoAddCell, for: indexPath) as! TodoAddCell
+            cell.delegate = self
             return cell
         case .list:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
-            cell.nameLabel.text = "member1"
-            cell.todoLabel.text = "This is a a very very very very very long todoosssss"
+            cell.todoObject = todoItems[indexPath.row]
+            //cell.nameLabel.text = "member1"
+            //cell.todoLabel.text = "This is a a very very very very very long todoosssss"
             return cell
         case .showCompleted:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell, for: indexPath) as! TodoShowCompletedCell
@@ -98,10 +120,70 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 1.0
+        return 0.1
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
+}
+
+extension TodoViewController: TodoAddCellDelegate {
+    func todoAddCell(_ todoAddCell: TodoAddCell, todoString: String) {
+        debugPrint("textfield did return: \(todoString)")
+        let newTodo = createTodoObject(todoString: todoString)
+        
+        if todoItems.count == 0 {
+            todoItems.append(newTodo)
+        } else {
+            todoItems.insert(newTodo, at: 0)
+        }
+        
+        //tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        
+        //todoItems.insert(newTodo, at: 0)
+        //tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+//        tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
+//        tableView.cellForRow(at: IndexPath(row: 0, section: 0))?.alpha = 0.5
+        
+        
+        parseClient.saveTodoToParse(todo: newTodo) { (success: Bool, error: Error?) in
+            if success {
+                debugPrint("Successfully adding new follow-up item")
+                self.tableView.reloadData()
+            } else {
+                debugPrint("Error adding new follow-up item with error: \(error?.localizedDescription)")
+            }
+        }
+
+
+        // save to Parse
+        // reload table
+        // maybe explore batching request when have time?
+    }
+    
+    // MARK: - Helpers
+    // TODO: move the PFObject and Parse logic to Todo wrapper class?
+    fileprivate func createTodoObject(todoString: String) -> PFObject {
+        let todoObject = PFObject(className: "ToDo")
+        if let manager = currentPerson {
+            todoObject[ObjectKeys.ToDo.managerId] = manager.objectId!
+        }
+        todoObject[ObjectKeys.ToDo.text] = todoString
+        
+        /*
+        switch viewTypes {
+        case ViewTypes.dashboard:
+            break
+        case ViewTypes.employeeDetail:
+            // add personId (employeeId) to the todoObject dictionary
+            break
+        case ViewTypes.meeting:
+            // add personId and meetingId to the todoObject dictionary
+            break
+        }*/
+        
+        return todoObject
+    }
+    
 }

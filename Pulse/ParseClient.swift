@@ -102,7 +102,7 @@ class ParseClient: NSObject {
         }
     }
     
-    func createNewCompany(company: Company, completion: PFBooleanResultBlock?) {
+    func saveNewCompanyToParse(company: Company, completion: PFBooleanResultBlock?) {
         let parseCompany = PFObject(className: "Company")
         parseCompany[ObjectKeys.Company.companyName] = company.companyName
         parseCompany.saveInBackground(block: completion)
@@ -122,5 +122,9 @@ class ParseClient: NSObject {
                 }
             }
         }
+    }
+    
+    func saveTodoToParse(todo: PFObject, completion: PFBooleanResultBlock?) {
+        todo.saveInBackground(block: completion)
     }
 }
