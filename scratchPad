@@ -1,0 +1,51 @@
+itasari	[9:31 PM]  
+heroku username: 2b8wad2qg5@snkmail.com
+
+[9:32]  
+pulse123
+
+[9:34]  
+app name pu1se
+
+[9:36]  
+app_id pulseAleBiancaIta
+
+ale	[9:36 PM]  
+serverUrl= http://pu1se.herokuapp.com/parse
+
+itasari	[9:36 PM]  
+master key same as email (2b8wad2qg5)
+
+[9:38]  
+If you ever need to change these values (parse setup) later, you can go to (https://dashboard.heroku.com/apps/<app name>/settings)
+
+[9:40]  
+app host name: https://pu1se.herokuapp.com.
+
+UIDevice.currentDevice().identifierForVendor!.UUIDString
+
+## test
+curl -X GET -H "X-Parse-Application-Id: pulsetest1" -H "X-Parse-Master-Key: pulseAleBiancaIta"  \
+https://pulsetest1.herokuapp.com/parse/classes/GameScore
+
+## actual (template)
+curl -X GET -H "X-Parse-Application-Id: pulseAleBiancaIta" -H "X-Parse-Master-Key: 2b8wad2qg5"  \
+https://pu1se.herokuapp.com/parse/classes/GameScore
+
+curl -X POST -H "X-Parse-Application-Id: pulseAleBiancaIta" -H "X-Parse-Master-Key: 2b8wad2qg5" \
+-H "Content-Type: application/json" \
+-d '{"score":1337,"playerName":"Sean Plott","cheatMode":false}' \
+https://pu1se.herokuapp.com/parse/classes/GameScore
+
+
+
+
+curl -X POST -H "X-Parse-Application-Id: pulseAleBiancaIta" -H "X-Parse-Master-Key: 2b8wad2qg5" \
+-H "Content-Type: application/json" \
+-d '{"managerId": "chr", "personId":"shy","text":"Do something for shy","isCompleted":true,"dueAt":"2017-01-01","completedAt":"2017-01-01","deletedAt":""}' \
+https://pu1se.herokuapp.com/parse/classes/ToDo
+
+Notes:
+* Capptivate.co 
+	- Login design: http://capptivate.co/2014/06/11/stackexchange/
+
