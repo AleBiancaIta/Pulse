@@ -12,8 +12,7 @@ class TeamListViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
-       let dataSource = TeamViewDataSource.sharedInstance()
-    
+    let dataSource = TeamViewDataSource.sharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
