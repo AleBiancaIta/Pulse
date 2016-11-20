@@ -12,14 +12,22 @@ import UIKit
 class MeetingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var selectAllButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
     
     var meetings: [Meeting] = []
+    var expanded = false
+    
+    var personId: String? // Employee ID - TODO Ale, when adding this to person details, set this parameter
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Meetings"
 
+        selectAllButton.isHidden = expanded
+        addButton.isHidden = expanded
+        
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -32,6 +40,14 @@ class MeetingsViewController: UIViewController {
 
                 let managerId = person.objectId! as String
                 query.whereKey("managerId", equalTo: managerId)
+                
+                if let personId = self.personId {
+                    query.whereKey("personId", equalTo: personId)
+                }
+                
+                if !self.expanded {
+                    query.limit = 3
+                }
                 
                 query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
                     if let posts = posts {
@@ -77,6 +93,21 @@ class MeetingsViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: - IBAction
+    
+    @IBAction func onSeeAllButton(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+        viewController.expanded = true
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    @IBAction func onAddButton(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
+        navigationController?.pushViewController(viewController, animated: true)
+    }
 }
 
 extension MeetingsViewController: UITableViewDataSource {
@@ -104,7 +135,8 @@ extension MeetingsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let viewController = MeetingDetailsViewController()
+        let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
         viewController.meeting = meetings[indexPath.row]
         navigationController?.pushViewController(viewController, animated: true)
     }
