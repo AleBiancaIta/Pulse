@@ -38,6 +38,10 @@ class TodoViewController: UIViewController {
         configureRowHeight()
         getCurrentPerson()
     }
+    
+    func heightForView() -> CGFloat {
+        return 240; // TODO fix this to calculate height properly
+    }
 
     // MARK: - Helpers
     

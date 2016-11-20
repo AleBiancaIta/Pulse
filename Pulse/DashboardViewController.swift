@@ -120,6 +120,14 @@ extension DashboardViewController: UITableViewDataSource {
                 self.addChildViewController(vc)
                 cell.contentView.addSubview(vc.view)
                 return cell
+                
+            case "d":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "TodoVC")
+                self.addChildViewController(vc)
+                cell.contentView.addSubview(vc.view)
+                return cell
 
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
@@ -144,15 +152,24 @@ extension DashboardViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
+        let defaultHeight: CGFloat = 44
         guard indexPath.row < selectedCards.count else {
-            return 44
+            return defaultHeight
         }
         
         switch selectedCards[indexPath.row].id! {
         case "t":
-            return 240
+            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+            return viewController.heightForView()
+            
+        case "d":
+            let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+            return viewController.heightForView()
+            
         default:
-            return 44
+            return defaultHeight
         }
         
     }

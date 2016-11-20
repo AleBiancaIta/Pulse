@@ -38,7 +38,7 @@ class TeamCollectionViewController: UIViewController {
     }
     
     func heightForView() -> CGFloat {
-        return CGFloat(210)
+        return 240;
     }
 
     // MARK: - Actions
