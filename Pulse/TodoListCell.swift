@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class TodoListCell: UITableViewCell {
     
@@ -15,6 +16,14 @@ class TodoListCell: UITableViewCell {
     @IBOutlet weak var squareImageView: UIImageView!
     @IBOutlet weak var todoLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
+    var todoObject: PFObject! {
+        didSet {
+            todoLabel.text = todoObject[ObjectKeys.ToDo.text] as? String
+            nameLabel.text = todoObject[ObjectKeys.ToDo.personId] as? String
+        }
+    }
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

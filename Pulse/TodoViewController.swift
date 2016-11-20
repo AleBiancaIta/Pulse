@@ -248,7 +248,6 @@ class TodoViewController: UIViewController {
         }
     }
     
-    
     fileprivate func setUpTopSectionView() {
         switch todoLimit {
         case .topEntries:
@@ -378,8 +377,7 @@ extension TodoViewController: TodoAddCellDelegate {
         } else {
             todoItems.insert(newTodo, at: 0)
         }
-        tableView.reloadData()
-        
+        tableView.reloadData()        
         //tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         
         //todoItems.insert(newTodo, at: 0)
