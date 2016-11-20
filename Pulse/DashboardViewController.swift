@@ -70,10 +70,6 @@ class DashboardViewController: UIViewController {
     
     // MARK: - IBAction
     
-    @IBAction func onAddMeeting(_ sender: UIBarButtonItem) {
-        navigationController?.pushViewController(MeetingDetailsViewController(), animated: true)
-    }
-    
     func onAddCard() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let dashboardSelectionNavigationController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionNavigationController") as! UINavigationController
@@ -89,7 +85,8 @@ class DashboardViewController: UIViewController {
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
-        navigationController?.pushViewController(settingsVC, animated: true)
+        let navController = UINavigationController(rootViewController: settingsVC)
+        present(navController, animated: true, completion: nil)
     }
     
 }

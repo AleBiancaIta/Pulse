@@ -36,6 +36,10 @@ class TeamCollectionViewController: UIViewController {
             }
         }
     }
+    
+    func heightForView() -> CGFloat {
+        return CGFloat(210)
+    }
 
     // MARK: - Actions
     
@@ -59,10 +63,6 @@ class TeamCollectionViewController: UIViewController {
     @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
         debugPrint("Get notifications: add team member successful")
 		collectionView.reloadData()
-    }
-
-    func heightForView() -> CGFloat {
-        return CGFloat(44 * 3) // TODO
     }
 }
 

@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -50,18 +49,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="rhG-hT-WVt">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="hTh-qq-kWB">
-                                <connections>
-                                    <action selector="onAddMeeting:" destination="BYZ-38-t0r" id="zEc-C2-JSw"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem image="Settings" id="z4O-Xw-Bd7">
-                                <connections>
-                                    <action selector="onSettingsButtonTap:" destination="BYZ-38-t0r" id="b8t-2j-uWh"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="Settings" id="z4O-Xw-Bd7">
+                            <connections>
+                                <action selector="onSettingsButtonTap:" destination="BYZ-38-t0r" id="b8t-2j-uWh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="apc-nX-wLz" id="U2A-Wd-dsw"/>
