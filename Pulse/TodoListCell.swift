@@ -1,5 +1,5 @@
 //
-//  TodoTableViewCell.swift
+//  TodoListCell.swift
 //  Pulse
 //
 //  Created by Itasari on 11/19/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TodoTableViewCell: UITableViewCell {
+class TodoListCell: UITableViewCell {
     
     
     @IBOutlet weak var todoBackgroundView: UIView!

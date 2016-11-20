@@ -35,9 +35,13 @@
 		437DE06A1DD9C40600B08988 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */; };
 		437DE06B1DD9C40600B08988 /* TeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */; };
 		43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BB71DE12D6A006C8703 /* Todo.storyboard */; };
-		43EC9BBB1DE130C1006C8703 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BB91DE130C1006C8703 /* TodoTableViewCell.swift */; };
-		43EC9BBC1DE130C1006C8703 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BBA1DE130C1006C8703 /* TodoTableViewCell.xib */; };
+		43EC9BBB1DE130C1006C8703 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BB91DE130C1006C8703 /* TodoListCell.swift */; };
+		43EC9BBC1DE130C1006C8703 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */; };
 		43EC9BBE1DE13870006C8703 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BBD1DE13870006C8703 /* TodoViewController.swift */; };
+		43EC9BC11DE16D97006C8703 /* TodoAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BBF1DE16D97006C8703 /* TodoAddCell.swift */; };
+		43EC9BC21DE16D97006C8703 /* TodoAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC01DE16D97006C8703 /* TodoAddCell.xib */; };
+		43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */; };
+		43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */; };
 		43ED9E2D1DDFB0A200AB49E1 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED9E2C1DDFB0A200AB49E1 /* Company.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		672A891F1DDA9B6400935085 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A891E1DDA9B6400935085 /* Survey.swift */; };
@@ -90,9 +94,13 @@
 		437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamTableViewCell.swift; sourceTree = "<group>"; };
 		437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamTableViewCell.xib; sourceTree = "<group>"; };
 		43EC9BB71DE12D6A006C8703 /* Todo.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Todo.storyboard; sourceTree = "<group>"; };
-		43EC9BB91DE130C1006C8703 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
-		43EC9BBA1DE130C1006C8703 /* TodoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoTableViewCell.xib; sourceTree = "<group>"; };
+		43EC9BB91DE130C1006C8703 /* TodoListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
+		43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoListCell.xib; sourceTree = "<group>"; };
 		43EC9BBD1DE13870006C8703 /* TodoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
+		43EC9BBF1DE16D97006C8703 /* TodoAddCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoAddCell.swift; sourceTree = "<group>"; };
+		43EC9BC01DE16D97006C8703 /* TodoAddCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoAddCell.xib; sourceTree = "<group>"; };
+		43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoShowCompletedCell.swift; sourceTree = "<group>"; };
+		43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoShowCompletedCell.xib; sourceTree = "<group>"; };
 		43ED9E2C1DDFB0A200AB49E1 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		672A891E1DDA9B6400935085 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
@@ -200,8 +208,12 @@
 				437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */,
 				437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */,
 				437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */,
-				43EC9BB91DE130C1006C8703 /* TodoTableViewCell.swift */,
-				43EC9BBA1DE130C1006C8703 /* TodoTableViewCell.xib */,
+				43EC9BBF1DE16D97006C8703 /* TodoAddCell.swift */,
+				43EC9BC01DE16D97006C8703 /* TodoAddCell.xib */,
+				43EC9BB91DE130C1006C8703 /* TodoListCell.swift */,
+				43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */,
+				43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */,
+				43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */,
 				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 			);
 			name = Views;
@@ -360,6 +372,7 @@
 				431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */,
 				431804951DD5A8BE00B279C6 /* LoginViewController.xib in Resources */,
 				4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */,
+				43EC9BC21DE16D97006C8703 /* TodoAddCell.xib in Resources */,
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
 				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
 				437DE0581DD936C200B08988 /* Team.storyboard in Resources */,
@@ -367,8 +380,10 @@
 				67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */,
 				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
 				43EC9BBC1DE130C1006C8703 /* TodoTableViewCell.xib in Resources */,
+				43EC9BBC1DE130C1006C8703 /* TodoListCell.xib in Resources */,
 				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
 				67BCA1531DD9964100E7EE74 /* Main.storyboard in Resources */,
+				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 				67BCA1521DD6E66100E7EE74 /* MeetingsViewController.xib in Resources */,
 			);
@@ -436,16 +451,18 @@
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
 				437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
+				43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
 				4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */,
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
 				437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */,
-				43EC9BBB1DE130C1006C8703 /* TodoTableViewCell.swift in Sources */,
+				43EC9BBB1DE130C1006C8703 /* TodoListCell.swift in Sources */,
 				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
 				437DE0671DD9A7FF00B08988 /* ParseClient.swift in Sources */,
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
 				71ACDE631DD94AF0005D85DE /* PersonDetailsViewController.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
+				43EC9BC11DE16D97006C8703 /* TodoAddCell.swift in Sources */,
 				431804AB1DD7C73500B279C6 /* SettingsViewController.swift in Sources */,
 				672A891F1DDA9B6400935085 /* Survey.swift in Sources */,
 				67BCA1511DD6E66100E7EE74 /* MeetingsViewController.swift in Sources */,

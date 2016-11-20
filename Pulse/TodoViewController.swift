@@ -9,14 +9,26 @@
 import UIKit
 import Parse
 
+enum CellTypes: Int {
+    case add = 0, list, showCompleted
+}
+
+enum ViewTypes: String {
+    case dashboard = "Dashboard"
+    case employeeDetail = "Employee Detail"
+}
+
 class TodoViewController: UIViewController {
 
+    // MARK: - Properties
+    
     @IBOutlet weak var tableView: UITableView!
+    fileprivate let CellSections = ["Add Todo", "List Todo", "Show Completed"]
     var todoItems: [PFObject]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(UINib(nibName: "TodoTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoTableViewCell)
+        registerCellNibs()
         configureRowHeight()
     }
 
@@ -27,6 +39,11 @@ class TodoViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
 
+    fileprivate func registerCellNibs() {
+        tableView.register(UINib(nibName: "TodoAddCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoAddCell)
+        tableView.register(UINib(nibName: "TodoListCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoListCell)
+        tableView.register(UINib(nibName: "TodoShowCompletedCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell)
+    }
 
     /*
     // MARK: - Navigation
@@ -40,22 +57,40 @@ class TodoViewController: UIViewController {
 
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
 extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        // Change this if adding cell to show/hide completed items
-        return 1
+        return CellSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return todoItems.count ?? 0
-        return 1
+        switch CellTypes(rawValue: section)! {
+        case .add:
+            return 1
+        case .list:
+            //return todoItems.count ?? 0
+            return 1
+        case .showCompleted:
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoTableViewCell, for: indexPath) as! TodoTableViewCell
-        cell.nameLabel.text = "member1"
-        cell.todoLabel.text = "This is a a very very very very very long todooooooooooooooosssss"
-        return cell
+        switch CellTypes(rawValue: indexPath.section)! {
+        case .add:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoAddCell, for: indexPath) as! TodoAddCell
+            return cell
+        case .list:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
+            cell.nameLabel.text = "member1"
+            cell.todoLabel.text = "This is a a very very very very very long todoosssss"
+            return cell
+        case .showCompleted:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell, for: indexPath) as! TodoShowCompletedCell
+            cell.labelString = "SHOW COMPLETED TO-DOS"
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -63,10 +98,10 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 2.0
+        return 1.0
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1.0
+        return 0.1
     }
 }

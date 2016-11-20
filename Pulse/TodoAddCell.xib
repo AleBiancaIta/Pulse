@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="62" id="KGk-i7-Jjw" customClass="TodoAddCell" customModule="Pulse" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="54"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lte-DH-eJj">
+                        <rect key="frame" x="5" y="5" width="310" height="44.5"/>
+                        <subviews>
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-gT-eGL">
+                                <rect key="frame" x="8" y="12" width="22" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="W3b-cM-5xT"/>
+                                    <constraint firstAttribute="height" constant="22" id="rbg-bh-g7F"/>
+                                </constraints>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xOA-gn-Iw7">
+                                <rect key="frame" x="38" y="8" width="264" height="30"/>
+                                <color key="backgroundColor" red="0.900020032051282" green="0.900020032051282" blue="0.900020032051282" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="9Qy-6G-V4J"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="xOA-gn-Iw7" firstAttribute="centerY" secondItem="WtX-gT-eGL" secondAttribute="centerY" id="K72-RS-74C"/>
+                            <constraint firstAttribute="height" constant="44.5" id="Pb2-LG-Bpo"/>
+                            <constraint firstAttribute="trailing" secondItem="xOA-gn-Iw7" secondAttribute="trailing" constant="8" id="V3Q-Ri-x3m"/>
+                            <constraint firstItem="WtX-gT-eGL" firstAttribute="centerY" secondItem="lte-DH-eJj" secondAttribute="centerY" id="aOT-mY-MIt"/>
+                            <constraint firstItem="WtX-gT-eGL" firstAttribute="leading" secondItem="lte-DH-eJj" secondAttribute="leading" constant="8" id="fCQ-xE-GUV"/>
+                            <constraint firstItem="xOA-gn-Iw7" firstAttribute="leading" secondItem="WtX-gT-eGL" secondAttribute="trailing" constant="8" id="ntK-AQ-uzp"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="lte-DH-eJj" secondAttribute="bottom" constant="5" id="BNQ-bK-9UO"/>
+                    <constraint firstAttribute="trailing" secondItem="lte-DH-eJj" secondAttribute="trailing" constant="5" id="nQC-3o-Wpc"/>
+                    <constraint firstItem="lte-DH-eJj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="u6x-Tt-6dH"/>
+                    <constraint firstItem="lte-DH-eJj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ywx-U5-gj3"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="cellBackgroundView" destination="lte-DH-eJj" id="vT5-W3-Rxs"/>
+                <outlet property="todoTextField" destination="xOA-gn-Iw7" id="oc3-ZT-Hh4"/>
+            </connections>
+            <point key="canvasLocation" x="52" y="74.5"/>
+        </tableViewCell>
+    </objects>
+</document>
