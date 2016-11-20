@@ -29,8 +29,18 @@ extension UIViewController {
 		if let person = person {
 			personViewController.person = person
 		}
-		show(personViewController, sender: nil)
+        if nil == person {
+            let navController = UINavigationController(rootViewController: personViewController)
+            personViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButton(_:)))
+            present(navController, animated: true, completion: nil)
+        } else {
+            show(personViewController, sender: nil)
+        }
 	}
+    
+    @objc fileprivate func onCancelButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 extension UIApplication {

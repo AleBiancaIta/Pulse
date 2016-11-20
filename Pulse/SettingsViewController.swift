@@ -29,13 +29,6 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         settingsTableView.estimatedRowHeight = 50
         settingsTableView.rowHeight = UITableViewAutomaticDimension
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
-    }
-    
-    // MARK: - Private Methods
-    
-    @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
     }
 }
 

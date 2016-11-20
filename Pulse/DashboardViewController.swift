@@ -85,10 +85,16 @@ class DashboardViewController: UIViewController {
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        settingsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
         let navController = UINavigationController(rootViewController: settingsVC)
         present(navController, animated: true, completion: nil)
     }
-    
+ 
+    // MARK: - Private Methods
+ 
+    @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UIGestureRecognizerDelegate
