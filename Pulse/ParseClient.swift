@@ -128,7 +128,7 @@ class ParseClient: NSObject {
         todo.saveInBackground(block: completion)
     }
     
-    func fetchTodoFor(managerId: String, personId: String?, meetingId: String?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
+    func fetchTodoFor(managerId: String, personId: String?, meetingId: String?, limit: Int?, isAscending: Bool?, orderBy: String?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
         let query = PFQuery(className: "ToDo")
         query.whereKey(ObjectKeys.ToDo.managerId, equalTo: managerId)
         
@@ -138,6 +138,18 @@ class ParseClient: NSObject {
         
         if let meetingId = meetingId {
             query.whereKey(ObjectKeys.ToDo.meetingId, equalTo: meetingId)
+        }
+        
+        if let limit = limit {
+            query.limit = limit
+        }
+        
+        if let isAscending = isAscending, let orderBy = orderBy {
+            if isAscending {
+                query.order(byAscending: orderBy)
+            } else {
+                query.order(byDescending: orderBy)
+            }
         }
         
         if isDeleted {

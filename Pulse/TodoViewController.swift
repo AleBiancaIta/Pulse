@@ -19,23 +19,38 @@ enum ViewTypes: String {
     case meeting = "Meeting View"
 }
 
+enum TodoLimit: String {
+    case topEntries = "Top Entries"
+    case seeAll = "See All"
+}
+
 class TodoViewController: UIViewController {
 
     // MARK: - Properties
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var topSectionView: UIView!
     
     fileprivate let CellSections = ["Add Todo", "List Todo", "Show Completed"]
     fileprivate let parseClient = ParseClient.sharedInstance()
     
     var todoItems = [PFObject]()
     var viewTypes: ViewTypes = .dashboard // FOR TESTING ONLY
+    var todoLimit: TodoLimit = .topEntries // FOR TESTING ONLY
+    
     var currentPerson: PFObject?
+    var limitParameter: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellNibs()
         configureRowHeight()
+        //getCurrentPerson()
+        setUpTopSectionView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         getCurrentPerson()
     }
     
@@ -75,7 +90,8 @@ class TodoViewController: UIViewController {
         switch viewTypes {
         case .dashboard:
             if let manager = self.currentPerson {
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, isDeleted: false) {  (items: [PFObject]?, error: Error?) in
+                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false) {  (items: [PFObject]?, error: Error?) in
+                    
                     if let error = error {
                         debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                     } else {
@@ -100,6 +116,33 @@ class TodoViewController: UIViewController {
         }
     }
 
+    fileprivate func setUpTopSectionView() {
+        switch todoLimit {
+        case .topEntries:
+            topSectionView.isHidden = false
+            limitParameter = 3
+        case .seeAll:
+            topSectionView.isHidden = true
+            limitParameter = nil
+        }
+    }
+    
+    fileprivate func openSeeAllTodoVC() {
+        let storyboard = UIStoryboard.init(name: "Todo", bundle: nil)
+        let seeAllTodoVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoVC) as! TodoViewController
+        seeAllTodoVC.currentPerson = self.currentPerson
+        seeAllTodoVC.viewTypes = self.viewTypes
+        seeAllTodoVC.todoLimit = .seeAll
+        seeAllTodoVC.limitParameter = nil
+        self.navigationController?.pushViewController(seeAllTodoVC, animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func onSeeAllButtonTap(_ sender: UIButton) {
+        openSeeAllTodoVC()
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -126,7 +169,12 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .list:
             return todoItems.count
         case .showCompleted:
-            return 1
+            switch todoLimit {
+            case .topEntries:
+                return 0
+            case .seeAll:
+                return 1
+            }
         }
     }
     
@@ -139,8 +187,6 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .list:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
             cell.todoObject = todoItems[indexPath.row]
-            //cell.nameLabel.text = "member1"
-            //cell.todoLabel.text = "This is a a very very very very very long todoosssss"
             return cell
         case .showCompleted:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell, for: indexPath) as! TodoShowCompletedCell
