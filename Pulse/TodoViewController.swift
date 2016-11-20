@@ -46,7 +46,7 @@ class TodoViewController: UIViewController {
     var currentTeamPerson: PFObject?
     //var currentMeeting: PFObject?
     var currentMeeting: Meeting?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellNibs()
@@ -118,8 +118,7 @@ class TodoViewController: UIViewController {
         switch viewTypes {
         case .dashboard:
             if let manager = self.currentManager {
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: false) {  (items: [PFObject]?, error: Error?) in
-                    
+                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: false) {  (items: [PFObject]?, error: Error?) in                    
                     if let error = error {
                         debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                     } else {
@@ -279,6 +278,33 @@ class TodoViewController: UIViewController {
         openSeeAllTodoVC()
     }
 
+    fileprivate func setUpTopSectionView() {
+        switch todoLimit {
+        case .topEntries:
+            topSectionView.isHidden = false
+            limitParameter = 3
+        case .seeAll:
+            topSectionView.isHidden = true
+            limitParameter = nil
+        }
+    }
+    
+    fileprivate func openSeeAllTodoVC() {
+        let storyboard = UIStoryboard.init(name: "Todo", bundle: nil)
+        let seeAllTodoVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoVC) as! TodoViewController
+        seeAllTodoVC.currentPerson = self.currentPerson
+        seeAllTodoVC.viewTypes = self.viewTypes
+        seeAllTodoVC.todoLimit = .seeAll
+        seeAllTodoVC.limitParameter = nil
+        self.navigationController?.pushViewController(seeAllTodoVC, animated: true)
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func onSeeAllButtonTap(_ sender: UIButton) {
+        openSeeAllTodoVC()
+    }
+    
     /*
     // MARK: - Navigation
 

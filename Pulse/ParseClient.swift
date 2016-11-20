@@ -128,7 +128,11 @@ class ParseClient: NSObject {
         todo.saveInBackground(block: completion)
     }
     
+<<<<<<< 387879c29a9c67ab32ec090de668a90d0cd18189
     func fetchTodoFor(managerId: String, personId: String?, meetingId: String?, limit: Int?, isAscending: Bool?, orderBy: String?, isDeleted: Bool, isCompleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
+=======
+    func fetchTodoFor(managerId: String, personId: String?, meetingId: String?, limit: Int?, isAscending: Bool?, orderBy: String?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
+>>>>>>> Implement Todo SeeAll button
         let query = PFQuery(className: "ToDo")
         query.whereKey(ObjectKeys.ToDo.managerId, equalTo: managerId)
         
