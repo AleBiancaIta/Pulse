@@ -29,7 +29,7 @@ class TodoViewController: UIViewController {
     fileprivate let parseClient = ParseClient.sharedInstance()
     
     var todoItems = [PFObject]()
-    var viewTypes: ViewTypes! = .dashboard // FOR TESTING ONLY
+    var viewTypes: ViewTypes = .dashboard // FOR TESTING ONLY
     var currentPerson: PFObject?
     
     override func viewDidLoad() {
@@ -53,16 +53,46 @@ class TodoViewController: UIViewController {
     }
     
     fileprivate func getCurrentPerson() {
-        ParseClient.sharedInstance().getCurrentPerson { (manager: PFObject?, error: Error?) in
+        parseClient.getCurrentPerson { (manager: PFObject?, error: Error?) in
             if let error = error {
-                debugPrint("Unable to retrieve current person")
+                debugPrint("Unable to retrieve current person with error: \(error.localizedDescription)")
             } else {
                 if let manager = manager {
                     self.currentPerson = manager
+                    self.populateTodoItemsTable()
                 } else {
                     debugPrint("Manager is nil")
                 }
             }
+        }
+    }
+    
+    fileprivate func populateTodoItemsTable() {
+        switch viewTypes {
+        case .dashboard:
+            if let manager = self.currentPerson {
+                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, isDeleted: false) {  (items: [PFObject]?, error: Error?) in
+                    if let error = error {
+                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    } else {
+                        if let items = items, items.count > 0 {
+                            self.todoItems = items
+                            self.tableView.reloadData()
+                            debugPrint("Fetching todo items successful, reloading table")
+                        } else {
+                            debugPrint("TodoItems is nil or contains 0 items")
+                        }
+                    }
+                }
+            } else {
+                debugPrint("Manager is nil, cannot fetch todoItems")
+            }
+        case .employeeDetail:
+            // pass in managerId, personId
+            break
+        case .meeting:
+            // pass in managerId, personId, meetingId
+            break
         }
     }
 
@@ -138,6 +168,7 @@ extension TodoViewController: TodoAddCellDelegate {
         } else {
             todoItems.insert(newTodo, at: 0)
         }
+        tableView.reloadData()
         
         //tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .none)
         
@@ -150,9 +181,13 @@ extension TodoViewController: TodoAddCellDelegate {
         parseClient.saveTodoToParse(todo: newTodo) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("Successfully adding new follow-up item")
-                self.tableView.reloadData()
+                //self.tableView.reloadData()
             } else {
-                debugPrint("Error adding new follow-up item with error: \(error?.localizedDescription)")
+                //remove the new todo added - need to test this
+                self.ABIShowAlert(title: "Error", message: "Adding new item: error \(error?.localizedDescription). Please try again later", sender: nil, handler: { (alertAction: UIAlertAction) in
+                    self.todoItems.remove(at: 0)
+                    self.tableView.reloadData()
+                })
             }
         }
 

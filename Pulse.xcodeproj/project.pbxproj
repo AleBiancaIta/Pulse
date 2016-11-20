@@ -43,6 +43,7 @@
 		43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */; };
 		43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */; };
 		43ED9E2D1DDFB0A200AB49E1 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED9E2C1DDFB0A200AB49E1 /* Company.swift */; };
+		43F6247A1DE19DBC007086E0 /* TodoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F624791DE19DBC007086E0 /* TodoEditViewController.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		672A891F1DDA9B6400935085 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A891E1DDA9B6400935085 /* Survey.swift */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
@@ -102,6 +103,7 @@
 		43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoShowCompletedCell.swift; sourceTree = "<group>"; };
 		43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoShowCompletedCell.xib; sourceTree = "<group>"; };
 		43ED9E2C1DDFB0A200AB49E1 /* Company.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
+		43F624791DE19DBC007086E0 /* TodoEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditViewController.swift; sourceTree = "<group>"; };
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		672A891E1DDA9B6400935085 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */,
 				437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */,
 				43EC9BBD1DE13870006C8703 /* TodoViewController.swift */,
+				43F624791DE19DBC007086E0 /* TodoEditViewController.swift */,
 				437DE05F1DD9523D00B08988 /* AddTeamMemberViewController.swift */,
 				71ACDE621DD94AF0005D85DE /* PersonDetailsViewController.swift */,
 				71ACDE641DD9534A005D85DE /* ImageViewController.swift */,
@@ -454,6 +457,7 @@
 				43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
 				4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */,
+				43F6247A1DE19DBC007086E0 /* TodoEditViewController.swift in Sources */,
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
 				437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */,
 				43EC9BBB1DE130C1006C8703 /* TodoListCell.swift in Sources */,

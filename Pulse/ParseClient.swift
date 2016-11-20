@@ -127,4 +127,35 @@ class ParseClient: NSObject {
     func saveTodoToParse(todo: PFObject, completion: PFBooleanResultBlock?) {
         todo.saveInBackground(block: completion)
     }
+    
+    func fetchTodoFor(managerId: String, personId: String?, meetingId: String?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
+        let query = PFQuery(className: "ToDo")
+        query.whereKey(ObjectKeys.ToDo.managerId, equalTo: managerId)
+        
+        if let personId = personId {
+            query.whereKey(ObjectKeys.ToDo.personId, equalTo: personId)
+        }
+        
+        if let meetingId = meetingId {
+            query.whereKey(ObjectKeys.ToDo.meetingId, equalTo: meetingId)
+        }
+        
+        if isDeleted {
+            query.whereKeyExists(ObjectKeys.ToDo.deletedAt)
+        } else {
+            query.whereKeyDoesNotExist(ObjectKeys.ToDo.deletedAt)
+        }
+        
+        query.findObjectsInBackground { (todoItems: [PFObject]?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to fetch todoItems")
+                completion(nil, error)
+            } else {
+                if let todoItems = todoItems {
+                    debugPrint("Query returns \(todoItems.count) items")
+                    completion(todoItems, nil)
+                }
+            }
+        }
+    }
 }
