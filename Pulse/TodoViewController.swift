@@ -355,6 +355,7 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .list:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
             cell.todoObject = todoItems[indexPath.row]
+            cell.delegate = self
             return cell
         case .showCompleted:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell, for: indexPath) as! TodoShowCompletedCell
@@ -367,6 +368,7 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .listCompleted:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
             cell.todoObject = todoCompletedItems[indexPath.row]
+            cell.delegate = self
             return cell
         }
     }
@@ -463,6 +465,27 @@ extension TodoViewController: TodoAddCellDelegate {
             }
         }
         return todoObject
-    }    
+    }
+}
+
+extension TodoViewController: TodoListCellDelegate {
+    func todoListCell(_ todoListCell: TodoListCell, isCompleted: Bool) {
+        // if it's completed, uncomplete, make sure delete the completedAT key
+        // update table view
+        // reload table
+        
+        // if it's not complete, change it to complete, assign the value to completed at key
+        // update table view
+        // reload table
+        
+        if isCompleted {
+            debugPrint("need to uncomplete the task")
+            
+        } else {
+            debugPrint("need to complete the task")
+        }
+        
+        
+    }
 }
 

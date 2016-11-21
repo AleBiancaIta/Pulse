@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+@objc protocol TodoListCellDelegate {
+    @objc optional func todoListCell(_ todoListCell: TodoListCell, isCompleted: Bool)
+}
+
 class TodoListCell: UITableViewCell {
     
     
@@ -17,10 +21,21 @@ class TodoListCell: UITableViewCell {
     @IBOutlet weak var todoLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    var isCompleted: Bool!
+    weak var delegate: TodoListCellDelegate?
+    
     var todoObject: PFObject! {
         didSet {
             todoLabel.text = todoObject[ObjectKeys.ToDo.text] as? String
             nameLabel.text = todoObject[ObjectKeys.ToDo.personId] as? String
+            
+            if let _ = todoObject[ObjectKeys.ToDo.completedAt] {
+                isCompleted = true
+                squareImageView.image = UIImage(named: "SquareChecked")
+            } else {
+                isCompleted = false
+                squareImageView.image = UIImage(named: "Square")
+            }
         }
     }
     
@@ -51,6 +66,6 @@ class TodoListCell: UITableViewCell {
     }
     
     @objc fileprivate func squareImageViewTap(_ sender: UITapGestureRecognizer) {
-        debugPrint("square image view tap")
+        delegate?.todoListCell?(self, isCompleted: isCompleted)
     }
 }
