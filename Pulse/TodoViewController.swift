@@ -439,19 +439,41 @@ extension TodoViewController: TodoAddCellDelegate {
 
 extension TodoViewController: TodoListCellDelegate {
     func todoListCell(_ todoListCell: TodoListCell, isCompleted: Bool) {
-        // if it's completed, uncomplete, make sure delete the completedAT key
-        // update table view
-        // reload table
-        
-        // if it's not complete, change it to complete, assign the value to completed at key
-        // update table view
-        // reload table
         
         if isCompleted {
             debugPrint("need to uncomplete the task")
-            
+            if let indexPath = tableView.indexPath(for: todoListCell) {
+                let todo = todoCompletedItems.remove(at: indexPath.row)
+                todo.remove(forKey: ObjectKeys.ToDo.completedAt)
+                todoItems.append(todo)
+                tableView.reloadData()
+                
+                todo.saveInBackground(block: { (success: Bool, error: Error?) in
+                    if success {
+                        debugPrint("Successfully uncompleting task")
+                    } else {
+                        debugPrint("Failed to uncomplete task, error: \(error?.localizedDescription)")
+                        // TODO: Retry or reset the changes?
+                    }
+                })
+            }
         } else {
             debugPrint("need to complete the task")
+            if let indexPath = tableView.indexPath(for: todoListCell) {
+                let todo = todoItems.remove(at: indexPath.row)
+                todo[ObjectKeys.ToDo.completedAt] = Date()
+                todoCompletedItems.insert(todo, at: 0)
+                tableView.reloadData()
+                
+                todo.saveInBackground(block: { (success: Bool, error: Error?) in
+                    if success {
+                        debugPrint("Successfully updated completedAt for todo item")
+                    } else {
+                        debugPrint("Failed to update completedAt for todo item, error: \(error?.localizedDescription)")
+                        // TODO: Retry or reset the changes?
+                    }
+                })
+            }
         }
         
         
