@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 enum CellTypes: Int {
-    case add = 0, list, showCompleted
+    case add = 0, list, showCompleted//, listCompleted
 }
 
 enum ViewTypes: String {
@@ -31,15 +31,19 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topSectionView: UIView!
     
-    fileprivate let CellSections = ["Add Todo", "List Todo", "Show Completed"]
+    fileprivate let CellSections = ["Add Todo", "List Todo", "Show Completed"]//, "List Completed"]
     fileprivate let parseClient = ParseClient.sharedInstance()
     
     var todoItems = [PFObject]()
-    var viewTypes: ViewTypes = .dashboard // FOR TESTING ONLY
-    var todoLimit: TodoLimit = .topEntries // FOR TESTING ONLY
+    //var todoCompleted =
     
-    var currentPerson: PFObject?
+    var viewTypes: ViewTypes = .employeeDetail // FOR TESTING ONLY
+    var todoLimit: TodoLimit = .topEntries // FOR TESTING ONLY
     var limitParameter: Int?
+    
+    var currentManager: PFObject?
+    var currentTeamPerson: PFObject?
+    var currentMeeting: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +51,25 @@ class TodoViewController: UIViewController {
         configureRowHeight()
         //getCurrentPerson()
         setUpTopSectionView()
+        
+        // FOR TESTING ONLY
+        //currentTeamPerson = makeFakePerson()
+        //currentMeeting = makeFakeMeeting()
     }
+    
+    /*
+    fileprivate func makeFakeMeeting() -> PFObject {
+        let fakeMeeting = PFObject(className: "Meeting")
+        fakeMeeting[ObjectKeys.Meeting.objectId] = "C47VdSyaGG"
+        fakeMeeting[ObjectKeys.Meeting.personId] = "IAa9IGKU3p"
+        return fakeMeeting
+    }
+    
+    fileprivate func makeFakePerson() -> PFObject {
+        let fakePerson = PFObject(className: "Person")
+        fakePerson[ObjectKeys.Person.objectId] = "IAa9IGKU3p"
+        return fakePerson
+    }*/
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -77,7 +99,7 @@ class TodoViewController: UIViewController {
                 debugPrint("Unable to retrieve current person with error: \(error.localizedDescription)")
             } else {
                 if let manager = manager {
-                    self.currentPerson = manager
+                    self.currentManager = manager
                     self.populateTodoItemsTable()
                 } else {
                     debugPrint("Manager is nil")
@@ -89,7 +111,7 @@ class TodoViewController: UIViewController {
     fileprivate func populateTodoItemsTable() {
         switch viewTypes {
         case .dashboard:
-            if let manager = self.currentPerson {
+            if let manager = self.currentManager {
                 parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false) {  (items: [PFObject]?, error: Error?) in
                     
                     if let error = error {
@@ -109,10 +131,48 @@ class TodoViewController: UIViewController {
             }
         case .employeeDetail:
             // pass in managerId, personId
-            break
+            // We only want to show the todo related to the current user account
+            if let manager = self.currentManager, let currentTeamPerson = self.currentTeamPerson {
+                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false) { (items: [PFObject]?, error: Error?) in
+                    
+                    if let error = error {
+                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    } else {
+                        if let items = items, items.count > 0 {
+                            self.todoItems = items
+                            self.tableView.reloadData()
+                            debugPrint("Fetching todo items successful, reloading table")
+                        } else {
+                            debugPrint("TodoItems is nil or contains 0 items")
+                        }
+                    }
+                }
+            }  else {
+                debugPrint("Manager or current team member is nil, cannot fetch todoItems")
+            }
         case .meeting:
             // pass in managerId, personId, meetingId
-            break
+            // We only want to show the todo related to the current user account
+            if let manager = self.currentManager, let currentMeeting = self.currentMeeting {
+                let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                
+                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: personId, meetingId: currentMeeting.objectId!, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false) { (items: [PFObject]?, error: Error?) in
+                    
+                    if let error = error {
+                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    } else {
+                        if let items = items, items.count > 0 {
+                            self.todoItems = items
+                            self.tableView.reloadData()
+                            debugPrint("Fetching todo items successful, reloading table")
+                        } else {
+                            debugPrint("TodoItems is nil or contains 0 items")
+                        }
+                    }
+                }
+            }  else {
+                debugPrint("Manager or current meeting object is nil, cannot fetch todoItems")
+            }
         }
     }
 
@@ -130,7 +190,7 @@ class TodoViewController: UIViewController {
     fileprivate func openSeeAllTodoVC() {
         let storyboard = UIStoryboard.init(name: "Todo", bundle: nil)
         let seeAllTodoVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoVC) as! TodoViewController
-        seeAllTodoVC.currentPerson = self.currentPerson
+        seeAllTodoVC.currentManager = self.currentManager
         seeAllTodoVC.viewTypes = self.viewTypes
         seeAllTodoVC.todoLimit = .seeAll
         seeAllTodoVC.limitParameter = nil
@@ -251,23 +311,28 @@ extension TodoViewController: TodoAddCellDelegate {
     // TODO: move the PFObject and Parse logic to Todo wrapper class?
     fileprivate func createTodoObject(todoString: String) -> PFObject {
         let todoObject = PFObject(className: "ToDo")
-        if let manager = currentPerson {
+        if let manager = currentManager {
             todoObject[ObjectKeys.ToDo.managerId] = manager.objectId!
         }
         todoObject[ObjectKeys.ToDo.text] = todoString
         
-        /*
         switch viewTypes {
         case ViewTypes.dashboard:
-            break
+            debugPrint("Adding todo in dashboard")
+            
         case ViewTypes.employeeDetail:
             // add personId (employeeId) to the todoObject dictionary
-            break
+            if let currentTeamPerson = currentTeamPerson {
+                todoObject[ObjectKeys.ToDo.personId] = currentTeamPerson.objectId!
+            }
         case ViewTypes.meeting:
             // add personId and meetingId to the todoObject dictionary
-            break
-        }*/
-        
+            if let currentMeeting = currentMeeting {
+                let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                todoObject[ObjectKeys.ToDo.personId] = personId
+                todoObject[ObjectKeys.ToDo.meetingId] = currentMeeting.objectId!
+            }
+        }
         return todoObject
     }
     
