@@ -128,6 +128,7 @@ class MeetingDetailsViewController: UIViewController {
     
     func onSaveButton(_ sender: UIBarButtonItem) {
         
+        // TODO save companyId to table
         let query = PFQuery(className: "Person")
         let firstName = personTextField.text! as String
         query.whereKey("firstName", equalTo: firstName)

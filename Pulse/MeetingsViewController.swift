@@ -93,6 +93,10 @@ class MeetingsViewController: UIViewController {
         }
     }
     
+    func heightForView() -> CGFloat {
+        return 44*4 // TODO
+    }
+    
     // MARK: - IBAction
     
     @IBAction func onSeeAllButton(_ sender: AnyObject) {

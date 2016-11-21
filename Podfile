@@ -10,5 +10,6 @@ pod 'ParseUI'
 pod 'SVProgressHUD'
 pod 'RKDropdownAlert'
 pod 'AFNetworking', '3.0.0'
+pod 'SwiftChart'
 
 end

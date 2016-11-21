@@ -113,6 +113,14 @@ extension DashboardViewController: UITableViewDataSource {
         // The actual cards
         } else {
             switch selectedCards[indexPath.row].id! {
+            case "g":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "GraphViewController")
+                self.addChildViewController(vc)
+                cell.contentView.addSubview(vc.view)
+                return cell
+                
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
@@ -166,8 +174,16 @@ extension DashboardViewController: UITableViewDelegate {
         }
         
         switch selectedCards[indexPath.row].id! {
+        case "g":
+            let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+            return viewController.heightForView()
+            
         case "m":
-            return 44*4 // TODO
+            let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+            return viewController.heightForView()
+            
         case "t":
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController

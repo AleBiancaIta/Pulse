@@ -22,6 +22,7 @@ PODS:
     - Parse (~> 1.9)
   - RKDropdownAlert (0.3.0)
   - SVProgressHUD (2.0.3)
+  - SwiftChart (0.3.0)
 
 DEPENDENCIES:
   - AFNetworking (= 3.0.0)
@@ -29,6 +30,7 @@ DEPENDENCIES:
   - ParseUI
   - RKDropdownAlert
   - SVProgressHUD
+  - SwiftChart
 
 SPEC CHECKSUMS:
   AFNetworking: 932ff751f9d6fb1dad0b3af58b7e3ffba0a4e7fd
@@ -37,7 +39,8 @@ SPEC CHECKSUMS:
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   RKDropdownAlert: f4b3364c251829ad439dc666836a1f2dad26f4c7
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
+  SwiftChart: 39b48ba287a9f77a2a958726ff58fc05d5d9129f
 
-PODFILE CHECKSUM: c2e9f1405180214346728994f059313b9871f2cd
+PODFILE CHECKSUM: 7dc44e74eb0d5928632f205484cc2e4b48f896e9
 
 COCOAPODS: 1.0.1
