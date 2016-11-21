@@ -71,15 +71,12 @@ class DashboardViewController: UIViewController {
     // MARK: - IBAction
     
     func onAddCard() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let dashboardSelectionNavigationController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionNavigationController") as! UINavigationController
-        
-        if let dashboardSelectionViewController = dashboardSelectionNavigationController.topViewController as? DashboardSelectionViewController {
-            dashboardSelectionViewController.delegate = self
-            dashboardSelectionViewController.selectedCards = selectedCards
-        }
-        
-        present(dashboardSelectionNavigationController, animated: true, completion: nil)
+        let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionViewController") as! DashboardSelectionViewController
+        viewController.delegate = self
+        viewController.selectedCards = selectedCards
+        let navController = UINavigationController(rootViewController: viewController)
+        present(navController, animated: true, completion: nil)
     }
     
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {

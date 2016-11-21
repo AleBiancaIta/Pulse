@@ -33,14 +33,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // For testing Team only
         if currentUser != nil {
-            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
             let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
             self.window?.rootViewController = dashboardNavVC
             debugPrint("current user inside the appDelegate \(currentUser)")
         }
 //
 //        if currentUser != nil {
-//            let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+//            let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
 //            let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
 //            self.window?.rootViewController = dashboardNavVC
 //            debugPrint("current user inside the appDelegate \(currentUser)")

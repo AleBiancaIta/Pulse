@@ -54,7 +54,7 @@ class LoginSignUpViewController: UIViewController {
                 debugPrint("Anonymous user is \(PFUser.current()), username is \(PFUser.current()?.username), id is \(PFUser.current()?.objectId)")
         
                 // segue to dashboard view
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
                 let dashboardVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
                 self.present(dashboardVC, animated: true, completion: nil)
             }

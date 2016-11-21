@@ -159,7 +159,7 @@ class SignUpViewController: UIViewController {
     }
     
     fileprivate func segueToDashboardVC() {
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
         let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
         self.present(dashboardNavVC, animated: true, completion: nil)
     }

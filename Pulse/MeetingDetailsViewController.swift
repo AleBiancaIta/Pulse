@@ -118,7 +118,7 @@ class MeetingDetailsViewController: UIViewController {
             return
         }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let selectionNavigationController = storyboard.instantiateViewController(withIdentifier: "SelectionNavigationController") as! UINavigationController
         
         /*if let selectionViewController = selectionNavigationController.topViewController as? SelectionViewController {
