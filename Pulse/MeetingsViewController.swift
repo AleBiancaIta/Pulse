@@ -64,7 +64,7 @@ class MeetingsViewController: UIViewController {
                                         "managerId": post["managerId"],
                                         "surveyId": post["surveyId"],
                                         "meetingDate": meetingDate,
-                                        "notes": post["notes"]
+                                        "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "")
                                     ]
                                     
                                     let meeting = Meeting(dictionary: dictionary)
@@ -79,7 +79,7 @@ class MeetingsViewController: UIViewController {
                                         "managerId": post["managerId"],
                                         "surveyId": post["surveyId"],
                                         "meetingDate": meetingDate,
-                                        "notes": post["notes"]
+                                        "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "")
                                     ]
                                     
                                     let meeting = Meeting(dictionary: dictionary)

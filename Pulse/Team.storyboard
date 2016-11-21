@@ -18,19 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jil-jH-HK7" userLabel="Add Button">
-                                <rect key="frame" x="345" y="58" width="22" height="22"/>
-                                <connections>
-                                    <action selector="onAddButtonTap:" destination="p0f-yH-iaE" eventType="touchUpInside" id="6Zv-WE-OEs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-Bh-2S4">
-                                <rect key="frame" x="10" y="54" width="47" height="30"/>
-                                <state key="normal" title="See All"/>
-                                <connections>
-                                    <segue destination="r7D-jI-xXf" kind="show" id="g6U-Qz-8sR"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKU-No-zSt">
                                 <rect key="frame" x="10" y="28" width="39" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
@@ -56,17 +43,6 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jil-jH-HK7" userLabel="Add Button">
-                                <connections>
-                                    <action selector="onAddButtonTap:" destination="p0f-yH-iaE" eventType="touchUpInside" id="6Zv-WE-OEs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-Bh-2S4">
-                                <state key="normal" title="See All"/>
-                                <connections>
-                                    <segue destination="r7D-jI-xXf" kind="show" id="g6U-Qz-8sR"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
