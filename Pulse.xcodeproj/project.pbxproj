@@ -183,13 +183,8 @@
 			isa = PBXGroup;
 			children = (
 				67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */,
-				437DE0571DD936C200B08988 /* Team.storyboard */,
-				43EC9BB71DE12D6A006C8703 /* Todo.storyboard */,
-				431804A31DD6843700B279C6 /* Login.storyboard */,
-				67A364AE1DCD8DA500BFD931 /* Dashboard.storyboard */,
 				676CEF411DE26493000FA406 /* Meeting.storyboard */,
 				676CEF461DE29429000FA406 /* Notes.storyboard */,
-				71ACDE601DD94AC4005D85DE /* Person.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -282,7 +277,7 @@
 				437DE0571DD936C200B08988 /* Team.storyboard */,
 				43EC9BB71DE12D6A006C8703 /* Todo.storyboard */,
 				431804A31DD6843700B279C6 /* Login.storyboard */,
-				67A364AE1DCD8DA500BFD931 /* Main.storyboard */,
+				67A364AE1DCD8DA500BFD931 /* Dashboard.storyboard */,
 				71ACDE601DD94AC4005D85DE /* Person.storyboard */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
 				67A364B61DCD8DA500BFD931 /* Info.plist */,
@@ -395,9 +390,8 @@
 				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
 				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
 				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
-				67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */,
 				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
-				67BCA1531DD9964100E7EE74 /* Main.storyboard in Resources */,
+				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
 				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 			);

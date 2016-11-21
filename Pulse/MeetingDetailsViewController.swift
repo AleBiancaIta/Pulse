@@ -41,6 +41,7 @@ class MeetingDetailsViewController: UIViewController {
 
         title = "Meeting"
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
         tableView.dataSource = self
@@ -119,6 +120,10 @@ class MeetingDetailsViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc fileprivate func onCancelButtonTap(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
     }
     
     func onSaveButton(_ sender: UIBarButtonItem) {

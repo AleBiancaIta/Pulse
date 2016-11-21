@@ -105,7 +105,8 @@ class MeetingsViewController: UIViewController {
     @IBAction func onAddButton(_ sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
-        navigationController?.pushViewController(viewController, animated: true)
+        let navController = UINavigationController(rootViewController: viewController)
+        present(navController, animated: true, completion: nil)
     }
 }
 
