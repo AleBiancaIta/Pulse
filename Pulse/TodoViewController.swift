@@ -36,6 +36,7 @@ class TodoViewController: UIViewController {
     
     var todoItems = [PFObject]()
     var todoCompletedItems = [PFObject]()
+    var deletedItemIndexPath: IndexPath? = nil
     
     var shouldShowCompleted = false
     var viewTypes: ViewTypes = .dashboard // FOR TESTING ONLY
@@ -353,7 +354,6 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .showCompleted:
             shouldShowCompleted = !shouldShowCompleted
             tableView.reloadData()
-            
         case .listCompleted:
             break
         }
@@ -366,7 +366,72 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        switch CellTypes(rawValue: indexPath.section)! {
+        case .list:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        switch CellTypes(rawValue: indexPath.section)! {
+        case .list:
+            if editingStyle == .delete {
+                deletedItemIndexPath = indexPath
+                let todoItemToDelete = todoItems[indexPath.row]
+                confirmDelete(todoItem: todoItemToDelete)
+            }
+        default:
+            // do nothing
+            break
+        }
+    }
+    
+    // MARK: - Helpers
+    fileprivate func confirmDelete(todoItem: PFObject) {
+        ABIShowAlertWithActions(title: "Alert", message: "Are you sure you want to delete this item?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
+            if alertAction.title == "Confirm" {
+                self.handleDeletingItem()
+            }
+        }, handler2: { (alertAction: UIAlertAction) in
+            if alertAction.title == "Cancel" {
+                self.cancelDeletingItem()
+            }
+        })
+    }
+    
+    fileprivate func handleDeletingItem() {
+        if let indexPath = deletedItemIndexPath {
+            tableView.beginUpdates()
+            let deletedTodo = todoItems.remove(at: indexPath.row)
+            deletedTodo[ObjectKeys.ToDo.deletedAt] = Date()
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            deletedItemIndexPath = nil
+            tableView.endUpdates()
+            
+            // Update Parse
+            deletedTodo.saveInBackground(block: { (success: Bool, error: Error?) in
+                if success {
+                    debugPrint("Successfully 'deleting' todo item")
+                } else {
+                    debugPrint("Failed to 'delete' todo item with error: \(error?.localizedDescription)")
+                    // TODO: reset deleted item or retry later?
+                }
+            })
+        }
+    }
+    
+    fileprivate func cancelDeletingItem() {
+        // reset deletedItemIndexPath
+        deletedItemIndexPath = nil
+        
+    }
 }
+
+// MARK: - TodoAddCellDelegate
 
 extension TodoViewController: TodoAddCellDelegate {
     func todoAddCell(_ todoAddCell: TodoAddCell, todoString: String) {
@@ -400,10 +465,7 @@ extension TodoViewController: TodoAddCellDelegate {
             }
         }
 
-
-        // save to Parse
-        // reload table
-        // maybe explore batching request when have time?
+        // TODO: explore batching request when have time?
     }
     
     // MARK: - Helpers
@@ -436,6 +498,8 @@ extension TodoViewController: TodoAddCellDelegate {
         return todoObject
     }
 }
+
+// MARK: - TodoListCellDelegate
 
 extension TodoViewController: TodoListCellDelegate {
     func todoListCell(_ todoListCell: TodoListCell, isCompleted: Bool) {
@@ -475,8 +539,6 @@ extension TodoViewController: TodoListCellDelegate {
                 })
             }
         }
-        
-        
     }
 }
 
