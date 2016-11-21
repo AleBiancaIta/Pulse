@@ -136,7 +136,6 @@ class MeetingDetailsViewController: UIViewController {
                     debugPrint("post contains \(post.objectId!)")
                 }
                 
-                
                 // Survey
                 let post = PFObject(className: "Survey")
                 post["surveyDesc1"] = "happiness"
@@ -152,7 +151,7 @@ class MeetingDetailsViewController: UIViewController {
                             if let person = person {
                                 let managerId = person.objectId
                                 let dictionary: [String: Any] = [
-                                    "personId": personId, // TODO
+                                    "personId": personId, // TODO fix this
                                     "managerId": managerId,
                                     "surveyId": post.objectId!,
                                     "meetingDate": Date()
@@ -277,6 +276,16 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 cell.contentView.addSubview(viewController.view)
                 return cell
                 
+            case "n":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                let storyboard = UIStoryboard(name: "Notes", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+                viewController.delegate = self
+                viewController.notes = meeting.notes
+                self.addChildViewController(viewController)
+                cell.contentView.addSubview(viewController.view)
+                return cell
+                
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 for subview in cell.contentView.subviews  {
@@ -310,6 +319,12 @@ extension MeetingDetailsViewController: UITableViewDelegate {
             let storyboard = UIStoryboard(name: "Todo", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
             return viewController.heightForView()
+        
+        case "n":
+            let storyboard = UIStoryboard(name: "Notes", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+            return viewController.heightForView()
+            
         default:
             return defaultHeight
         }
@@ -401,5 +416,11 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
         }
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
+    }
+}
+
+extension MeetingDetailsViewController: NotesViewControllerDelegate {
+    func notesViewController(notesViewController: NotesViewController, didUpdateNotes notes: String) {
+        meeting.notes = notes
     }
 }

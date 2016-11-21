@@ -58,33 +58,32 @@ class MeetingsViewController: UIViewController {
                             if let meetingDateString = post["meetingDate"] as? String,
                                 let meetingDate = dateFormatter.date(from: meetingDateString) {
                                 
-                                // TODO use this later for Upcoming meetings -- if meetingDate >= Date() {
+                                // TODO remove this chunk later, where meetingDate is string
                                     let dictionary = [
                                         "personId": post["personId"],
                                         "managerId": post["managerId"],
                                         "surveyId": post["surveyId"],
                                         "meetingDate": meetingDate,
+                                        "notes": post["notes"],
                                         "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "")
                                     ]
                                     
                                     let meeting = Meeting(dictionary: dictionary)
                                     self.meetings.append(meeting)
-                                //}
                             }
                             
                             if let meetingDate = post["meetingDate"] as? Date {
-                                // TODO if meetingDate >= Date() {
-                                    let dictionary = [
-                                        "personId": post["personId"],
-                                        "managerId": post["managerId"],
-                                        "surveyId": post["surveyId"],
-                                        "meetingDate": meetingDate,
-                                        "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "")
-                                    ]
-                                    
-                                    let meeting = Meeting(dictionary: dictionary)
-                                    self.meetings.append(meeting)
-                                //}
+                                let dictionary = [
+                                    "personId": post["personId"],
+                                    "managerId": post["managerId"],
+                                    "surveyId": post["surveyId"],
+                                    "meetingDate": meetingDate,
+                                    "notes": post["notes"],
+                                    "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "")
+                                ]
+                                
+                                let meeting = Meeting(dictionary: dictionary)
+                                self.meetings.append(meeting)
                             }
                         }
                     }

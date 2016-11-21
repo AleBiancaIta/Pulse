@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Notes View Controller-->
+        <scene sceneID="jrN-yO-x4X">
+            <objects>
+                <viewController storyboardIdentifier="NotesViewController" id="tvH-dU-4Cf" customClass="NotesViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1No-Q5-gWd"/>
+                        <viewControllerLayoutGuide type="bottom" id="4eI-7x-3fF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="73p-hP-Hdv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JnB-bi-nGG">
+                                <color key="backgroundColor" red="1" green="0.43529412150000002" blue="0.81176471709999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="hbP-Kh-37K"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="JnB-bi-nGG" secondAttribute="trailing" constant="8" id="H1n-Df-gng"/>
+                            <constraint firstItem="JnB-bi-nGG" firstAttribute="leading" secondItem="73p-hP-Hdv" secondAttribute="leading" constant="8" id="MR4-0w-Gp0"/>
+                            <constraint firstItem="JnB-bi-nGG" firstAttribute="top" secondItem="1No-Q5-gWd" secondAttribute="bottom" constant="8" id="MrO-Qa-Tzq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="notesTextView" destination="JnB-bi-nGG" id="TwA-78-sBO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Vl-fJ-IBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="562" y="-220"/>
+        </scene>
+    </scenes>
+</document>
