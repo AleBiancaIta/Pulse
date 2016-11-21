@@ -80,10 +80,6 @@ class TodoViewController: UIViewController {
     func heightForView() -> CGFloat {
         return 240; // TODO fix this to calculate height properly
     }
-    
-    func heightForView() -> CGFloat {
-        return 240; // TODO fix this to calculate height properly
-    }
 
     // MARK: - Helpers
     
@@ -266,33 +262,6 @@ class TodoViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "Todo", bundle: nil)
         let seeAllTodoVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoVC) as! TodoViewController
         seeAllTodoVC.currentManager = self.currentManager
-        seeAllTodoVC.viewTypes = self.viewTypes
-        seeAllTodoVC.todoLimit = .seeAll
-        seeAllTodoVC.limitParameter = nil
-        self.navigationController?.pushViewController(seeAllTodoVC, animated: true)
-    }
-    
-    // MARK: - Actions
-    
-    @IBAction func onSeeAllButtonTap(_ sender: UIButton) {
-        openSeeAllTodoVC()
-    }
-
-    fileprivate func setUpTopSectionView() {
-        switch todoLimit {
-        case .topEntries:
-            topSectionView.isHidden = false
-            limitParameter = 3
-        case .seeAll:
-            topSectionView.isHidden = true
-            limitParameter = nil
-        }
-    }
-    
-    fileprivate func openSeeAllTodoVC() {
-        let storyboard = UIStoryboard.init(name: "Todo", bundle: nil)
-        let seeAllTodoVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoVC) as! TodoViewController
-        seeAllTodoVC.currentPerson = self.currentPerson
         seeAllTodoVC.viewTypes = self.viewTypes
         seeAllTodoVC.todoLimit = .seeAll
         seeAllTodoVC.limitParameter = nil
