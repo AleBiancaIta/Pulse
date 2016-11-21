@@ -15,8 +15,6 @@ class MeetingDetailsViewController: UIViewController {
     
     @IBOutlet weak var personTextField: UITextField! // Person ID // TODO should be name
     
-    @IBOutlet weak var notesTextView: UITextView!
-    
     // TODO use objectkey.survey to display on labels
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
@@ -30,9 +28,11 @@ class MeetingDetailsViewController: UIViewController {
     @IBOutlet weak var survey3Med: UISwitch!
     @IBOutlet weak var survey3High: UISwitch!
     
-    static var cards: [Card] = [] // TODO
-    
     var alertController: UIAlertController?
+    
+    var selectedCardsString: String? = ""
+    var selectedCards: [Card] = []
+    
     var meeting: Meeting!
     // var survey: Survey!
     
@@ -43,14 +43,11 @@ class MeetingDetailsViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
-        // TODO
-        tableView.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        tableView.register(UINib(nibName: "CardCellNib", bundle: nil), forCellReuseIdentifier: "CardCell")
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
         alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
@@ -59,7 +56,22 @@ class MeetingDetailsViewController: UIViewController {
         // Existing meeting
         if nil != meeting {
             personTextField.text = meeting.personId
-            notesTextView.text = meeting.notes
+            
+            if let selectedCardsString = meeting.selectedCards {
+                self.selectedCardsString = selectedCardsString
+                for c in (meeting.selectedCards?.characters)! {
+                    switch c {
+                    case "d":
+                        selectedCards.append(Constants.meetingCards[0])
+                    case "n":
+                        selectedCards.append(Constants.meetingCards[1])
+                    case "p":
+                        selectedCards.append(Constants.meetingCards[2])
+                    default:
+                        break
+                    }
+                }
+            }
             
             let query = PFQuery(className: "Survey")
             query.whereKey(ObjectKeys.Survey.objectId, equalTo: meeting.surveyId)
@@ -109,26 +121,6 @@ class MeetingDetailsViewController: UIViewController {
         }
     }
     
-    // MARK: - Private Methods
-    
-    /*func onAddButton(_ sender: UIBarButtonItem) {
-        guard MeetingDetailsViewController.cards.count != Constants.dashboardCards.count else {
-            alertController?.message = "You already have all the cards"
-            present(alertController!, animated: true)
-            return
-        }
-        
-        let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
-        let selectionNavigationController = storyboard.instantiateViewController(withIdentifier: "SelectionNavigationController") as! UINavigationController
-        
-        /*if let selectionViewController = selectionNavigationController.topViewController as? SelectionViewController {
-            selectionViewController.delegate = self
-            selectionViewController.selectionType = "meeting"
-        }*/
-        
-        present(selectionNavigationController, animated: true, completion: nil)
-    }*/
-    
     func onSaveButton(_ sender: UIBarButtonItem) {
         
         let query = PFQuery(className: "Person")
@@ -163,8 +155,7 @@ class MeetingDetailsViewController: UIViewController {
                             "personId": personId, // TODO
                             "managerId": managerId,
                             "surveyId": post.objectId!,
-                            "meetingDate": Date(),
-                            "notes": self.notesTextView.text
+                            "meetingDate": Date()
                         ]
                         self.meeting = Meeting(dictionary: dictionary)
                         print("survey saved successfully")
@@ -254,138 +245,140 @@ class MeetingDetailsViewController: UIViewController {
             survey3Med.isOn = false
         }
     }
+    
+    func onAddCard() {
+        let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsSelectionViewController") as! MeetingDetailsSelectionViewController
+        viewController.delegate = self
+        viewController.selectedCards = selectedCards
+        let navController = UINavigationController(rootViewController: viewController)
+        present(navController, animated: true, completion: nil)
+    }
 }
 
-// MARK: - SelectionViewControllerDelegate
-
-/*extension MeetingDetailsViewController: SelectionViewControllerDelegate {
-    
-    func selectionViewController(selectionViewController: SelectionViewController, didAddDashboardCard card: Card) {
-        // Do nothing
-    }
-    
-    func selectionViewController(selectionViewController: SelectionViewController, didRemoveDashboardCard card: Card) {
-        // Do nothing
-    }
-    
-    func selectionViewController(selectionViewController: SelectionViewController, didAddMeetingCard card: Card) {
-        // Insert new card at the top of the table view
-        MeetingDetailsViewController.cards.insert(card, at: 0)
-        tableView.reloadData()
-    }
-    func selectionViewController(selectionViewController: SelectionViewController, didRemoveMeetingCard card: Card) {
-        // Remove card from table view
-        for (index, meetingCard) in MeetingDetailsViewController.cards.enumerated() {
-            if meetingCard.id == card.id {
-                MeetingDetailsViewController.cards.remove(at: index)
-            }
-        }
-        tableView.reloadData()
-    }
-}
-*/
 // MARK: - UITableViewDataSource
 
 extension MeetingDetailsViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MeetingDetailsViewController.cards.count
-    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // No cards
-        if MeetingDetailsViewController.cards.count == 0 {
-            var cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as? MessageCell
-            if nil == cell {
-                cell = UITableViewCell(style: .default, reuseIdentifier: "MessageCell") as? MessageCell
-            }
-            cell?.message = "Tap the + button to add cards"
-            cell?.isUserInteractionEnabled = false
-            return cell!
-            
-            // Last section
-        } else if indexPath.section == numberOfSections(in: tableView) - 1 {
-            var cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as? MessageCell
-            if nil == cell {
-                cell = UITableViewCell(style: .default, reuseIdentifier: "MessageCell") as? MessageCell
-            }
-            cell?.message = "Tap the + button to add cards"
-            cell?.isUserInteractionEnabled = false
-            return cell!
         
-            // TODO replace the cells with the actual view
-        } else {
-            /*var cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath) as? CardCell
-            if nil == cell {
-                cell = (UITableViewCell(style: .default, reuseIdentifier: "CardCell") as? CardCell)!
-            }
-            cell?.delegate = self
-            cell?.card = MeetingDetailsViewController.cards[indexPath.section]
-            return cell!*/
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+        if indexPath.row == selectedCards.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.message = "Tap here to manage cards"
             return cell
+            
+            // The actual cards
+        } else {
+            switch selectedCards[indexPath.row].id! {
+            // TODO
+                
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                for subview in cell.contentView.subviews  {
+                    subview.removeFromSuperview() // Reset subviews
+                }
+                cell.textLabel?.text = selectedCards[indexPath.row].name
+                return cell
+            }
+            
         }
-        
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return MeetingDetailsViewController.cards.count + 2
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("TESTTEST\(selectedCards.count + 1)")
+        return selectedCards.count + 1
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension MeetingDetailsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        guard indexPath.row < selectedCards.count else {
+            return 44
+        }
+        
+        switch selectedCards[indexPath.row].id! {
+        // TODO
+        default:
+            return 44
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Deselect row appearance after it has been selected
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == selectedCards.count {
+            onAddCard()
+        }
+    }
 }
 
-// MARK: - CardCellDelegate
+// MARK: - MeetingDetailsSelectionViewControllerDelegate
 
-/*extension MeetingDetailsViewController: CardCellDelegate {
-    func cardCell(cardCell: CardCell, didMoveUp card: Card) {
-        for (index, meetingCard) in MeetingDetailsViewController.cards.enumerated() {
-            if meetingCard.id == card.id {
-                
-                // First card
-                guard index != 0 else {
-                    alertController?.message = "This card cannot move up further"
-                    present(alertController!, animated: true)
-                    return
+extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDelegate {
+    
+    func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didAddCard card: Card) {
+        print("ADDADD")
+        /*let query = PFQuery(className: "Meeting")
+        query.whereKey("objectId", equalTo: meeting.objectId)
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCardsString = self.selectedCardsString {
+                let post = posts[0]
+                post["userId"] = userId
+                self.selectedCardsString = "\(id)\(selectedCardsString)"
+                post["selectedCards"] = self.selectedCardsString
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    if success {
+                        print("successfully saved dashboard card")
+                    } else {
+                        print(error?.localizedDescription)
+                    }
                 }
-                
-                // Swap with card before
-                let cardBefore = MeetingDetailsViewController.cards[index-1]
-                MeetingDetailsViewController.cards[index-1] = card
-                MeetingDetailsViewController.cards[index] = cardBefore
-                tableView.reloadData()
+            } else {
+                print(error?.localizedDescription)
             }
         }
+        
+        // Insert new card at the top of the table view
+        selectedCards.insert(card, at: 0)
+        tableView.reloadData()
+        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)*/
     }
     
-    func cardCell(cardCell: CardCell, didMoveDown card: Card) {
-        for (index, meetingCard) in MeetingDetailsViewController.cards.enumerated() {
-            if meetingCard.id == card.id { // TODO find better way to do this
-                
-                // Last card
-                guard index < MeetingDetailsViewController.cards.count - 1 else {
-                    alertController?.message = "This card cannot move down further"
-                    present(alertController!, animated: true)
-                    return
+    func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didRemoveCard card: Card) {
+        print("REMOVEREMOVE")
+        /*let query = PFQuery(className: "Dashboard")
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCardsString = self.selectedCardsString {
+                let post = posts[0]
+                post["userId"] = userId
+                self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
+                post["selectedCards"] = self.selectedCardsString
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    print("successfully removed dashboard card")
                 }
-                
-                // Swap with card after
-                let cardAfter = MeetingDetailsViewController.cards[index+1]
-                MeetingDetailsViewController.cards[index+1] = card
-                MeetingDetailsViewController.cards[index] = cardAfter
-                tableView.reloadData()
+            } else {
+                print(error?.localizedDescription)
             }
         }
-    }
-    
-    func cardCell(cardCell: CardCell, didDelete card: Card) {
+        
         // Remove card from table view
-        for (index, meetingCard) in MeetingDetailsViewController.cards.enumerated() {
-            if meetingCard.id == card.id {
-                MeetingDetailsViewController.cards.remove(at: index)
+        for (index, dashboardCard) in selectedCards.enumerated() {
+            if dashboardCard.id == card.id {
+                selectedCards.remove(at: index)
             }
         }
         tableView.reloadData()
+        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)*/
     }
-}*/
-
+}

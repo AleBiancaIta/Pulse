@@ -27,11 +27,14 @@ class MeetingDetailsSelectionViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        title = "Meeting Cards"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
     }
     
     // MARK: - IBAction
     
-    @IBAction func onDoneButton(_ sender: UIBarButtonItem) {
+    @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 }
