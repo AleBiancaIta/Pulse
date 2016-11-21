@@ -44,7 +44,8 @@ class TodoViewController: UIViewController {
     
     var currentManager: PFObject?
     var currentTeamPerson: PFObject?
-    var currentMeeting: PFObject?
+    //var currentMeeting: PFObject?
+    var currentMeeting: Meeting?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,7 +156,8 @@ class TodoViewController: UIViewController {
             // pass in managerId, personId, meetingId
             // We only want to show the todo related to the current user account
             if let manager = self.currentManager, let currentMeeting = self.currentMeeting {
-                let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                //let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                let personId = currentMeeting.personId
                 
                 parseClient.fetchTodoFor(managerId: manager.objectId!, personId: personId, meetingId: currentMeeting.objectId!, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: false) { (items: [PFObject]?, error: Error?) in
                     
@@ -223,7 +225,8 @@ class TodoViewController: UIViewController {
             // pass in managerId, personId, meetingId
             // We only want to show the todo related to the current user account
             if let manager = self.currentManager, let currentMeeting = self.currentMeeting {
-                let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                //let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                let personId = currentMeeting.personId
                 
                 parseClient.fetchTodoFor(managerId: manager.objectId!, personId: personId, meetingId: currentMeeting.objectId!, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: true) { (items: [PFObject]?, error: Error?) in
                     
@@ -425,7 +428,8 @@ extension TodoViewController: TodoAddCellDelegate {
         case ViewTypes.meeting:
             // add personId and meetingId to the todoObject dictionary
             if let currentMeeting = currentMeeting {
-                let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                //let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
+                let personId = currentMeeting.personId
                 todoObject[ObjectKeys.ToDo.personId] = personId
                 todoObject[ObjectKeys.ToDo.meetingId] = currentMeeting.objectId!
             }
