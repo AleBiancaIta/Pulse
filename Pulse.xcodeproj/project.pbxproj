@@ -398,6 +398,7 @@
 				67D8D65C1DD5AF1500B6DE19 /* MeetingDetailsViewController.xib in Resources */,
 				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
 				67BCA1531DD9964100E7EE74 /* Main.storyboard in Resources */,
+				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -19,11 +19,10 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iml-I3-uQh">
-                        <rect key="frame" x="5" y="2" width="310" height="73.5"/>
+                        <rect key="frame" x="5" y="5" width="310" height="67.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Square" translatesAutoresizingMaskIntoConstraints="NO" id="lYE-LU-XTT">
                                 <rect key="frame" x="8" y="8" width="20" height="20"/>
-                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Lzi-1v-b7h"/>
                                     <constraint firstAttribute="width" constant="20" id="x67-8u-4i4"/>
@@ -59,8 +58,8 @@
                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="iml-I3-uQh" secondAttribute="trailing" constant="5" id="Mx3-Gc-Gfy"/>
-                    <constraint firstAttribute="bottom" secondItem="iml-I3-uQh" secondAttribute="bottom" constant="2" id="RZn-57-VZN"/>
-                    <constraint firstItem="iml-I3-uQh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="cTh-gX-Lqv"/>
+                    <constraint firstAttribute="bottom" secondItem="iml-I3-uQh" secondAttribute="bottom" constant="5" id="RZn-57-VZN"/>
+                    <constraint firstItem="iml-I3-uQh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="cTh-gX-Lqv"/>
                     <constraint firstItem="iml-I3-uQh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="n5d-e4-b0Y"/>
                 </constraints>
             </tableViewCellContentView>
