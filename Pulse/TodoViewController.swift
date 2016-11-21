@@ -275,7 +275,7 @@ class TodoViewController: UIViewController {
     @IBAction func onSeeAllButtonTap(_ sender: UIButton) {
         openSeeAllTodoVC()
     }
-    
+
     /*
     // MARK: - Navigation
 
@@ -435,6 +435,6 @@ extension TodoViewController: TodoAddCellDelegate {
             }
         }
         return todoObject
-    }
-    
+    }    
 }
+

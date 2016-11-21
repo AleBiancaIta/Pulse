@@ -119,6 +119,8 @@ struct CellReuseIdentifier {
         static let todoAddCell = "TodoAddCell"
         static let todoListCell = "TodoListCell"
         static let todoShowCompletedCell = "TodoShowCompletedCell"
+        //static let todoTableViewCell = "TodoTableViewCell"
+
     }
 }
 
