@@ -528,7 +528,7 @@ extension TodoViewController: TodoAddCellDelegate {
         case ViewTypes.employeeDetail:
             // add personId (employeeId) to the todoObject dictionary
             if let currentTeamPerson = currentTeamPerson {
-                todoObject[ObjectKeys.ToDo.personId] = currentTeamPerson.objectId!
+                todoObject[ObjectKeys.ToDo.personId] = currentTeamPerson.objectId!                
             }
         case ViewTypes.meeting:
             // add personId and meetingId to the todoObject dictionary

@@ -21,13 +21,14 @@ class TodoListCell: UITableViewCell {
     @IBOutlet weak var todoLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     
+    let parseClient = ParseClient.sharedInstance()
     var isCompleted: Bool!
     weak var delegate: TodoListCellDelegate?
     
     var todoObject: PFObject! {
         didSet {
             todoLabel.text = todoObject[ObjectKeys.ToDo.text] as? String
-            nameLabel.text = todoObject[ObjectKeys.ToDo.personId] as? String
+            //nameLabel.text = todoObject[ObjectKeys.ToDo.personId] as? String
             
             if let _ = todoObject[ObjectKeys.ToDo.completedAt] {
                 isCompleted = true
@@ -35,6 +36,25 @@ class TodoListCell: UITableViewCell {
             } else {
                 isCompleted = false
                 squareImageView.image = UIImage(named: "Square")
+            }
+            
+            if let personId = todoObject[ObjectKeys.ToDo.personId] as? String {
+                
+                // Probably not the best place to do this?? TODO
+                parseClient.fetchPersonFor(personId: personId) { (person: PFObject?, error: Error?) in
+                    if let error = error {
+                        debugPrint("error: \(error.localizedDescription)")
+                    } else {
+                        if let person = person {
+                            let firstName = person[ObjectKeys.Person.firstName] as! String
+                            let lastName = person[ObjectKeys.Person.lastName] as! String
+                            
+                            self.nameLabel.text = "\(firstName) \(lastName)"
+                        }
+                    }
+                }
+            } else {
+                nameLabel.text = ""
             }
         }
     }

@@ -45,8 +45,27 @@ class ParseClient: NSObject {
             })
         } else {
             let userInfo = [NSLocalizedDescriptionKey: "currentUser is nil"]
-            let error = NSError(domain: "ParseClient", code: 0, userInfo: userInfo)
-            completion(nil, error as Error)
+            let error = NSError(domain: "ParseClient", code: 0, userInfo: userInfo) as Error
+            completion(nil, error)
+        }
+    }
+    
+    func fetchPersonFor(personId: String, completion: @escaping (PFObject?, Error?) -> ()) {
+        let query = PFQuery(className: "Person")
+        query.whereKey(ObjectKeys.Person.objectId, equalTo: personId)
+        query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                if let persons = persons, persons.count > 0 {
+                    let person = persons[0]
+                    completion(person, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "fetchPerson query returns no person with id: \(personId)"]
+                    let error = NSError(domain: "ParseClient fetchPersonFor", code: 0, userInfo: userInfo) as Error
+                    completion(nil, error)
+                }
+            }
         }
     }
     
