@@ -71,7 +71,7 @@ class TeamViewDataSource: NSObject {
                     //debugPrint("predicate in manager is \(predicate)")
                     //debugPrint("manager is \(manager)")
                     
-                    self.parseClient.fetchMeetingsFor(personId: personId, managerId: manager.objectId!, orderBy: orderBy , limit: limit, predicate: nil, completion: { (meetings: [PFObject]?, error: Error?) in
+                    self.parseClient.fetchMeetingsFor(personId: personId, managerId: manager.objectId!, meetingDate: nil, orderBy: orderBy , limit: limit, isDeleted: false, predicate: nil, completion: { (meetings: [PFObject]?, error: Error?) in
                         
                         debugPrint("in fetch latest: personId: \(personId), managerId: \(manager.objectId!)")
                         
@@ -96,7 +96,7 @@ class TeamViewDataSource: NSObject {
     }
     
     func getSelectedPersonObjectAt(indexPath: IndexPath) -> PFObject? {
-        return teamMembers[indexPath.row] ?? nil
+        return teamMembers[indexPath.row]
     }
 }
 

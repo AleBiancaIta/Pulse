@@ -47,31 +47,16 @@ class TodoViewController: UIViewController {
     var currentTeamPerson: PFObject?
     //var currentMeeting: PFObject?
     var currentMeeting: Meeting?
+    var currentMeetingObject: PFObject?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         registerCellNibs()
         configureRowHeight()
         setUpTopSectionView()
-        
-        // FOR TESTING ONLY
-        //currentTeamPerson = makeFakePerson()
-        //currentMeeting = makeFakeMeeting()
+        //getCurrentManager()
+        //getCurrentMeetingObject()
     }
-    
-    /*
-    fileprivate func makeFakeMeeting() -> PFObject {
-        let fakeMeeting = PFObject(className: "Meeting")
-        fakeMeeting[ObjectKeys.Meeting.objectId] = "C47VdSyaGG"
-        fakeMeeting[ObjectKeys.Meeting.personId] = "IAa9IGKU3p"
-        return fakeMeeting
-    }
-    
-    fileprivate func makeFakePerson() -> PFObject {
-        let fakePerson = PFObject(className: "Person")
-        fakePerson[ObjectKeys.Person.objectId] = "IAa9IGKU3p"
-        return fakePerson
-    }*/
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -95,17 +80,72 @@ class TodoViewController: UIViewController {
         tableView.register(UINib(nibName: "TodoShowCompletedCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Todo.todoShowCompletedCell)
     }
     
-    fileprivate func populateTodoTables() {
+    fileprivate func getCurrentManager(completion: @escaping (_ success: Bool, _ error: Error?)->()) {
         parseClient.getCurrentPerson { (manager: PFObject?, error: Error?) in
             if let error = error {
-                debugPrint("Unable to retrieve current person with error: \(error.localizedDescription)")
+                //debugPrint("Unable to retrieve current person with error: \(error.localizedDescription)")
+                completion(false, error)
             } else {
                 if let manager = manager {
                     self.currentManager = manager
+                    completion(true, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "Manager is nil"]
+                    let tempError = NSError(domain: "TodoVC getCurrentManager", code: 0, userInfo: userInfo) as Error
+                    completion(false, tempError)
+                }
+            }
+        }
+    }
+    
+    fileprivate func getCurrentMeetingObject(completion: @escaping (_ success: Bool, _ error: Error?)->()) {
+        if let meeting = currentMeeting, let manager = currentManager {
+            parseClient.fetchMeetingsFor(personId: meeting.personId, managerId: manager.objectId!, meetingDate: meeting.meetingDate, orderBy: nil, limit: nil, isDeleted: false, predicate: nil) { (meetings: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Failed to retrieve meeting object, error: \(error.localizedDescription)")
+                    completion(false, error)
+                } else {
+                    if let meetings = meetings, meetings.count > 0 {
+                        self.currentMeetingObject = meetings[0]
+                        completion(true, nil)
+                    } else {
+                        let userInfo = [NSLocalizedDescriptionKey: "get current meeting object returned nil"]
+                        let tempError = NSError(domain: "TodoVC getCurrentMeetingObject", code: 0, userInfo: userInfo) as Error
+                        completion(false, tempError)
+                    }
+                }
+            }
+        } else {
+            let userInfo = [NSLocalizedDescriptionKey: "in getCurrentMeetingObject, either currentMeeting or currentManager is nil"]
+            let tempError = NSError(domain: "TodoVC getCurrentMeetingObject", code: 0, userInfo: userInfo) as Error
+            completion(false, tempError)
+        }
+    }
+    
+    fileprivate func populateTodoTables() {
+        switch viewTypes {
+        case .dashboard, .employeeDetail: // assume getting a currentTeamPerson as PFObject, if not, need to adjust
+            getCurrentManager { (success: Bool, error: Error?) in
+                if success {
                     self.populateTodoItemsTable()
                     self.populateTodoCompletedItemsTable()
                 } else {
-                    debugPrint("Manager is nil")
+                    debugPrint("Couldn't get current manager with error: \(error?.localizedDescription)")
+                }
+            }
+        case .meeting:
+            getCurrentManager { (success: Bool, error: Error?) in
+                if success {
+                    self.getCurrentMeetingObject { (succes: Bool, error: Error?) in
+                        if success {
+                            self.populateTodoItemsTable()
+                            self.populateTodoCompletedItemsTable()
+                        } else {
+                            debugPrint("Couldn't get current meeting object with error: \(error?.localizedDescription)")
+                        }
+                    }
+                } else {
+                    debugPrint("Couldn't get current manager with error: \(error?.localizedDescription)")
                 }
             }
         }
@@ -114,137 +154,128 @@ class TodoViewController: UIViewController {
     fileprivate func populateTodoItemsTable() {
         switch viewTypes {
         case .dashboard:
-            if let manager = self.currentManager {
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: false) {  (items: [PFObject]?, error: Error?) in                    
-                    if let error = error {
-                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+            fetchTodoDashboard(isCompleted: false) { (items: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                } else {
+                    if let items = items, items.count > 0 {
+                        self.todoItems = items
+                        self.tableView.reloadData()
+                        debugPrint("Fetching todo items successful, reloading table")
                     } else {
-                        if let items = items, items.count > 0 {
-                            self.todoItems = items
-                            self.tableView.reloadData()
-                            debugPrint("Fetching todo items successful, reloading table")
-                        } else {
-                            debugPrint("TodoItems is nil or contains 0 items")
-                        }
+                        debugPrint("TodoItems is nil or contains 0 items")
                     }
                 }
-            } else {
-                debugPrint("Manager is nil, cannot fetch todoItems")
             }
         case .employeeDetail:
-            // pass in managerId, personId
-            // We only want to show the todo related to the current user account
-            if let manager = self.currentManager, let currentTeamPerson = self.currentTeamPerson {
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: false) { (items: [PFObject]?, error: Error?) in
-                    
-                    if let error = error {
-                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+            fetchTodoEmployeeDetail(isCompleted: false) { (items: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                } else {
+                    if let items = items, items.count > 0 {
+                        self.todoItems = items
+                        self.tableView.reloadData()
+                        debugPrint("Fetching todo items successful, reloading table")
                     } else {
-                        if let items = items, items.count > 0 {
-                            self.todoItems = items
-                            self.tableView.reloadData()
-                            debugPrint("Fetching todo items successful, reloading table")
-                        } else {
-                            debugPrint("TodoItems is nil or contains 0 items")
-                        }
+                        debugPrint("TodoItems is nil or contains 0 items")
                     }
                 }
-            }  else {
-                debugPrint("Manager or current team member is nil, cannot fetch todoItems")
             }
         case .meeting:
-            // pass in managerId, personId, meetingId
-            // We only want to show the todo related to the current user account
-            if let manager = self.currentManager, let currentMeeting = self.currentMeeting {
-                //let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
-                let personId = currentMeeting.personId
-                
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: personId, meetingId: currentMeeting.objectId!, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: false) { (items: [PFObject]?, error: Error?) in
-                    
-                    if let error = error {
-                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+            fetchTodoMeeting(isCompleted: false) { (items: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                } else {
+                    if let items = items, items.count > 0 {
+                        self.todoItems = items
+                        self.tableView.reloadData()
+                        debugPrint("Fetching todo items successful, reloading table")
                     } else {
-                        if let items = items, items.count > 0 {
-                            self.todoItems = items
-                            self.tableView.reloadData()
-                            debugPrint("Fetching todo items successful, reloading table")
-                        } else {
-                            debugPrint("TodoItems is nil or contains 0 items")
-                        }
+                        debugPrint("TodoItems is nil or contains 0 items")
                     }
                 }
-            }  else {
-                debugPrint("Manager or current meeting object is nil, cannot fetch todoItems")
             }
         }
     }
-
+    
     fileprivate func populateTodoCompletedItemsTable() {
         switch viewTypes {
         case .dashboard:
-            if let manager = self.currentManager {
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: true) {  (items: [PFObject]?, error: Error?) in
-                    
-                    if let error = error {
-                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+            fetchTodoDashboard(isCompleted: true) { (items: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                } else {
+                    if let items = items, items.count > 0 {
+                        self.todoCompletedItems = items
+                        self.tableView.reloadData()
+                        debugPrint("Fetching todo items successful, reloading table")
                     } else {
-                        if let items = items, items.count > 0 {
-                            self.todoCompletedItems = items
-                            self.tableView.reloadData()
-                            debugPrint("Fetching todo items successful, reloading table")
-                        } else {
-                            debugPrint("TodoItems is nil or contains 0 items")
-                        }
+                        debugPrint("TodoItems is nil or contains 0 items")
                     }
                 }
-            } else {
-                debugPrint("Manager is nil, cannot fetch todoItems")
             }
         case .employeeDetail:
-            // pass in managerId, personId
-            // We only want to show the todo related to the current user account
-            if let manager = self.currentManager, let currentTeamPerson = self.currentTeamPerson {
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: true) { (items: [PFObject]?, error: Error?) in
-                    
-                    if let error = error {
-                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+            fetchTodoEmployeeDetail(isCompleted: true) { (items: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                } else {
+                    if let items = items, items.count > 0 {
+                        self.todoCompletedItems = items
+                        self.tableView.reloadData()
+                        debugPrint("Fetching todo items successful, reloading table")
                     } else {
-                        if let items = items, items.count > 0 {
-                            self.todoCompletedItems = items
-                            self.tableView.reloadData()
-                            debugPrint("Fetching todo items successful, reloading table")
-                        } else {
-                            debugPrint("TodoItems is nil or contains 0 items")
-                        }
+                        debugPrint("TodoItems is nil or contains 0 items")
                     }
                 }
-            }  else {
-                debugPrint("Manager or current team member is nil, cannot fetch todoItems")
             }
         case .meeting:
-            // pass in managerId, personId, meetingId
-            // We only want to show the todo related to the current user account
-            if let manager = self.currentManager, let currentMeeting = self.currentMeeting {
-                //let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
-                let personId = currentMeeting.personId
-                
-                parseClient.fetchTodoFor(managerId: manager.objectId!, personId: personId, meetingId: currentMeeting.objectId!, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: true) { (items: [PFObject]?, error: Error?) in
-                    
-                    if let error = error {
-                        debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+            fetchTodoMeeting(isCompleted: true) { (items: [PFObject]?, error: Error?) in
+                if let error = error {
+                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                } else {
+                    if let items = items, items.count > 0 {
+                        self.todoCompletedItems = items
+                        self.tableView.reloadData()
+                        debugPrint("Fetching todo items successful, reloading table")
                     } else {
-                        if let items = items, items.count > 0 {
-                            self.todoCompletedItems = items
-                            self.tableView.reloadData()
-                            debugPrint("Fetching todo items successful, reloading table")
-                        } else {
-                            debugPrint("TodoItems is nil or contains 0 items")
-                        }
+                        debugPrint("TodoItems is nil or contains 0 items")
                     }
                 }
-            }  else {
-                debugPrint("Manager or current meeting object is nil, cannot fetch todoItems")
             }
+        }
+    }
+    
+    fileprivate func fetchTodoDashboard(isCompleted: Bool, completion: @escaping ([PFObject]?, Error?)->()) {
+        if let manager = self.currentManager {
+            parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
+        } else {
+            debugPrint("Manager is nil, cannot fetch todoItems")
+        }
+    }
+    
+    fileprivate func fetchTodoEmployeeDetail(isCompleted: Bool, completion: @escaping ([PFObject]?, Error?)->()) {
+        // pass in managerId, personId
+        // We only want to show the todo related to the current user account
+        if let manager = self.currentManager, let currentTeamPerson = self.currentTeamPerson {
+            parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
+            
+        }  else {
+            debugPrint("Manager or current team member is nil, cannot fetch todoItems")
+        }
+    }
+    
+    fileprivate func fetchTodoMeeting(isCompleted: Bool, completion: @escaping ([PFObject]?, Error?)->()) {
+        // pass in managerId, personId (from meeting), meetingId
+        // We only want to show the todo related to the current user account
+        if let manager = self.currentManager, let meeting = self.currentMeetingObject {
+            let personId = meeting[ObjectKeys.Meeting.personId] as! String
+            let meetingId = meeting.objectId!
+            let managerId = manager.objectId!
+            
+            parseClient.fetchTodoFor(managerId: managerId, personId: personId, meetingId: meetingId, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
+            
+        }  else {
+            debugPrint("Manager or meeting object is nil, cannot fetch todoItems")
         }
     }
     
@@ -266,6 +297,11 @@ class TodoViewController: UIViewController {
         seeAllTodoVC.viewTypes = self.viewTypes
         seeAllTodoVC.todoLimit = .seeAll
         seeAllTodoVC.limitParameter = nil
+        
+        if let meeting = self.currentMeeting {
+            seeAllTodoVC.currentMeeting = meeting
+        }
+
         self.navigationController?.pushViewController(seeAllTodoVC, animated: true)
     }
     
@@ -488,11 +524,10 @@ extension TodoViewController: TodoAddCellDelegate {
             }
         case ViewTypes.meeting:
             // add personId and meetingId to the todoObject dictionary
-            if let currentMeeting = currentMeeting {
-                //let personId = currentMeeting[ObjectKeys.Meeting.personId] as! String
-                let personId = currentMeeting.personId
+            if let meeting = currentMeetingObject {
+                let personId = meeting[ObjectKeys.Meeting.personId] as! String
                 todoObject[ObjectKeys.ToDo.personId] = personId
-                todoObject[ObjectKeys.ToDo.meetingId] = currentMeeting.objectId!
+                todoObject[ObjectKeys.ToDo.meetingId] = meeting.objectId!
             }
         }
         return todoObject

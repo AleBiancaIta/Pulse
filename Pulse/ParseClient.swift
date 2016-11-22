@@ -66,7 +66,7 @@ class ParseClient: NSObject {
     }
     
     // Order descending
-    func fetchMeetingsFor(personId: String, managerId: String, orderBy: String?, limit: Int?, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
+    func fetchMeetingsFor(personId: String, managerId: String, meetingDate: Date?, orderBy: String?, limit: Int?, isDeleted: Bool, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
         
         // TODO: Need to filter out deleted meetings at some point
         
@@ -78,12 +78,22 @@ class ParseClient: NSObject {
 //            query = PFQuery(className: "Meetings")
 //        }
         
+        if let meetingDate = meetingDate {
+            query.whereKey(ObjectKeys.Meeting.meetingDate, equalTo: meetingDate)
+        }
+        
         if let orderBy = orderBy {
             query.order(byDescending: orderBy)
         }
         
         if let limit = limit {
             query.limit = limit
+        }
+        
+        if isDeleted {
+            query.whereKeyExists(ObjectKeys.Meeting.deletedAt)
+        } else {
+            query.whereKeyDoesNotExist(ObjectKeys.Meeting.deletedAt)
         }
         
         query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
