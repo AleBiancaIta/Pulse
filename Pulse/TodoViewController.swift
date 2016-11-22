@@ -298,10 +298,18 @@ class TodoViewController: UIViewController {
         seeAllTodoVC.todoLimit = .seeAll
         seeAllTodoVC.limitParameter = nil
         
-        if let meeting = self.currentMeeting {
-            seeAllTodoVC.currentMeeting = meeting
+        switch viewTypes {
+        case .dashboard:
+            break
+        case .employeeDetail:
+            if let teamPerson = self.currentTeamPerson {
+                seeAllTodoVC.currentTeamPerson = teamPerson
+            }
+        case .meeting:
+            if let meeting = self.currentMeeting {
+                seeAllTodoVC.currentMeeting = meeting
+            }
         }
-
         self.navigationController?.pushViewController(seeAllTodoVC, animated: true)
     }
     
