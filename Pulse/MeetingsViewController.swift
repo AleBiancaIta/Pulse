@@ -18,7 +18,7 @@ class MeetingsViewController: UIViewController {
     var meetings: [Meeting] = []
     var expanded = false
     
-    var personId: String? // Employee ID - TODO Ale, when adding this to person details, set this parameter
+    var personId: String? // Employee ID - TODO - Ale, when adding this to person details, set this parameter
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,14 +32,19 @@ class MeetingsViewController: UIViewController {
         tableView.delegate = self
         
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
-        
+    
+        loadMeetings()
+    }
+    
+    func loadMeetings() {
         ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
             if let person = person {
                 
                 let query = PFQuery(className: "Meetings")
-
+                
                 let managerId = person.objectId! as String
                 query.whereKey("managerId", equalTo: managerId)
+                query.order(byDescending: "meetingDate")
                 
                 if let personId = self.personId {
                     query.whereKey("personId", equalTo: personId)
@@ -59,17 +64,17 @@ class MeetingsViewController: UIViewController {
                                 let meetingDate = dateFormatter.date(from: meetingDateString) {
                                 
                                 // TODO remove this chunk later, where meetingDate is string
-                                    let dictionary = [
-                                        "personId": post["personId"],
-                                        "managerId": post["managerId"],
-                                        "surveyId": post["surveyId"],
-                                        "meetingDate": meetingDate,
-                                        "notes": post["notes"],
-                                        "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "") as Any
-                                    ]
-                                    
-                                    let meeting = Meeting(dictionary: dictionary)
-                                    self.meetings.append(meeting)
+                                let dictionary = [
+                                    "personId": post["personId"],
+                                    "managerId": post["managerId"],
+                                    "surveyId": post["surveyId"],
+                                    "meetingDate": meetingDate,
+                                    "notes": post["notes"],
+                                    "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "") as Any
+                                ]
+                                
+                                let meeting = Meeting(dictionary: dictionary)
+                                self.meetings.append(meeting)
                             }
                             
                             if let meetingDate = post["meetingDate"] as? Date {
@@ -109,6 +114,7 @@ class MeetingsViewController: UIViewController {
     @IBAction func onAddButton(_ sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
+        viewController.editMode = false
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -117,10 +123,22 @@ extension MeetingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
         if 0 < meetings.count {
-            let personId = meetings[indexPath.row].personId // TODO should be person name
-            let meetingDate = meetings[indexPath.row].meetingDate
+            
+            let formatter = DateFormatter()
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .short
+            let meetingDate = formatter.string(from: meetings[indexPath.row].meetingDate)
+            
+            let personQuery = PFQuery(className: "Person")
+            personQuery.whereKey(ObjectKeys.Person.objectId, equalTo: meetings[indexPath.row].personId)
+            personQuery.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+                if let persons = persons,
+                    let person = persons[0] as? PFObject,
+                    let personName = person["firstName"] as? String {
+                    cell.messageLabel.text = "\(personName) (\(meetingDate))"
+                }
+            }
             cell.accessoryType = .disclosureIndicator
-            cell.messageLabel.text = "\(personId) (\(meetingDate))"
 
         } else {
             cell.messageLabel.text = "You have no meetings"

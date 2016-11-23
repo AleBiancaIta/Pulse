@@ -13,9 +13,8 @@ class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var personTextField: UITextField! // Person ID // TODO should be name
+    @IBOutlet weak var personTextField: UITextField!
     
-    // TODO use objectkey.survey to display on labels
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
     @IBOutlet weak var survey1High: UISwitch! // 2
@@ -34,7 +33,7 @@ class MeetingDetailsViewController: UIViewController {
     var selectedCards: [Card] = []
     
     var meeting: Meeting!
-    // var survey: Survey!
+    var editMode = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +49,27 @@ class MeetingDetailsViewController: UIViewController {
         
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
-        alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+        alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
+        loadExistingMeeting()
+    }
+    
+    func loadExistingMeeting() {
         // Existing meeting
         if nil != meeting {
-            personTextField.text = meeting.personId
+            let personQuery = PFQuery(className: "Person")
+            personQuery.whereKey(ObjectKeys.Person.objectId, equalTo: meeting.personId)
+            personQuery.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+                if let error = error {
+                    print("Unable to find survey associated with survey id, error: \(error.localizedDescription)")
+                } else {
+                    if let persons = persons {
+                        let person = persons[0]
+                        self.personTextField.text = person["firstName"] as? String
+                    }
+                }
+            }
             
             if let selectedCardsString = meeting.selectedCards {
                 self.selectedCardsString = selectedCardsString
@@ -132,59 +146,104 @@ class MeetingDetailsViewController: UIViewController {
             return
         }
         
-        // TODO save companyId to table
-        let query = PFQuery(className: "Person")
-        let firstName = personTextField.text! as String
-        query.whereKey("firstName", equalTo: firstName)
+        if editMode {
+            saveExistingMeeting()
+        } else {
+            saveNewMeeting()
+        }
+    }
+    
+    func saveExistingMeeting() {
+        let query = PFQuery(className: "Survey")
+        query.whereKey("objectId", equalTo: meeting.surveyId)
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
             if let posts = posts {
-                let person = posts[0]
-                let personId = person.objectId
-        
-                debugPrint("no of items in posts: \(posts.count)")
-                for post in posts {
-                    debugPrint("post contains \(post.objectId!)")
-                }
-                
-                // Survey
-                let post = PFObject(className: "Survey")
+                let post = posts[0]
                 post["surveyDesc1"] = "happiness"
                 post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
                 post["surveyDesc2"] = "engagement"
                 post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
                 post["surveyDesc3"] = "workload"
                 post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
-                post["companyId"] = person["companyId"]
                 post.saveInBackground(block: { (success: Bool, error: Error?) in
-                    
                     if success {
-                        ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
-                            if let person = person {
-                                let managerId = person.objectId
+                        Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
+                            if success {
+                                self.editMode = true
+                                self.alertController?.message = "Successfully saved meeting"
+                                self.present(self.alertController!, animated: true)
+                            } else {
+                                self.alertController?.message = "Meeting was unable to be saved"
+                                self.present(self.alertController!, animated: true)
+                            }
+                        }
+                    } else {
+                        self.alertController?.message = "Meeting was unable to be saved"
+                        self.present(self.alertController!, animated: true)
+                    }
+                })
+            }
+        }
+    }
+    
+    func saveNewMeeting() {
+        ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
+            if let userPerson = person {
+                let query = PFQuery(className: "Person")
+                let firstName = self.personTextField.text! as String
+                query.whereKey("firstName", equalTo: firstName)
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
+                    if let posts = posts {
+                        let person = posts[0]
+                        let personId = person.objectId
+                        
+                        debugPrint("no of items in posts: \(posts.count)")
+                        for post in posts {
+                            debugPrint("post contains \(post.objectId!)")
+                        }
+                        
+                        // Survey
+                        let post = PFObject(className: "Survey")
+                        post["surveyDesc1"] = "happiness"
+                        post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
+                        post["surveyDesc2"] = "engagement"
+                        post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
+                        post["surveyDesc3"] = "workload"
+                        post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
+                        post["companyId"] = userPerson["companyId"]
+                        post.saveInBackground(block: { (success: Bool, error: Error?) in
+                            
+                            if success {
+                                let managerId = userPerson.objectId
                                 let dictionary: [String: Any] = [
                                     "personId": personId, // TODO fix this
                                     "managerId": managerId,
                                     "surveyId": post.objectId!,
-                                    "meetingDate": Date()
+                                    "meetingDate": Date() // tODO fix this
                                 ]
                                 self.meeting = Meeting(dictionary: dictionary)
                                 print("survey saved successfully")
                                 
                                 Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
                                     if success {
-                                        print("Successfully saved meeting")
+                                        self.editMode = true
+                                        self.alertController?.message = "Successfully saved meeting."
+                                        self.present(self.alertController!, animated: true)
                                         let _ = self.navigationController?.popViewController(animated: true)
                                     } else {
                                         self.alertController?.message = "Meeting was unable to be saved"
                                         self.present(self.alertController!, animated: true)
                                     }
                                 }
+                            } else {
+                                self.alertController?.message = "Meeting was unable to be saved"
+                                self.present(self.alertController!, animated: true)
                             }
                         })
                     }
-                })
+                }
             }
-        }
+        })
     }
     
     // MARK: - IBAction
