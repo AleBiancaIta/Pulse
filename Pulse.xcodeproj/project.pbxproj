@@ -22,6 +22,10 @@
 		431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804AE1DD7F2CC00B279C6 /* Person.swift */; };
 		431804B11DD83A4A00B279C6 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */; };
 		431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */; };
+		437903A11DE5069600945C63 /* TodoEditPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */; };
+		437903A21DE5069600945C63 /* TodoEditPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437903A01DE5069600945C63 /* TodoEditPersonCell.xib */; };
+		437903A51DE51BB400945C63 /* TodoEditTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437903A31DE51BB400945C63 /* TodoEditTextCell.swift */; };
+		437903A61DE51BB400945C63 /* TodoEditTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437903A41DE51BB400945C63 /* TodoEditTextCell.xib */; };
 		437DE04B1DD90F0100B08988 /* TeamCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */; };
 		437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */; };
 		437DE0581DD936C200B08988 /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 437DE0571DD936C200B08988 /* Team.storyboard */; };
@@ -86,6 +90,10 @@
 		431804AE1DD7F2CC00B279C6 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
+		4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditPersonCell.swift; sourceTree = "<group>"; };
+		437903A01DE5069600945C63 /* TodoEditPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoEditPersonCell.xib; sourceTree = "<group>"; };
+		437903A31DE51BB400945C63 /* TodoEditTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditTextCell.swift; sourceTree = "<group>"; };
+		437903A41DE51BB400945C63 /* TodoEditTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoEditTextCell.xib; sourceTree = "<group>"; };
 		437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCollectionCell.swift; sourceTree = "<group>"; };
 		437DE04A1DD90F0100B08988 /* TeamCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCollectionCell.xib; sourceTree = "<group>"; };
 		437DE0571DD936C200B08988 /* Team.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Team.storyboard; sourceTree = "<group>"; };
@@ -228,6 +236,10 @@
 				43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */,
 				43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */,
 				43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */,
+				437903A31DE51BB400945C63 /* TodoEditTextCell.swift */,
+				437903A41DE51BB400945C63 /* TodoEditTextCell.xib */,
+				4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */,
+				437903A01DE5069600945C63 /* TodoEditPersonCell.xib */,
 				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 			);
 			name = Views;
@@ -378,6 +390,7 @@
 			files = (
 				431804A41DD6843700B279C6 /* Login.storyboard in Resources */,
 				437DE06B1DD9C40600B08988 /* TeamTableViewCell.xib in Resources */,
+				437903A21DE5069600945C63 /* TodoEditPersonCell.xib in Resources */,
 				676CEF421DE26493000FA406 /* Meeting.storyboard in Resources */,
 				431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */,
 				71ACDE611DD94AC4005D85DE /* Person.storyboard in Resources */,
@@ -398,6 +411,7 @@
 				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
 				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
 				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
+				437903A61DE51BB400945C63 /* TodoEditTextCell.xib in Resources */,
 				67F0DB351DE2D4F5006C7925 /* Graph.storyboard in Resources */,
 				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
@@ -462,9 +476,11 @@
 				67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */,
 				437DE0621DD9648000B08988 /* Meeting.swift in Sources */,
 				71ACDE651DD9534A005D85DE /* ImageViewController.swift in Sources */,
+				437903A51DE51BB400945C63 /* TodoEditTextCell.swift in Sources */,
 				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
 				437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */,
+				437903A11DE5069600945C63 /* TodoEditPersonCell.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,

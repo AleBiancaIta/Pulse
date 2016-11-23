@@ -31,7 +31,7 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topSectionView: UIView!
     
-    fileprivate let CellSections = ["Add Todo", "List Todo", "Show Completed", "List Completed"]
+    fileprivate let cellSections = ["Add Todo", "List Todo", "Show Completed", "List Completed"]
     fileprivate let parseClient = ParseClient.sharedInstance()
     
     var todoItems = [PFObject]()
@@ -336,9 +336,9 @@ class TodoViewController: UIViewController {
 extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
         if shouldShowCompleted {
-            return CellSections.count
+            return cellSections.count
         } else {
-            return CellSections.count - 1
+            return cellSections.count - 1
         }
     }
     
@@ -394,7 +394,11 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .add:
             break
         case .list:
-            break
+            let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+            let todoEditVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoEditVC) as! TodoEditViewController
+            todoEditVC.viewTypes = self.viewTypes
+            todoEditVC.todoItem = todoItems[indexPath.row]
+            self.navigationController?.pushViewController(todoEditVC, animated: true)
         case .showCompleted:
             shouldShowCompleted = !shouldShowCompleted
             tableView.reloadData()

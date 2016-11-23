@@ -20,15 +20,15 @@ class SettingsHeaderCell: UITableViewCell {
     var user: PFUser! {
         didSet {
             // Check if user is anonymous
-            if PFAnonymousUtils.isLinked(with: user) {
-                usernameLabel.text = "Hello, Anonymous"
-                emailLabel.isHidden = true
-            } else {
+//            if PFAnonymousUtils.isLinked(with: user) {
+//                usernameLabel.text = "Hello, Anonymous"
+//                emailLabel.isHidden = true
+//            } else {
                 if let user = user {
                     usernameLabel.text = "Hello, \(user.username!)"
                     emailLabel.text = user.email
                 }
-            }
+            //}
         }
     }
 

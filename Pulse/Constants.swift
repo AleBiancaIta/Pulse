@@ -35,6 +35,7 @@ struct StoryboardID {
     static let signupVC = "SignupVC"
     static let teamCollectionVC = "TeamCollectionVC"
     static let todoVC = "TodoVC"
+    static let todoEditVC = "TodoEditVC"
 }
 
 struct ObjectKeys {
@@ -119,6 +120,8 @@ struct CellReuseIdentifier {
         static let todoAddCell = "TodoAddCell"
         static let todoListCell = "TodoListCell"
         static let todoShowCompletedCell = "TodoShowCompletedCell"
+        static let todoEditTextCell = "TodoEditTextCell"
+        static let todoEditPersonCell = "TodoEditPersonCell"
     }
 }
 
