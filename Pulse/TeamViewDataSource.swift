@@ -34,7 +34,7 @@ class TeamViewDataSource: NSObject {
             } else {
                 if let person = person {
                     self.currentPerson = person
-                    self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, completion: { (members: [PFObject]?, error: Error?) in
+                    self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, completion: { (members: [PFObject]?, error: Error?) in
                         if let error = error {
                             completion(false, error)
                         } else {

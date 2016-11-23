@@ -17,13 +17,44 @@ class TodoEditPersonCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var downArrowImageView: UIImageView!
     
+    var highlightBackground: Bool! {
+        didSet {
+            cellBackgroundView.backgroundColor = highlightBackground! ? UIColor.lightGray : UIColor.white
+        }
+    }
+    
+    var selectedPerson: PFObject! {
+        didSet {
+            configureNameLabel(person: selectedPerson)
+        }
+    }
+    
+    var firstRow: Bool? {
+        didSet{
+            if firstRow! {
+                // Show down arrow
+                downArrowImageView.isHidden = false
+                downArrowImageView.image = UIImage(named: "DownArrow")
+                forLabel.isHidden = false
+            } else {
+                // Hide down arrow
+                downArrowImageView.isHidden = true
+                forLabel.isHidden = true
+            }
+        }
+    }
+    
     var person: PFObject! {
         didSet {
-            let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
-            let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
-            
-            nameLabel.text = "\(firstName) \(lastName)"
+            configureNameLabel(person: person)
         }
+    }
+    
+    fileprivate func configureNameLabel(person: PFObject) {
+        let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
+        let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
+        nameLabel.text = "\(firstName) \(lastName)"
+        debugPrint("\(firstName) \(lastName)")
     }
     
     override func awakeFromNib() {
