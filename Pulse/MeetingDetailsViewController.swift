@@ -41,7 +41,6 @@ class MeetingDetailsViewController: UIViewController {
 
         title = "Meeting"
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
         tableView.dataSource = self
@@ -122,11 +121,16 @@ class MeetingDetailsViewController: UIViewController {
         }
     }
     
-    @objc fileprivate func onCancelButtonTap(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     func onSaveButton(_ sender: UIBarButtonItem) {
+        
+        if !(nil != personTextField &&
+            (survey1Low.isOn || survey1Med.isOn || survey1High.isOn) &&
+            (survey2Low.isOn || survey2Med.isOn || survey2High.isOn) &&
+            (survey3Low.isOn || survey3Med.isOn || survey3High.isOn)) {
+            self.alertController?.message = "Please complete the required fields."
+            self.present(self.alertController!, animated: true)
+            return
+        }
         
         // TODO save companyId to table
         let query = PFQuery(className: "Person")
@@ -150,6 +154,7 @@ class MeetingDetailsViewController: UIViewController {
                 post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
                 post["surveyDesc3"] = "workload"
                 post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
+                post["companyId"] = person["companyId"]
                 post.saveInBackground(block: { (success: Bool, error: Error?) in
                     
                     if success {

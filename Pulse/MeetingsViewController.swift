@@ -78,7 +78,7 @@ class MeetingsViewController: UIViewController {
                                     "managerId": post["managerId"],
                                     "surveyId": post["surveyId"],
                                     "meetingDate": meetingDate,
-                                    "notes": post["notes"],
+                                    "notes": (nil != post["notes"] ? post["notes"] : ""),
                                     "selectedCards": (nil != post["selectedCards"] ? post["selectedCards"] : "")
                                 ]
                                 
@@ -109,8 +109,7 @@ class MeetingsViewController: UIViewController {
     @IBAction func onAddButton(_ sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
-        let navController = UINavigationController(rootViewController: viewController)
-        present(navController, animated: true, completion: nil)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
