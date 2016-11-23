@@ -20,6 +20,8 @@ class MeetingsViewController: UIViewController {
     
     var personId: String? // Employee ID - TODO - Ale, when adding this to person details, set this parameter
     
+    var alertController: UIAlertController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +39,9 @@ class MeetingsViewController: UIViewController {
     }
     
     func loadMeetings() {
+        // Reset meetings
+        meetings = []
+        
         ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
             if let person = person {
                 
@@ -44,6 +49,7 @@ class MeetingsViewController: UIViewController {
                 
                 let managerId = person.objectId! as String
                 query.whereKey("managerId", equalTo: managerId)
+                query.whereKeyDoesNotExist("deletedAt")
                 query.order(byDescending: "meetingDate")
                 
                 if let personId = self.personId {
@@ -65,6 +71,7 @@ class MeetingsViewController: UIViewController {
                                 
                                 // TODO remove this chunk later, where meetingDate is string
                                 let dictionary = [
+                                    "objectId": post.objectId,
                                     "personId": post["personId"],
                                     "managerId": post["managerId"],
                                     "surveyId": post["surveyId"],
@@ -79,6 +86,7 @@ class MeetingsViewController: UIViewController {
                             
                             if let meetingDate = post["meetingDate"] as? Date {
                                 let dictionary = [
+                                    "objectId": post.objectId,
                                     "personId": post["personId"],
                                     "managerId": post["managerId"],
                                     "surveyId": post["surveyId"],
@@ -114,7 +122,7 @@ class MeetingsViewController: UIViewController {
     @IBAction func onAddButton(_ sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
-        viewController.editMode = false
+        viewController.isExistingMeeting = false
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -148,6 +156,40 @@ extension MeetingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (0 < meetings.count ? meetings.count : 1)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            // Update parse
+            let query = PFQuery(className: "Meetings")
+            let meeting = meetings[indexPath.row]
+               if let meetingId = meeting.objectId {
+                query.whereKey("objectId", equalTo: meetingId)
+            }
+            
+            query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                if let posts = posts {
+                    let post = posts[0]
+                    post["deletedAt"] = Date()
+                    post.saveInBackground { (success: Bool, error: Error?) in
+                        if success {
+                            //self.alertController?.message = "Successfully deleted meeting."
+                            //self.present(self.alertController!, animated: true)
+                            print("Successfully deleted meeting")
+                            self.loadMeetings()
+                        } else {
+                            //self.alertController?.message = "Error deleting meeting."
+                            //self.present(self.alertController!, animated: true)
+                            print("Error deleting meeting")
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

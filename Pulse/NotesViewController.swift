@@ -35,12 +35,7 @@ class NotesViewController: UIViewController {
 
 
 extension NotesViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text == "\n"{
-            textView.resignFirstResponder()
-            delegate?.notesViewController(notesViewController: self, didUpdateNotes: notesTextView.text)
-            return false
-        }
-        return true
+    func textViewDidChange(_ textView: UITextView) {
+        delegate?.notesViewController(notesViewController: self, didUpdateNotes: notesTextView.text)
     }
 }

@@ -33,12 +33,17 @@ class MeetingDetailsViewController: UIViewController {
     var selectedCards: [Card] = []
     
     var meeting: Meeting!
-    var editMode = true
+    var isExistingMeeting = true // False if new meeting, otherwise true
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = "Meeting"
+        
+        if !isExistingMeeting {
+            personTextField.isUserInteractionEnabled = true
+        } else {
+            personTextField.isUserInteractionEnabled = false
+        }
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
@@ -137,6 +142,9 @@ class MeetingDetailsViewController: UIViewController {
     
     func onSaveButton(_ sender: UIBarButtonItem) {
         
+        // TODO Parse Client fetchTeamMembers for managerId 
+        // Do a check to make sure the person entered is actually a team member
+        
         if !(nil != personTextField &&
             (survey1Low.isOn || survey1Med.isOn || survey1High.isOn) &&
             (survey2Low.isOn || survey2Med.isOn || survey2High.isOn) &&
@@ -146,7 +154,7 @@ class MeetingDetailsViewController: UIViewController {
             return
         }
         
-        if editMode {
+        if isExistingMeeting {
             saveExistingMeeting()
         } else {
             saveNewMeeting()
@@ -167,14 +175,26 @@ class MeetingDetailsViewController: UIViewController {
                 post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
                 post.saveInBackground(block: { (success: Bool, error: Error?) in
                     if success {
-                        Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
-                            if success {
-                                self.editMode = true
-                                self.alertController?.message = "Successfully saved meeting"
-                                self.present(self.alertController!, animated: true)
-                            } else {
-                                self.alertController?.message = "Meeting was unable to be saved"
-                                self.present(self.alertController!, animated: true)
+                        let query = PFQuery(className: "Meetings")
+                        if let meetingId = self.meeting.objectId {
+                            query.whereKey("objectId", equalTo: meetingId)
+                            query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
+                                if let posts = posts {
+                                    let post = posts[0]
+                                    post["notes"] = self.meeting.notes
+                                    post["selectedCards"] = self.selectedCardsString
+                                    post.saveInBackground(block: { (success: Bool, error: Error?) in
+                                        if success {
+                                            self.isExistingMeeting = true
+                                            self.personTextField.isUserInteractionEnabled = false
+                                            self.tableView.reloadData()
+                                            self.alertController?.message = "Successfully saved meeting"
+                                            self.present(self.alertController!, animated: true)
+                                        } else {
+                                            print("unable to save meeting")
+                                        }
+                                    })
+                                }
                             }
                         }
                     } else {
@@ -226,10 +246,11 @@ class MeetingDetailsViewController: UIViewController {
                                 
                                 Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
                                     if success {
-                                        self.editMode = true
+                                        self.isExistingMeeting = true
+                                        self.personTextField.isUserInteractionEnabled = false
+                                        self.tableView.reloadData()
                                         self.alertController?.message = "Successfully saved meeting."
                                         self.present(self.alertController!, animated: true)
-                                        let _ = self.navigationController?.popViewController(animated: true)
                                     } else {
                                         self.alertController?.message = "Meeting was unable to be saved"
                                         self.present(self.alertController!, animated: true)
@@ -330,7 +351,11 @@ extension MeetingDetailsViewController: UITableViewDataSource {
         
         if indexPath.row == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-            cell.message = "Tap here to manage cards"
+            if isExistingMeeting {
+                cell.message = "Tap here to manage cards"
+            } else {
+                cell.message = "Save meeting to manage cards"
+            }
             return cell
             
         } else { // The actual cards
@@ -404,7 +429,7 @@ extension MeetingDetailsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == selectedCards.count {
+        if indexPath.row == selectedCards.count && isExistingMeeting {
             onManageCards()
         }
     }
