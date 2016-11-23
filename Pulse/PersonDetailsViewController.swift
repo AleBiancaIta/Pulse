@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import AFNetworking
 import Parse
 
 class PersonDetailsViewController: UIViewController {
 
-	@IBOutlet weak var profileImageView: UIImageView!
+	@IBOutlet weak var photoImageView: PhotoImageView!
 	@IBOutlet weak var firstNameTextField: UITextField!
 	@IBOutlet weak var lastNameTextField: UITextField!
 	@IBOutlet weak var emailTextField: UITextField!
@@ -22,7 +21,6 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var scheduleMeetingLabel: UILabel!
 	@IBOutlet weak var scheduleMeetingDatePicker: UIDatePicker!
 
-	let imagePicker = UIImagePickerController()
 	var photoData: Data?
 	var person: Person?
     var personPFObject: PFObject?
@@ -40,29 +38,11 @@ class PersonDetailsViewController: UIViewController {
 	// MARK: - Initializations
 
 	func initImage() {
-		imagePicker.delegate = self
-
-		profileImageView.layer.cornerRadius = 3
-		profileImageView.clipsToBounds = true
-
-		if let photo = person?.photoUrl {
-			profileImageView.setImageWith(photo)
-		}
+		photoImageView.delegate = self
+		photoImageView.imageUrl = person?.photoUrl
 	}
 
 	func initPerson() {
-
-//		if let person = person {
-//
-//			firstNameTextField.text = person.firstName
-//			lastNameTextField.text = person.lastName
-//			phoneTextField.text = person.phone
-//			emailTextField.text = person.email
-//
-//			navigationItem.title = person.firstName + " " + person.lastName
-//			setEditing(false, animated: true)
-//        }
-//		else
 
 		if let pfObject = personPFObject {
 
@@ -73,17 +53,7 @@ class PersonDetailsViewController: UIViewController {
             lastNameTextField.text = lastName
             phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
-
-			if let pffileData = pfObject[ObjectKeys.Person.photo] as? PFFile {
-				do {
-					if let data = try? pffileData.getData() {
-						photoData = data
-						if let image = UIImage(data: data) {
-							self.profileImageView.image = image
-						}
-					}
-				}
-			}
+			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
 
             navigationItem.title = firstName + " " + lastName
             setEditing(false, animated: true)
@@ -169,7 +139,7 @@ class PersonDetailsViewController: UIViewController {
 		emailTextField.isUserInteractionEnabled = isEditing
 		lastNameTextField.isUserInteractionEnabled = isEditing
 		firstNameTextField.isUserInteractionEnabled = isEditing
-		profileImageView.isUserInteractionEnabled = isEditing
+		photoImageView.isUserInteractionEnabled = isEditing
 
 		phoneTextField.borderStyle = isEditing ? .roundedRect : .none
 		emailTextField.borderStyle = isEditing ? .roundedRect : .none
@@ -235,80 +205,11 @@ class PersonDetailsViewController: UIViewController {
             })
  		}
 	}
-
-	// MARK: - Image
-
-	@IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
-		showAlertAction()
-	}
-
-	func showAlertAction() {
-
-		let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-		let chooseFromLibraryAction = UIAlertAction(title: "Choose from library", style: .default) {
-			(UIAlertAction) in
-			self.chooseFromLibrary()
-		}
-
-		let takeProfilePhotoAction = UIAlertAction(title: "Take profile photo", style: .default) {
-			(UIAlertAction) in
-			self.takeProfilePhoto()
-		}
-
-		let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-		alertController.addAction(chooseFromLibraryAction)
-		alertController.addAction(takeProfilePhotoAction)
-		alertController.addAction(cancelAction)
-
-		present(alertController, animated: true, completion: nil)
-	}
-
-	func takeProfilePhoto() {
-		imagePicker.allowsEditing = false
-		imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-		imagePicker.cameraCaptureMode = .photo
-		imagePicker.modalPresentationStyle = .fullScreen
-		present(imagePicker, animated: true, completion: nil)
-	}
-
-	func chooseFromLibrary() {
-		imagePicker.allowsEditing = false
-		imagePicker.sourceType = .photoLibrary
-		present(imagePicker, animated: true, completion: nil)
-	}
 }
 
-// MARK: - UIImagePickerControllerDelegate
+extension PersonDetailsViewController : PhotoImageViewDelegate {
 
-extension PersonDetailsViewController : UIImagePickerControllerDelegate {
-
-	public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-		let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-		profileImageView.contentMode = .scaleAspectFit
-		profileImageView.image = chosenImage
-		profileImageView.layer.cornerRadius = 3
-		profileImageView.clipsToBounds = true
-
-		let scaledImage = scaleImageWith(newImage: chosenImage, newSize: CGSize(width: 120, height: 120))
-		photoData = UIImagePNGRepresentation(scaledImage)
-
-		dismiss(animated: true, completion: nil)
+	func didSelectImage(sender: PhotoImageView) {
+		self.photoData = sender.photoData
 	}
-
-	public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-		dismiss(animated: true, completion: nil)
-	}
-
-	func scaleImageWith(newImage:UIImage, newSize:CGSize) -> UIImage {
-		UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-		newImage.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-		UIGraphicsEndImageContext()
-		return newImage
-	}
-}
-
-// MARK: - UINavigationControllerDelegate
-
-extension PersonDetailsViewController : UINavigationControllerDelegate {
 }

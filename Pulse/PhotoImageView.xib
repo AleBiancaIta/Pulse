@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="YqC-9h-hOz"/>
+                <outlet property="imageView" destination="1yb-Pw-bB9" id="DpI-Ao-qE9"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="1yb-Pw-bB9">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1yb-Pw-bB9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1Mw-h0-do4"/>
+                <constraint firstItem="1yb-Pw-bB9" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="ero-oK-Nl3"/>
+                <constraint firstItem="1yb-Pw-bB9" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="pgW-ZR-ya9"/>
+                <constraint firstItem="1yb-Pw-bB9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wtN-Ij-27f"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="hEo-xY-dNh" appends="YES" id="kLF-Ji-UTc"/>
+            </connections>
+            <point key="canvasLocation" x="28" y="-121"/>
+        </view>
+        <tapGestureRecognizer id="hEo-xY-dNh" userLabel="Image View Tap Gesture Recognizer">
+            <connections>
+                <action selector="didTapProfileImageView:" destination="-1" id="295-YJ-NXq"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="DefaultPhoto" width="256" height="256"/>
+    </resources>
+</document>

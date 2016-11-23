@@ -36,7 +36,7 @@ class Person: NSObject {
         firstName = dictionary[ObjectKeys.Person.firstName] as! String
         lastName = dictionary[ObjectKeys.Person.lastName] as! String
         positionId = dictionary[ObjectKeys.Person.positionId] as! String
-        
+
         email = dictionary[ObjectKeys.Person.email] as? String
         phone = dictionary[ObjectKeys.Person.phone] as? String
         managerId = dictionary[ObjectKeys.Person.managerId] as? String
@@ -49,7 +49,7 @@ class Person: NSObject {
                 self.photoUrl = photoUrl
             }
         }
-        
+
         selectedCards = dictionary[ObjectKeys.Person.selectedCards] as? String
         deletedAt = dictionary[ObjectKeys.Person.deletedAt] as? Date
 		photo = dictionary[ObjectKeys.Person.photo] as? Data
@@ -73,7 +73,7 @@ class Person: NSObject {
         if let email = person.email {
             parsePerson[ObjectKeys.Person.email] = email
         }
-        
+
         if let phone = person.phone {
             parsePerson[ObjectKeys.Person.phone] = phone
         }
@@ -97,16 +97,27 @@ class Person: NSObject {
         if let deletedAt = person.deletedAt {
             parsePerson[ObjectKeys.Person.deletedAt] = deletedAt
         }
-        
+
+		if let companyId = person.companyId {
+			parsePerson[ObjectKeys.Person.companyId] = companyId
+		}
+
         if let photo = person.photo {
-            parsePerson[ObjectKeys.Person.photo] = PFFile(data: photo)
+
+			let parsePhotoFile = PFFile(data: photo)
+			parsePhotoFile?.saveInBackground(block: { (success: Bool, error: Error?) in
+				if success {
+					parsePerson[ObjectKeys.Person.photo] = parsePhotoFile
+					NSLog("File saved ok")
+				}
+				else {
+					print(error!.localizedDescription);
+				}
+				parsePerson.saveInBackground(block: completion)
+			})
         }
-        
-        if let companyId = person.companyId {
-            parsePerson[ObjectKeys.Person.companyId] = companyId
-        }
-        
-        parsePerson.saveInBackground(block: completion)
+		else {
+			parsePerson.saveInBackground(block: completion)
+		}
     }
 }
-

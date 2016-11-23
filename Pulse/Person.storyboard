@@ -68,20 +68,6 @@
                                     <!--2016-11-14 21:08:10 +0000-->
                                 </date>
                             </datePicker>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="yvg-nw-Z1q">
-                                <rect key="frame" x="16" y="107" width="120" height="120"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
-                                </accessibility>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="YhR-QQ-sWM"/>
-                                    <constraint firstAttribute="height" constant="120" id="iyC-Cg-aEV"/>
-                                </constraints>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="EZV-ex-beu" appends="YES" id="jI7-Lf-JmM"/>
-                                </connections>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouF-MC-VDc">
                                 <rect key="frame" x="258" y="248" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,11 +79,19 @@
                                     <action selector="didTapCallButton:" destination="Uwy-PO-bTJ" eventType="touchUpInside" id="igK-kA-Zae"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-vI-Cpq" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
+                                <rect key="frame" x="16" y="107" width="120" height="120"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="8et-Lv-3U5"/>
+                                    <constraint firstAttribute="width" constant="120" id="eWj-V2-P2f"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="yvg-nw-Z1q" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="43" id="IrS-pi-SeW"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="yvg-nw-Z1q" secondAttribute="leading" id="KfL-2p-AGP"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="aoC-vI-Cpq" secondAttribute="leading" id="9dE-Ug-pM0"/>
+                            <constraint firstItem="aoC-vI-Cpq" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="43" id="KRA-Ey-aau"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9mV-B5-MGU">
@@ -113,47 +107,15 @@
                         <outlet property="firstNameTextField" destination="UGc-GT-hsk" id="b5E-tk-UbZ"/>
                         <outlet property="lastNameTextField" destination="fSb-46-36I" id="2Ld-f9-7B3"/>
                         <outlet property="phoneTextField" destination="VZq-fp-qWE" id="pSV-fl-3LM"/>
-                        <outlet property="profileImageView" destination="yvg-nw-Z1q" id="bzo-Hy-RpO"/>
+                        <outlet property="photoImageView" destination="aoC-vI-Cpq" id="aCB-Lk-9AL"/>
                         <outlet property="rightBarButtonItem" destination="da2-rr-G06" id="hVS-D2-7ey"/>
                         <outlet property="scheduleMeetingDatePicker" destination="SDP-ZR-iCR" id="3bI-97-U39"/>
                         <outlet property="scheduleMeetingLabel" destination="I3v-c0-fQi" id="xvs-14-ngQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4U4-er-MFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="EZV-ex-beu" userLabel="Image View Tap Gesture Recognizer">
-                    <connections>
-                        <action selector="didTapProfileImageView:" destination="Uwy-PO-bTJ" id="UHL-DM-dIc"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1125" y="195.42253521126761"/>
-        </scene>
-        <!--Image View Controller-->
-        <scene sceneID="gMv-6c-haf">
-            <objects>
-                <viewController storyboardIdentifier="ImageViewController" id="grk-dd-RUT" customClass="ImageViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wvo-5Z-D9D"/>
-                        <viewControllerLayoutGuide type="bottom" id="Imv-Xv-tJ4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="MEG-jS-rQB">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nDz-1E-PXN">
-                                <rect key="frame" x="49" y="189" width="277" height="289"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="nDz-1E-PXN" id="SQ0-7J-y3e"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FaR-s7-uTC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1890.4000000000001" y="194.75262368815595"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4WI-zc-YWR">
@@ -174,7 +136,4 @@
             <point key="canvasLocation" x="188" y="196.55172413793105"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="DefaultPhoto" width="256" height="256"/>
-    </resources>
 </document>
