@@ -90,7 +90,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         switch viewTypes {
-        case .dashboard:
+        case .dashboard: // TODO - check if meetingId is populated
             return cellSections.count
         default:
             return cellSections.count - 1
@@ -117,33 +117,30 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
             cell.todoItem = todoItem
             return cell
         case .person:
-            if !isPersonExpanded {
-               // if indexPath.row == 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
-                    cell.firstRow = true
-                    if personRowSelected != nil {
-                        cell.selectedPerson = teamMembers[personRowSelected!]
-                        debugPrint("cell selected person: \(cell.selectedPerson)")
-                    }
-                    return cell
-                //}
+            switch indexPath.row {
+            case 0:
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
+                cell.firstRow = true
+                cell.isUserInteractionEnabled = isPersonExpanded ? false : true
                 
-            } else {
-                if indexPath.row == 0 {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
-                    
-                    if personRowSelected != nil {
-                        cell.selectedPerson = teamMembers[personRowSelected!]
-                    }
-                    
-                    cell.firstRow = true
-                    return cell
-                } else {
-                    let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
-                    cell.firstRow = false
-                    cell.person = teamMembers[indexPath.row - 1]
-                    return cell
+                if let selectedPerson = personRowSelected {
+                    cell.selectedPerson = teamMembers[selectedPerson]
                 }
+                
+                return cell
+            default:
+                let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
+                cell.firstRow = false
+                cell.isUserInteractionEnabled = true
+                cell.person = teamMembers[indexPath.row - 1]
+                
+                if let selectedRow = personRowSelected, selectedRow == (indexPath.row - 1) {
+                    cell.highlightBackground = true
+                } else {
+                    cell.highlightBackground = false
+                }
+                
+                return cell
             }
         }
     }
@@ -151,11 +148,10 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if isPersonExpanded {
+        if isPersonExpanded { // need to collapse
             personRowSelected = indexPath.row - 1
             isPersonExpanded = !isPersonExpanded
-            personRowSelected = indexPath.row - 1
-        } else {
+        } else { // need to expand
             isPersonExpanded = !isPersonExpanded
         }
         tableView.reloadData()

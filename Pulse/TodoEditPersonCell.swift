@@ -17,6 +17,12 @@ class TodoEditPersonCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var downArrowImageView: UIImageView!
     
+    var highlightBackground: Bool! {
+        didSet {
+            cellBackgroundView.backgroundColor = highlightBackground! ? UIColor.lightGray : UIColor.white
+        }
+    }
+    
     var selectedPerson: PFObject! {
         didSet {
             configureNameLabel(person: selectedPerson)
@@ -48,6 +54,7 @@ class TodoEditPersonCell: UITableViewCell {
         let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
         let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
         nameLabel.text = "\(firstName) \(lastName)"
+        debugPrint("\(firstName) \(lastName)")
     }
     
     override func awakeFromNib() {
