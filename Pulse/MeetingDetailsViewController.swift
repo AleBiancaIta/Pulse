@@ -231,15 +231,16 @@ class MeetingDetailsViewController: UIViewController {
                         post["surveyDesc3"] = "workload"
                         post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
                         post["companyId"] = userPerson["companyId"]
+                        post["meetingDate"] = Date()
                         post.saveInBackground(block: { (success: Bool, error: Error?) in
                             
                             if success {
                                 let managerId = userPerson.objectId
                                 let dictionary: [String: Any] = [
-                                    "personId": personId, // TODO fix this
+                                    "personId": personId,
                                     "managerId": managerId,
                                     "surveyId": post.objectId!,
-                                    "meetingDate": Date() // tODO fix this
+                                    "meetingDate": Date()
                                 ]
                                 self.meeting = Meeting(dictionary: dictionary)
                                 print("survey saved successfully")

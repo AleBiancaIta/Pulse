@@ -24,11 +24,9 @@ class GraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO add meetingDate and companyId to survey table to speed up query
         let query = PFQuery(className: "Survey")
-        //query.whereKey("companyId", equalTo: "Pulse") // TODO add to table
-        // query.whereKey("meetingDate", equalTo: ) // TODO <= 30 days ago add to table
-        query.whereKey("meetingDate", notEqualTo: Date())
+        query.whereKey("companyId", equalTo: "Pulse")
+        // query.whereKey("meetingDate", lessThanOrEqualTo: ) // TODO <= 30 days ago add to table
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
@@ -38,7 +36,7 @@ class GraphViewController: UIViewController {
                     self.survey2Values.append(post["surveyValueId2"] as! Float)
                     self.survey3Values.append(post["surveyValueId3"] as! Float)
                     self.diffDaysValues.append(a) // TODO
-                    a += 1
+                    a += 5
                 }
                 self.setupCharts()
             }
