@@ -69,9 +69,26 @@ class ParseClient: NSObject {
         }
     }
     
-    func fetchTeamMembersFor(managerId: String, completion: @escaping ([PFObject]?, Error?) -> ()) {
+    func fetchTeamMembersFor(managerId: String, isAscending1: Bool?, isAscending2: Bool?, orderBy1: String?, orderBy2: String?, completion: @escaping ([PFObject]?, Error?) -> ()) {
         let query = PFQuery(className: "Person")
         query.whereKey(ObjectKeys.Person.managerId, equalTo: managerId)
+        
+        if let isAscending1 = isAscending1, let orderBy1 = orderBy1 {
+            if isAscending1 {
+                query.order(byAscending: orderBy1)
+            } else {
+                query.order(byDescending: orderBy1)
+            }
+        }
+        
+        if let isAscending2 = isAscending2, let orderBy2 = orderBy2 {
+            if isAscending2 {
+                query.order(byAscending: orderBy2)
+            } else {
+                query.order(byDescending: orderBy2)
+            }
+        }
+        
         query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
             if let error = error {
                 debugPrint("Unable to fetch team members for managerId: \(managerId)")

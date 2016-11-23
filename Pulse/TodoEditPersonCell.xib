@@ -28,26 +28,29 @@
                                     <constraint firstAttribute="width" constant="30" id="sgQ-oK-RK2"/>
                                 </constraints>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QrJ-9k-0dx">
-                                <rect key="frame" x="8" y="11" width="76" height="18"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="firstBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="QrJ-9k-0dx">
+                                <rect key="frame" x="8" y="11" width="256" height="18"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="For:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qk0-U1-NA3">
                                         <rect key="frame" x="0.0" y="0.0" width="38" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="38" id="V3H-35-IEV"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gpz-Ov-Szb">
-                                        <rect key="frame" x="38" y="0.0" width="38" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gpz-Ov-Szb">
+                                        <rect key="frame" x="43" y="1" width="213" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Gpz-Ov-Szb" firstAttribute="top" secondItem="Qk0-U1-NA3" secondAttribute="top" id="icR-5T-FNi"/>
-                                    <constraint firstItem="Qk0-U1-NA3" firstAttribute="centerY" secondItem="QrJ-9k-0dx" secondAttribute="centerY" id="tvy-rJ-QpG"/>
-                                    <constraint firstAttribute="trailing" secondItem="Gpz-Ov-Szb" secondAttribute="trailing" id="vU5-4C-x5j"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Gpz-Ov-Szb" secondAttribute="trailing" id="Rmg-iO-DyJ"/>
+                                    <constraint firstItem="Gpz-Ov-Szb" firstAttribute="leading" secondItem="Qk0-U1-NA3" secondAttribute="trailing" constant="5" id="bdS-ec-L3y"/>
+                                    <constraint firstItem="Qk0-U1-NA3" firstAttribute="top" secondItem="QrJ-9k-0dx" secondAttribute="top" id="lim-OG-187"/>
                                 </constraints>
                             </stackView>
                         </subviews>
