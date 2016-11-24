@@ -55,7 +55,8 @@ class MeetingsViewController: UIViewController {
                 query.whereKeyDoesNotExist("deletedAt")
                 query.order(byDescending: "meetingDate")
                 
-                if let personId = self.personId {
+                if self.personId != nil,
+                    let personId = self.personId {
                     query.whereKey("personId", equalTo: personId)
                 }
                 

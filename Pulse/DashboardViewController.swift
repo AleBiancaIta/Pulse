@@ -146,7 +146,8 @@ extension DashboardViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController")
+                let vc = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+                vc.personId = nil
                 self.addChildViewController(vc)
                 cell.contentView.addSubview(vc.view)
                 return cell

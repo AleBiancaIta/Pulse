@@ -100,6 +100,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+                if let personPFObject = personPFObject {
+                    viewController.personId = personPFObject.objectId
+                }
                 self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
                 return cell
