@@ -593,7 +593,6 @@ extension TodoViewController: TodoListCellDelegate {
 extension TodoViewController: TodoEditViewControllerDelegate {
     func todoEditViewController(_ todoEditViewController: TodoEditViewController, didUpdate success: Bool) {
         if success {
-            
             self.populateTodoTables()
             self.tableView.reloadData()
         }

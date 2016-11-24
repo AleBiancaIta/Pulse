@@ -54,7 +54,6 @@ class TodoEditPersonCell: UITableViewCell {
         let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
         let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
         nameLabel.text = "\(firstName) \(lastName)"
-        debugPrint("\(firstName) \(lastName)")
     }
     
     override func awakeFromNib() {
