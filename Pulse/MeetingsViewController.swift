@@ -18,7 +18,7 @@ class MeetingsViewController: UIViewController {
     var meetings: [Meeting] = []
     var expanded = false
     
-    var personId: String? // Employee ID - TODO - Ale, when adding this to person details, set this parameter
+    var personId: String? 
     
     var alertController: UIAlertController?
     

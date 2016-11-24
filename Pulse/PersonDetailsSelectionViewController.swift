@@ -20,13 +20,16 @@ class PersonDetailsSelectionViewController: UIViewController {
     weak var delegate: PersonDetailsSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    var alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+    var alertController: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.dataSource = self
         tableView.delegate = self
+        
+        alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
+        alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         title = "Person Cards"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
@@ -68,8 +71,13 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let card = Constants.personCards[indexPath.row]
+        guard indexPath.row != 0 else {
+            alertController?.message = "Cannot remove info card"
+            present(alertController!, animated: true)
+            return
+        }
         
+        let card = Constants.personCards[indexPath.row]
         if selectedCards.contains(card) {
             for (index, personCard) in selectedCards.enumerated() {
                 // Double check to avoid index out of bounds

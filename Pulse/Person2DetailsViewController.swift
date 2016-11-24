@@ -16,7 +16,7 @@ class Person2DetailsViewController: UIViewController {
     var alertController: UIAlertController?
     
     var selectedCardsString: String? = ""
-    var selectedCards: [Card] = []
+    var selectedCards: [Card] = [Constants.personCards[0]] // Info is always required
     
     var personPFObject: PFObject?
     
@@ -54,9 +54,11 @@ class Person2DetailsViewController: UIViewController {
                 for c in selectedCardsString.characters {
                     switch c {
                     case "d":
-                        selectedCards.append(Constants.personCards[0])
-                    case "n":
                         selectedCards.append(Constants.personCards[1])
+                    case "m":
+                        selectedCards.append(Constants.personCards[2])
+                    case "n":
+                        selectedCards.append(Constants.personCards[3])
                     //case "p":
                     //    selectedCards.append(Constants.personCards[2])
                     default:
@@ -84,6 +86,11 @@ extension Person2DetailsViewController: UITableViewDataSource {
             
         } else { // The actual cards
             switch selectedCards[indexPath.row].id! {
+            case "i": // TODO Ale's Person Cell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+                cell.message = "Info Cell"
+                return cell
+                
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
@@ -155,6 +162,13 @@ extension Person2DetailsViewController: UITableViewDelegate {
         
         switch selectedCards[indexPath.row].id! {
         case "d":
+            /* TODO fix this
+            let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+            return viewController.heightForView()*/
+            return defaultHeight * 3
+            
+        case "d":
             let storyboard = UIStoryboard(name: "Todo", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
             return viewController.heightForView()
@@ -203,7 +217,11 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                 
                 if posts.count > 0 {
                     let post = posts[0]
-                    self.selectedCardsString = "\(id)\(selectedCardsString)"
+                    
+                    // Always put info first
+                    self.selectedCardsString = selectedCardsString.replacingOccurrences(of: "i", with: "")
+                    self.selectedCardsString = "i\(id)\(selectedCardsString)"
+                    
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
                         if success {
@@ -223,7 +241,7 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         }
         
         // Insert new card at the top of the table view
-        selectedCards.insert(card, at: 0)
+        selectedCards.insert(card, at: 1)
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }

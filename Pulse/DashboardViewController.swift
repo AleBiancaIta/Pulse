@@ -28,7 +28,7 @@ class DashboardViewController: UIViewController {
 
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
-        alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+        alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         let query = PFQuery(className: "Dashboard")
