@@ -88,8 +88,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 let storyboard = UIStoryboard(name: "Notes", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                 viewController.delegate = self
-                if let personPFObject = personPFObject {
-                    viewController.notes = personPFObject["notes"] as! String
+                if let personPFObject = personPFObject,
+                    let notes = personPFObject["notes"] as? String {
+                    viewController.notes = notes
                 }
                 self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
