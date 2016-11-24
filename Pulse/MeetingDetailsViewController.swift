@@ -79,8 +79,8 @@ class MeetingDetailsViewController: UIViewController {
                         selectedCards.append(Constants.meetingCards[0])
                     case "n":
                         selectedCards.append(Constants.meetingCards[1])
-                    case "p":
-                        selectedCards.append(Constants.meetingCards[2])
+                    //case "p":
+                    //    selectedCards.append(Constants.meetingCards[2])
                     default:
                         break
                     }
@@ -313,7 +313,7 @@ class MeetingDetailsViewController: UIViewController {
         }
     }
     
-    func onAddCard() {
+    func onManageCards() {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsSelectionViewController") as! MeetingDetailsSelectionViewController
         viewController.delegate = self
@@ -333,8 +333,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             cell.message = "Tap here to manage cards"
             return cell
             
-            // The actual cards
-        } else {
+        } else { // The actual cards
             switch selectedCards[indexPath.row].id! {
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
@@ -406,7 +405,7 @@ extension MeetingDetailsViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == selectedCards.count {
-            onAddCard()
+            onManageCards()
         }
     }
 }
@@ -429,7 +428,7 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
                 if posts.count > 0 {
                     let post = posts[0]
                     self.selectedCardsString = "\(id)\(selectedCardsString)"
-                    post["selectedCards"] = selectedCardsString
+                    post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
                         if success {
                             print("successfully saved meeting card")
@@ -468,9 +467,9 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
                 if posts.count > 0 {
                     let post = posts[0]
                     self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
-                    post["selectedCards"] = selectedCardsString
+                    post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
-                        print("successfully removed dashboard card")
+                        print("successfully removed meeting card")
                     }
                 }
             } else {
@@ -479,8 +478,8 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
         }
         
         // Remove card from table view
-        for (index, dashboardCard) in selectedCards.enumerated() {
-            if dashboardCard.id == card.id {
+        for (index, meetingCard) in selectedCards.enumerated() {
+            if meetingCard.id == card.id {
                 selectedCards.remove(at: index)
             }
         }

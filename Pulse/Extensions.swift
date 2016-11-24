@@ -6,6 +6,7 @@
 //  Copyright © 2016 ABI. All rights reserved.
 //
 
+import Parse
 import UIKit
 
 extension UIViewController {
@@ -23,13 +24,13 @@ extension UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
 
-	func ABIShowPersonViewController(person: Person?) {
+	func ABIShowPersonViewController(personPFObject: PFObject?) {
 		navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
-		let personViewController = UIStoryboard(name: "Person", bundle: nil).instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
-		if let person = person {
-			personViewController.person = person
+		let personViewController = UIStoryboard(name: "Person2", bundle: nil).instantiateViewController(withIdentifier: "Person2DetailsViewController") as! Person2DetailsViewController
+		if let personPFObject = personPFObject {
+			personViewController.personPFObject = personPFObject
 		}
-        if nil == person {
+        if nil == personPFObject {
             let navController = UINavigationController(rootViewController: personViewController)
             personViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButton(_:)))
             present(navController, animated: true, completion: nil)

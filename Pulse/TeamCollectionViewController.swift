@@ -44,7 +44,7 @@ class TeamCollectionViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func onAddButtonTap(_ sender: UIButton) {
-		ABIShowPersonViewController(person: nil)
+		ABIShowPersonViewController(personPFObject: nil)
     }
     
     // MARK: - deinit
@@ -77,8 +77,8 @@ extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let storyboard = UIStoryboard(name: "Person", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
+        let storyboard = UIStoryboard(name: "Person2", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "Person2DetailsViewController") as! Person2DetailsViewController
         viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
