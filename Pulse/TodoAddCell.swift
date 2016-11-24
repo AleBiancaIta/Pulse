@@ -48,13 +48,9 @@ extension TodoAddCell: UITextFieldDelegate {
         return true
     }
     
-    /*
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        todoTextField.resignFirstResponder()
-    }*/
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.resignFirstResponder()
+        endEditing(true) // Resign first responder is not working for whatever reason
+        
         if !((todoTextField.text?.isEmpty)!) {
             delegate?.todoAddCell?(self, todoString: todoTextField.text!)
             todoTextField.text = ""
