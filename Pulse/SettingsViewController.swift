@@ -21,14 +21,17 @@ class SettingsViewController: UIViewController {
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
     fileprivate let settingsContent = ["User Info", "Change Password", "Log Out"]
     
+    fileprivate let parseClient = ParseClient.sharedInstance()
+    
     @IBOutlet var settingsTableView: UITableView!
     var user: PFUser! = PFUser.current()
-    var person: Person!
+    var person: PFObject!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsTableView.estimatedRowHeight = 50
         settingsTableView.rowHeight = UITableViewAutomaticDimension
+        getCurrentPerson()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
     }
     
@@ -36,6 +39,23 @@ class SettingsViewController: UIViewController {
     
     @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Helpers
+    fileprivate func getCurrentPerson() {
+        parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to fetch current person with error: \(error.localizedDescription)")
+            } else {
+                if let person = person {
+                    self.person = person
+                    self.settingsTableView.reloadData()
+                } else {
+                    debugPrint("getCurrentPerson is returning nil")
+                }
+            }
+        }
+        
     }
 }
 
@@ -58,7 +78,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsHeaderCell, for: indexPath) as! SettingsHeaderCell
-            cell.user = user // NEED TO CHANGE THIS TO PERSON
+            cell.user = user
+            if let person = self.person {
+                cell.person = person
+            }
             cell.isUserInteractionEnabled = false
             return cell
         } else {

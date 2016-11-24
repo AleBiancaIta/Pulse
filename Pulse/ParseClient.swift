@@ -69,7 +69,7 @@ class ParseClient: NSObject {
         }
     }
     
-    func fetchTeamMembersFor(managerId: String, isAscending1: Bool?, isAscending2: Bool?, orderBy1: String?, orderBy2: String?, completion: @escaping ([PFObject]?, Error?) -> ()) {
+    func fetchTeamMembersFor(managerId: String, isAscending1: Bool?, isAscending2: Bool?, orderBy1: String?, orderBy2: String?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
         let query = PFQuery(className: "Person")
         query.whereKey(ObjectKeys.Person.managerId, equalTo: managerId)
         
@@ -87,6 +87,12 @@ class ParseClient: NSObject {
             } else {
                 query.order(byDescending: orderBy2)
             }
+        }
+        
+        if isDeleted {
+            query.whereKeyExists(ObjectKeys.Person.deletedAt)
+        } else {
+            query.whereKeyDoesNotExist(ObjectKeys.Person.deletedAt)
         }
         
         query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in

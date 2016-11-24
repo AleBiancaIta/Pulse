@@ -15,7 +15,13 @@ class SettingsHeaderCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
     
-    var person: Person!
+    var person: PFObject! {
+        didSet {
+            let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
+            let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
+            usernameLabel.text = "Hello, \(firstName) \(lastName)"
+        }
+    }
     
     var user: PFUser! {
         didSet {
@@ -25,7 +31,6 @@ class SettingsHeaderCell: UITableViewCell {
 //                emailLabel.isHidden = true
 //            } else {
                 if let user = user {
-                    usernameLabel.text = "Hello, \(user.username!)"
                     emailLabel.text = user.email
                 }
             //}

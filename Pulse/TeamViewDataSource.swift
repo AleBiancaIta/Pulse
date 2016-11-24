@@ -34,7 +34,7 @@ class TeamViewDataSource: NSObject {
             } else {
                 if let person = person {
                     self.currentPerson = person
-                    self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, completion: { (members: [PFObject]?, error: Error?) in
+                    self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false, completion: { (members: [PFObject]?, error: Error?) in
                         if let error = error {
                             completion(false, error)
                         } else {
@@ -98,6 +98,21 @@ class TeamViewDataSource: NSObject {
     func getSelectedPersonObjectAt(indexPath: IndexPath) -> PFObject? {
         return teamMembers[indexPath.row]
     }
+    
+    func removeSelectedPersonObjectAt(indexPath: IndexPath) {
+        // update Parse
+        let person = teamMembers[indexPath.row]
+        person[ObjectKeys.Person.deletedAt] = Date()
+        
+        person.saveInBackground { (success: Bool, error: Error?) in
+            if success {
+                debugPrint("Deleting \(person) successful")
+                self.teamMembers.remove(at: indexPath.row)
+            } else {
+                debugPrint("Unable to delete \(person) with error: \(error?.localizedDescription)")
+            }
+        }
+    }
 }
 
 extension TeamViewDataSource: UITableViewDataSource {
@@ -112,7 +127,9 @@ extension TeamViewDataSource: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Team.teamListCell, for: indexPath) as! TeamTableViewCell
-        cell.firstNameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
+        let firstName = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String ?? ""
+        let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
+        cell.firstNameLabel.text = "\(firstName) \(lastName)"
         cell.emailLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.email] as? String
 
 		if let pffileData = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile {
@@ -147,8 +164,11 @@ extension TeamViewDataSource: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell, for: indexPath) as! TeamCollectionCell
         cell.profileImageView.image = UIImage(named: "DefaultPhoto")
-        cell.nameLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String
-
+        
+        let firstName = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String ?? ""
+        let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
+        cell.nameLabel.text = "\(firstName) \(lastName)"
+        
 		if let pffileData = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile {
 			do {
 				if let data = try? pffileData.getData() {

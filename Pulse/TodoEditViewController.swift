@@ -79,7 +79,7 @@ class TodoEditViewController: UIViewController {
             let managerId = todoItem[ObjectKeys.ToDo.managerId] as! String
             
             // Compound sort not working for parse?
-            parseClient.fetchTeamMembersFor(managerId: managerId, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil) { (teams: [PFObject]?, error: Error?) in
+            parseClient.fetchTeamMembersFor(managerId: managerId, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false) { (teams: [PFObject]?, error: Error?) in
                 if let error = error {
                     debugPrint("Failed to fetch team members with error: \(error.localizedDescription)")
                 } else {

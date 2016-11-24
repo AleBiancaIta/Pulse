@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Parse
 
 class TeamListViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
     let dataSource = TeamViewDataSource.sharedInstance()
+    var deletedPersonIndexPath: IndexPath? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,5 +79,39 @@ extension TeamListViewController: UITableViewDelegate {
         let viewController = storyboard.instantiateViewController(withIdentifier: "Person2DetailsViewController") as! Person2DetailsViewController
         viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deletedPersonIndexPath = indexPath
+            let personToDelete = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
+            confirmDelete(person: personToDelete!)
+        }
+    }
+    
+    // MARK: - Helpers
+    fileprivate func confirmDelete(person: PFObject) {
+        ABIShowAlertWithActions(title: "Alert", message: "Are you sure you want to delete this person?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
+            if alertAction.title == "Confirm" {
+                self.handleDeletingPerson()
+            }
+        }, handler2: { (alertAction: UIAlertAction) in
+            if alertAction.title == "Cancel" {
+                self.cancelDeletingPerson()
+            }
+        })
+    }
+    
+    fileprivate func handleDeletingPerson() {
+        if let indexPath = deletedPersonIndexPath {
+            tableView.beginUpdates()
+            dataSource.removeSelectedPersonObjectAt(indexPath: indexPath)
+            deletedPersonIndexPath = nil
+            tableView.endUpdates()
+        }
+    }
+    
+    fileprivate func cancelDeletingPerson() {
+        deletedPersonIndexPath = nil
     }
 }
