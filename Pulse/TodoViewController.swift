@@ -398,6 +398,7 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
             let todoEditVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.todoEditVC) as! TodoEditViewController
             todoEditVC.viewTypes = self.viewTypes
             todoEditVC.todoItem = todoItems[indexPath.row]
+            todoEditVC.delegate = self
             self.navigationController?.pushViewController(todoEditVC, animated: true)
         case .showCompleted:
             shouldShowCompleted = !shouldShowCompleted
@@ -585,6 +586,14 @@ extension TodoViewController: TodoListCellDelegate {
                     }
                 })
             }
+        }
+    }
+}
+
+extension TodoViewController: TodoEditViewControllerDelegate {
+    func todoEditViewController(_ todoEditViewController: TodoEditViewController, didUpdate success: Bool) {
+        if success {
+            self.tableView.reloadData()
         }
     }
 }

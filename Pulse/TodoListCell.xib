@@ -35,8 +35,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssq-xC-LXi">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssq-xC-LXi">
                                 <rect key="frame" x="36" y="25" width="31" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soH-JR-xNb" userLabel="Meeting Label">
+                                <rect key="frame" x="271" y="25.5" width="31" height="14.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -46,8 +52,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4nm-SP-k1Z" secondAttribute="trailing" constant="8" id="3dv-Mn-rcu"/>
                             <constraint firstItem="4nm-SP-k1Z" firstAttribute="top" secondItem="iml-I3-uQh" secondAttribute="top" constant="8" id="4Ua-fE-3hj"/>
+                            <constraint firstAttribute="trailing" secondItem="soH-JR-xNb" secondAttribute="trailing" constant="8" id="Aov-qb-xZD"/>
+                            <constraint firstItem="soH-JR-xNb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ssq-xC-LXi" secondAttribute="trailing" constant="8" id="LQs-id-EvA"/>
                             <constraint firstItem="Ssq-xC-LXi" firstAttribute="top" secondItem="4nm-SP-k1Z" secondAttribute="bottom" constant="1" id="MSQ-KR-RyM"/>
                             <constraint firstItem="Ssq-xC-LXi" firstAttribute="leading" secondItem="4nm-SP-k1Z" secondAttribute="leading" id="YFt-yw-Y8H"/>
+                            <constraint firstItem="soH-JR-xNb" firstAttribute="centerY" secondItem="Ssq-xC-LXi" secondAttribute="centerY" id="alp-1t-g9O"/>
                             <constraint firstItem="lYE-LU-XTT" firstAttribute="leading" secondItem="iml-I3-uQh" secondAttribute="leading" constant="8" id="iTf-0w-D0t"/>
                             <constraint firstItem="lYE-LU-XTT" firstAttribute="top" secondItem="iml-I3-uQh" secondAttribute="top" constant="8" id="n2v-Vt-CKj"/>
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Ssq-xC-LXi" secondAttribute="bottom" constant="8" id="nP8-LQ-cMc"/>
@@ -65,6 +74,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="meetingLabel" destination="soH-JR-xNb" id="S5Z-ct-4sb"/>
                 <outlet property="nameLabel" destination="Ssq-xC-LXi" id="fz9-w3-iL1"/>
                 <outlet property="squareImageView" destination="lYE-LU-XTT" id="wdE-sm-Pof"/>
                 <outlet property="todoBackgroundView" destination="iml-I3-uQh" id="YEq-RS-cN6"/>

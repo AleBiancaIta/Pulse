@@ -101,6 +101,25 @@ class ParseClient: NSObject {
         }
     }
     
+    func fetchMeetingFor(meetingId: String, completion: @escaping (PFObject?, Error?) -> ()) {
+        let query = PFQuery(className: "Meetings")
+        query.whereKey(ObjectKeys.Meeting.objectId, equalTo: meetingId)
+        query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                if let meetings = meetings, meetings.count > 0 {
+                    let meeting = meetings[0]
+                    completion(meeting, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "fetchMeetingForMeetingId query returns no meeting with id: \(meetingId)"]
+                    let error = NSError(domain: "ParseClient fetchMeetingFor", code: 0, userInfo: userInfo) as Error
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     // Order descending
     func fetchMeetingsFor(personId: String, managerId: String, meetingDate: Date?, orderBy: String?, limit: Int?, isDeleted: Bool, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
         

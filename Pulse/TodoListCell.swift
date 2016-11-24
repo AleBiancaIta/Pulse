@@ -20,6 +20,7 @@ class TodoListCell: UITableViewCell {
     @IBOutlet weak var squareImageView: UIImageView!
     @IBOutlet weak var todoLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var meetingLabel: UILabel!
     
     let parseClient = ParseClient.sharedInstance()
     var isCompleted: Bool!
@@ -55,6 +56,26 @@ class TodoListCell: UITableViewCell {
                 }
             } else {
                 nameLabel.text = ""
+            }
+            
+            if let meetingId = todoObject[ObjectKeys.ToDo.meetingId] as? String {
+                
+                parseClient.fetchMeetingFor(meetingId: meetingId) { (meeting: PFObject?, error: Error?) in
+                    if let error = error {
+                        debugPrint("error: \(error.localizedDescription)")
+                    } else {
+                        if let meeting = meeting {
+                            let meetingDate = meeting[ObjectKeys.Meeting.meetingDate] as! Date
+                            
+                            let dateFormatter = DateFormatter()
+                            dateFormatter.dateStyle = .short
+                            dateFormatter.timeStyle = .none
+                            self.meetingLabel.text = dateFormatter.string(from: meetingDate)
+                        }
+                    }
+                }
+            } else {
+                meetingLabel.text = ""
             }
         }
     }

@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+@objc protocol TodoEditViewControllerDelegate {
+    @objc optional func todoEditViewController(_ todoEditViewController: TodoEditViewController, didUpdate success: Bool)
+}
+
 class TodoEditViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
@@ -21,6 +25,7 @@ class TodoEditViewController: UIViewController {
     var viewTypes: ViewTypes = .dashboard
     var todoItem: PFObject!
     var teamMembers = [PFObject]() // only applies to dashboard view type
+    weak var delegate: TodoEditViewControllerDelegate?
 
     enum EditCellTypes: Int {
         case text = 0, person
@@ -37,6 +42,23 @@ class TodoEditViewController: UIViewController {
         
         if viewTypes == .dashboard {
             fetchTeamMembers()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let selectedPerson = personRowSelected {
+            todoItem[ObjectKeys.ToDo.personId] = teamMembers[selectedPerson].objectId!
+            
+            todoItem.saveInBackground { (success: Bool, error: Error?) in
+                if success {
+                    debugPrint("Successfully updating todo item")
+                    self.delegate?.todoEditViewController?(self, didUpdate: true)
+                } else {
+                    debugPrint("Failed to update todo with error: \(error?.localizedDescription)")
+                }
+            }
         }
     }
     
