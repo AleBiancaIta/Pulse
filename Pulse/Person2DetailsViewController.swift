@@ -61,6 +61,12 @@ class Person2DetailsViewController: UIViewController {
             }
         }
     }
+    
+    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
+        for view in cell.contentView.subviews {
+            view.removeFromSuperview()
+        }
+    }
 }
 
 extension Person2DetailsViewController: UITableViewDataSource {
@@ -75,6 +81,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
             switch selectedCards[indexPath.row].id! {
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Todo", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                 viewController.currentTeamPerson = personPFObject
@@ -85,6 +92,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Notes", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                 viewController.delegate = self
@@ -98,9 +106,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                for subview in cell.contentView.subviews  {
-                    subview.removeFromSuperview() // Reset subviews
-                }
+                resetCell(cell)
                 cell.textLabel?.text = selectedCards[indexPath.row].name
                 return cell
             }

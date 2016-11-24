@@ -106,6 +106,12 @@ class DashboardViewController: UIViewController {
     @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
+        for view in cell.contentView.subviews {
+            view.removeFromSuperview()
+        }
+    }
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -129,6 +135,7 @@ extension DashboardViewController: UITableViewDataSource {
             switch selectedCards[indexPath.row].id! {
             case "g":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Graph", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "GraphViewController")
                 self.addChildViewController(vc)
@@ -137,6 +144,7 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController")
                 self.addChildViewController(vc)
@@ -145,6 +153,7 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Team", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC")
                 self.addChildViewController(vc)
@@ -153,6 +162,7 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Todo", bundle: nil)
                 let vc = storyboard.instantiateViewController(withIdentifier: "TodoVC")
                 self.addChildViewController(vc)
@@ -161,9 +171,7 @@ extension DashboardViewController: UITableViewDataSource {
 
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                for subview in cell.contentView.subviews  {
-                    subview.removeFromSuperview() // Reset subviews
-                }
+                resetCell(cell)
                 cell.textLabel?.text = selectedCards[indexPath.row].name
                 return cell
             }

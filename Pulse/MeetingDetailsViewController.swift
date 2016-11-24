@@ -60,6 +60,12 @@ class MeetingDetailsViewController: UIViewController {
         loadExistingMeeting()
     }
     
+    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
+        for view in cell.contentView.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
     func loadExistingMeeting() {
         // Existing meeting
         if nil != meeting {
@@ -363,6 +369,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             switch selectedCards[indexPath.row].id! {
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Todo", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                 viewController.currentMeeting = meeting
@@ -373,6 +380,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
                 let storyboard = UIStoryboard(name: "Notes", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                 viewController.delegate = self
@@ -383,9 +391,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                for subview in cell.contentView.subviews  {
-                    subview.removeFromSuperview() // Reset subviews
-                }
+                resetCell(cell)
                 cell.textLabel?.text = selectedCards[indexPath.row].name
                 return cell
             }
