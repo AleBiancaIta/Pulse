@@ -137,6 +137,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
         case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditTextCell, for: indexPath) as! TodoEditTextCell
             cell.todoItem = todoItem
+            cell.delegate = self
             return cell
         case .person:
             switch indexPath.row {
@@ -170,13 +171,15 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if isPersonExpanded { // need to collapse
-            personRowSelected = indexPath.row - 1
-            isPersonExpanded = !isPersonExpanded
-        } else { // need to expand
-            isPersonExpanded = !isPersonExpanded
+        if indexPath.section == 1 {
+            if isPersonExpanded { // need to collapse
+                personRowSelected = indexPath.row - 1
+                isPersonExpanded = !isPersonExpanded
+            } else { // need to expand
+                isPersonExpanded = !isPersonExpanded
+            }
+            tableView.reloadData()
         }
-        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -185,5 +188,13 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.1
+    }
+}
+
+extension TodoEditViewController: TodoEditTextCellDelegate {
+    func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEdit: Bool) {
+        if didEdit {
+            tableView.reloadData()
+        }
     }
 }

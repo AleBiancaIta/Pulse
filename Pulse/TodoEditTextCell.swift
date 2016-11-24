@@ -9,17 +9,22 @@
 import UIKit
 import Parse
 
+@objc protocol TodoEditTextCellDelegate {
+    @objc optional func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEdit: Bool)
+}
+
 class TodoEditTextCell: UITableViewCell {
     
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var todoTextField: UITextField!
     @IBOutlet weak var todoLabel: UILabel!
     
-    var isTodoEditing: Bool = false
     var originalTodoText: String? = nil
+    weak var delegate: TodoEditTextCellDelegate?
     
     var todoItem: PFObject! {
         didSet {
+            addTapGesture()
             if let text = todoItem[ObjectKeys.ToDo.text] as? String {
                 todoLabel.isHidden = false
                 todoTextField.isHidden = true
@@ -28,7 +33,6 @@ class TodoEditTextCell: UITableViewCell {
                 todoTextField.text = text
                 
                 todoTextField.delegate = self
-                addTapGesture()
                 originalTodoText = text
             }
         }
@@ -36,12 +40,12 @@ class TodoEditTextCell: UITableViewCell {
 
     fileprivate func addTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(onTodoLabelTap(_:)))
+        tapGesture.numberOfTapsRequired = 1
         todoLabel.addGestureRecognizer(tapGesture)
         todoLabel.isUserInteractionEnabled = true
     }
     
     @objc fileprivate func onTodoLabelTap(_ sender: UITapGestureRecognizer) {
-        isTodoEditing = true
         todoTextField.isHidden = false
         todoLabel.isHidden = true
     }
@@ -67,28 +71,32 @@ class TodoEditTextCell: UITableViewCell {
 }
 
 extension TodoEditTextCell: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.resignFirstResponder()
-        
-        if let originalText = originalTodoText, todoTextField.text != originalText {
-            todoItem[ObjectKeys.ToDo.text] = todoTextField.text!
-            
-            todoItem.saveInBackground(block: { (success: Bool, error: Error?) in
-                if success {
-                    debugPrint("successfully updating todoItem")
-                } else {
-                    debugPrint("\(error?.localizedDescription)")
-                }
-            })
-            
-            
-        } else {
-            debugPrint("same text, do nothing")
-        }
-        
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
         return true
     }
     
-    
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.resignFirstResponder()
+        todoTextField.isHidden = true
+        todoLabel.isHidden = false
+        
+        if let originalText = originalTodoText, todoTextField.text != originalText {
+            todoItem[ObjectKeys.ToDo.text] = todoTextField.text!
+            todoLabel.text = todoTextField.text
+            originalTodoText = todoTextField.text
+            delegate?.todoEditTextCell?(self, didEdit: true)
+            
+            todoItem.saveInBackground { (success: Bool, error: Error?) in
+                if success {
+                    debugPrint("successfully updating todoItem")
+                } else {
+                    debugPrint("Failed to save changes at this time, please try again later. Error: \(error?.localizedDescription)")
+                }
+            }
+        } else {
+            debugPrint("same text, do nothing")
+        }
+        return true
+    }
 }
