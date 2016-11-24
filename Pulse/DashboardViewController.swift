@@ -245,11 +245,11 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
                     if success {
                         print("successfully saved dashboard card")
                     } else {
-                        print(error?.localizedDescription)
+                        print("error saving dashboard card")
                     }
                 }
             } else {
-                print(error?.localizedDescription)
+                print("error saving dashboard card")
             }
         }
         

@@ -34,7 +34,10 @@ class MeetingsViewController: UIViewController {
         tableView.delegate = self
         
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadMeetings()
     }
     

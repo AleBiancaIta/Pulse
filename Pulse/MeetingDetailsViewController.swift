@@ -151,13 +151,13 @@ class MeetingDetailsViewController: UIViewController {
             (survey3Low.isOn || survey3Med.isOn || survey3High.isOn)) {
             self.alertController?.message = "Please complete the required fields."
             self.present(self.alertController!, animated: true)
-            return
-        }
-        
-        if isExistingMeeting {
-            saveExistingMeeting()
+            
         } else {
-            saveNewMeeting()
+            if isExistingMeeting {
+                saveExistingMeeting()
+            } else {
+                saveNewMeeting()
+            }
         }
     }
     
@@ -459,7 +459,7 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
                         if success {
                             print("successfully saved meeting card")
                         } else {
-                            print(error?.localizedDescription)
+                            print("error saving meeting card")
                         }
                     }
                 } else {
@@ -468,7 +468,7 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
                     post.saveInBackground()
                 }
             } else {
-                print(error?.localizedDescription)
+                print("error saving meeting card")
             }
         }
         
@@ -499,7 +499,7 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
                     }
                 }
             } else {
-                print(error?.localizedDescription)
+                print("error removing meeting card")
             }
         }
         
