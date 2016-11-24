@@ -30,12 +30,17 @@ class Person2DetailsViewController: UIViewController {
         
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
+        // TODO ?? navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
+        
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         loadExistingPerson()
     }
 
+    // TODO ?? func onSaveButton(_ sender: UIBarButtonItem) {
+    // }
+    
     func loadExistingPerson() {
         // Existing person
         if nil != self.personPFObject,
@@ -90,6 +95,15 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 cell.contentView.addSubview(viewController.view)
                 return cell
                 
+            case "m":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
+                let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+                self.addChildViewController(viewController)
+                cell.contentView.addSubview(viewController.view)
+                return cell
+                
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
@@ -140,6 +154,11 @@ extension Person2DetailsViewController: UITableViewDelegate {
         case "d":
             let storyboard = UIStoryboard(name: "Todo", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+            return viewController.heightForView()
+            
+        case "m":
+            let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
             return viewController.heightForView()
             
         case "n":
