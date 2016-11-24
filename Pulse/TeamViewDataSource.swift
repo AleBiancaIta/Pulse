@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+@objc protocol TeamViewDataSourceDelegate {
+    @objc optional func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, at indexPath: IndexPath)
+}
+
 class TeamViewDataSource: NSObject {
     
     // MARK: - Properties
@@ -18,6 +22,8 @@ class TeamViewDataSource: NSObject {
     var teamMembers = [PFObject]()
     //var meetings = [Meeting]()
     var currentPerson: PFObject?
+    
+    weak var delegate: TeamViewDataSourceDelegate?
     
     // MARK: - Shared instance
     class func sharedInstance() -> TeamViewDataSource {
@@ -99,7 +105,7 @@ class TeamViewDataSource: NSObject {
         return teamMembers[indexPath.row]
     }
     
-    func removeSelectedPersonObjectAt(indexPath: IndexPath) {
+    func removeSelectedPersonObjectAt(indexPath: IndexPath, completion: @escaping (Bool, Error?)->()) {
         // update Parse
         let person = teamMembers[indexPath.row]
         person[ObjectKeys.Person.deletedAt] = Date()
@@ -108,8 +114,10 @@ class TeamViewDataSource: NSObject {
             if success {
                 debugPrint("Deleting \(person) successful")
                 self.teamMembers.remove(at: indexPath.row)
+                completion(true, nil)
             } else {
                 debugPrint("Unable to delete \(person) with error: \(error?.localizedDescription)")
+                completion(false, error)
             }
         }
     }
@@ -151,6 +159,12 @@ extension TeamViewDataSource: UITableViewDataSource {
         }
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            delegate?.teamViewDataSource?(self, at: indexPath)
+        }
     }
 }
 

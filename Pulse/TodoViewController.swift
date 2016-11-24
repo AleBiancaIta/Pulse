@@ -475,8 +475,8 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     
     fileprivate func cancelDeletingItem() {
         // reset deletedItemIndexPath
+        tableView.reloadRows(at: [deletedItemIndexPath!], with: .none)
         deletedItemIndexPath = nil
-        
     }
 }
 

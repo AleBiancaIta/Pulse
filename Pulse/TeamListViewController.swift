@@ -23,6 +23,8 @@ class TeamListViewController: UIViewController {
         tableView.register(UINib(nibName: "TeamTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Team.teamListCell)
         tableView.delegate = self
         
+        dataSource.delegate = self
+        
         subscribeToNotifications()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAddButtonTap(_:)))
     }
@@ -80,16 +82,18 @@ extension TeamListViewController: UITableViewDelegate {
         viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+}
+
+extension TeamListViewController: TeamViewDataSourceDelegate {
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            deletedPersonIndexPath = indexPath
-            let personToDelete = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
-            confirmDelete(person: personToDelete!)
-        }
+    func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, at indexPath: IndexPath) {
+        deletedPersonIndexPath = indexPath
+        let personToDelete = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
+        confirmDelete(person: personToDelete!)
     }
     
     // MARK: - Helpers
+    
     fileprivate func confirmDelete(person: PFObject) {
         ABIShowAlertWithActions(title: "Alert", message: "Are you sure you want to delete this person?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
             if alertAction.title == "Confirm" {
@@ -104,14 +108,24 @@ extension TeamListViewController: UITableViewDelegate {
     
     fileprivate func handleDeletingPerson() {
         if let indexPath = deletedPersonIndexPath {
-            tableView.beginUpdates()
-            dataSource.removeSelectedPersonObjectAt(indexPath: indexPath)
-            deletedPersonIndexPath = nil
-            tableView.endUpdates()
+            dataSource.removeSelectedPersonObjectAt(indexPath: indexPath) { (success: Bool, error: Error?) in
+                if success {
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.deletedPersonIndexPath = nil
+                    self.tableView.endUpdates()
+                } else {
+                    debugPrint("\(error?.localizedDescription)")
+                }
+            }
         }
     }
     
     fileprivate func cancelDeletingPerson() {
+        tableView.reloadRows(at: [deletedPersonIndexPath!], with: .none)
         deletedPersonIndexPath = nil
     }
 }
+
+
+
