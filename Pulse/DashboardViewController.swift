@@ -63,7 +63,7 @@ class DashboardViewController: UIViewController {
                 self.tableView.reloadData()
                 
             } else {
-                print(error?.localizedDescription)
+                print("error loading dashboard cards")
             }
         }
         
@@ -276,7 +276,7 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
                     print("successfully removed dashboard card")
                 }
             } else {
-                print(error?.localizedDescription)
+                print("error removing dashboard card")
             }
         }
         

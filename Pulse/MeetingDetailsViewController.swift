@@ -237,8 +237,8 @@ class MeetingDetailsViewController: UIViewController {
                             if success {
                                 let managerId = userPerson.objectId
                                 let dictionary: [String: Any] = [
-                                    "personId": personId,
-                                    "managerId": managerId,
+                                    "personId": personId as Any,
+                                    "managerId": managerId as Any,
                                     "surveyId": post.objectId!,
                                     "meetingDate": Date()
                                 ]

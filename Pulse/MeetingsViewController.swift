@@ -74,7 +74,7 @@ class MeetingsViewController: UIViewController {
                                 
                                 // TODO remove this chunk later, where meetingDate is string
                                 let dictionary = [
-                                    "objectId": post.objectId,
+                                    "objectId": post.objectId as Any,
                                     "personId": post["personId"],
                                     "managerId": post["managerId"],
                                     "surveyId": post["surveyId"],
@@ -89,7 +89,7 @@ class MeetingsViewController: UIViewController {
                             
                             if let meetingDate = post["meetingDate"] as? Date {
                                 let dictionary = [
-                                    "objectId": post.objectId,
+                                    "objectId": post.objectId as Any,
                                     "personId": post["personId"],
                                     "managerId": post["managerId"],
                                     "surveyId": post["surveyId"],

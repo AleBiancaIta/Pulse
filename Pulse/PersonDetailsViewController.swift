@@ -174,7 +174,7 @@ class PersonDetailsViewController: UIViewController {
             pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
                 if success {
                     self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-						self.navigationController?.popViewController(animated: true)
+						let _ = self.navigationController?.popViewController(animated: true)
                     })
                 } else {
                     self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
@@ -198,7 +198,7 @@ class PersonDetailsViewController: UIViewController {
                         (success: Bool, error: Error?) in
                         NSLog("Created ok!")
                         
-                        self.navigationController?.popViewController(animated: true)
+                        let _ = self.navigationController?.popViewController(animated: true)
                         NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
                     }
                 }

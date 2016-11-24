@@ -38,14 +38,11 @@
 		437DE0671DD9A7FF00B08988 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0661DD9A7FF00B08988 /* ParseClient.swift */; };
 		437DE06A1DD9C40600B08988 /* TeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437DE0681DD9C40600B08988 /* TeamTableViewCell.swift */; };
 		437DE06B1DD9C40600B08988 /* TeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437DE0691DD9C40600B08988 /* TeamTableViewCell.xib */; };
-		43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BB71DE12D6A006C8703 /* Todo.storyboard */; };
 		43EC9BBB1DE130C1006C8703 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BB91DE130C1006C8703 /* TodoListCell.swift */; };
-		43EC9BBC1DE130C1006C8703 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */; };
 		43EC9BBE1DE13870006C8703 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BBD1DE13870006C8703 /* TodoViewController.swift */; };
 		43EC9BC11DE16D97006C8703 /* TodoAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BBF1DE16D97006C8703 /* TodoAddCell.swift */; };
 		43EC9BC21DE16D97006C8703 /* TodoAddCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC01DE16D97006C8703 /* TodoAddCell.xib */; };
 		43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EC9BC31DE16ECE006C8703 /* TodoShowCompletedCell.swift */; };
-		43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */; };
 		43ED9E2D1DDFB0A200AB49E1 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43ED9E2C1DDFB0A200AB49E1 /* Company.swift */; };
 		43F6247A1DE19DBC007086E0 /* TodoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F624791DE19DBC007086E0 /* TodoEditViewController.swift */; };
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
@@ -60,11 +57,14 @@
 		67A276161DE5FDBE00ED73B0 /* Person2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A276151DE5FDBE00ED73B0 /* Person2.storyboard */; };
 		67A276181DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */; };
 		67A2761A1DE662A600ED73B0 /* Person2DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */; };
+		67A2761B1DE684D500ED73B0 /* Todo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BB71DE12D6A006C8703 /* Todo.storyboard */; };
+		67A2761C1DE684D500ED73B0 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */; };
+		67A2761D1DE684D500ED73B0 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Dashboard.storyboard */; };
+		67A2761E1DE684D500ED73B0 /* TodoShowCompletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */; };
 		67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */; };
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
 		67BCA1511DD6E66100E7EE74 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */; };
-		67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Dashboard.storyboard */; };
 		67D8D6231DD4E28900B6DE19 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* MessageCell.swift */; };
 		67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6221DD4E28900B6DE19 /* MessageCellNib.xib */; };
 		67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6491DD56D9800B6DE19 /* Constants.swift */; };
@@ -362,7 +362,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = ABI;
 				TargetAttributes = {
 					67A364A61DCD8DA400BFD931 = {
@@ -414,20 +414,14 @@
 				67D8D6241DD4E28900B6DE19 /* MessageCellNib.xib in Resources */,
 				437DE0581DD936C200B08988 /* Team.storyboard in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
-				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
+				67A2761D1DE684D500ED73B0 /* Dashboard.storyboard in Resources */,
 				676CEF471DE29429000FA406 /* Notes.storyboard in Resources */,
-				43EC9BBC1DE130C1006C8703 /* TodoListCell.xib in Resources */,
-				43EC9BBC1DE130C1006C8703 /* TodoListCell.xib in Resources */,
-				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
-				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
-				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
-				43EC9BB81DE12D6A006C8703 /* Todo.storyboard in Resources */,
-				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
+				67A2761C1DE684D500ED73B0 /* TodoListCell.xib in Resources */,
+				67A2761B1DE684D500ED73B0 /* Todo.storyboard in Resources */,
+				67A2761E1DE684D500ED73B0 /* TodoShowCompletedCell.xib in Resources */,
 				437903A61DE51BB400945C63 /* TodoEditTextCell.xib in Resources */,
 				67F0DB351DE2D4F5006C7925 /* Graph.storyboard in Resources */,
-				43EC9BC61DE16ECE006C8703 /* TodoShowCompletedCell.xib in Resources */,
 				712FA7F91DE2332300762EB6 /* PhotoImageView.xib in Resources */,
-				67BCA1531DD9964100E7EE74 /* Dashboard.storyboard in Resources */,
 				67A276161DE5FDBE00ED73B0 /* Person2.storyboard in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 			);
@@ -653,6 +647,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pulse/Pulse.entitlements;
 				DEVELOPMENT_TEAM = EVW9447S78;
@@ -668,6 +663,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7747767799B8936708691A8F /* Pods-Pulse.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Pulse/Pulse.entitlements;
 				DEVELOPMENT_TEAM = EVW9447S78;
