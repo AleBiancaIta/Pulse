@@ -55,31 +55,17 @@ extension UIApplication {
 	}
 }
 
-/*
-extension UIImage {
-    
-    func ABIResizeWith(percentage: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: size.width * percentage, height: size.height * percentage)))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-    func ABIResizeWith(width: CGFloat) -> UIImage? {
-        let imageView = UIImageView(frame: CGRect(origin: .zero, size: CGSize(width: width, height: CGFloat(ceil(width/size.width * size.height)))))
-        imageView.contentMode = .scaleAspectFit
-        imageView.image = self
-        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
-        guard let context = UIGraphicsGetCurrentContext() else { return nil }
-        imageView.layer.render(in: context)
-        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        UIGraphicsEndImageContext()
-        return result
-    }
-}*/
+extension String {
 
+	func isValidEmail() -> Bool {
+		let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
+		let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+		return emailPredicate.evaluate(with: self)
+	}
 
+	func isValidPhone() -> Bool {
+		let phoneRegEx = "^\\d{3}-\\d{3}-\\d{4}$"
+		let phonePredicate = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
+		return phonePredicate.evaluate(with: self)
+	}
+}

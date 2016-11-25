@@ -111,15 +111,10 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func isValid() -> Bool {
+
 		if (firstNameTextField.text?.isEmpty)! {
 			ABIShowAlert(title: "Error!",
 			          message: "First Name cannot be empty", sender: nil, handler: nil)
-			return false
-		}
-
-		if (lastNameTextField.text?.isEmpty)! {
-			ABIShowAlert(title: "Error!",
-			          message: "Last Name cannot be empty", sender: nil, handler: nil)
 			return false
 		}
 
@@ -129,9 +124,20 @@ class PersonDetailsViewController: UIViewController {
 			return false
 		}
 
+		if !emailTextField.text!.isValidEmail() {
+			ABIShowAlert(title: "Error!",
+			             message: "Please enter a valid email", sender: nil, handler: nil)
+			return false
+		}
+
+		if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
+			ABIShowAlert(title: "Error!",
+			             message: "Please enter a valid phone", sender: nil, handler: nil)
+			return false
+		}
+
 		return true
 	}
-
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
@@ -151,7 +157,6 @@ class PersonDetailsViewController: UIViewController {
 		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
 	}
 
-
 	func savePerson() {
 
         // ALE: this is just a hack for now so that we're checking for PFObject instead
@@ -160,13 +165,18 @@ class PersonDetailsViewController: UIViewController {
 //			NSLog("Editing current person")
 //			// TODO: Save current person to Parse
 //		}
-        if let pfPerson = personPFObject {
+
+		if let pfPerson = personPFObject {
             NSLog("Editing current person")
             
-            pfPerson[ObjectKeys.Person.firstName] = self.firstNameTextField.text
-            pfPerson[ObjectKeys.Person.lastName] = self.lastNameTextField.text
-            pfPerson[ObjectKeys.Person.email] = self.emailTextField.text
-            pfPerson[ObjectKeys.Person.phone] = self.phoneTextField.text
+			let firstName = firstNameTextField.text!
+            pfPerson[ObjectKeys.Person.firstName] = firstName
+
+			let lastName = lastNameTextField.text ?? firstName
+			pfPerson[ObjectKeys.Person.lastName] = lastName
+
+            pfPerson[ObjectKeys.Person.email] = emailTextField.text
+            pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
 
 			if let photoData = photoData {
 				pfPerson[ObjectKeys.Person.photo] = photoData
@@ -183,8 +193,12 @@ class PersonDetailsViewController: UIViewController {
             })
         } else {
 			NSLog("Creating new person")
-			person = Person(firstName: firstNameTextField.text!,
-			                lastName: lastNameTextField.text!)
+
+			let firstName = firstNameTextField.text!
+			let lastName = lastNameTextField.text ?? firstName
+
+			person = Person(firstName: firstName,
+			                lastName: lastName)
 			person?.email = emailTextField.text
 			person?.phone = phoneTextField.text
 			person?.photo = photoData
