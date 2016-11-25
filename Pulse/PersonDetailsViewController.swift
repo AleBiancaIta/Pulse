@@ -159,13 +159,6 @@ class PersonDetailsViewController: UIViewController {
 
 	func savePerson() {
 
-        // ALE: this is just a hack for now so that we're checking for PFObject instead
-        // of person. Feel free to change this later
-//		if let person = person {
-//			NSLog("Editing current person")
-//			// TODO: Save current person to Parse
-//		}
-
 		if let pfPerson = personPFObject {
             NSLog("Editing current person")
             
@@ -211,10 +204,12 @@ class PersonDetailsViewController: UIViewController {
 
 					Person.savePersonToParse(person: self.person!) {
                         (success: Bool, error: Error?) in
-                        NSLog("Created ok!")
-                        
-                        let _ = self.navigationController?.popViewController(animated: true)
-                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+						if success {
+							self.ABIShowAlert(title: "Success", message: "Team member created successfully!", sender: nil, handler: { (alertAction: UIAlertAction) in
+								self.dismiss(animated: true, completion: nil)
+								NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+							})
+						}
                     }
                 }
             })
