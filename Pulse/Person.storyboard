@@ -1,139 +1,124 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_0" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
-    <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-    </dependencies>
-    <scenes>
-        <!--Person Details View Controller-->
-        <scene sceneID="ans-Ok-2rT">
-            <objects>
-                <viewController storyboardIdentifier="PersonDetailsViewController" id="Uwy-PO-bTJ" customClass="PersonDetailsViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4Ra-l0-F2s"/>
-                        <viewControllerLayoutGuide type="bottom" id="vC3-ed-Zqe"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dd2-dU-vf8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UGc-GT-hsk">
-                                <rect key="frame" x="144" y="107" width="160" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSb-46-36I">
-                                <rect key="frame" x="144" y="152" width="160" height="27"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ee3-O0-BO6">
-                                <rect key="frame" x="144" y="197" width="160" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VZq-fp-qWE">
-                                <rect key="frame" x="144" y="243" width="160" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Schedule next meeting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3v-c0-fQi">
-                                <rect key="frame" x="16" y="314" width="176" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="10" translatesAutoresizingMaskIntoConstraints="NO" id="SDP-ZR-iCR">
-                                <rect key="frame" x="0.0" y="343" width="320" height="225"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="500850490.51382101">
-                                    <!--2016-11-14 21:08:10 +0000-->
-                                </date>
-                            </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouF-MC-VDc">
-                                <rect key="frame" x="258" y="248" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.27450980392156865" green="0.70980392156862748" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Call">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="didTapCallButton:" destination="Uwy-PO-bTJ" eventType="touchUpInside" id="igK-kA-Zae"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-vI-Cpq" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
-                                <rect key="frame" x="16" y="107" width="120" height="120"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="8et-Lv-3U5"/>
-                                    <constraint firstAttribute="width" constant="120" id="eWj-V2-P2f"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="leadingMargin" secondItem="aoC-vI-Cpq" secondAttribute="leading" id="9dE-Ug-pM0"/>
-                            <constraint firstItem="aoC-vI-Cpq" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="43" id="KRA-Ey-aau"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="9mV-B5-MGU">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="da2-rr-G06">
-                            <connections>
-                                <action selector="onRightBarButtonTap:" destination="Uwy-PO-bTJ" id="Ivk-2b-1x7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="callButton" destination="ouF-MC-VDc" id="vNr-CT-e6u"/>
-                        <outlet property="emailTextField" destination="ee3-O0-BO6" id="SM9-xy-7LD"/>
-                        <outlet property="firstNameTextField" destination="UGc-GT-hsk" id="b5E-tk-UbZ"/>
-                        <outlet property="lastNameTextField" destination="fSb-46-36I" id="2Ld-f9-7B3"/>
-                        <outlet property="phoneTextField" destination="VZq-fp-qWE" id="pSV-fl-3LM"/>
-                        <outlet property="photoImageView" destination="aoC-vI-Cpq" id="aCB-Lk-9AL"/>
-                        <outlet property="rightBarButtonItem" destination="da2-rr-G06" id="hVS-D2-7ey"/>
-                        <outlet property="scheduleMeetingDatePicker" destination="SDP-ZR-iCR" id="3bI-97-U39"/>
-                        <outlet property="scheduleMeetingLabel" destination="I3v-c0-fQi" id="xvs-14-ngQ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4U4-er-MFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1125" y="195.42253521126761"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="4WI-zc-YWR">
-            <objects>
-                <navigationController storyboardIdentifier="PersonDetailsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="TsK-7G-a0r" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tem-0a-9re">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Uwy-PO-bTJ" kind="relationship" relationship="rootViewController" id="gTk-6L-oUM"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S3r-zb-cBp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="188" y="196.55172413793105"/>
-        </scene>
-    </scenes>
+	<device id="retina4_7" orientation="portrait">
+		<adaptation id="fullscreen"/>
+	</device>
+	<dependencies>
+		<deployment identifier="iOS"/>
+		<plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+		<capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+		<capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+	</dependencies>
+	<scenes>
+		<!--Person Details View Controller-->
+		<scene sceneID="ans-Ok-2rT">
+			<objects>
+				<viewController storyboardIdentifier="PersonDetailsViewController" id="Uwy-PO-bTJ" customClass="PersonDetailsViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+					<layoutGuides>
+						<viewControllerLayoutGuide type="top" id="4Ra-l0-F2s"/>
+						<viewControllerLayoutGuide type="bottom" id="vC3-ed-Zqe"/>
+					</layoutGuides>
+					<view key="view" contentMode="scaleToFill" id="Dd2-dU-vf8">
+						<rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+						<autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+						<subviews>
+							<textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UGc-GT-hsk">
+								<rect key="frame" x="159" y="34" width="200" height="30"/>
+								<gestureRecognizers/>
+								<constraints>
+									<constraint firstAttribute="height" constant="30" id="IFJ-OG-3pN"/>
+									<constraint firstAttribute="width" constant="200" id="oaz-Ff-Ds7"/>
+								</constraints>
+								<nil key="textColor"/>
+								<fontDescription key="fontDescription" type="system" pointSize="14"/>
+								<textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+							</textField>
+							<textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fSb-46-36I">
+								<rect key="frame" x="159" y="74" width="200" height="30"/>
+								<gestureRecognizers/>
+								<constraints>
+									<constraint firstAttribute="width" constant="200" id="SWe-1L-Z49"/>
+									<constraint firstAttribute="height" constant="30" id="cdq-SA-Vkf"/>
+								</constraints>
+								<nil key="textColor"/>
+								<fontDescription key="fontDescription" type="system" pointSize="14"/>
+								<textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+							</textField>
+							<textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ee3-O0-BO6">
+								<rect key="frame" x="159" y="114" width="200" height="30"/>
+								<gestureRecognizers/>
+								<constraints>
+									<constraint firstAttribute="width" constant="200" id="8cu-o8-Zkk"/>
+									<constraint firstAttribute="height" constant="30" id="VbC-8S-01Q"/>
+								</constraints>
+								<nil key="textColor"/>
+								<fontDescription key="fontDescription" type="system" pointSize="14"/>
+								<textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
+							</textField>
+							<textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VZq-fp-qWE">
+								<rect key="frame" x="159" y="154" width="200" height="30"/>
+								<gestureRecognizers/>
+								<constraints>
+									<constraint firstAttribute="height" constant="30" id="Y4E-DU-JKA"/>
+									<constraint firstAttribute="width" constant="200" id="nPq-J3-5jU"/>
+								</constraints>
+								<nil key="textColor"/>
+								<fontDescription key="fontDescription" type="system" pointSize="14"/>
+								<textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done"/>
+							</textField>
+							<view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoC-vI-Cpq" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
+								<rect key="frame" x="20" y="45" width="120" height="120"/>
+								<color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+								<constraints>
+									<constraint firstAttribute="width" constant="120" id="GN1-2E-wlY"/>
+									<constraint firstAttribute="height" constant="120" id="vNC-u9-RqU"/>
+								</constraints>
+							</view>
+							<button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouF-MC-VDc">
+								<rect key="frame" x="319" y="154" width="46" height="30"/>
+								<color key="backgroundColor" red="0.27450980392156865" green="0.70980392156862748" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+								<constraints>
+									<constraint firstAttribute="width" constant="46" id="ifx-wL-khE"/>
+									<constraint firstAttribute="height" constant="30" id="t2R-kT-sCm"/>
+								</constraints>
+								<state key="normal" title="Call">
+									<color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+								</state>
+								<connections>
+									<action selector="didTapCallButton:" destination="Uwy-PO-bTJ" eventType="touchUpInside" id="igK-kA-Zae"/>
+								</connections>
+							</button>
+						</subviews>
+						<color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+						<constraints>
+							<constraint firstAttribute="trailingMargin" secondItem="UGc-GT-hsk" secondAttribute="trailing" id="6Ql-SO-wop"/>
+							<constraint firstItem="VZq-fp-qWE" firstAttribute="top" secondItem="ee3-O0-BO6" secondAttribute="bottom" constant="10" id="EBu-h4-zru"/>
+							<constraint firstItem="vC3-ed-Zqe" firstAttribute="top" secondItem="aoC-vI-Cpq" secondAttribute="bottom" constant="502" id="H8O-5C-0fy"/>
+							<constraint firstItem="fSb-46-36I" firstAttribute="top" secondItem="UGc-GT-hsk" secondAttribute="bottom" constant="10" id="KOV-yx-VTJ"/>
+							<constraint firstItem="ouF-MC-VDc" firstAttribute="centerY" secondItem="VZq-fp-qWE" secondAttribute="centerY" id="OI7-jw-7fF"/>
+							<constraint firstItem="ee3-O0-BO6" firstAttribute="top" secondItem="fSb-46-36I" secondAttribute="bottom" constant="10" id="QAB-yh-GS2"/>
+							<constraint firstAttribute="trailingMargin" secondItem="ouF-MC-VDc" secondAttribute="trailing" constant="-6" id="SLn-08-bw4"/>
+							<constraint firstItem="aoC-vI-Cpq" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="25" id="VEI-wg-o6L"/>
+							<constraint firstItem="VZq-fp-qWE" firstAttribute="leading" secondItem="ee3-O0-BO6" secondAttribute="leading" id="Vwh-IG-dPQ"/>
+							<constraint firstItem="fSb-46-36I" firstAttribute="leading" secondItem="UGc-GT-hsk" secondAttribute="leading" id="gv7-zw-sNS"/>
+							<constraint firstItem="aoC-vI-Cpq" firstAttribute="leading" secondItem="Dd2-dU-vf8" secondAttribute="leadingMargin" constant="4" id="nG2-A4-xAs"/>
+							<constraint firstItem="UGc-GT-hsk" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="14" id="uKm-4u-sv1"/>
+							<constraint firstItem="ee3-O0-BO6" firstAttribute="leading" secondItem="fSb-46-36I" secondAttribute="leading" id="xj9-75-ofT"/>
+						</constraints>
+					</view>
+					<navigationItem key="navigationItem" id="9mV-B5-MGU"/>
+					<connections>
+						<outlet property="callButton" destination="ouF-MC-VDc" id="vNr-CT-e6u"/>
+						<outlet property="emailTextField" destination="ee3-O0-BO6" id="SM9-xy-7LD"/>
+						<outlet property="firstNameTextField" destination="UGc-GT-hsk" id="b5E-tk-UbZ"/>
+						<outlet property="lastNameTextField" destination="fSb-46-36I" id="2Ld-f9-7B3"/>
+						<outlet property="phoneTextField" destination="VZq-fp-qWE" id="pSV-fl-3LM"/>
+						<outlet property="photoImageView" destination="aoC-vI-Cpq" id="aCB-Lk-9AL"/>
+					</connections>
+				</viewController>
+				<placeholder placeholderIdentifier="IBFirstResponder" id="4U4-er-MFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+			</objects>
+			<point key="canvasLocation" x="1124" y="194.75262368815595"/>
+		</scene>
+	</scenes>
 </document>

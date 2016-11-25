@@ -17,9 +17,6 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var phoneTextField: UITextField!
 	@IBOutlet weak var callButton: UIButton!
-	@IBOutlet weak var rightBarButtonItem: UIBarButtonItem!
-	@IBOutlet weak var scheduleMeetingLabel: UILabel!
-	@IBOutlet weak var scheduleMeetingDatePicker: UIDatePicker!
 
 	var photoData: Data?
 	var person: Person?
@@ -55,17 +52,21 @@ class PersonDetailsViewController: UIViewController {
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
 
-            navigationItem.title = firstName + " " + lastName
+            parent?.navigationItem.title = firstName + " " + lastName
             setEditing(false, animated: true)
         }
 		else {
-			navigationItem.title = "New team member"
+			parent?.navigationItem.title = "New team member"
 			setEditing(true, animated: true)
 		}
 	}
 
 	func initViews() {
 		callButton.layer.cornerRadius = 3
+	}
+
+	func heightForView() -> CGFloat {
+		return 200;
 	}
 
 	// MARK: - UI Actions
@@ -90,12 +91,12 @@ class PersonDetailsViewController: UIViewController {
 		present(alertController, animated: true, completion: nil)
 	}
 
-	@IBAction func onRightBarButtonTap(_ sender: UIBarButtonItem) {
+	func onRightBarButtonTap(_ sender: UIBarButtonItem) {
 
 		if isEditing {
 			if isValid() {
 				setEditing(false, animated: true)
-				savePerson()
+ 				savePerson()
 
 				if let pfObject = personPFObject {
 					let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
@@ -134,6 +135,7 @@ class PersonDetailsViewController: UIViewController {
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
+		parent?.setEditing(editing, animated: animated)
 
 		phoneTextField.isUserInteractionEnabled = isEditing
 		emailTextField.isUserInteractionEnabled = isEditing
@@ -147,10 +149,6 @@ class PersonDetailsViewController: UIViewController {
 		firstNameTextField.borderStyle = isEditing ? .roundedRect : .none
 
 		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
-		scheduleMeetingLabel.isHidden = person == nil
-		scheduleMeetingDatePicker.isHidden = person == nil
-
-		rightBarButtonItem.title = isEditing ? "Save" : "Edit"
 	}
 
 
@@ -169,7 +167,10 @@ class PersonDetailsViewController: UIViewController {
             pfPerson[ObjectKeys.Person.lastName] = self.lastNameTextField.text
             pfPerson[ObjectKeys.Person.email] = self.emailTextField.text
             pfPerson[ObjectKeys.Person.phone] = self.phoneTextField.text
-			pfPerson[ObjectKeys.Person.photo] = photoData
+
+			if let photoData = photoData {
+				pfPerson[ObjectKeys.Person.photo] = photoData
+			}
 
             pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
                 if success {

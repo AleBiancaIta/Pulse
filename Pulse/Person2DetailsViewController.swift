@@ -19,7 +19,8 @@ class Person2DetailsViewController: UIViewController {
     var selectedCards: [Card] = [Constants.personCards[0]] // Info is always required
     
     var personPFObject: PFObject?
-    
+	var personInfoViewController: PersonDetailsViewController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,17 +31,32 @@ class Person2DetailsViewController: UIViewController {
         
         tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
-        // TODO ?? navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
-        
+		initPersonInfo()
+
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         loadExistingPerson()
     }
 
-    // TODO ?? func onSaveButton(_ sender: UIBarButtonItem) {
-    // }
-    
+	func initPersonInfo() {
+
+		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onRightBarButtonTap(_:)))
+
+		let storyboard = UIStoryboard(name: "Person", bundle: nil)
+		personInfoViewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
+		personInfoViewController.personPFObject = personPFObject
+	}
+
+	func onRightBarButtonTap(_ sender: UIBarButtonItem) {
+		personInfoViewController.onRightBarButtonTap(sender)
+	}
+
+	override func setEditing(_ editing: Bool, animated: Bool) {
+		super.setEditing(editing, animated: animated)
+		navigationItem.rightBarButtonItem?.title = editing ? "Save" : "Edit"
+	}
+
     func loadExistingPerson() {
         // Existing person
         if nil != self.personPFObject,
@@ -86,11 +102,14 @@ extension Person2DetailsViewController: UITableViewDataSource {
             
         } else { // The actual cards
             switch selectedCards[indexPath.row].id! {
-            case "i": // TODO Ale's Person Cell
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-                cell.message = "Info Cell"
-                return cell
-                
+			case "i": 
+				let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+				resetCell(cell)
+				self.addChildViewController(personInfoViewController)
+				cell.contentView.addSubview(personInfoViewController.view)
+				cell.selectionStyle = .none
+				return cell
+
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
@@ -161,13 +180,11 @@ extension Person2DetailsViewController: UITableViewDelegate {
         }
         
         switch selectedCards[indexPath.row].id! {
-        case "d":
-            /* TODO fix this
-            let storyboard = UIStoryboard(name: "Todo", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
-            return viewController.heightForView()*/
-            return defaultHeight * 3
-            
+		case "i":
+			let storyboard = UIStoryboard(name: "Person", bundle: nil)
+			let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
+			return viewController.heightForView()
+
         case "d":
             let storyboard = UIStoryboard(name: "Todo", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
