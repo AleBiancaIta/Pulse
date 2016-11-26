@@ -476,14 +476,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DMg-Bf-m0t">
-                                <rect key="frame" x="127" y="40" width="120" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="wN8-Ft-sK0" appends="YES" id="hJe-Bk-7xd"/>
-                                </connections>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Oyy-ID-mcE">
                                 <rect key="frame" x="16" y="194" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -564,6 +556,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vGN-sL-ncC" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
+                                <rect key="frame" x="127" y="39" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -576,7 +573,7 @@
                         <outlet property="passwordTextField" destination="Flg-nb-Erw" id="FmF-tn-86m"/>
                         <outlet property="phoneTextField" destination="9dm-eM-TNV" id="ZXU-EU-TgW"/>
                         <outlet property="positionTextField" destination="h8N-Qk-Qcf" id="d3F-SJ-vkb"/>
-                        <outlet property="profileImageView" destination="DMg-Bf-m0t" id="dsO-D8-3UG"/>
+                        <outlet property="profileImageView" destination="vGN-sL-ncC" id="mOA-AF-rIY"/>
                         <segue destination="YdN-Yd-wjs" kind="presentation" identifier="loginModalSegue" id="EVd-po-Ciy"/>
                     </connections>
                 </viewController>
@@ -591,6 +588,6 @@
         <image name="PulseLogo" width="256" height="256"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="7lI-04-9Bb"/>
+        <segue reference="EVd-po-Ciy"/>
     </inferredMetricsTieBreakers>
 </document>

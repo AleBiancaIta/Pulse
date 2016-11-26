@@ -15,7 +15,7 @@ class SignUpViewController: UIViewController {
     // MARK: - Properties
     
     //@IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var profileImageView: UIImageView!
+	@IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
@@ -25,28 +25,15 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var companyNameTextField: UITextField!
     @IBOutlet weak var positionTextField: UITextField!
     
-    //let imagePicker = UIImagePickerController()
-    //var photoData: Data?
     var person: Person!
-    
+	var photoData: Data?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Default photo for now
-        profileImageView.image = UIImage(named: "DefaultPhoto")
-        
-        //initImage()
+
+		profileImageView.delegate = self
+		profileImageView.isEditable = true
     }
-    
-    /*
-    // MARK: - Initializations
-    
-    func initImage() {
-        imagePicker.delegate = self
-        profileImageView.isUserInteractionEnabled = true
-        profileImageView.layer.cornerRadius = 3
-        profileImageView.clipsToBounds = true
-        profileImageView.image = UIImage(named: "DefaultPhoto")
-    }*/
     
     // MARK: - Actions
     
@@ -79,7 +66,8 @@ class SignUpViewController: UIViewController {
                     
                     // Create a Person object and save it to Parse
                     self.person = Person(dictionary: dictionary)
-                    //self.person.photo = self.photoData
+                    self.person.photo = self.photoData
+
 					Person.savePersonToParse(person: self.person) { (success: Bool, error: Error?) in
                         if success {
                             // Link Person to newUser
@@ -208,89 +196,12 @@ class SignUpViewController: UIViewController {
         }
         
         return true
-    }
-    
-    // MARK: - Image
-    
-    @IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
-        //showAlertAction()
-    }
+    }    
 }
-    
-/*
-    func showAlertAction() {
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let chooseFromLibraryAction = UIAlertAction(title: "Choose from library", style: .default) {
-            (UIAlertAction) in
-            self.chooseFromLibrary()
-        }
-        
-        let takeProfilePhotoAction = UIAlertAction(title: "Take profile photo", style: .default) {
-            (UIAlertAction) in
-            self.takeProfilePhoto()
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alertController.addAction(chooseFromLibraryAction)
-        alertController.addAction(takeProfilePhotoAction)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
-    func takeProfilePhoto() {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = UIImagePickerControllerSourceType.camera
-        imagePicker.cameraCaptureMode = .photo
-        imagePicker.modalPresentationStyle = .fullScreen
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func chooseFromLibrary() {
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-}*/
 
-/*
-// MARK: - UIImagePickerControllerDelegate
+extension SignUpViewController : PhotoImageViewDelegate {
 
-extension SignUpViewController : UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
-        
-        let chosenImageData = UIImagePNGRepresentation(chosenImage)!
-        let imageSize = (chosenImageData as NSData).length
-        
-        profileImageView.contentMode = .scaleAspectFit
-        profileImageView.image = chosenImage
-        profileImageView.layer.cornerRadius = 3
-        profileImageView.clipsToBounds = true
-        
-        //let scaledImage = scaleImageWith(newImage: chosenImage, newSize: CGSize(width: 120, height: 120))
-        let scaledImage = chosenImage.ABIResizeWith(percentage: 0.01)
-        photoData = UIImagePNGRepresentation(scaledImage!)
-        
-        //let photoData2 = NSData(data: photoData!)
-        let photoSize = (photoData as! NSData).length
-        
-        dismiss(animated: true, completion: nil)
-    }
-    
-    public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-//    func scaleImageWith(newImage:UIImage, newSize:CGSize) -> UIImage {
-//        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-//        newImage.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
-//        UIGraphicsEndImageContext()
-//        return newImage
-//    }
-}*/
-
+	func didSelectImage(sender: PhotoImageView) {
+		self.photoData = sender.photoData
+	}
+}
