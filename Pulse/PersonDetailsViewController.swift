@@ -37,7 +37,6 @@ class PersonDetailsViewController: UIViewController {
 	func initImage() {
 		photoImageView.delegate = self
 		photoImageView.isEditable = true
-		photoImageView.imageUrl = person?.photoUrl
 	}
 
 	func initPerson() {

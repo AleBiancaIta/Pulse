@@ -21,7 +21,6 @@ class PhotoImageView: UIView {
 
 	var viewController: UIViewController!
 	let imagePicker = UIImagePickerController()
-	var imageUrl: URL?
 	var photoData: Data? {
 		didSet {
 			self.imageView.image = UIImage(data: photoData!)
@@ -73,10 +72,6 @@ class PhotoImageView: UIView {
 		imageView.layer.borderColor = UIColor.gray.cgColor
 		imageView.layer.borderWidth = 0.5
 		imageView.clipsToBounds = true
-
-		if let imageUrl = imageUrl {
-			imageView.setImageWith(imageUrl);
-		}
 	}
 
 	@IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
