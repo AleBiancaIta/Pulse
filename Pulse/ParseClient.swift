@@ -126,25 +126,25 @@ class ParseClient: NSObject {
         }
     }
     
-    // Order descending
-    func fetchMeetingsFor(personId: String, managerId: String, meetingDate: Date?, orderBy: String?, limit: Int?, isDeleted: Bool, predicate: NSPredicate?, completion: @escaping ([PFObject]?, Error?) -> ()) {
-        
-        // TODO: Need to filter out deleted meetings at some point
+    func fetchMeetingsFor(personId: String, managerId: String, meetingDate: Date?, isAscending: Bool?, orderBy: String?, limit: Int?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
         
         let query = PFQuery(className: "Meetings")
         
-//        if let predicate = predicate {
-//            query = PFQuery(className: "Meetings", predicate: predicate)
-//        } else {
-//            query = PFQuery(className: "Meetings")
-//        }
+        // TODO: Add check for meeting date < current date?
+        
+        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
+        query.whereKey(ObjectKeys.Meeting.managerId, equalTo: managerId)
         
         if let meetingDate = meetingDate {
             query.whereKey(ObjectKeys.Meeting.meetingDate, equalTo: meetingDate)
         }
         
-        if let orderBy = orderBy {
-            query.order(byDescending: orderBy)
+        if let isAscending = isAscending, let orderBy = orderBy {
+            if isAscending {
+                query.order(byAscending: orderBy)
+            } else {
+                query.order(byDescending: orderBy)
+            }
         }
         
         if let limit = limit {
@@ -157,17 +157,46 @@ class ParseClient: NSObject {
             query.whereKeyDoesNotExist(ObjectKeys.Meeting.deletedAt)
         }
         
-        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
-        query.whereKey(ObjectKeys.Meeting.managerId, equalTo: managerId)
         query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
-            debugPrint("query is \(query)")
             if let error = error {
                 debugPrint("Unable to fetch meetings for person: \(personId), manager: \(managerId)")
                 completion(nil, error)
             } else {
-                if let meetings = meetings {
-                    debugPrint("Find meetings, \(meetings.count)")
+                if let meetings = meetings, meetings.count > 0 {
+                    debugPrint("fetchMeetingsFor returned \(meetings.count)")
                     completion(meetings, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "fetchMeetingsForPersonId \(personId) ManagerId \(managerId) query returns no meeting"]
+                    let error = NSError(domain: "ParseClient fetchMeetingsFor", code: 0, userInfo: userInfo) as Error
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    func fetchSurveyFor(surveyId: String, isAscending: Bool?, orderBy: String?, completion: @escaping (PFObject?, Error?)->()) {
+        let query = PFQuery(className: "Survey")
+        query.whereKey(ObjectKeys.Survey.objectId, equalTo: surveyId)
+        
+        if let isAscending = isAscending, let orderBy = orderBy {
+            if isAscending {
+                query.order(byAscending: orderBy)
+            } else {
+                query.order(byDescending: orderBy)
+            }
+        }
+        
+        query.findObjectsInBackground { (surveys: [PFObject]?, error: Error?) in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                if let surveys = surveys, surveys.count > 0 {
+                    let survey = surveys[0]
+                    completion(survey, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "fetchSurveyForSurveyId query returns no survey with id: \(surveyId)"]
+                    let error = NSError(domain: "ParseClient fetchSurveyFor", code: 0, userInfo: userInfo) as Error
+                    completion(nil, error)
                 }
             }
         }

@@ -55,6 +55,7 @@ class TeamViewDataSource: NSObject {
         }
     }
     
+    /*
     func refreshTeamMembersData() {
         fetchTeamMembersForCurrentPerson { (success: Bool, error: Error?) in
             if success {
@@ -63,39 +64,46 @@ class TeamViewDataSource: NSObject {
                 debugPrint("refresh data error: \(error?.localizedDescription)")
             }
         }
-    }
+    }*/
     
-    func fetchLatestMeetingForTeam(personId: String, orderBy: String, limit: Int, completion: @escaping (PFObject?, Error?) -> ()) {
-        
+    func fetchLatestSurveyFor(personId: String, orderBy: String, limit: Int, completion: @escaping (PFObject?, Error?) -> ()) {
         parseClient.getCurrentPerson { (manager: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("Error getting current person with error: \(error.localizedDescription)")
+                completion(nil, error)
             } else {
                 if let manager = manager {
-                    //let predicate = NSPredicate(format: "\(ObjectKeys.Meeting.meetingDate) <= '\(NSDate())'")
+                    // TODO: check if meeting < current date?
                     
-                    //debugPrint("predicate in manager is \(predicate)")
-                    //debugPrint("manager is \(manager)")
-                    
-                    self.parseClient.fetchMeetingsFor(personId: personId, managerId: manager.objectId!, meetingDate: nil, orderBy: orderBy , limit: limit, isDeleted: false, predicate: nil, completion: { (meetings: [PFObject]?, error: Error?) in
-                        
-                        debugPrint("in fetch latest: personId: \(personId), managerId: \(manager.objectId!)")
+                    self.parseClient.fetchMeetingsFor(personId: personId, managerId: manager.objectId!, meetingDate: nil, isAscending: false, orderBy: orderBy, limit: limit, isDeleted: false) { (meetings: [PFObject]?, error: Error?) in
                         
                         if let error = error {
                             debugPrint("Failed in fetching meetings: \(error.localizedDescription)")
                             completion(nil, error)
                         } else {
                             debugPrint("Success in fetching meetings, \(meetings?.count)")
-                            if let meetings = meetings {
+                            if let meetings = meetings, meetings.count > 0 {
                                 let meeting = meetings[0]
-                                completion(meeting, nil)
                                 
-                                for meeting in meetings {
-                                    debugPrint("meeting is \(meeting)")
+                                if let surveyId = meeting[ObjectKeys.Meeting.surveyId] as? String {
+                                    self.parseClient.fetchSurveyFor(surveyId: surveyId, isAscending: nil, orderBy: nil) { (survey: PFObject?, error: Error?) in
+                                        if let error = error {
+                                            completion(nil, error)
+                                        } else {
+                                            completion(survey, nil)
+                                        }
+                                    }
+                                } else {
+                                    debugPrint("Could not find key surveyId in Meeting object")
+                                    completion(nil, error)
                                 }
+                            } else {
+                                let userInfo = [NSLocalizedDescriptionKey: "Fetch meeting returned 0 meeting"]
+                                let error = NSError(domain: "TeamViewDataSource fetchLatestSurvey", code: 0, userInfo: userInfo)
+                                completion(nil, error)
                             }
                         }
-                    })
+                    }
                 }
             }
         }
@@ -142,11 +150,12 @@ extension TeamViewDataSource: UITableViewDataSource {
 
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
 
-        fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
+        fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) { (survey: PFObject?, error: Error?) in
             if let error = error {
-                debugPrint("error: \(error.localizedDescription)")
+                debugPrint("Unable to fetch survey data: \(error.localizedDescription)")
             } else {
-                debugPrint("meeting is \(meeting)")
+                debugPrint("survey is \(survey)")
+                cell.survey = survey
             }
         }
 
@@ -175,11 +184,11 @@ extension TeamViewDataSource: UICollectionViewDataSource {
         cell.nameLabel.text = "\(firstName) \(lastName)"
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
 
-        fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
+        fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) {(survey: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")
             } else {
-                debugPrint("meeting is \(meeting)")
+                debugPrint("survey is \(survey)")
             }
         }
     

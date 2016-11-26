@@ -100,7 +100,7 @@ class TodoViewController: UIViewController {
     
     fileprivate func getCurrentMeetingObject(completion: @escaping (_ success: Bool, _ error: Error?)->()) {
         if let meeting = currentMeeting, let manager = currentManager {
-            parseClient.fetchMeetingsFor(personId: meeting.personId, managerId: manager.objectId!, meetingDate: meeting.meetingDate, orderBy: nil, limit: nil, isDeleted: false, predicate: nil) { (meetings: [PFObject]?, error: Error?) in
+            parseClient.fetchMeetingsFor(personId: meeting.personId, managerId: manager.objectId!, meetingDate: meeting.meetingDate, isAscending: nil, orderBy: nil, limit: nil, isDeleted: false) { (meetings: [PFObject]?, error: Error?) in
                 if let error = error {
                     debugPrint("Failed to retrieve meeting object, error: \(error.localizedDescription)")
                     completion(false, error)

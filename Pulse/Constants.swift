@@ -108,6 +108,7 @@ struct ObjectKeys {
     
     struct Survey {
         static let objectId = "objectId"
+        //static let objectId = "_id"
         static let createdAt = "createdAt"
         static let updatedAt = "updatedAt"
         static let surveyDesc1 = "surveyDesc1"
