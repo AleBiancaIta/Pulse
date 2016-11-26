@@ -11,15 +11,22 @@ import Parse
 
 class SettingsHeaderCell: UITableViewCell {
     
-    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
-    
+
+	weak var parent: UIViewController? {
+		didSet {
+			profileImageView.viewController = parent
+		}
+	}
+
     var person: PFObject! {
         didSet {
             let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
             let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
             usernameLabel.text = "Hello, \(firstName) \(lastName)"
+			profileImageView.pffile = person[ObjectKeys.Person.photo] as? PFFile
         }
     }
     
@@ -39,7 +46,9 @@ class SettingsHeaderCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+		profileImageView.delegate = self
+		profileImageView.isEditable = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -47,5 +56,11 @@ class SettingsHeaderCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+}
 
+extension SettingsHeaderCell : PhotoImageViewDelegate {
+
+	func didSelectImage(sender: PhotoImageView) {
+		Person.savePhotoInPerson(pfObject: person, data: sender.photoData!)
+	}
 }

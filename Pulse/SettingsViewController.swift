@@ -82,7 +82,8 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             if let person = self.person {
                 cell.person = person
             }
-            cell.isUserInteractionEnabled = false
+			cell.parent = self
+			cell.selectionStyle = .none
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: settingsContentCell, for: indexPath)

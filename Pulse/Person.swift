@@ -120,4 +120,18 @@ class Person: NSObject {
 			parsePerson.saveInBackground(block: completion)
 		}
     }
+
+	class func savePhotoInPerson(pfObject: PFObject, data: Data) {
+
+		let parsePhotoFile = PFFile(data: data)
+		parsePhotoFile?.saveInBackground(block: { (success: Bool, error: Error?) in
+			if success {
+				pfObject[ObjectKeys.Person.photo] = parsePhotoFile
+				pfObject.saveInBackground()
+			}
+			else {
+				print(error!.localizedDescription);
+			}
+		})
+	}
 }
