@@ -247,4 +247,23 @@ class ParseClient: NSObject {
             }
         }
     }
+
+	func fetchPersonFor(email: String, completion: @escaping (PFObject?, Error?) -> ()) {
+		let query = PFQuery(className: "Person")
+		query.whereKey(ObjectKeys.Person.email, equalTo: email)
+		query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+			if let error = error {
+				completion(nil, error)
+			} else {
+				if let persons = persons, persons.count > 0 {
+					let person = persons[0]
+					completion(person, nil)
+				} else {
+					let userInfo = [NSLocalizedDescriptionKey: "fetchPerson query returns no person with email: \(email)"]
+					let error = NSError(domain: "ParseClient fetchPersonFor", code: 0, userInfo: userInfo) as Error
+					completion(nil, error)
+				}
+			}
+		}
+	}
 }

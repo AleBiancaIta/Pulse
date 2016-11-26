@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import SVProgressHUD
 
 class PersonDetailsViewController: UIViewController {
 
@@ -95,13 +96,25 @@ class PersonDetailsViewController: UIViewController {
 
 		if isEditing {
 			if isValid() {
-				setEditing(false, animated: true)
- 				savePerson()
+				SVProgressHUD.show()
 
-				if let pfObject = personPFObject {
-					let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
-					let lastName = pfObject[ObjectKeys.Person.lastName] as! String
-					navigationItem.title = firstName + " " + lastName
+				ParseClient.sharedInstance().fetchPersonFor(email: emailTextField.text!) {
+					(person: PFObject?, error: Error?) in
+
+					if error != nil {
+						self.setEditing(false, animated: true)
+						self.savePerson()
+
+						if let pfObject = self.personPFObject {
+							let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
+							let lastName = pfObject[ObjectKeys.Person.lastName] as! String
+							self.navigationItem.title = firstName + " " + lastName
+						}
+					}
+					else {
+						SVProgressHUD.dismiss()
+						self.ABIShowAlert(title: "Error!", message: "User already exists. Please enter a new email", sender: nil, handler: nil)
+					}
 				}
 			}
 		}
@@ -211,6 +224,7 @@ class PersonDetailsViewController: UIViewController {
                         (success: Bool, error: Error?) in
 						if success {
 							self.ABIShowAlert(title: "Success", message: "Team member created successfully!", sender: nil, handler: { (alertAction: UIAlertAction) in
+								SVProgressHUD.dismiss()
 								self.dismiss(animated: true, completion: nil)
 								NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
 							})
@@ -218,6 +232,7 @@ class PersonDetailsViewController: UIViewController {
                     }
                 }
             })
+			SVProgressHUD.dismiss()
  		}
 	}
 }
