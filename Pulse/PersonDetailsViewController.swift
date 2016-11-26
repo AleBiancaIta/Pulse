@@ -165,8 +165,9 @@ class PersonDetailsViewController: UIViewController {
 			let firstName = firstNameTextField.text!
             pfPerson[ObjectKeys.Person.firstName] = firstName
 
-			let lastName = lastNameTextField.text ?? firstName
+			let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
 			pfPerson[ObjectKeys.Person.lastName] = lastName
+			lastNameTextField.text = lastName
 
             pfPerson[ObjectKeys.Person.email] = emailTextField.text
             pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
@@ -188,10 +189,11 @@ class PersonDetailsViewController: UIViewController {
 			NSLog("Creating new person")
 
 			let firstName = firstNameTextField.text!
-			let lastName = lastNameTextField.text ?? firstName
+			let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
+			lastNameTextField.text = lastName
 
 			person = Person(firstName: firstName,
-			                lastName: lastName)
+			                lastName: lastName!)
 			person?.email = emailTextField.text
 			person?.phone = phoneTextField.text
 			person?.photo = photoData
@@ -201,6 +203,9 @@ class PersonDetailsViewController: UIViewController {
                     debugPrint("Error finding the person matching current user, error: \(error.localizedDescription)")
                 } else {
                     self.person?.managerId = manager?.objectId
+					self.person?.companyId = manager?[ObjectKeys.Person.companyId] as? String
+					let positionId = (manager?[ObjectKeys.Person.positionId] as? String)!
+					self.person?.positionId = String(Int(positionId)! - 1)
 
 					Person.savePersonToParse(person: self.person!) {
                         (success: Bool, error: Error?) in
