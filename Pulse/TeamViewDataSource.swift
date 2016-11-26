@@ -140,15 +140,7 @@ extension TeamViewDataSource: UITableViewDataSource {
         cell.firstNameLabel.text = "\(firstName) \(lastName)"
         cell.emailLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.email] as? String
 
-		if let pffileData = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile {
-			do {
-				if let data = try? pffileData.getData() {
-					if let image = UIImage(data: data) {
-						cell.profileImageView.image = image
-					}
-				}
-			}
-		}
+		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
 
         fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
             if let error = error {
@@ -177,21 +169,11 @@ extension TeamViewDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell, for: indexPath) as! TeamCollectionCell
-        cell.profileImageView.image = UIImage(named: "DefaultPhoto")
-        
+
         let firstName = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String ?? ""
         let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
         cell.nameLabel.text = "\(firstName) \(lastName)"
-        
-		if let pffileData = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile {
-			do {
-				if let data = try? pffileData.getData() {
-					if let image = UIImage(data: data) {
-						cell.profileImageView.image = image
-					}
-				}
-			}
-		}
+		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
 
         fetchLatestMeetingForTeam(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 5) {(meeting: PFObject?, error: Error?) in
             if let error = error {

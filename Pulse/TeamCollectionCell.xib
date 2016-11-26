@@ -18,10 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="155" height="210"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g87-rV-KOY">
-                        <rect key="frame" x="8" y="8" width="139" height="135"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="TeamMemberName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bk-0H-NLH">
                         <rect key="frame" x="8" y="148" width="139" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -50,13 +46,18 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleAspectFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3wZ-O0-eNz" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
+                        <rect key="frame" x="12" y="14" width="130" height="130"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <size key="customSize" width="155" height="213"/>
             <connections>
                 <outlet property="nameLabel" destination="8Bk-0H-NLH" id="85T-sU-S1t"/>
-                <outlet property="profileImageView" destination="g87-rV-KOY" id="6SE-5o-Z6a"/>
+                <outlet property="profileImageView" destination="3wZ-O0-eNz" id="eec-ec-1qx"/>
                 <outlet property="surveyValue1Label" destination="H7f-h6-45P" id="HnP-OL-UM9"/>
                 <outlet property="surveyValue2Label" destination="XWT-0m-OVr" id="XBl-B4-hie"/>
                 <outlet property="surveyValue3Label" destination="DAO-xR-Zrc" id="3VJ-Gw-CLr"/>

@@ -12,30 +12,20 @@ class TeamCollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
     
-    @IBOutlet weak var profileImageView: UIImageView!
+	@IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var surveyValue1Label: UILabel!
     @IBOutlet weak var surveyValue2Label: UILabel!
     @IBOutlet weak var surveyValue3Label: UILabel!
 
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         debugPrint("team cell loaded")
-//        profileImageView.clipsToBounds = true
-//        
+
 //        surveyValue1Label.text = "0"
 //        surveyValue2Label.text = "1"
 //        surveyValue3Label.text = "3"
 //        nameLabel.text = "Testing"
-//        profileImageView.image = UIImage(named: "DefaultPhoto")
-//        
-        
     }
-    
-    
-    
-    
 }

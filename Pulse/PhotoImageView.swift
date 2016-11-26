@@ -24,7 +24,7 @@ class PhotoImageView: UIView {
 	var imageUrl: URL?
 	var photoData: Data? {
 		didSet {
-			self.imageView.image = UIImage(data: photoData!);
+			self.imageView.image = UIImage(data: photoData!)
 		}
 	}
 
@@ -37,9 +37,13 @@ class PhotoImageView: UIView {
 					})
 				}
 			}
+			else {
+				imageView.image = #imageLiteral(resourceName: "DefaultPhoto")
+			}
 		}
 	}
 
+	var isEditable = false
 	let imageDefaultSize = 200.0
 
 	weak var delegate:PhotoImageViewDelegate? {
@@ -66,6 +70,8 @@ class PhotoImageView: UIView {
 
 		imagePicker.delegate = self
 		imageView.layer.cornerRadius = 3
+		imageView.layer.borderColor = UIColor.gray.cgColor
+		imageView.layer.borderWidth = 0.5
 		imageView.clipsToBounds = true
 
 		if let imageUrl = imageUrl {
@@ -74,7 +80,9 @@ class PhotoImageView: UIView {
 	}
 
 	@IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
-		showAlertAction()
+		if isEditable {
+			showAlertAction()
+		}
 	}
 
 	func showAlertAction() {
