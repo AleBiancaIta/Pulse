@@ -24,7 +24,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view clipsSubviews="YES" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wZ-O0-eNz" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
+                    <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wZ-O0-eNz" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
                         <rect key="frame" x="12" y="14" width="130" height="130"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
