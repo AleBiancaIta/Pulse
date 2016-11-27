@@ -189,10 +189,10 @@ extension TeamViewDataSource: UICollectionViewDataSource {
                 debugPrint("error: \(error.localizedDescription)")
             } else {
                 debugPrint("survey is \(survey)")
+                cell.survey = survey
             }
         }
     
-        debugPrint("indexPath.row \(indexPath.row)")
         return cell
     }
 }

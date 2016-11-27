@@ -38,7 +38,8 @@ class TeamCollectionViewController: UIViewController {
     }
     
     func heightForView() -> CGFloat {
-        return 240;
+        //return 240
+        return 300
     }
 
     // MARK: - Actions
@@ -71,7 +72,8 @@ extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionVi
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 155.0, height: 300) //height: 210.0)
+        return CGSize(width: 155.0, height: 210.0)
+        //return CGSize(width: 155.0, height: 300) //height: 210.0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
