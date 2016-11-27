@@ -108,8 +108,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
 			case "i": 
 				let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
 				resetCell(cell)
-				self.addChildViewController(personInfoViewController)
 				cell.contentView.addSubview(personInfoViewController.view)
+                self.addChildViewController(personInfoViewController)
+                personInfoViewController.didMove(toParentViewController: self)
 				cell.selectionStyle = .none
 				return cell
                 
@@ -117,9 +118,10 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Team", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC")
-                self.addChildViewController(viewController)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
                 cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 cell.selectionStyle = .none
                 return cell
 
@@ -130,8 +132,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                 viewController.currentTeamPerson = personPFObject
                 viewController.viewTypes = .employeeDetail
-                self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             case "m":
@@ -142,8 +145,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 if let personPFObject = personPFObject {
                     viewController.personId = personPFObject.objectId
                 }
-                self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             case "n":
@@ -156,8 +160,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     let notes = personPFObject["notes"] as? String {
                     viewController.notes = notes
                 }
-                self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             default:

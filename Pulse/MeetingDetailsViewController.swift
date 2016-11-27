@@ -374,8 +374,9 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                 viewController.currentMeeting = meeting
                 viewController.viewTypes = .meeting
-                self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             case "n":
@@ -385,8 +386,9 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                 viewController.delegate = self
                 viewController.notes = meeting.notes
-                self.addChildViewController(viewController)
                 cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             default:

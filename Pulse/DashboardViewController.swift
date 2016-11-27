@@ -137,37 +137,41 @@ extension DashboardViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Graph", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "GraphViewController")
-                self.addChildViewController(vc)
-                cell.contentView.addSubview(vc.view)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+                cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
-                vc.personId = nil
-                self.addChildViewController(vc)
-                cell.contentView.addSubview(vc.view)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+                viewController.personId = nil
+                cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Team", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC")
-                self.addChildViewController(vc)
-                cell.contentView.addSubview(vc.view)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+                cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
                 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Todo", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "TodoVC")
-                self.addChildViewController(vc)
-                cell.contentView.addSubview(vc.view)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+                cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
                 return cell
 
             default:
