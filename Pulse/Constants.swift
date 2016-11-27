@@ -25,6 +25,7 @@ class Constants: NSObject {
     
     static let personCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "i", "name": "Info", "card_type": "info", "page_type": "person"],
+        ["id" : "t", "name": "Team Members", "card_type": "team", "page_type": "person"],
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "person"],
         ["id" : "m", "name": "Meetings", "card_type": "meetings", "page_type": "person"],
         ["id" : "n", "name": "Notes", "card_type": "notes", "page_type": "person"]

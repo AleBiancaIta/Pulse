@@ -71,8 +71,8 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        guard indexPath.row != 0 else {
-            alertController?.message = "Cannot remove info card"
+        guard indexPath.row != 0 && indexPath.row != 1 else {
+            alertController?.message = "Cannot update info and team cards"
             present(alertController!, animated: true)
             return
         }

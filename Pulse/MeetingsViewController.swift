@@ -202,6 +202,11 @@ extension MeetingsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
+        guard 0 < meetings.count else {
+            print("No meetings")
+            return
+        }
+        
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
         viewController.meeting = meetings[indexPath.row]

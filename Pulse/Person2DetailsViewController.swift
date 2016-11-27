@@ -16,7 +16,7 @@ class Person2DetailsViewController: UIViewController {
     var alertController: UIAlertController?
     
     var selectedCardsString: String? = ""
-    var selectedCards: [Card] = [Constants.personCards[0]] // Info is always required
+    var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
     
     var personPFObject: PFObject?
 	var personInfoViewController: PersonDetailsViewController!
@@ -35,6 +35,11 @@ class Person2DetailsViewController: UIViewController {
 
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
+        
+        // TODO Ita
+        if true { // If person is a manager or above, include team card
+            selectedCards.append(Constants.personCards[1])
+        }
         
         loadExistingPerson()
     }
@@ -70,13 +75,11 @@ class Person2DetailsViewController: UIViewController {
                 for c in selectedCardsString.characters {
                     switch c {
                     case "d":
-                        selectedCards.append(Constants.personCards[1])
-                    case "m":
                         selectedCards.append(Constants.personCards[2])
-                    case "n":
+                    case "m":
                         selectedCards.append(Constants.personCards[3])
-                    //case "p":
-                    //    selectedCards.append(Constants.personCards[2])
+                    case "n":
+                        selectedCards.append(Constants.personCards[4])
                     default:
                         break
                     }
@@ -109,6 +112,16 @@ extension Person2DetailsViewController: UITableViewDataSource {
 				cell.contentView.addSubview(personInfoViewController.view)
 				cell.selectionStyle = .none
 				return cell
+                
+            case "t":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
+                let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC")
+                self.addChildViewController(viewController)
+                cell.contentView.addSubview(viewController.view)
+                cell.selectionStyle = .none
+                return cell
 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
@@ -184,6 +197,11 @@ extension Person2DetailsViewController: UITableViewDelegate {
 			let storyboard = UIStoryboard(name: "Person", bundle: nil)
 			let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
 			return viewController.heightForView()
+            
+        case "t":
+            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+            return viewController.heightForView()
 
         case "d":
             let storyboard = UIStoryboard(name: "Todo", bundle: nil)
@@ -229,15 +247,12 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
-                let id = card.id,
                 let selectedCardsString = self.selectedCardsString {
                 
                 if posts.count > 0 {
                     let post = posts[0]
                     
-                    // Always put info first
-                    self.selectedCardsString = selectedCardsString.replacingOccurrences(of: "i", with: "")
-                    self.selectedCardsString = "i\(id)\(selectedCardsString)"
+                    self.selectedCardsString = selectedCardsString
                     
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
@@ -258,7 +273,12 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         }
         
         // Insert new card at the top of the table view
-        selectedCards.insert(card, at: 1)
+        // TODO Ita, if team cell is required
+        if true {
+            selectedCards.insert(card, at: 2)
+        } else {
+            selectedCards.insert(card, at: 1)
+        }
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
