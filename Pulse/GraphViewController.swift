@@ -19,24 +19,27 @@ class GraphViewController: UIViewController {
     var survey1Values: [Float] = []
     var survey2Values: [Float] = []
     var survey3Values: [Float] = []
-    var diffDaysValues: [Float] = []
+    var personIdValues: [String] = []
+    var highLowValues = ["Low", "Medium", "High"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let query = PFQuery(className: "Survey")
         query.whereKey("companyId", equalTo: "Pulse")
-        // query.whereKey("meetingDate", lessThanOrEqualTo: ) // TODO <= 30 days ago add to table
+        query.order(byDescending: "meetingDate") // TODO filter by last 60 days
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts {
-                var a: Float = -30 // TODO test
                 for post in posts {
-                    self.survey1Values.append(post["surveyValueId1"] as! Float)
-                    self.survey2Values.append(post["surveyValueId2"] as! Float)
-                    self.survey3Values.append(post["surveyValueId3"] as! Float)
-                    self.diffDaysValues.append(a) // TODO
-                    a += 5
+                    if let personId = post["personId"] as? String {
+                        if !self.personIdValues.contains(personId) {
+                            self.survey1Values.append(post["surveyValueId1"] as! Float)
+                            self.survey2Values.append(post["surveyValueId2"] as! Float)
+                            self.survey3Values.append(post["surveyValueId3"] as! Float)
+                            self.personIdValues.append(personId)
+                        }
+                    }
                 }
                 self.setupCharts()
             }
@@ -51,35 +54,41 @@ class GraphViewController: UIViewController {
         var data1: [(x: Float, y: Float)] = []
         var data2: [(x: Float, y: Float)] = []
         var data3: [(x: Float, y: Float)] = []
-        for i in 0...diffDaysValues.count-1 {
-            data1.append((x: diffDaysValues[i], y: survey1Values[i])) // Happiness
-            data2.append((x: diffDaysValues[i], y: survey2Values[i])) // Engagement
-            data3.append((x: diffDaysValues[i], y: survey3Values[i])) // Workload
+        for i in 0...personIdValues.count-1 {
+            data1.append((x: Float(i), y: survey1Values[i])) // Happiness
+            data2.append((x: Float(i), y: survey2Values[i])) // Engagement
+            data3.append((x: Float(i), y: survey3Values[i])) // Workload
         }
 
         let survey1Series = ChartSeries(data: data1)
         survey1Series.color = UIColor.blue
         survey1Series.area = true
         chart1.add(survey1Series)
-        chart1.xLabels = [-30, -20, -10, 0]
-        chart1.xLabelsFormatter = { String(Int(round($1))) + " days" }
+        chart1.lineWidth = 1
+        //chart1.xLabels = [0, 1, 2]
+        //chart1.xLabelsFormatter = { self.personIdValues[Int($1)] }
         chart1.yLabels = [0, 1, 2]
+        chart1.yLabelsFormatter = { self.highLowValues[Int($1)] }
         
         let survey2Series = ChartSeries(data: data2)
         survey2Series.color = UIColor.red
         survey2Series.area = true
         chart2.add(survey2Series)
-        chart2.xLabels = [-30, -20, -10, 0]
-        chart2.xLabelsFormatter = { String(Int(round($1))) + " days" }
+        chart2.lineWidth = 1
+        //chart2.xLabels = [0, 1, 2]
+        //chart2.xLabelsFormatter = { self.personIdValues[Int($1)] }
         chart2.yLabels = [0, 1, 2]
+        chart2.yLabelsFormatter = { self.highLowValues[Int($1)] }
 
         let survey3Series = ChartSeries(data: data3)
         survey3Series.color = UIColor.green
         survey3Series.area = true
         chart3.add(survey3Series)
-        chart3.xLabels = [-30, -20, -10, 0]
-        chart3.xLabelsFormatter = { String(Int(round($1))) + " days" }
+        chart3.lineWidth = 1
+        //chart3.xLabels = [0, 1, 2]
+        //chart3.xLabelsFormatter = { String(Int(round($1))) + "" }
         chart3.yLabels = [0, 1, 2]
+        chart3.yLabelsFormatter = { self.highLowValues[Int($1)] }
     }
 
     func heightForView() -> CGFloat {

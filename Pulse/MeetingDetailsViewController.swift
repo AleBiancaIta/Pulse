@@ -238,6 +238,7 @@ class MeetingDetailsViewController: UIViewController {
                         post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
                         post["companyId"] = userPerson["companyId"]
                         post["meetingDate"] = Date()
+                        post["personId"] = personId
                         post.saveInBackground(block: { (success: Bool, error: Error?) in
                             
                             if success {
