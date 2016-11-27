@@ -39,9 +39,12 @@ class Person2DetailsViewController: UIViewController {
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         // If person is a manager or above, include team card
-        if let personObject = personPFObject, let positionId = personObject[ObjectKeys.Person.positionId] as? String, (positionId != "1" || positionId != "") {
-            selectedCards.append(Constants.personCards[1])
-            isPersonManager = true
+        if let personObject = personPFObject, let positionId = personObject[ObjectKeys.Person.positionId] as? String {
+            debugPrint("positionId is \(positionId)")
+            if positionId != "1" {
+                selectedCards.append(Constants.personCards[1])
+                isPersonManager = true
+            }
         }
     
         loadExistingPerson()
