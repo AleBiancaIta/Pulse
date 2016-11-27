@@ -95,26 +95,34 @@ class PersonDetailsViewController: UIViewController {
 	func onRightBarButtonTap(_ sender: UIBarButtonItem) {
 
 		if isEditing {
+
 			if isValid() {
-				SVProgressHUD.show()
 
-				ParseClient.sharedInstance().fetchPersonFor(email: emailTextField.text!) {
-					(person: PFObject?, error: Error?) in
+				if personPFObject != nil {
 
-					if error != nil {
-						self.setEditing(false, animated: true)
-						self.savePerson()
+					let personCurrentEmail:String = personPFObject![ObjectKeys.Person.email] as! String
+					let personNewEmail:String = emailTextField.text!
 
-						if let pfObject = self.personPFObject {
-							let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
-							let lastName = pfObject[ObjectKeys.Person.lastName] as! String
-							self.navigationItem.title = firstName + " " + lastName
-						}
+					if  personCurrentEmail != personNewEmail {
+						validateIfPersonExists(completion: { (success: Bool, error: Error?) in
+							if (success) {
+								self.editPerson()
+								self.setEditing(false, animated: true)
+							}
+						})
 					}
 					else {
-						SVProgressHUD.dismiss()
-						self.ABIShowAlert(title: "Error!", message: "User already exists. Please enter a new email", sender: nil, handler: nil)
+						editPerson()
+						self.setEditing(false, animated: true)
 					}
+				}
+				else {
+					validateIfPersonExists(completion: { (success: Bool, error: Error?) in
+						if (success) {
+							self.createPerson()
+							self.setEditing(false, animated: true)
+						}
+					})
 				}
 			}
 		}
@@ -122,6 +130,8 @@ class PersonDetailsViewController: UIViewController {
 			setEditing(true, animated: true)
 		}
 	}
+
+	// MARK: - Helpers
 
 	func isValid() -> Bool {
 
@@ -152,6 +162,22 @@ class PersonDetailsViewController: UIViewController {
 		return true
 	}
 
+	func validateIfPersonExists(completion: @escaping (_ success: Bool, _ error: Error?) -> ()) {
+
+		ParseClient.sharedInstance().fetchPersonFor(email: emailTextField.text!) {
+			(person: PFObject?, error: Error?) in
+
+			if error != nil {
+				completion(true, error)
+			}
+			else {
+				self.ABIShowAlert(title: "Error!", message: "User already exists. Please enter a new email", sender: nil, handler: nil)
+			}
+		}
+	}
+
+	// MARK: - Edit/Save
+
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
 		parent?.setEditing(editing, animated: animated)
@@ -170,72 +196,82 @@ class PersonDetailsViewController: UIViewController {
 		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
 	}
 
-	func savePerson() {
+	func editPerson() {
+
+		NSLog("Editing current person")
 
 		if let pfPerson = personPFObject {
-            NSLog("Editing current person")
-            
 			let firstName = firstNameTextField.text!
-            pfPerson[ObjectKeys.Person.firstName] = firstName
+			pfPerson[ObjectKeys.Person.firstName] = firstName
 
 			let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
 			pfPerson[ObjectKeys.Person.lastName] = lastName
 			lastNameTextField.text = lastName
 
-            pfPerson[ObjectKeys.Person.email] = emailTextField.text
-            pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
+			pfPerson[ObjectKeys.Person.email] = emailTextField.text
+			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
 
 			if let photoData = photoData {
 				pfPerson[ObjectKeys.Person.photo] = photoData
 			}
 
-            pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
-                if success {
-                    self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+			pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
+				if success {
+					self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
 						let _ = self.navigationController?.popViewController(animated: true)
-                    })
-                } else {
-                    self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
-                }
-            })
-        } else {
-			NSLog("Creating new person")
+					})
+				} else {
+					self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+				}
+			})
+		}
+	}
 
-			let firstName = firstNameTextField.text!
-			let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
-			lastNameTextField.text = lastName
+	func createPerson() {
 
-			person = Person(firstName: firstName,
-			                lastName: lastName!)
-			person?.email = emailTextField.text
-			person?.phone = phoneTextField.text
-			person?.photo = photoData
+		NSLog("Creating new person")
 
-            ParseClient.sharedInstance().getCurrentPerson(completion: { (manager: PFObject?, error: Error?) in
-                if let error = error {
-                    debugPrint("Error finding the person matching current user, error: \(error.localizedDescription)")
-                } else {
-                    self.person?.managerId = manager?.objectId
-					self.person?.companyId = manager?[ObjectKeys.Person.companyId] as? String
-					let positionId = (manager?[ObjectKeys.Person.positionId] as? String)!
-					self.person?.positionId = String(Int(positionId)! - 1)
+		validateIfPersonExists(completion: { (success: Bool, error: Error?) in
+			if (success) {
+				self.editPerson()
+			}
+		})
 
-					Person.savePersonToParse(person: self.person!) {
-                        (success: Bool, error: Error?) in
-						if success {
-							self.ABIShowAlert(title: "Success", message: "Team member created successfully!", sender: nil, handler: { (alertAction: UIAlertAction) in
-								SVProgressHUD.dismiss()
-								self.dismiss(animated: true, completion: nil)
-								NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
-							})
-						}
-                    }
-                }
-            })
-			SVProgressHUD.dismiss()
- 		}
+		let firstName = firstNameTextField.text!
+		let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
+		lastNameTextField.text = lastName
+
+		person = Person(firstName: firstName,
+		                lastName: lastName!)
+		person?.email = emailTextField.text
+		person?.phone = phoneTextField.text
+		person?.photo = photoData
+
+		ParseClient.sharedInstance().getCurrentPerson(completion: { (manager: PFObject?, error: Error?) in
+			if let error = error {
+				debugPrint("Error finding the person matching current user, error: \(error.localizedDescription)")
+			} else {
+				self.person?.managerId = manager?.objectId
+				self.person?.companyId = manager?[ObjectKeys.Person.companyId] as? String
+				let positionId = (manager?[ObjectKeys.Person.positionId] as? String)!
+				self.person?.positionId = String(Int(positionId)! - 1)
+
+				Person.savePersonToParse(person: self.person!) {
+					(success: Bool, error: Error?) in
+					if success {
+						self.ABIShowAlert(title: "Success", message: "Team member created successfully!", sender: nil, handler: { (alertAction: UIAlertAction) in
+							SVProgressHUD.dismiss()
+							self.dismiss(animated: true, completion: nil)
+							NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+						})
+					}
+				}
+			}
+		})
 	}
 }
+
+// MARK: - PhotoImageViewDelegate
 
 extension PersonDetailsViewController : PhotoImageViewDelegate {
 
