@@ -61,6 +61,7 @@
 		67A2761C1DE684D500ED73B0 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */; };
 		67A2761D1DE684D500ED73B0 /* Dashboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364AE1DCD8DA500BFD931 /* Dashboard.storyboard */; };
 		67A2761E1DE684D500ED73B0 /* TodoShowCompletedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BC41DE16ECE006C8703 /* TodoShowCompletedCell.xib */; };
+		67A276221DEA6F0200ED73B0 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A276211DEA6F0200ED73B0 /* UIExtensions.swift */; };
 		67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */; };
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
@@ -132,6 +133,7 @@
 		67A276151DE5FDBE00ED73B0 /* Person2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person2.storyboard; sourceTree = "<group>"; };
 		67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsSelectionViewController.swift; sourceTree = "<group>"; };
 		67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person2DetailsViewController.swift; sourceTree = "<group>"; };
+		67A276211DEA6F0200ED73B0 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		67A364A71DCD8DA500BFD931 /* Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		67A364AF1DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Dashboard.storyboard; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				431804A21DD5B0B700B279C6 /* SignUp/Login */,
 				676CEF451DE276BE000FA406 /* Storyboards */,
 				67D8D6491DD56D9800B6DE19 /* Constants.swift */,
+				67A276211DEA6F0200ED73B0 /* UIExtensions.swift */,
 				431804A51DD68A3C00B279C6 /* Pulse.entitlements */,
 				67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */,
 				431804A61DD6975500B279C6 /* Extensions.swift */,
@@ -493,6 +496,7 @@
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
+				67A276221DEA6F0200ED73B0 /* UIExtensions.swift in Sources */,
 				4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */,
 				43F6247A1DE19DBC007086E0 /* TodoEditViewController.swift in Sources */,
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
