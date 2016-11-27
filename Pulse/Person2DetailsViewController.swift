@@ -247,12 +247,12 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
+                let id = card.id,
                 let selectedCardsString = self.selectedCardsString {
                 
                 if posts.count > 0 {
                     let post = posts[0]
-                    
-                    self.selectedCardsString = selectedCardsString
+                    self.selectedCardsString = "\(id)\(selectedCardsString)"
                     
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
