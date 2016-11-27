@@ -15,6 +15,7 @@ class TeamListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     let dataSource = TeamViewDataSource.sharedInstance()
     var deletedPersonIndexPath: IndexPath? = nil
+    var person: PFObject! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +33,7 @@ class TeamListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.dataSource = self.dataSource
-        dataSource.fetchTeamMembersForCurrentPerson { (success: Bool, error: Error?) in
+        dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")
                 self.tableView.reloadData()

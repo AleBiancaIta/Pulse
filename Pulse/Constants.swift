@@ -47,6 +47,10 @@ struct StoryboardID {
     static let todoEditVC = "TodoEditVC"
 }
 
+struct SegueID {
+    static let seeAllTeamList = "SeeAllTeamList"
+}
+
 struct ObjectKeys {
     
     struct Company {

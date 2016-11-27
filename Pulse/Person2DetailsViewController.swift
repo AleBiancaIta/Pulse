@@ -20,6 +20,8 @@ class Person2DetailsViewController: UIViewController {
     
     var personPFObject: PFObject?
 	var personInfoViewController: PersonDetailsViewController!
+    
+    var isPersonManager: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,11 +38,12 @@ class Person2DetailsViewController: UIViewController {
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        // TODO Ita
-        if true { // If person is a manager or above, include team card
+        // If person is a manager or above, include team card
+        if let personObject = personPFObject, let positionId = personObject[ObjectKeys.Person.positionId] as? String, (positionId != "1" || positionId != "") {
             selectedCards.append(Constants.personCards[1])
+            isPersonManager = true
         }
-        
+    
         loadExistingPerson()
     }
 
@@ -119,6 +122,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 resetCell(cell)
                 let storyboard = UIStoryboard(name: "Team", bundle: nil)
                 let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+                viewController.person = personPFObject
                 cell.contentView.addSubview(viewController.view)
                 self.addChildViewController(viewController)
                 viewController.didMove(toParentViewController: self)
@@ -278,8 +282,7 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         }
         
         // Insert new card at the top of the table view
-        // TODO Ita, if team cell is required
-        if true {
+        if isPersonManager {
             selectedCards.insert(card, at: 2)
         } else {
             selectedCards.insert(card, at: 1)

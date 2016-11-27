@@ -33,23 +33,43 @@ class TeamViewDataSource: NSObject {
         return Singleton.sharedInstance
     }
     
-    func fetchTeamMembersForCurrentPerson(completion: @escaping (_ success: Bool, _ error: Error?) -> ()) {
-        parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
-            if let error = error {
-                completion(false, error)
-            } else {
-                if let person = person {
-                    self.currentPerson = person
-                    self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false, completion: { (members: [PFObject]?, error: Error?) in
-                        if let error = error {
-                            completion(false, error)
-                        } else {
-                            if let members = members {
-                                self.teamMembers = members
-                                completion(true, nil)
+    func fetchTeamMembersForCurrentPerson(person: PFObject?, completion: @escaping (_ success: Bool, _ error: Error?) -> ()) {
+        if person == nil { // In Dashboard
+            parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
+                if let error = error {
+                    completion(false, error)
+                } else {
+                    if let person = person {
+                        self.currentPerson = person
+                        self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false) { (members: [PFObject]?, error: Error?) in
+                            if let error = error {
+                                completion(false, error)
+                            } else {
+                                if let members = members, members.count > 0 {
+                                    self.teamMembers = members
+                                    completion(true, nil)
+                                } else {
+                                    debugPrint("Fetch members returned 0 members")
+                                    completion(true, nil)
+                                }
                             }
                         }
-                    })
+                    }
+                }
+            }
+        } else { // In Person
+            self.currentPerson = person!
+            parseClient.fetchTeamMembersFor(managerId: person!.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false) { (members: [PFObject]?, error:Error?) in
+                if let error = error {
+                    completion(false, error)
+                } else {
+                    if let members = members, members.count > 0 {
+                        self.teamMembers = members
+                        completion(true, nil)
+                    } else {
+                        debugPrint("Fetch members returned 0 members")
+                        completion(true, nil)
+                    }
                 }
             }
         }
@@ -128,6 +148,10 @@ class TeamViewDataSource: NSObject {
                 completion(false, error)
             }
         }
+    }
+    
+    func numberOfMembers() -> Int {
+        return teamMembers.count
     }
 }
 

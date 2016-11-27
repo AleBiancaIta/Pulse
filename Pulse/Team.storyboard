@@ -51,7 +51,7 @@
                                 <rect key="frame" x="10" y="26" width="47" height="30"/>
                                 <state key="normal" title="See All"/>
                                 <connections>
-                                    <segue destination="r7D-jI-xXf" kind="show" id="g6U-Qz-8sR"/>
+                                    <segue destination="r7D-jI-xXf" kind="show" identifier="SeeAllTeamList" id="g6U-Qz-8sR"/>
                                 </connections>
                             </button>
                         </subviews>

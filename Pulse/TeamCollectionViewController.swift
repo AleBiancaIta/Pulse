@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import Parse
 
 class TeamCollectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     let dataSource = TeamViewDataSource.sharedInstance()
+    var person: PFObject! = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +28,7 @@ class TeamCollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.dataSource = self.dataSource
-        dataSource.fetchTeamMembersForCurrentPerson { (success: Bool, error: Error?) in
+        dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")
                 self.collectionView.reloadData()
@@ -64,6 +66,13 @@ class TeamCollectionViewController: UIViewController {
     @objc fileprivate func addTeamMemberSuccessful(notification: NSNotification) {
         debugPrint("Get notifications: add team member successful")
 		collectionView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueID.seeAllTeamList {
+            let destinationVC = segue.destination as! TeamListViewController
+            destinationVC.person = self.person            
+        }
     }
 }
 
