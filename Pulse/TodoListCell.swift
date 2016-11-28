@@ -33,10 +33,10 @@ class TodoListCell: UITableViewCell {
             
             if let _ = todoObject[ObjectKeys.ToDo.completedAt] {
                 isCompleted = true
-                squareImageView.image = UIImage(named: "SquareChecked")
+                squareImageView.image = UIImage(named: "CircleChecked")
             } else {
                 isCompleted = false
-                squareImageView.image = UIImage(named: "Square")
+                squareImageView.image = UIImage(named: "Circle")
             }
             
             if let personId = todoObject[ObjectKeys.ToDo.personId] as? String {
