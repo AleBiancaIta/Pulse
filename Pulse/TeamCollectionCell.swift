@@ -46,8 +46,6 @@ class TeamCollectionCell: UICollectionViewCell {
             surveyValue1Button.backgroundColor = UIColor.clear
         default:
             surveyValue1Button.tintColor = UIColor.black
-            //surveyValue1Button.backgroundColor = UIColor.gray
-            
         }
     }
     
@@ -66,8 +64,6 @@ class TeamCollectionCell: UICollectionViewCell {
             surveyValue2Button.backgroundColor = UIColor.clear
         default:
             surveyValue2Button.tintColor = UIColor.black
-            //surveyValue2Button.backgroundColor = UIColor.gray
-            
         }
     }
     
@@ -86,12 +82,13 @@ class TeamCollectionCell: UICollectionViewCell {
             surveyValue3Button.backgroundColor = UIColor.clear
         default:
             surveyValue3Button.tintColor = UIColor.black
-            //surveyValue3Button.backgroundColor = UIColor.gray
-            
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        surveyValue1Button.tintColor = UIColor.black
+        surveyValue2Button.tintColor = UIColor.black
+        surveyValue3Button.tintColor = UIColor.black
     }
 }

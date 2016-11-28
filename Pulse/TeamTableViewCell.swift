@@ -47,8 +47,6 @@ class TeamTableViewCell: UITableViewCell {
             surveyValue1Button.backgroundColor = UIColor.clear
         default:
             surveyValue1Button.tintColor = UIColor.black
-            //surveyValue1Button.backgroundColor = UIColor.gray
-            
         }
     }
     
@@ -66,8 +64,6 @@ class TeamTableViewCell: UITableViewCell {
             surveyValue2Button.backgroundColor = UIColor.clear
         default:
             surveyValue2Button.tintColor = UIColor.black
-            //surveyValue2Button.backgroundColor = UIColor.gray
-            
         }
     }
     
@@ -85,20 +81,13 @@ class TeamTableViewCell: UITableViewCell {
             surveyValue3Button.backgroundColor = UIColor.clear
         default:
             surveyValue3Button.tintColor = UIColor.black
-            //surveyValue3Button.backgroundColor = UIColor.gray
-            
         }
     }
     
-	override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        surveyValue1Button.tintColor = UIColor.black
+        surveyValue2Button.tintColor = UIColor.black
+        surveyValue3Button.tintColor = UIColor.black
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }
