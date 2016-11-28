@@ -130,6 +130,7 @@ extension DashboardViewController: UITableViewDataSource {
             switch selectedCards[indexPath.section].id! {
             case "g":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -145,6 +146,7 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -161,6 +163,7 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -176,6 +179,7 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {

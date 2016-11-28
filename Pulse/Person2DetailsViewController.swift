@@ -108,6 +108,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
             switch selectedCards[indexPath.section].id! {
 			case "i": 
 				let cell = tableView.dequeueReusableCell(withIdentifier: "InfoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -121,6 +122,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -137,6 +139,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -154,6 +157,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
@@ -172,6 +176,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {

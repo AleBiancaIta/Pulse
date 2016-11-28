@@ -364,6 +364,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             switch selectedCards[indexPath.row].id! {
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
@@ -380,6 +381,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Notes", bundle: nil)
