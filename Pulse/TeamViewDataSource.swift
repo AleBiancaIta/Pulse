@@ -212,7 +212,7 @@ extension TeamViewDataSource: UICollectionViewDataSource {
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")
             } else {
-                debugPrint("survey is \(survey)")
+                //debugPrint("survey is \(survey)")
                 cell.survey = survey
             }
         }

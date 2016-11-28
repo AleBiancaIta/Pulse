@@ -107,6 +107,31 @@ class ParseClient: NSObject {
         }
     }
     
+    func isPersonManager(personId: String, isDeleted: Bool, isManager: @escaping (Bool, Error?) -> ()) {
+        let query = PFQuery(className: "Person")
+        query.whereKey(ObjectKeys.Person.managerId, equalTo: personId)
+        if isDeleted {
+            query.whereKeyExists(ObjectKeys.Person.deletedAt)
+        } else {
+            query.whereKeyDoesNotExist(ObjectKeys.Person.deletedAt)
+        }
+        
+        query.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to figure out if \(personId) is a manager, error: \(error.localizedDescription)")
+                isManager(false, error)
+            } else {
+                if let persons = persons, persons.count > 0 {
+                    isManager(true, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "isPersonManager query returned 0 team member"]
+                    let error = NSError(domain: "ParseClient isPersonManager", code: 0, userInfo: userInfo) as Error
+                    isManager(false, error)
+                }
+            }
+        }
+    }
+    
     func fetchMeetingFor(meetingId: String, completion: @escaping (PFObject?, Error?) -> ()) {
         let query = PFQuery(className: "Meetings")
         query.whereKey(ObjectKeys.Meeting.objectId, equalTo: meetingId)
@@ -191,7 +216,7 @@ class ParseClient: NSObject {
                 completion(nil, error)
             } else {
                 if let meetings = meetings, meetings.count > 0 {
-                    debugPrint("fetchMeetingsFor returned \(meetings.count)")
+                    //debugPrint("fetchMeetingsFor returned \(meetings.count)")
                     completion(meetings, nil)
                 } else {
                     let userInfo = [NSLocalizedDescriptionKey: "fetchMeetingsForPersonId \(personId) ManagerId \(managerId) query returns no meeting"]

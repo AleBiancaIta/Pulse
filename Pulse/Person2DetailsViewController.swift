@@ -22,6 +22,8 @@ class Person2DetailsViewController: UIViewController {
 	var personInfoViewController: PersonDetailsViewController!
     
     var isPersonManager: Bool = false
+    
+    fileprivate let parseClient = ParseClient.sharedInstance()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,17 +40,57 @@ class Person2DetailsViewController: UIViewController {
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
+        /*
         // If person is a manager or above, include team card
         if let personObject = personPFObject, let positionId = personObject[ObjectKeys.Person.positionId] as? String {
             debugPrint("positionId is \(positionId)")
             if positionId != "1" {
-                selectedCards.append(Constants.personCards[1])
-                isPersonManager = true
+                self.selectedCards.append(Constants.personCards[1])
+                self.isPersonManager = true
             }
+        }*/
+        
+        /*
+        if let person = personPFObject, let positionId = person[ObjectKeys.Person.positionId] as? String {
+            debugPrint("positionId is \(positionId)")
+            hasDirectReport(manager: person) { (isManager: Bool, error: Error?) in
+                if isManager {
+                    self.selectedCards.append(Constants.personCards[1])
+                    self.isPersonManager = true
+                    self.loadExistingPerson()
+                } else {
+                    if let error = error {
+                        debugPrint("hasDirectReport returned error: \(error.localizedDescription)")
+                    }
+                    
+                    self.loadExistingPerson()
+                }
+            }
+        }*/
+        
+        if isPersonManager {
+            self.selectedCards.append(Constants.personCards[1])
         }
     
         loadExistingPerson()
     }
+    
+//    fileprivate func hasDirectReport(manager: PFObject, isManager: @escaping (Bool, Error?)->())  {
+//        let managerId = manager.objectId!
+//        
+//        parseClient.fetchTeamMembersFor(managerId: managerId, isAscending1: nil, isAscending2: nil, orderBy1: nil, orderBy2: nil, isDeleted: false) { (teams: [PFObject]?, error: Error?) in
+//            if let error = error {
+//                debugPrint("Failed to fetch team members")
+//                isManager(false, error)
+//            } else {
+//                if let teams = teams, teams.count > 0 {
+//                    isManager(true, nil)
+//                } else {
+//                    isManager(false, nil)
+//                }
+//            }
+//        }
+//    }
 
 	func initPersonInfo() {
 

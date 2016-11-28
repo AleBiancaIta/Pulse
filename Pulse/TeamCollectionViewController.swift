@@ -12,6 +12,7 @@ import Parse
 class TeamCollectionViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    fileprivate let parseClient = ParseClient.sharedInstance()
     let dataSource = TeamViewDataSource.sharedInstance()
     var person: PFObject! = nil
 
@@ -90,7 +91,26 @@ extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionVi
         
         let storyboard = UIStoryboard(name: "Person2", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "Person2DetailsViewController") as! Person2DetailsViewController
-        viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
-        self.navigationController?.pushViewController(viewController, animated: true)
+        //viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
+        let person = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
+        viewController.personPFObject = person
+        parseClient.isPersonManager(personId: (person?.objectId)!, isDeleted: false) { (isManager: Bool, error: Error?) in
+            if let error = error {
+                debugPrint("in TeamCollectionVC isPersonManager returned error: \(error.localizedDescription)")
+                viewController.isPersonManager = false
+            } else {
+                if isManager {
+                    viewController.isPersonManager = true
+                } else {
+                    viewController.isPersonManager = false
+                }
+            }
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
+        
+        
+        
+        
+        //self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
