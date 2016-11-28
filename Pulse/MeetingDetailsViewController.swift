@@ -30,7 +30,7 @@ class MeetingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Meeting"
+        title = "Meeting" // TODO: Add first and last name?
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
@@ -40,6 +40,8 @@ class MeetingDetailsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
+//        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
+//        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -63,7 +65,7 @@ class MeetingDetailsViewController: UIViewController {
     func loadSelectedCards() {
         // Existing meeting
         if nil != meeting {
- 
+            
             if let selectedCardsString = meeting.selectedCards {
                 self.selectedCardsString = selectedCardsString
                 for c in (meeting.selectedCards?.characters)! {
@@ -130,7 +132,8 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 return cell
                 
             case "d":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                //let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
@@ -147,7 +150,8 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 return cell
                 
             case "n":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                //let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {

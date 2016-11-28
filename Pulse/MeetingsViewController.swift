@@ -151,10 +151,11 @@ extension MeetingsViewController: UITableViewDataSource {
             let personQuery = PFQuery(className: "Person")
             personQuery.whereKey(ObjectKeys.Person.objectId, equalTo: meetings[indexPath.row].personId)
             personQuery.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
-                if let persons = persons,
-                    let person = persons[0] as? PFObject,
-                    let firstName = person[ObjectKeys.Person.firstName] as? String, let lastName = person[ObjectKeys.Person.lastName] as? String {
-                    cell.messageLabel.text = "\(firstName) \(lastName) (\(meetingDate))"
+                if let persons = persons {
+                    let person = persons[0]
+                    if let firstName = person[ObjectKeys.Person.firstName] as? String, let lastName = person[ObjectKeys.Person.lastName] as? String {
+                        cell.messageLabel.text = "\(firstName) \(lastName) (\(meetingDate))"
+                    }
                 }
             }
             cell.accessoryType = .disclosureIndicator

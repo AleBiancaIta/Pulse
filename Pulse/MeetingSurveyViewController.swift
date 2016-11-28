@@ -82,6 +82,12 @@ class MeetingSurveyViewController: UIViewController {
                     debugPrint("Unable to find person associated with this meeting, error: \(error.localizedDescription)")
                 } else {
                     self.person = person
+                    
+                    /*
+                    if let person = person, let firstName = person[ObjectKeys.Person.firstName] as? String, let lastName = person[ObjectKeys.Person.lastName] as? String {
+                        self.title = "Meeting with \(firstName) \(lastName)"
+                    }*/
+                    
                     //self.originalPerson = person
                     self.teamListTableView.reloadData()
                 }
