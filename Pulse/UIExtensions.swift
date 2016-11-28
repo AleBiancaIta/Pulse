@@ -50,10 +50,15 @@ class UIExtensions: NSObject {
 extension UIColor {
     
     class func pulseBarTintColor() -> UIColor {
-        return UIExtensions.uiColorWith(hex: "#1976D2") // Blue
+        return UIExtensions.uiColorWith(hex: "#1976D2") // Darker blue
     }
     
     class func pulseTintColor() -> UIColor {
         return UIColor.white
+    }
+    
+    // TODO, use this for buttons, and tinted text, etc.
+    class func pulsePrimaryTintColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#2196F3") // Blue
     }
 }

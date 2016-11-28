@@ -35,7 +35,9 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-O2-1ul">
                                                 <rect key="frame" x="8" y="24" width="47" height="30"/>
-                                                <state key="normal" title="See All"/>
+                                                <state key="normal" title="See All">
+                                                    <color key="titleColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
                                                 <connections>
                                                     <action selector="onSeeAllButtonTap:" destination="nJh-GG-WIM" eventType="touchUpInside" id="k8L-0P-Vap"/>
                                                 </connections>
