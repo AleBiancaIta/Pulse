@@ -9,23 +9,14 @@
 import Parse
 import UIKit
 
+@objc protocol MeetingDetailsViewControllerDelegate {
+    @objc optional func meetingDetailsViewController(_ meetingDetailsViewController: MeetingDetailsViewController, onSave: Bool)
+}
+
 class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    /*
-    @IBOutlet weak var personTextField: UITextField!
-    @IBOutlet weak var survey1Low: UISwitch! // 0
-    @IBOutlet weak var survey1Med: UISwitch! // 1
-    @IBOutlet weak var survey1High: UISwitch! // 2
-    @IBOutlet weak var survey2Low: UISwitch!
-    @IBOutlet weak var survey2Med: UISwitch!
-    @IBOutlet weak var survey2High: UISwitch!
-    @IBOutlet weak var survey3Low: UISwitch!
-    @IBOutlet weak var survey3Med: UISwitch!
-    @IBOutlet weak var survey3High: UISwitch!
- */
- 
     var alertController: UIAlertController?
     
     var selectedCardsString: String? = ""
@@ -33,6 +24,9 @@ class MeetingDetailsViewController: UIViewController {
     
     var meeting: Meeting!
     var isExistingMeeting = true // False if new meeting, otherwise true
+    
+    fileprivate let parseClient = ParseClient.sharedInstance()
+    weak var delegate: MeetingDetailsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,13 +51,27 @@ class MeetingDetailsViewController: UIViewController {
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        loadExistingMeeting()
+        if !isExistingMeeting {
+            selectedCards.append(Constants.meetingCards[0])
+        }
+        
+        //loadExistingMeeting()
+        loadSelectedCards()
     }
     
-    func loadExistingMeeting() {
-        
+    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
+        for view in cell.contentView.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    //func loadExistingMeeting() {
+    
+    func loadSelectedCards() {
         // Existing meeting
         if nil != meeting {
+            
+            /*
             let personQuery = PFQuery(className: "Person")
             personQuery.whereKey(ObjectKeys.Person.objectId, equalTo: meeting.personId)
             personQuery.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
@@ -75,7 +83,7 @@ class MeetingDetailsViewController: UIViewController {
                         //self.personTextField.text = person["firstName"] as? String
                     }
                 }
-            }
+            }*/
             
             // THIS ONE NEED TO STAY HERE
             if let selectedCardsString = meeting.selectedCards {
@@ -96,6 +104,7 @@ class MeetingDetailsViewController: UIViewController {
                 }
             }
             
+            /*
             let query = PFQuery(className: "Survey")
             query.whereKey(ObjectKeys.Survey.objectId, equalTo: meeting.surveyId)
             query.findObjectsInBackground { (surveys: [PFObject]?, error: Error?) in
@@ -105,8 +114,7 @@ class MeetingDetailsViewController: UIViewController {
                     if let surveys = surveys {
                         if surveys.count > 0 {
                             let survey = surveys[0]
-                            
-                            /*
+             
                             // Reset
                             self.survey1Med.isOn = false
                             self.survey2Med.isOn = false
@@ -137,211 +145,18 @@ class MeetingDetailsViewController: UIViewController {
                                 self.survey3Med.isOn = true
                             } else if survey3Value == 2 {
                                 self.survey3High.isOn = true
-                            }*/
+                            }
                         }
                     }
                 }
-            }
+            }*/
         }
     }
     
     func onSaveButton(_ sender: UIBarButtonItem) {
-        
-        // TODO Parse Client fetchTeamMembers for managerId 
-        // Do a check to make sure the person entered is actually a team member
-        
-        /*
-        if !(nil != personTextField &&
-            (survey1Low.isOn || survey1Med.isOn || survey1High.isOn) &&
-            (survey2Low.isOn || survey2Med.isOn || survey2High.isOn) &&
-            (survey3Low.isOn || survey3Med.isOn || survey3High.isOn)) {
-            self.alertController?.message = "Please complete the required fields."
-            self.present(self.alertController!, animated: true)
-            
-        } else {
-            if isExistingMeeting {
-                saveExistingMeeting()
-            } else {
-                saveNewMeeting()
-            }
-        }*/
+        debugPrint("Save button tap")
+        delegate?.meetingDetailsViewController?(self, onSave: true)
     }
-    
-    /*
-    func saveExistingMeeting() {
-        let query = PFQuery(className: "Survey")
-        query.whereKey("objectId", equalTo: meeting.surveyId)
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
-            if let posts = posts {
-                let post = posts[0]
-                post["surveyDesc1"] = "happiness"
-                post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
-                post["surveyDesc2"] = "engagement"
-                post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
-                post["surveyDesc3"] = "workload"
-                post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
-                post.saveInBackground(block: { (success: Bool, error: Error?) in
-                    if success {
-                        let query = PFQuery(className: "Meetings")
-                        if let meetingId = self.meeting.objectId {
-                            query.whereKey("objectId", equalTo: meetingId)
-                            query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
-                                if let posts = posts {
-                                    let post = posts[0]
-                                    post["notes"] = self.meeting.notes
-                                    post["selectedCards"] = self.selectedCardsString
-                                    post.saveInBackground(block: { (success: Bool, error: Error?) in
-                                        if success {
-                                            self.isExistingMeeting = true
-                                            self.personTextField.isUserInteractionEnabled = false
-                                            self.tableView.reloadData()
-                                            self.alertController?.message = "Successfully saved meeting"
-                                            self.present(self.alertController!, animated: true)
-                                        } else {
-                                            print("unable to save meeting")
-                                        }
-                                    })
-                                }
-                            }
-                        }
-                    } else {
-                        self.alertController?.message = "Meeting was unable to be saved"
-                        self.present(self.alertController!, animated: true)
-                    }
-                })
-            }
-        }
-    }
-    
-    func saveNewMeeting() {
-        ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
-            if let userPerson = person {
-                let query = PFQuery(className: "Person")
-                let firstName = self.personTextField.text! as String
-                query.whereKey("firstName", equalTo: firstName)
-                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
-                    if let posts = posts {
-                        let person = posts[0]
-                        let personId = person.objectId
-                        
-                        debugPrint("no of items in posts: \(posts.count)")
-                        for post in posts {
-                            debugPrint("post contains \(post.objectId!)")
-                        }
-                        
-                        // Survey
-                        let post = PFObject(className: "Survey")
-                        post["surveyDesc1"] = "happiness"
-                        post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
-                        post["surveyDesc2"] = "engagement"
-                        post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
-                        post["surveyDesc3"] = "workload"
-                        post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
-                        post["companyId"] = userPerson["companyId"]
-                        post["meetingDate"] = Date()
-                        post["personId"] = personId
-                        post.saveInBackground(block: { (success: Bool, error: Error?) in
-                            
-                            if success {
-                                let managerId = userPerson.objectId
-                                let dictionary: [String: Any] = [
-                                    "personId": personId as Any,
-                                    "managerId": managerId as Any,
-                                    "surveyId": post.objectId!,
-                                    "meetingDate": Date()
-                                ]
-                                self.meeting = Meeting(dictionary: dictionary)
-                                print("survey saved successfully")
-                                
-                                Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
-                                    if success {
-                                        self.isExistingMeeting = true
-                                        self.personTextField.isUserInteractionEnabled = false
-                                        self.tableView.reloadData()
-                                        self.alertController?.message = "Successfully saved meeting."
-                                        self.present(self.alertController!, animated: true)
-                                    } else {
-                                        self.alertController?.message = "Meeting was unable to be saved"
-                                        self.present(self.alertController!, animated: true)
-                                    }
-                                }
-                            } else {
-                                self.alertController?.message = "Meeting was unable to be saved"
-                                self.present(self.alertController!, animated: true)
-                            }
-                        })
-                    }
-                }
-            }
-        })
-    }*/
-    
-    // MARK: - IBAction
-    /*
-    @IBAction func onSurvey1LowSwitch(_ sender: AnyObject) {
-        // survey1Low.isOn = !survey1Low.isOn not working properly
-        
-        if survey1Low.isOn {
-            survey1Med.isOn = false
-            survey1High.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey1MedSwitch(_ sender: AnyObject) {
-        if survey1Med.isOn {
-            survey1Low.isOn = false
-            survey1High.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey1HighSwitch(_ sender: AnyObject) {
-        if survey1High.isOn {
-            survey1Low.isOn = false
-            survey1Med.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey2LowSwitch(_ sender: AnyObject) {
-        if survey2Low.isOn {
-            survey2Med.isOn = false
-            survey2High.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey2MedSwitch(_ sender: AnyObject) {
-        if survey2Med.isOn {
-            survey2Low.isOn = false
-            survey2High.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey2HighSwitch(_ sender: AnyObject) {
-        if survey2High.isOn {
-            survey2Low.isOn = false
-            survey2Med.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey3LowSwitch(_ sender: AnyObject) {
-        if survey3Low.isOn {
-            survey3Med.isOn = false
-            survey3High.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey3MedSwitch(_ sender: AnyObject) {
-        if survey3Med.isOn {
-            survey3Low.isOn = false
-            survey3High.isOn = false
-        }
-    }
-    
-    @IBAction func onSurvey3HighSwitch(_ sender: AnyObject) {
-        if survey3High.isOn {
-            survey3Low.isOn = false
-            survey3Med.isOn = false
-        }
-    }*/
     
     func onManageCards() {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
@@ -376,6 +191,8 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
                 viewController.meeting = meeting
                 viewController.isExistingMeeting = isExistingMeeting
+                viewController.delegate = self
+                self.delegate = viewController
                 cell.contentView.addSubview(viewController.view)
                 self.addChildViewController(viewController)
                 viewController.didMove(toParentViewController: self)
@@ -555,3 +372,113 @@ extension MeetingDetailsViewController: NotesViewControllerDelegate {
         meeting.notes = notes
     }
 }
+
+extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
+    func meetingSurveyViewController(_ meetingSurveyViewController: MeetingSurveyViewController, meeting: Meeting, surveyChanged: Bool) {
+        if surveyChanged {
+            if isExistingMeeting {
+                saveExistingMeeting(meeting: meeting)
+            } else {
+                saveNewMeeting(meeting: meeting)
+            }
+        }
+    }
+    
+    fileprivate func saveExistingMeeting(meeting: Meeting) {
+        parseClient.fetchMeetingFor(meetingId: meeting.objectId!) { (meeting: PFObject?, error: Error?) in
+            if let meeting = meeting {
+                meeting[ObjectKeys.Meeting.notes] = self.meeting.notes
+                meeting[ObjectKeys.Meeting.selectedCards] = self.selectedCardsString
+                meeting.saveInBackground { (success: Bool, error: Error?) in
+                    if success {
+                        self.isExistingMeeting = true
+                        self.tableView.reloadData()
+                        self.alertController?.message = "Successfully saved meeting"
+                        self.present(self.alertController!, animated: true)
+                    } else {
+                        self.alertController?.message = "Meeting was unable to be saved"
+                        self.present(self.alertController!, animated: true)
+                    }
+                }
+            } else {
+                debugPrint("Failed to fetch meeting, error: \(error?.localizedDescription)")
+            }
+        }
+    }
+
+    fileprivate func saveNewMeeting(meeting: Meeting) {
+        Meeting.saveMeetingToParse(meeting: meeting) { (success: Bool, error: Error?) in
+            if success {
+                self.isExistingMeeting = true
+                self.tableView.reloadData()
+                self.alertController?.message = "Successfully saved meeting."
+                self.present(self.alertController!, animated: true)
+            } else {
+                self.alertController?.message = "Meeting was unable to be saved"
+                self.present(self.alertController!, animated: true)
+            }
+        }
+    }
+}
+    /*
+        ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
+            if let userPerson = person {
+                let query = PFQuery(className: "Person")
+                let firstName = self.personTextField.text! as String
+                query.whereKey("firstName", equalTo: firstName)
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
+                    if let posts = posts {
+                        let person = posts[0]
+                        let personId = person.objectId
+                        
+                        debugPrint("no of items in posts: \(posts.count)")
+                        for post in posts {
+                            debugPrint("post contains \(post.objectId!)")
+                        }
+                        
+                        // Survey
+                        let post = PFObject(className: "Survey")
+                        post["surveyDesc1"] = "happiness"
+                        post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
+                        post["surveyDesc2"] = "engagement"
+                        post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
+                        post["surveyDesc3"] = "workload"
+                        post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
+                        post["companyId"] = userPerson["companyId"]
+                        post["meetingDate"] = Date()
+                        post["personId"] = personId
+                        post.saveInBackground(block: { (success: Bool, error: Error?) in
+                            
+                            if success {
+                                let managerId = userPerson.objectId
+                                let dictionary: [String: Any] = [
+                                    "personId": personId as Any,
+                                    "managerId": managerId as Any,
+                                    "surveyId": post.objectId!,
+                                    "meetingDate": Date()
+                                ]
+                                self.meeting = Meeting(dictionary: dictionary)
+                                print("survey saved successfully")
+                                
+                                Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
+                                    if success {
+                                        self.isExistingMeeting = true
+                                        self.personTextField.isUserInteractionEnabled = false
+                                        self.tableView.reloadData()
+                                        self.alertController?.message = "Successfully saved meeting."
+                                        self.present(self.alertController!, animated: true)
+                                    } else {
+                                        self.alertController?.message = "Meeting was unable to be saved"
+                                        self.present(self.alertController!, animated: true)
+                                    }
+                                }
+                            } else {
+                                self.alertController?.message = "Meeting was unable to be saved"
+                                self.present(self.alertController!, animated: true)
+                            }
+                        })
+                    }
+                }
+            }
+        })
+    }*/

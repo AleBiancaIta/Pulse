@@ -121,6 +121,9 @@ struct ObjectKeys {
         static let surveyValueId2 = "surveyValueId2"
         static let surveyDesc3 = "surveyDesc3"
         static let surveyValueId3 = "surveyValueId3"
+        static let meetingDate = "meetingDate"
+        static let personId = "personId"
+        static let companyId = "companyId"
     }
 }
 
