@@ -106,12 +106,6 @@ class DashboardViewController: UIViewController {
     @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-    
-    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
-        for view in cell.contentView.subviews {
-            view.removeFromSuperview()
-        }
-    }
 }
 
 // MARK: - UIGestureRecognizerDelegate
@@ -134,50 +128,65 @@ extension DashboardViewController: UITableViewDataSource {
         } else {
             switch selectedCards[indexPath.row].id! {
             case "g":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Graph", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+                    viewController.willMove(toParentViewController: self)
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
                 return cell
                 
             case "m":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
-                viewController.personId = nil
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+                    viewController.personId = nil
+                    viewController.willMove(toParentViewController: self)
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
                 return cell
                 
             case "t":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Team", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+                    viewController.willMove(toParentViewController: self)
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                    
                 return cell
                 
             case "d":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Todo", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+                    viewController.willMove(toParentViewController: self)
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
                 return cell
 
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                cell.textLabel?.text = selectedCards[indexPath.row].name
+            default: // This shouldn't actually be reached
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+                cell.message = selectedCards[indexPath.row].name
                 return cell
             }
             

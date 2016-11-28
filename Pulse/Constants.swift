@@ -20,7 +20,6 @@ class Constants: NSObject {
     static let meetingCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "meeting"],
         ["id" : "n", "name": "Notes", "card_type": "notes", "page_type": "meeting"]
-        // ["id" : "p", "name": "Photo Notes", "card_type": "photo_note", "page_type": "meeting"]
     ])
     
     static let personCards: [Card] = Card.cardsWithArray(dictionaries: [
@@ -29,7 +28,6 @@ class Constants: NSObject {
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "person"],
         ["id" : "m", "name": "Meetings", "card_type": "meetings", "page_type": "person"],
         ["id" : "n", "name": "Notes", "card_type": "notes", "page_type": "person"]
-        // ["id" : "p", "name": "Photo Notes", "card_type": "photo_note", "page_type": "meeting"]
     ]);
     
     //static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],["positionId": "2", "description": "Individual Contributor"]]

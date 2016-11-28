@@ -60,12 +60,6 @@ class MeetingDetailsViewController: UIViewController {
         loadExistingMeeting()
     }
     
-    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
-        for view in cell.contentView.subviews {
-            view.removeFromSuperview()
-        }
-    }
-    
     func loadExistingMeeting() {
         // Existing meeting
         if nil != meeting {
@@ -90,8 +84,6 @@ class MeetingDetailsViewController: UIViewController {
                         selectedCards.append(Constants.meetingCards[0])
                     case "n":
                         selectedCards.append(Constants.meetingCards[1])
-                    //case "p":
-                    //    selectedCards.append(Constants.meetingCards[2])
                     default:
                         break
                     }
@@ -369,33 +361,40 @@ extension MeetingDetailsViewController: UITableViewDataSource {
         } else { // The actual cards
             switch selectedCards[indexPath.row].id! {
             case "d":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Todo", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
-                viewController.currentMeeting = meeting
-                viewController.viewTypes = .meeting
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+                    viewController.currentMeeting = meeting
+                    viewController.viewTypes = .meeting
+                    viewController.willMove(toParentViewController: self)
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
                 return cell
                 
             case "n":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Notes", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
-                viewController.delegate = self
-                viewController.notes = meeting.notes
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Notes", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
+                    viewController.delegate = self
+                    viewController.notes = meeting.notes
+                    viewController.willMove(toParentViewController: self)
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
                 return cell
                 
-            default:
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                cell.textLabel?.text = selectedCards[indexPath.row].name
+            default: // This shouldn't actually be reached
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+                cell.message = selectedCards[indexPath.row].name
                 return cell
             }
             
