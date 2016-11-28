@@ -120,6 +120,7 @@ class MeetingsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
         viewController.expanded = true
+        viewController.personId = personId
         navigationController?.pushViewController(viewController, animated: true)
     }
     
