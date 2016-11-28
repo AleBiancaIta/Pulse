@@ -409,7 +409,6 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
 
 extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
     func meetingDetailsViewController(_ meetingDetailsViewController: MeetingDetailsViewController, onSave: Bool) {
-        debugPrint("in meeting survey view controller: meeting details view controller delegate")
         if onSave {
             if !isExistingMeeting { // new meeting
                 if validateNewMeeting() {
@@ -460,6 +459,9 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
                             }
                         }
                     }
+                } else {
+                    delegate?.meetingSurveyViewController?(self, meeting: self.meeting, surveyChanged: false)
+                    debugPrint("no changed in survey values")
                 }
             }
         }

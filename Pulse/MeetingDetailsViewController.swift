@@ -19,7 +19,7 @@ class MeetingDetailsViewController: UIViewController {
     
     var alertController: UIAlertController?
     
-    var selectedCardsString: String? = ""
+    var selectedCardsString: String? = "s"
     var selectedCards: [Card] = []
     
     var meeting: Meeting!
@@ -31,13 +31,6 @@ class MeetingDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Meeting"
-        
-        /*
-        if !isExistingMeeting {
-            personTextField.isUserInteractionEnabled = true
-        } else {
-            personTextField.isUserInteractionEnabled = false
-        }*/
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
@@ -70,22 +63,7 @@ class MeetingDetailsViewController: UIViewController {
     func loadSelectedCards() {
         // Existing meeting
         if nil != meeting {
-            
-            /*
-            let personQuery = PFQuery(className: "Person")
-            personQuery.whereKey(ObjectKeys.Person.objectId, equalTo: meeting.personId)
-            personQuery.findObjectsInBackground { (persons: [PFObject]?, error: Error?) in
-                if let error = error {
-                    print("Unable to find survey associated with survey id, error: \(error.localizedDescription)")
-                } else {
-                    if let persons = persons {
-                        let person = persons[0]
-                        //self.personTextField.text = person["firstName"] as? String
-                    }
-                }
-            }*/
-            
-            // THIS ONE NEED TO STAY HERE
+ 
             if let selectedCardsString = meeting.selectedCards {
                 self.selectedCardsString = selectedCardsString
                 for c in (meeting.selectedCards?.characters)! {
@@ -103,53 +81,6 @@ class MeetingDetailsViewController: UIViewController {
                     }
                 }
             }
-            
-            /*
-            let query = PFQuery(className: "Survey")
-            query.whereKey(ObjectKeys.Survey.objectId, equalTo: meeting.surveyId)
-            query.findObjectsInBackground { (surveys: [PFObject]?, error: Error?) in
-                if let error = error {
-                    print("Unable to find survey associated with survey id, error: \(error.localizedDescription)")
-                } else {
-                    if let surveys = surveys {
-                        if surveys.count > 0 {
-                            let survey = surveys[0]
-             
-                            // Reset
-                            self.survey1Med.isOn = false
-                            self.survey2Med.isOn = false
-                            self.survey3Med.isOn = false
-                            
-                            let survey1Value = survey[ObjectKeys.Survey.surveyValueId1] as! Int
-                            if survey1Value == 0 {
-                                self.survey1Low.isOn = true
-                            } else if survey1Value == 1 {
-                                self.survey1Med.isOn = true
-                            } else if survey1Value == 2 {
-                                self.survey1High.isOn = true
-                            }
-                            
-                            let survey2Value = survey[ObjectKeys.Survey.surveyValueId2] as! Int
-                            if survey2Value == 0 {
-                                self.survey2Low.isOn = true
-                            } else if survey2Value == 1 {
-                                self.survey2Med.isOn = true
-                            } else if survey2Value == 2 {
-                                self.survey2High.isOn = true
-                            }
-                            
-                            let survey3Value = survey[ObjectKeys.Survey.surveyValueId3] as! Int
-                            if survey3Value == 0 {
-                                self.survey3Low.isOn = true
-                            } else if survey3Value == 1 {
-                                self.survey3Med.isOn = true
-                            } else if survey3Value == 2 {
-                                self.survey3High.isOn = true
-                            }
-                        }
-                    }
-                }
-            }*/
         }
     }
     
@@ -327,6 +258,7 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
         
         // Insert new card at the top of the table view
         selectedCards.insert(card, at: 0)
+        //selectedCards.append(card)
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
@@ -381,6 +313,9 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
             } else {
                 saveNewMeeting(meeting: meeting)
             }
+        } else {
+            // save notes in case it's changed
+            saveExistingMeeting(meeting: meeting)
         }
     }
     
@@ -407,12 +342,21 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
     }
 
     fileprivate func saveNewMeeting(meeting: Meeting) {
+        meeting.selectedCards = self.selectedCardsString
         Meeting.saveMeetingToParse(meeting: meeting) { (success: Bool, error: Error?) in
             if success {
-                self.isExistingMeeting = true
-                self.tableView.reloadData()
-                self.alertController?.message = "Successfully saved meeting."
-                self.present(self.alertController!, animated: true)
+                self.parseClient.fetchMeetingFor(personId: meeting.personId, managerId: meeting.managerId, surveyId: meeting.surveyId, isDeleted: false) { (meetingObject: PFObject?, error: Error?) in
+                    if let error = error {
+                        debugPrint("Failed to fetch newly saved meeting, error: \(error.localizedDescription)")
+                    } else {
+                        self.meeting = meeting
+                        self.meeting.objectId = meetingObject?.objectId
+                        self.isExistingMeeting = true
+                        self.tableView.reloadData()
+                        self.alertController?.message = "Successfully saved meeting."
+                        self.present(self.alertController!, animated: true)
+                    }
+                }
             } else {
                 self.alertController?.message = "Meeting was unable to be saved"
                 self.present(self.alertController!, animated: true)
