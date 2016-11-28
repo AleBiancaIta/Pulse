@@ -13,20 +13,19 @@ class MeetingDetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    /*
     @IBOutlet weak var personTextField: UITextField!
-    
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
     @IBOutlet weak var survey1High: UISwitch! // 2
-    
     @IBOutlet weak var survey2Low: UISwitch!
     @IBOutlet weak var survey2Med: UISwitch!
     @IBOutlet weak var survey2High: UISwitch!
-    
     @IBOutlet weak var survey3Low: UISwitch!
     @IBOutlet weak var survey3Med: UISwitch!
     @IBOutlet weak var survey3High: UISwitch!
-    
+ */
+ 
     var alertController: UIAlertController?
     
     var selectedCardsString: String? = ""
@@ -39,11 +38,12 @@ class MeetingDetailsViewController: UIViewController {
         super.viewDidLoad()
         title = "Meeting"
         
+        /*
         if !isExistingMeeting {
             personTextField.isUserInteractionEnabled = true
         } else {
             personTextField.isUserInteractionEnabled = false
-        }
+        }*/
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
@@ -61,6 +61,7 @@ class MeetingDetailsViewController: UIViewController {
     }
     
     func loadExistingMeeting() {
+        
         // Existing meeting
         if nil != meeting {
             let personQuery = PFQuery(className: "Person")
@@ -69,23 +70,26 @@ class MeetingDetailsViewController: UIViewController {
                 if let error = error {
                     print("Unable to find survey associated with survey id, error: \(error.localizedDescription)")
                 } else {
-                    if let persons = persons,
-                        let person = persons[0] as? PFObject,
-                        let firstName = person["firstName"] as? String {
-                            self.title = "Meeting with \(firstName)"
-                            self.personTextField.text = firstName
+                    if let persons = persons {
+                        let person = persons[0]
+                        //self.personTextField.text = person["firstName"] as? String
                     }
                 }
             }
             
+            // THIS ONE NEED TO STAY HERE
             if let selectedCardsString = meeting.selectedCards {
                 self.selectedCardsString = selectedCardsString
                 for c in (meeting.selectedCards?.characters)! {
                     switch c {
-                    case "d":
+                    case "s":
                         selectedCards.append(Constants.meetingCards[0])
-                    case "n":
+                    case "d":
                         selectedCards.append(Constants.meetingCards[1])
+                    case "n":
+                        selectedCards.append(Constants.meetingCards[2])
+                    //case "p":
+                    //    selectedCards.append(Constants.meetingCards[2])
                     default:
                         break
                     }
@@ -102,6 +106,7 @@ class MeetingDetailsViewController: UIViewController {
                         if surveys.count > 0 {
                             let survey = surveys[0]
                             
+                            /*
                             // Reset
                             self.survey1Med.isOn = false
                             self.survey2Med.isOn = false
@@ -132,7 +137,7 @@ class MeetingDetailsViewController: UIViewController {
                                 self.survey3Med.isOn = true
                             } else if survey3Value == 2 {
                                 self.survey3High.isOn = true
-                            }
+                            }*/
                         }
                     }
                 }
@@ -145,6 +150,7 @@ class MeetingDetailsViewController: UIViewController {
         // TODO Parse Client fetchTeamMembers for managerId 
         // Do a check to make sure the person entered is actually a team member
         
+        /*
         if !(nil != personTextField &&
             (survey1Low.isOn || survey1Med.isOn || survey1High.isOn) &&
             (survey2Low.isOn || survey2Med.isOn || survey2High.isOn) &&
@@ -158,9 +164,10 @@ class MeetingDetailsViewController: UIViewController {
             } else {
                 saveNewMeeting()
             }
-        }
+        }*/
     }
     
+    /*
     func saveExistingMeeting() {
         let query = PFQuery(className: "Survey")
         query.whereKey("objectId", equalTo: meeting.surveyId)
@@ -267,10 +274,10 @@ class MeetingDetailsViewController: UIViewController {
                 }
             }
         })
-    }
+    }*/
     
     // MARK: - IBAction
-    
+    /*
     @IBAction func onSurvey1LowSwitch(_ sender: AnyObject) {
         // survey1Low.isOn = !survey1Low.isOn not working properly
         
@@ -334,7 +341,7 @@ class MeetingDetailsViewController: UIViewController {
             survey3Low.isOn = false
             survey3Med.isOn = false
         }
-    }
+    }*/
     
     func onManageCards() {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
@@ -362,6 +369,18 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             
         } else { // The actual cards
             switch selectedCards[indexPath.row].id! {
+            case "s":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                resetCell(cell)
+                let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+                let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
+                viewController.meeting = meeting
+                viewController.isExistingMeeting = isExistingMeeting
+                cell.contentView.addSubview(viewController.view)
+                self.addChildViewController(viewController)
+                viewController.didMove(toParentViewController: self)
+                return cell
+                
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
@@ -422,6 +441,11 @@ extension MeetingDetailsViewController: UITableViewDelegate {
         }
         
         switch selectedCards[indexPath.row].id! {
+        case "s":
+            let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
+            return viewController.heightForView()
+            
         case "d":
             let storyboard = UIStoryboard(name: "Todo", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController

@@ -22,6 +22,9 @@
 		431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804AE1DD7F2CC00B279C6 /* Person.swift */; };
 		431804B11DD83A4A00B279C6 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */; };
 		431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */; };
+		431AF1381DEA9043007B8B8A /* MeetingSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */; };
+		431AF13D1DEA9368007B8B8A /* MeetingPersonListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */; };
+		431AF13E1DEA9368007B8B8A /* MeetingPersonListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */; };
 		437903A11DE5069600945C63 /* TodoEditPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */; };
 		437903A21DE5069600945C63 /* TodoEditPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437903A01DE5069600945C63 /* TodoEditPersonCell.xib */; };
 		437903A51DE51BB400945C63 /* TodoEditTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437903A31DE51BB400945C63 /* TodoEditTextCell.swift */; };
@@ -95,6 +98,9 @@
 		431804AE1DD7F2CC00B279C6 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateProfileViewController.swift; sourceTree = "<group>"; };
+		431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingSurveyViewController.swift; sourceTree = "<group>"; };
+		431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingPersonListCell.swift; sourceTree = "<group>"; };
+		431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingPersonListCell.xib; sourceTree = "<group>"; };
 		4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditPersonCell.swift; sourceTree = "<group>"; };
 		437903A01DE5069600945C63 /* TodoEditPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoEditPersonCell.xib; sourceTree = "<group>"; };
 		437903A31DE51BB400945C63 /* TodoEditTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditTextCell.swift; sourceTree = "<group>"; };
@@ -254,6 +260,8 @@
 				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 				712FA7F81DE2332300762EB6 /* PhotoImageView.xib */,
 				712FA7FA1DE233A600762EB6 /* PhotoImageView.swift */,
+				431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */,
+				431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */,
 				67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
+				431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */,
 				676CEF431DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift */,
 				67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */,
 				67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */,
@@ -426,6 +435,7 @@
 				67F0DB351DE2D4F5006C7925 /* Graph.storyboard in Resources */,
 				712FA7F91DE2332300762EB6 /* PhotoImageView.xib in Resources */,
 				67A276161DE5FDBE00ED73B0 /* Person2.storyboard in Resources */,
+				431AF13E1DEA9368007B8B8A /* MeetingPersonListCell.xib in Resources */,
 				437DE04C1DD90F0100B08988 /* TeamCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +517,7 @@
 				67A276181DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift in Sources */,
 				676CEF491DE29467000FA406 /* NotesViewController.swift in Sources */,
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
+				431AF13D1DEA9368007B8B8A /* MeetingPersonListCell.swift in Sources */,
 				71ACDE631DD94AF0005D85DE /* PersonDetailsViewController.swift in Sources */,
 				67A364AB1DCD8DA500BFD931 /* AppDelegate.swift in Sources */,
 				43EC9BC11DE16D97006C8703 /* TodoAddCell.swift in Sources */,
@@ -526,6 +537,7 @@
 				67F0DB371DE2D516006C7925 /* GraphViewController.swift in Sources */,
 				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,
 				437DE04B1DD90F0100B08988 /* TeamCollectionCell.swift in Sources */,
+				431AF1381DEA9043007B8B8A /* MeetingSurveyViewController.swift in Sources */,
 				437DE05A1DD9371800B08988 /* TeamCollectionViewController.swift in Sources */,
 				43EC9BBE1DE13870006C8703 /* TodoViewController.swift in Sources */,
 				43ED9E2D1DDFB0A200AB49E1 /* Company.swift in Sources */,

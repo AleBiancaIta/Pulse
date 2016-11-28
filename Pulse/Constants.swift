@@ -18,6 +18,7 @@ class Constants: NSObject {
     ])
     
     static let meetingCards: [Card] = Card.cardsWithArray(dictionaries: [
+        ["id" : "s", "name": "Survey", "card_type": "survey", "page_type": "meeting"],
         ["id" : "d", "name": "To Dos", "card_type": "to_do", "page_type": "meeting"],
         ["id" : "n", "name": "Notes", "card_type": "notes", "page_type": "meeting"]
     ])
@@ -43,6 +44,7 @@ struct StoryboardID {
     static let teamCollectionVC = "TeamCollectionVC"
     static let todoVC = "TodoVC"
     static let todoEditVC = "TodoEditVC"
+    static let meetingSurveyVC = "MeetingSurveyVC"
 }
 
 struct SegueID {
@@ -134,6 +136,10 @@ struct CellReuseIdentifier {
         static let todoShowCompletedCell = "TodoShowCompletedCell"
         static let todoEditTextCell = "TodoEditTextCell"
         static let todoEditPersonCell = "TodoEditPersonCell"
+    }
+    
+    struct Meeting {
+        static let meetingPersonListCell = "MeetingPersonListCell"
     }
 }
 
