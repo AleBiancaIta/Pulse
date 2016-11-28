@@ -22,43 +22,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happiness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjY-oB-iX6">
-                                <rect key="frame" x="16" y="26" width="73" height="17"/>
+                                <rect key="frame" x="16" y="34" width="73" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engagement" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-cs-X4k">
-                                <rect key="frame" x="16" y="131" width="87" height="17"/>
+                                <rect key="frame" x="16" y="139" width="87" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workload" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQT-G4-Nlh">
-                                <rect key="frame" x="16" y="236" width="65.5" height="17"/>
+                                <rect key="frame" x="16" y="244" width="65.5" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2n-X7-jUQ" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="8" y="43" width="343" height="80"/>
+                                <rect key="frame" x="8" y="51" width="343" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Cng-dh-oUD"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZN-RS-gWN" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="8" y="148" width="343" height="80"/>
+                                <rect key="frame" x="8" y="156" width="343" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="k2T-pq-0rQ"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hci-68-o5z" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="8" y="253" width="343" height="80"/>
+                                <rect key="frame" x="8" y="261" width="343" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="jL2-1h-Led"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company Pulse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQg-9M-sTy">
-                                <rect key="frame" x="8" y="0.0" width="111" height="18"/>
+                                <rect key="frame" x="8" y="8" width="111" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -68,7 +68,7 @@
                         <constraints>
                             <constraint firstItem="VGS-cs-X4k" firstAttribute="top" secondItem="E2n-X7-jUQ" secondAttribute="bottom" constant="8" id="3yu-re-CqZ"/>
                             <constraint firstItem="NQT-G4-Nlh" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="16" id="4mE-u1-ytC"/>
-                            <constraint firstItem="ZQg-9M-sTy" firstAttribute="top" secondItem="nqc-DF-Fg9" secondAttribute="top" id="7DW-vW-XrD"/>
+                            <constraint firstItem="ZQg-9M-sTy" firstAttribute="top" secondItem="nqc-DF-Fg9" secondAttribute="top" constant="8" id="7DW-vW-XrD"/>
                             <constraint firstItem="ZQg-9M-sTy" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="7dD-is-Y4B"/>
                             <constraint firstItem="kZN-RS-gWN" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="9x9-1n-1rh"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="16" id="BJj-oU-Rwg"/>

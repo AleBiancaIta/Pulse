@@ -28,13 +28,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Up Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g03-c2-fMw">
-                                                <rect key="frame" x="8" y="0.0" width="114" height="18"/>
+                                                <rect key="frame" x="8" y="8" width="114" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-O2-1ul">
-                                                <rect key="frame" x="8" y="24" width="47" height="30"/>
+                                                <rect key="frame" x="8" y="34" width="47" height="30"/>
                                                 <state key="normal" title="See All">
                                                     <color key="titleColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -46,9 +46,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="54" id="98A-LW-KJz"/>
-                                            <constraint firstItem="g03-c2-fMw" firstAttribute="top" secondItem="UbG-Gv-M3G" secondAttribute="top" id="HwR-27-OUV"/>
+                                            <constraint firstItem="g03-c2-fMw" firstAttribute="top" secondItem="UbG-Gv-M3G" secondAttribute="top" constant="8" id="HwR-27-OUV"/>
                                             <constraint firstItem="g03-c2-fMw" firstAttribute="leading" secondItem="UbG-Gv-M3G" secondAttribute="leading" constant="8" id="Oug-El-4FW"/>
-                                            <constraint firstItem="ui9-O2-1ul" firstAttribute="top" secondItem="g03-c2-fMw" secondAttribute="bottom" constant="6" id="pBc-Cf-uEF"/>
+                                            <constraint firstItem="ui9-O2-1ul" firstAttribute="top" secondItem="g03-c2-fMw" secondAttribute="bottom" constant="8" id="pBc-Cf-uEF"/>
                                             <constraint firstItem="ui9-O2-1ul" firstAttribute="leading" secondItem="g03-c2-fMw" secondAttribute="leading" id="tQc-xD-GZf"/>
                                         </constraints>
                                     </view>

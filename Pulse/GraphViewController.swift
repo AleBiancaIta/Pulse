@@ -20,7 +20,7 @@ class GraphViewController: UIViewController {
     var survey2Values: [Float] = []
     var survey3Values: [Float] = []
     var personIdValues: [String] = []
-    var highLowValues = ["Low", "Medium", "High"]
+    var highLowValues = ["Low", "Med", "High"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +86,7 @@ class GraphViewController: UIViewController {
     }
 
     func heightForView() -> CGFloat {
-        return 350 // TODO
+        return 349
     }
 
 }

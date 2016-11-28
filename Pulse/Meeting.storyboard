@@ -22,14 +22,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lb5-MA-c6m" userLabel="Add Button">
-                                <rect key="frame" x="329" y="38" width="22" height="22"/>
+                                <rect key="frame" x="329" y="46" width="22" height="22"/>
                                 <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="onAddButton:" destination="Kf2-1e-xhq" eventType="touchUpInside" id="syP-Rz-nXs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsv-qF-A4D">
-                                <rect key="frame" x="10" y="34" width="47" height="30"/>
+                                <rect key="frame" x="10" y="42" width="47" height="30"/>
                                 <state key="normal" title="See All">
                                     <color key="titleColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -38,13 +38,13 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meetings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXM-OU-A5o" userLabel="Meetings">
-                                <rect key="frame" x="8" y="20" width="67" height="18"/>
+                                <rect key="frame" x="8" y="28" width="67" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ndN-v1-9TM">
-                                <rect key="frame" x="0.0" y="64" width="359" height="603"/>
+                                <rect key="frame" x="0.0" y="72" width="359" height="595"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MessageCell" id="EM7-Bg-eap" customClass="MessageCell" customModule="Pulse" customModuleProvider="target">
@@ -66,7 +66,7 @@
                             <constraint firstItem="Bsv-qF-A4D" firstAttribute="leading" secondItem="6OV-X0-hbB" secondAttribute="leading" constant="10" id="MKJ-Rj-0RP"/>
                             <constraint firstItem="FIf-2c-DMt" firstAttribute="top" secondItem="ndN-v1-9TM" secondAttribute="bottom" id="NeO-ie-AAp"/>
                             <constraint firstAttribute="trailing" secondItem="lb5-MA-c6m" secondAttribute="trailing" constant="24" id="Rwe-yu-Hnm"/>
-                            <constraint firstItem="RXM-OU-A5o" firstAttribute="top" secondItem="jhk-YY-nrE" secondAttribute="bottom" id="VIU-I9-IxM"/>
+                            <constraint firstItem="RXM-OU-A5o" firstAttribute="top" secondItem="jhk-YY-nrE" secondAttribute="bottom" constant="8" id="VIU-I9-IxM"/>
                             <constraint firstItem="Bsv-qF-A4D" firstAttribute="centerY" secondItem="lb5-MA-c6m" secondAttribute="centerY" id="g7s-dr-zUR"/>
                             <constraint firstItem="lb5-MA-c6m" firstAttribute="centerY" secondItem="Bsv-qF-A4D" secondAttribute="centerY" id="oZp-S2-7SP"/>
                             <constraint firstAttribute="trailing" secondItem="ndN-v1-9TM" secondAttribute="trailing" constant="16" id="p3t-9S-9fJ"/>
