@@ -59,7 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let loginSignUpVC = LoginSignUpViewController(nibName: "LoginSignUpViewController", bundle: nil)
 //        self.window?.rootViewController = loginSignUpVC
         
-        // Customize navigation bar
+        // Customize UI
+        UIApplication.shared.statusBarStyle = .lightContent
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.tintColor = UIColor.pulseTintColor()
         navigationBarAppearance.barTintColor = UIColor.pulseBarTintColor()

@@ -52,7 +52,7 @@ class MeetingDetailsViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        tableView.register(UINib(nibName: "MessageCellNib", bundle: nil), forCellReuseIdentifier: "MessageCell")
+        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -69,9 +69,11 @@ class MeetingDetailsViewController: UIViewController {
                 if let error = error {
                     print("Unable to find survey associated with survey id, error: \(error.localizedDescription)")
                 } else {
-                    if let persons = persons {
-                        let person = persons[0]
-                        self.personTextField.text = person["firstName"] as? String
+                    if let persons = persons,
+                        let person = persons[0] as? PFObject,
+                        let firstName = person["firstName"] as? String {
+                            self.title = "Meeting with \(firstName)"
+                            self.personTextField.text = firstName
                     }
                 }
             }

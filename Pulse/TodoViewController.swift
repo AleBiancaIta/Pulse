@@ -51,6 +51,7 @@ class TodoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Follow Up Items"
         registerCellNibs()
         configureRowHeight()
         setUpTopSectionView()

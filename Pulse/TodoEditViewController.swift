@@ -33,6 +33,7 @@ class TodoEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Item"
         registerCellNibs()
         configureRowHeight()
     }

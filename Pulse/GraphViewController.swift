@@ -47,9 +47,9 @@ class GraphViewController: UIViewController {
     }
     
     func setupCharts() {
-        chart1.backgroundColor = UIColor.lightGray
-        chart2.backgroundColor = UIColor.lightGray
-        chart3.backgroundColor = UIColor.lightGray
+        chart1.backgroundColor = UIColor.white
+        chart2.backgroundColor = UIColor.white
+        chart3.backgroundColor = UIColor.white
         
         var data1: [(x: Float, y: Float)] = []
         var data2: [(x: Float, y: Float)] = []
