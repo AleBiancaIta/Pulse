@@ -14,6 +14,7 @@ class MeetingsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var selectAllButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var meetingsLabel: UILabel!
     
     var meetings: [Meeting] = []
     var expanded = false
@@ -29,6 +30,7 @@ class MeetingsViewController: UIViewController {
 
         selectAllButton.isHidden = expanded
         addButton.isHidden = expanded
+        meetingsLabel.isHidden = expanded
         
         tableView.dataSource = self
         tableView.delegate = self
