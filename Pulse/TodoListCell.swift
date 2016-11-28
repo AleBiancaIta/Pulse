@@ -68,7 +68,7 @@ class TodoListCell: UITableViewCell {
                             let meetingDate = meeting[ObjectKeys.Meeting.meetingDate] as! Date
                             
                             let dateFormatter = DateFormatter()
-                            dateFormatter.dateStyle = .short
+                            dateFormatter.dateStyle = .medium
                             dateFormatter.timeStyle = .none
                             self.meetingLabel.text = dateFormatter.string(from: meetingDate)
                         }
