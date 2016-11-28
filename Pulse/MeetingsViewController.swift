@@ -117,7 +117,7 @@ class MeetingsViewController: UIViewController {
     
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + displayed rows height - half displayed row)
-        return 72 + (44 * 3) - 22
+        return 72 + (44 * 3) - 22 // TODO heightForView
     }
     
     // MARK: - IBAction

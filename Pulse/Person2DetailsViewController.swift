@@ -113,6 +113,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
                 if cell.contentView.subviews == [] {
                     personInfoViewController.willMove(toParentViewController: self)
+                    personInfoViewController.view.frame = CGRect(x: 0, y: 0, width: personInfoViewController.view.frame.size.width, height: personInfoViewController.heightForView())
                     cell.contentView.addSubview(personInfoViewController.view)
                     self.addChildViewController(personInfoViewController)
                     personInfoViewController.didMove(toParentViewController: self)
@@ -130,6 +131,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
                     viewController.person = personPFObject
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -148,6 +150,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     viewController.currentTeamPerson = personPFObject
                     viewController.viewTypes = .employeeDetail
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -167,6 +170,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                         viewController.personId = personPFObject.objectId
                     }
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -188,6 +192,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                         viewController.notes = notes
                     }
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)

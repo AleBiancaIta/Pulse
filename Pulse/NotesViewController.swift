@@ -33,7 +33,7 @@ class NotesViewController: UIViewController {
     
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + height + 8)
-        return 54 + 80 // TODO heightForView
+        return 54 + 80 
     }
 }
 

@@ -137,6 +137,7 @@ extension DashboardViewController: UITableViewDataSource {
                     let storyboard = UIStoryboard(name: "Graph", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -154,6 +155,7 @@ extension DashboardViewController: UITableViewDataSource {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
                     viewController.personId = nil
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -170,6 +172,7 @@ extension DashboardViewController: UITableViewDataSource {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -186,6 +189,7 @@ extension DashboardViewController: UITableViewDataSource {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
