@@ -121,11 +121,18 @@ class MeetingSurveyViewController: UIViewController {
     }
 
     fileprivate func startNewMeeting() {
+        parseClient.getCurrentPerson { (manager: PFObject?, error: Error?) in
+            if let error = error {
+                debugPrint("Failed to fetch current user info, error: \(error.localizedDescription)")
+            } else {
+                if let manager = manager {
+                    self.fetchTeamMembers(managerId: manager.objectId!)
+                } else {
+                    debugPrint("MeetingSurveyVC getCurrentPerson returned nil")
+                }
+            }
+        }
         
-    }
-
-    fileprivate func registerCellNibs() {
-        teamListTableView.register(UINib(nibName: "MeetingPersonListCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Meeting.meetingPersonListCell)
     }
 
     fileprivate func fetchTeamMembers(managerId: String) {
@@ -141,6 +148,10 @@ class MeetingSurveyViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    fileprivate func registerCellNibs() {
+        teamListTableView.register(UINib(nibName: "MeetingPersonListCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Meeting.meetingPersonListCell)
     }
 
     func heightForView() -> CGFloat {
@@ -234,12 +245,16 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isPersonExpanded {
-            return teamMembers.count + 1
-        } else {
-            return 1
-        }
         
+        if let isExistingMeeting = isExistingMeeting, isExistingMeeting == true  {
+            return 1
+        } else {
+            if isPersonExpanded {
+                return teamMembers.count + 1
+            } else {
+                return 1
+            }
+        }
     }
     
     // if existing meeting, only shows 1 row with the name of person listed (personId != nil), if not, show the list of the team member
@@ -247,13 +262,20 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Meeting.meetingPersonListCell, for: indexPath) as! MeetingPersonListCell
-            cell.firstRow = true
-            cell.isUserInteractionEnabled = isPersonExpanded ? false : true
             
-            if let selectedPerson = personRowSelected {
-                cell.selectedPerson = teamMembers[selectedPerson]
+            if let isExistingMeeting = isExistingMeeting, isExistingMeeting == true  {
+                cell.isUserInteractionEnabled = false
+                cell.firstRow = false
+                if let person = self.person {
+                    cell.person = person
+                }
+            } else {
+                cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                cell.firstRow = true // only applies to new user
+                if let selectedPerson = personRowSelected {
+                    cell.selectedPerson = teamMembers[selectedPerson]
+                }
             }
-            
             return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Meeting.meetingPersonListCell, for: indexPath) as! MeetingPersonListCell
@@ -275,7 +297,7 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 1 {
+        if indexPath.section == 1 && !(isExistingMeeting!) {
             if isPersonExpanded { // need to collapse
                 personRowSelected = indexPath.row - 1
                 isPersonExpanded = !isPersonExpanded
