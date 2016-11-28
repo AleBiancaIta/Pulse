@@ -9,6 +9,11 @@
 import UIKit
 
 class UIExtensions: NSObject {
+    /* UI Notes:
+     * Corner radius: 5.0
+     * Background color for UITableView: Group Table View Background Color
+     */
+    
     /* TODO - other things to address:
      * Card appearance - TODO Bianca
      * Colors - TODO Bianca

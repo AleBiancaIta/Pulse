@@ -119,16 +119,20 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
 extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == selectedCards.count {
+        if indexPath.section == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.layer.cornerRadius = 5
+            cell.layer.masksToBounds = true
             cell.message = "Tap here to manage cards"
             return cell
         
-        // The actual cards
+        // The actual cards - TODO pull this out to separate functions
         } else {
-            switch selectedCards[indexPath.row].id! {
+            switch selectedCards[indexPath.section].id! {
             case "g":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
+                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Graph", bundle: nil)
@@ -143,6 +147,8 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
+                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
@@ -158,6 +164,8 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
+                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
@@ -172,6 +180,8 @@ extension DashboardViewController: UITableViewDataSource {
                 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
+                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
@@ -186,7 +196,9 @@ extension DashboardViewController: UITableViewDataSource {
 
             default: // This shouldn't actually be reached
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-                cell.message = selectedCards[indexPath.row].name
+                cell.layer.cornerRadius = 5
+                cell.layer.masksToBounds = true
+                cell.message = selectedCards[indexPath.section].name
                 return cell
             }
             
@@ -194,6 +206,10 @@ extension DashboardViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return selectedCards.count + 1
     }
 }
@@ -202,14 +218,24 @@ extension DashboardViewController: UITableViewDataSource {
 
 extension DashboardViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let defaultHeight: CGFloat = 44
-        guard indexPath.row < selectedCards.count else {
+        guard indexPath.section < selectedCards.count else {
             return defaultHeight
         }
         
-        switch selectedCards[indexPath.row].id! {
+        switch selectedCards[indexPath.section].id! {
         case "g":
             let storyboard = UIStoryboard(name: "Graph", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
@@ -240,7 +266,7 @@ extension DashboardViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == selectedCards.count {
+        if indexPath.section == selectedCards.count {
             onAddCard()
         }
     }
