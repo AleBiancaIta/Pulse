@@ -22,18 +22,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JnB-bi-nGG">
-                                <rect key="frame" x="8" y="28" width="359" height="100"/>
+                                <rect key="frame" x="8" y="46" width="343" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="hbP-Kh-37K"/>
+                                    <constraint firstAttribute="height" constant="80" id="hbP-Kh-37K"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vim-zO-UlL">
+                                <rect key="frame" x="8" y="20" width="43" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JnB-bi-nGG" secondAttribute="trailing" constant="8" id="H1n-Df-gng"/>
+                            <constraint firstItem="JnB-bi-nGG" firstAttribute="top" secondItem="Vim-zO-UlL" secondAttribute="bottom" constant="8" id="48b-Te-5N2"/>
+                            <constraint firstAttribute="trailing" secondItem="JnB-bi-nGG" secondAttribute="trailing" constant="24" id="H1n-Df-gng"/>
                             <constraint firstItem="JnB-bi-nGG" firstAttribute="leading" secondItem="73p-hP-Hdv" secondAttribute="leading" constant="8" id="MR4-0w-Gp0"/>
-                            <constraint firstItem="JnB-bi-nGG" firstAttribute="top" secondItem="1No-Q5-gWd" secondAttribute="bottom" constant="8" id="MrO-Qa-Tzq"/>
+                            <constraint firstItem="Vim-zO-UlL" firstAttribute="leading" secondItem="73p-hP-Hdv" secondAttribute="leading" constant="8" id="MkK-J7-qso"/>
+                            <constraint firstItem="Vim-zO-UlL" firstAttribute="top" secondItem="1No-Q5-gWd" secondAttribute="bottom" id="vow-xW-RYG"/>
                         </constraints>
                     </view>
                     <connections>
@@ -42,7 +50,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vl-fJ-IBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="562" y="-220"/>
+            <point key="canvasLocation" x="561" y="-216"/>
         </scene>
     </scenes>
 </document>

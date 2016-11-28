@@ -98,16 +98,17 @@ class Person2DetailsViewController: UIViewController {
 extension Person2DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == selectedCards.count {
+        if indexPath.section == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.layer.cornerRadius = 5
             cell.message = "Tap here to manage cards"
             return cell
             
         } else { // The actual cards
-            switch selectedCards[indexPath.row].id! {
+            switch selectedCards[indexPath.section].id! {
 			case "i": 
 				let cell = tableView.dequeueReusableCell(withIdentifier: "InfoContainerCell", for: indexPath)
-				//cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
                     personInfoViewController.willMove(toParentViewController: self)
@@ -120,7 +121,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
-                //cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
@@ -136,6 +137,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
@@ -152,6 +154,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
@@ -169,6 +172,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Notes", bundle: nil)
@@ -188,7 +192,8 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 
             default: // This shouldn't actually be reached
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-                cell.message = selectedCards[indexPath.row].name
+                cell.layer.cornerRadius = 5
+                cell.message = selectedCards[indexPath.section].name
                 return cell
             }
             
@@ -196,6 +201,10 @@ extension Person2DetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return selectedCards.count + 1
     }
     
@@ -210,14 +219,25 @@ extension Person2DetailsViewController: UITableViewDataSource {
 }
 
 extension Person2DetailsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let defaultHeight: CGFloat = 44
-        guard indexPath.row < selectedCards.count else {
+        guard indexPath.section < selectedCards.count else {
             return defaultHeight
         }
         
-        switch selectedCards[indexPath.row].id! {
+        switch selectedCards[indexPath.section].id! {
 		case "i":
 			let storyboard = UIStoryboard(name: "Person", bundle: nil)
 			let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
@@ -253,7 +273,7 @@ extension Person2DetailsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == selectedCards.count {
+        if indexPath.section == selectedCards.count {
             onManageCards()
         }
     }

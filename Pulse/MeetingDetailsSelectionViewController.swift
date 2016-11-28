@@ -47,6 +47,7 @@ extension MeetingDetailsSelectionViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
         cell.textLabel?.text = card.name
+        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
         
         if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark

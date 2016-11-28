@@ -22,7 +22,9 @@ class NotesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         notesTextView.delegate = self
+        notesTextView.layer.cornerRadius = 5
         notesTextView.layer.borderWidth = 1
+        notesTextView.layer.borderColor = UIColor.lightGray.cgColor
 
         if let notes = notes {
             notesTextView.text = notes

@@ -48,6 +48,7 @@ extension PersonDetailsSelectionViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
         cell.textLabel?.text = card.name
+        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
         
         if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark
@@ -72,7 +73,7 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.row != 0 && indexPath.row != 1 else {
-            alertController?.message = "Cannot update info and team cards"
+            alertController?.message = "Sorry, info and team cards may not be manually updated"
             present(alertController!, animated: true)
             return
         }
