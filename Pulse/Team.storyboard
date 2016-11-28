@@ -42,7 +42,7 @@
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jil-jH-HK7" userLabel="Add Button">
-                                <rect key="frame" x="345" y="30" width="22" height="22"/>
+                                <rect key="frame" x="329" y="30" width="22" height="22"/>
                                 <connections>
                                     <action selector="onAddButtonTap:" destination="p0f-yH-iaE" eventType="touchUpInside" id="6Zv-WE-OEs"/>
                                 </connections>
@@ -64,7 +64,7 @@
                             <constraint firstItem="exV-XO-J5A" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" id="QVm-7P-kW4"/>
                             <constraint firstItem="jil-jH-HK7" firstAttribute="top" secondItem="9PD-MW-oph" secondAttribute="bottom" constant="10" id="TJH-8E-0gM"/>
                             <constraint firstItem="Dre-Bh-2S4" firstAttribute="centerY" secondItem="jil-jH-HK7" secondAttribute="centerY" id="phr-9O-Pve"/>
-                            <constraint firstAttribute="trailing" secondItem="jil-jH-HK7" secondAttribute="trailing" constant="8" id="x4b-eO-xZg"/>
+                            <constraint firstAttribute="trailing" secondItem="jil-jH-HK7" secondAttribute="trailing" constant="24" id="x4b-eO-xZg"/>
                         </constraints>
                     </view>
                     <connections>

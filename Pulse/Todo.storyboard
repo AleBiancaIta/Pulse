@@ -51,34 +51,34 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0OT-SV-twL">
-                                        <rect key="frame" x="0.0" y="66" width="375" height="581"/>
+                                        <rect key="frame" x="0.0" y="66" width="359" height="581"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoAddCell" id="tmF-vq-hUT" customClass="TodoAddCell" customModule="Pulse" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="56" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tmF-vq-hUT" id="s1J-mm-J3s">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoListCell" id="mt9-Cr-xc9" customClass="TodoListCell" customModule="Pulse" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="100" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="100" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mt9-Cr-xc9" id="eqF-Rs-aSx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoShowCompletedCell" id="Fmo-gH-LAp" customClass="TodoShowCompletedCell" customModule="Pulse" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="144" width="375" height="44"/>
+                                                <rect key="frame" x="0.0" y="144" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fmo-gH-LAp" id="tSJ-G7-PWW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -92,7 +92,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0OT-SV-twL" firstAttribute="leading" secondItem="RmT-Mu-CGU" secondAttribute="leading" id="C7I-jj-vJl"/>
-                                    <constraint firstAttribute="trailing" secondItem="0OT-SV-twL" secondAttribute="trailing" id="MRQ-pO-NFr"/>
+                                    <constraint firstAttribute="trailing" secondItem="0OT-SV-twL" secondAttribute="trailing" constant="16" id="MRQ-pO-NFr"/>
                                     <constraint firstItem="UbG-Gv-M3G" firstAttribute="top" secondItem="RmT-Mu-CGU" secondAttribute="top" id="U9k-rN-5Hj"/>
                                     <constraint firstItem="UbG-Gv-M3G" firstAttribute="leading" secondItem="RmT-Mu-CGU" secondAttribute="leading" id="UVK-dL-ouy"/>
                                     <constraint firstAttribute="trailing" secondItem="UbG-Gv-M3G" secondAttribute="trailing" id="ZWk-tk-mMM"/>
@@ -111,6 +111,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="0OT-SV-twL" id="eEV-ex-xQb"/>
+                        <outlet property="tableViewTrailingConstraint" destination="MRQ-pO-NFr" id="wnT-zw-tRy"/>
                         <outlet property="topSectionView" destination="UbG-Gv-M3G" id="RNy-xj-OfR"/>
                     </connections>
                 </viewController>

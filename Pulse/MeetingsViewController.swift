@@ -16,6 +16,8 @@ class MeetingsViewController: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var meetingsLabel: UILabel!
     
+    @IBOutlet weak var tableViewTrailingConstraint: NSLayoutConstraint!
+    
     var meetings: [Meeting] = []
     var expanded = false
     
@@ -31,6 +33,7 @@ class MeetingsViewController: UIViewController {
         selectAllButton.isHidden = expanded
         addButton.isHidden = expanded
         meetingsLabel.isHidden = expanded
+        tableViewTrailingConstraint.constant = expanded ? 0 : 16
         
         tableView.dataSource = self
         tableView.delegate = self

@@ -122,7 +122,6 @@ extension DashboardViewController: UITableViewDataSource {
         if indexPath.section == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
             cell.layer.cornerRadius = 5
-            cell.layer.masksToBounds = true
             cell.message = "Tap here to manage cards"
             return cell
         
@@ -132,7 +131,6 @@ extension DashboardViewController: UITableViewDataSource {
             case "g":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
                 cell.layer.cornerRadius = 5
-                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Graph", bundle: nil)
@@ -148,7 +146,6 @@ extension DashboardViewController: UITableViewDataSource {
             case "m":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
                 cell.layer.cornerRadius = 5
-                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
@@ -165,7 +162,6 @@ extension DashboardViewController: UITableViewDataSource {
             case "t":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
                 cell.layer.cornerRadius = 5
-                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
@@ -181,7 +177,6 @@ extension DashboardViewController: UITableViewDataSource {
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.layer.cornerRadius = 5
-                cell.layer.masksToBounds = true
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
@@ -197,7 +192,6 @@ extension DashboardViewController: UITableViewDataSource {
             default: // This shouldn't actually be reached
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
                 cell.layer.cornerRadius = 5
-                cell.layer.masksToBounds = true
                 cell.message = selectedCards[indexPath.section].name
                 return cell
             }

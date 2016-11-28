@@ -31,6 +31,8 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var topSectionView: UIView!
     
+    @IBOutlet weak var tableViewTrailingConstraint: NSLayoutConstraint!
+    
     fileprivate let cellSections = ["Add Todo", "List Todo", "Show Completed", "List Completed"]
     fileprivate let parseClient = ParseClient.sharedInstance()
     
@@ -52,6 +54,8 @@ class TodoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Follow Up Items"
+        tableViewTrailingConstraint.constant = todoLimit == .topEntries ? 16 : 0
+        
         registerCellNibs()
         configureRowHeight()
         setUpTopSectionView()
