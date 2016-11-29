@@ -47,9 +47,9 @@ class GraphViewController: UIViewController {
     }
     
     func setupCharts() {
-        chart1.backgroundColor = UIColor.white
-        chart2.backgroundColor = UIColor.white
-        chart3.backgroundColor = UIColor.white
+        chart1.backgroundColor = UIColor.clear
+        chart2.backgroundColor = UIColor.clear
+        chart3.backgroundColor = UIColor.clear
         
         var data1: [(x: Float, y: Float)] = []
         var data2: [(x: Float, y: Float)] = []
@@ -61,24 +61,27 @@ class GraphViewController: UIViewController {
         }
 
         let survey1Series = ChartSeries(data: data1)
-        survey1Series.color = UIColor.pulseDarkPrimaryColor()
+        survey1Series.color = UIColor.pulseAccentColor()
         survey1Series.area = true
+        chart1.labelColor = UIColor.pulseLightPrimaryColor()
         chart1.add(survey1Series)
         chart1.lineWidth = 1
         chart1.yLabels = [0, 1, 2]
         chart1.yLabelsFormatter = { self.highLowValues[Int($1)] }
         
         let survey2Series = ChartSeries(data: data2)
-        survey2Series.color = UIColor.pulseDarkPrimaryColor()
+        survey2Series.color = UIColor.pulseAccentColor()
         survey2Series.area = true
+        chart2.labelColor = UIColor.pulseLightPrimaryColor()
         chart2.add(survey2Series)
         chart2.lineWidth = 1
         chart2.yLabels = [0, 1, 2]
         chart2.yLabelsFormatter = { self.highLowValues[Int($1)] }
 
         let survey3Series = ChartSeries(data: data3)
-        survey3Series.color = UIColor.pulseDarkPrimaryColor()
+        survey3Series.color = UIColor.pulseAccentColor()
         survey3Series.area = true
+        chart3.labelColor = UIColor.pulseLightPrimaryColor()
         chart3.add(survey3Series)
         chart3.lineWidth = 1
         chart3.yLabels = [0, 1, 2]

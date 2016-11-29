@@ -136,6 +136,7 @@ extension DashboardViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Graph", bundle: nil)
