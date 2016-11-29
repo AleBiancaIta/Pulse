@@ -18,7 +18,10 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         UIExtensions.gradientBackgroundFor(view: view)
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        
         usernameTextField.delegate = self
         passwordTextField.delegate = self
     }

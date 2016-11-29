@@ -29,7 +29,9 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         UIExtensions.gradientBackgroundFor(view: view)
+        navigationController?.navigationBar.barStyle = .blackTranslucent
         
         settingsTableView.estimatedRowHeight = 50
         settingsTableView.rowHeight = UITableViewAutomaticDimension

@@ -22,7 +22,7 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         
         UIExtensions.gradientBackgroundFor(view: view)
-        UIApplication.shared.statusBarStyle = .lightContent
+        navigationController?.navigationBar.barStyle = .blackTranslucent
         
         tableView.dataSource = self
         tableView.delegate = self

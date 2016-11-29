@@ -34,10 +34,11 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         UIExtensions.gradientBackgroundFor(view: scrollView)
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         positionSegmentedControl.layer.cornerRadius = 5
-
 		profileImageView.delegate = self
 		profileImageView.isEditable = true
         

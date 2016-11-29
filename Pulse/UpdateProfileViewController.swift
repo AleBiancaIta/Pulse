@@ -24,7 +24,10 @@ class UpdateProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         UIExtensions.gradientBackgroundFor(view: view)
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        
         getUserProfile()
         emailTextField.isUserInteractionEnabled = false
     }

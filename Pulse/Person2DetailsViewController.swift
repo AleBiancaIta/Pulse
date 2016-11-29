@@ -27,7 +27,9 @@ class Person2DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         UIExtensions.gradientBackgroundFor(view: view)
+        navigationController?.navigationBar.barStyle = .blackTranslucent
         
         tableView.dataSource = self
         tableView.delegate = self

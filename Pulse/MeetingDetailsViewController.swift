@@ -30,9 +30,11 @@ class MeetingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         UIExtensions.gradientBackgroundFor(view: view)
-        title = "Meeting"
-        
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+      
+        title = "Meeting"  
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
         tableView.dataSource = self

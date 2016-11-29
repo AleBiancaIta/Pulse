@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    
+            
         Parse.initialize(with:
 			ParseClientConfiguration(block: { (configuration:ParseMutableClientConfiguration) -> Void in
 				configuration.applicationId = "pulseAleBiancaIta"
@@ -60,13 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = loginSignUpVC
         
         // Customize UI
-        UIApplication.shared.statusBarStyle = .lightContent
         let navigationBarAppearance = UINavigationBar.appearance()
         navigationBarAppearance.isTranslucent = false
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.barTintColor = UIColor.black
         navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-
+        
         return true
     }
 
