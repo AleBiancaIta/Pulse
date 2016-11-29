@@ -15,6 +15,7 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class LoginViewController: UIViewController {
         
         title = "Login to Pulse"
         
+        loginButton.isEnabled = true
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         
@@ -48,15 +50,20 @@ class LoginViewController: UIViewController {
     //    }
     
     fileprivate func loginToParse() {
+        loginButton.isEnabled = false
+
         if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
             ABIShowAlert(title: "Alert", message: "Username and password fields cannot be empty", sender: nil, handler: nil)
+            loginButton.isEnabled = true
         } else {
             if let username = usernameTextField.text, let password = passwordTextField.text {
                 PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
                     if let error = error {
+                        self.loginButton.isEnabled = true
                         self.ABIShowAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
                     } else {
                         debugPrint("User logged in successfully")
+                        self.loginButton.isEnabled = true
                         // Segue to Dashboard view controller
                         let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
                         let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)

@@ -26,6 +26,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var companyNameTextField: UITextField!
     //@IBOutlet weak var positionTextField: UITextField!
     @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var signUpButton: UIButton!
     
     var person: Person!
 	var photoData: Data?
@@ -41,6 +42,10 @@ class SignUpViewController: UIViewController {
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         positionSegmentedControl.layer.cornerRadius = 5
+
+        configureTextFieldDelegate()
+        signUpButton.isEnabled = true
+        
 		profileImageView.delegate = self
 		profileImageView.isEditable = true
         
@@ -65,6 +70,7 @@ class SignUpViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func onSignUpButtonTap(_ sender: UIButton) {
+        signUpButton.isEnabled = false
         //self.resignFirstResponder()
         
         // Verify entry
@@ -84,6 +90,7 @@ class SignUpViewController: UIViewController {
                 if let error = error {
                     debugPrint("Error in signing up new user: \(error.localizedDescription)")
                     SVProgressHUD.dismiss()
+                    self.signUpButton.isEnabled = true
                     self.ABIShowAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
                 } else {
                     debugPrint("User registered successfully")
@@ -109,11 +116,18 @@ class SignUpViewController: UIViewController {
                                         if let error = error {
                                             print("error saving person: \(error.localizedDescription)")
                                             SVProgressHUD.dismiss()
+                                            self.signUpButton.isEnabled = true
                                         } else {
                                             print("saved successfully: \(newUser)")
                                             SVProgressHUD.dismiss()
+                                            self.signUpButton.isEnabled = true
                                             self.ABIShowAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
                                                 
+                                                if alertAction.title == "OK" {
+                                                    self.segueToDashboardVC()
+                                                }
+                                                
+                                                /*
                                                 if alertAction.title == "OK" {
                                                     // Run login the background and segue to dashboard vc
                                                     PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
@@ -124,7 +138,7 @@ class SignUpViewController: UIViewController {
                                                             self.segueToDashboardVC()
                                                         }
                                                     }
-                                                }
+                                                }*/
                                             }
                                         }
                                     })
@@ -133,10 +147,13 @@ class SignUpViewController: UIViewController {
                         } else {
                             debugPrint("Error creating or saving Person object in Parse")
                             SVProgressHUD.dismiss()
+                            self.signUpButton.isEnabled = true
                         }
                     }
                 }
             }
+        } else {
+            signUpButton.isEnabled = true
         }
     }
     
@@ -241,7 +258,17 @@ class SignUpViewController: UIViewController {
         }
         
         return true
-    }    
+    }
+    
+    fileprivate func configureTextFieldDelegate() {
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPasswordTextField.delegate = self
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        phoneTextField.delegate = self
+        companyNameTextField.delegate = self
+    }
 }
 
 extension SignUpViewController : PhotoImageViewDelegate {
@@ -249,4 +276,16 @@ extension SignUpViewController : PhotoImageViewDelegate {
 	func didSelectImage(sender: PhotoImageView) {
 		self.photoData = sender.photoData
 	}
+}
+
+extension SignUpViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
 }

@@ -129,10 +129,20 @@
                                     <action selector="onLoginButtonTap:" destination="YdN-Yd-wjs" eventType="touchUpInside" id="Idi-xy-Wmo"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEz-zk-X5D">
+                                <rect key="frame" x="16" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="onCancelButtonTap:" destination="YdN-Yd-wjs" eventType="touchUpInside" id="75V-1O-xjP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="loginButton" destination="QYU-IQ-lNR" id="8uN-A7-KwG"/>
                         <outlet property="passwordTextField" destination="rr7-uE-Oug" id="Mds-iq-TOe"/>
                         <outlet property="usernameTextField" destination="Z2Z-ek-A8N" id="Z9j-p9-kCB"/>
                     </connections>
@@ -568,6 +578,7 @@
                         <outlet property="positionSegmentedControl" destination="SXo-FW-KK7" id="e9b-Sq-n7O"/>
                         <outlet property="profileImageView" destination="vGN-sL-ncC" id="mOA-AF-rIY"/>
                         <outlet property="scrollView" destination="56S-Nf-IuJ" id="x7V-JL-qdD"/>
+                        <outlet property="signUpButton" destination="S0w-X1-Hq5" id="ccb-et-Cf2"/>
                         <segue destination="YdN-Yd-wjs" kind="presentation" identifier="loginModalSegue" id="EVd-po-Ciy"/>
                     </connections>
                 </viewController>
