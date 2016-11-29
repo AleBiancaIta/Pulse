@@ -190,7 +190,7 @@ class MeetingSurveyViewController: UIViewController {
     }
 
     func heightForView() -> CGFloat {
-        return 300 // TODO: Calculate height properly
+        return 350 // TODO: Calculate height properly
     }
     
     // MARK: - Actions

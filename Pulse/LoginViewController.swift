@@ -25,8 +25,6 @@ class LoginViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        title = "Login to Pulse"
-        
         loginButton.isEnabled = true
         usernameTextField.delegate = self
         passwordTextField.delegate = self

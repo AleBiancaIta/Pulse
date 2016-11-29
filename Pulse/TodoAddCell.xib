@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lte-DH-eJj">
-                        <rect key="frame" x="5" y="5" width="310" height="44.5"/>
+                        <rect key="frame" x="5" y="5" width="310" height="45"/>
                         <subviews>
                             <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WtX-gT-eGL">
                                 <rect key="frame" x="8" y="12" width="22" height="22"/>
@@ -31,7 +31,7 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xOA-gn-Iw7">
                                 <rect key="frame" x="38" y="8" width="264" height="30"/>
-                                <color key="backgroundColor" red="0.900020032051282" green="0.900020032051282" blue="0.900020032051282" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9Qy-6G-V4J"/>
                                 </constraints>

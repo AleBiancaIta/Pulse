@@ -21,26 +21,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch" translatesAutoresizingMaskIntoConstraints="NO" id="6jv-Js-yu5">
-                                <rect key="frame" x="68" y="214" width="240" height="240"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="bY3-gf-vqV"/>
-                                    <constraint firstAttribute="width" constant="240" id="khb-QB-Q6B"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pulse" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FqA-WY-3fd">
-                                <rect key="frame" x="140" y="486" width="95" height="44"/>
-                                <fontDescription key="fontDescription" name="Verdana" family="Verdana" pointSize="36"/>
-                                <color key="textColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="269" y="600" width="82" height="43"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FqA-WY-3fd" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="I5T-Xu-pfz"/>
-                            <constraint firstItem="FqA-WY-3fd" firstAttribute="top" secondItem="6jv-Js-yu5" secondAttribute="bottom" constant="32" id="ISw-jA-yiD"/>
-                            <constraint firstItem="6jv-Js-yu5" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="R7j-pf-GvC"/>
-                            <constraint firstItem="6jv-Js-yu5" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="b8C-5R-1gp"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="FqA-WY-3fd" secondAttribute="bottom" constant="24" id="fnY-0H-YAY"/>
+                            <constraint firstAttribute="trailing" secondItem="FqA-WY-3fd" secondAttribute="trailing" constant="24" id="qs1-Hy-IHc"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -49,7 +40,4 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Launch" width="256" height="256"/>
-    </resources>
 </document>

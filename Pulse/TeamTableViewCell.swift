@@ -86,8 +86,8 @@ class TeamTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        surveyValue1Button.tintColor = UIColor.black
-        surveyValue2Button.tintColor = UIColor.black
-        surveyValue3Button.tintColor = UIColor.black
+        surveyValue1Button.tintColor = UIColor.clear
+        surveyValue2Button.tintColor = UIColor.clear
+        surveyValue3Button.tintColor = UIColor.clear
     }
 }

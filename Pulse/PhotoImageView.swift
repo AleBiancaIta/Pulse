@@ -23,7 +23,9 @@ class PhotoImageView: UIView {
 	let imagePicker = UIImagePickerController()
 	var photoData: Data? {
 		didSet {
-			self.imageView.image = UIImage(data: photoData!)
+            if let photoData = photoData {
+                self.imageView.image = UIImage(data: photoData)
+            }
 		}
 	}
 
@@ -68,9 +70,7 @@ class PhotoImageView: UIView {
 		addSubview(contentView)
 
 		imagePicker.delegate = self
-		imageView.layer.cornerRadius = 3
-		imageView.layer.borderColor = UIColor.gray.cgColor
-		imageView.layer.borderWidth = 0.5
+		imageView.layer.cornerRadius = 5
 		imageView.clipsToBounds = true
 	}
 

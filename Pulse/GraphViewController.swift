@@ -65,7 +65,7 @@ class GraphViewController: UIViewController {
         survey1Series.area = true
         chart1.labelColor = UIColor.pulseLightPrimaryColor()
         chart1.add(survey1Series)
-        chart1.lineWidth = 1
+        chart1.lineWidth = 2
         chart1.yLabels = [0, 1, 2]
         chart1.yLabelsFormatter = { self.highLowValues[Int($1)] }
         
@@ -74,7 +74,7 @@ class GraphViewController: UIViewController {
         survey2Series.area = true
         chart2.labelColor = UIColor.pulseLightPrimaryColor()
         chart2.add(survey2Series)
-        chart2.lineWidth = 1
+        chart2.lineWidth = 2
         chart2.yLabels = [0, 1, 2]
         chart2.yLabelsFormatter = { self.highLowValues[Int($1)] }
 
@@ -83,14 +83,14 @@ class GraphViewController: UIViewController {
         survey3Series.area = true
         chart3.labelColor = UIColor.pulseLightPrimaryColor()
         chart3.add(survey3Series)
-        chart3.lineWidth = 1
+        chart3.lineWidth = 2
         chart3.yLabels = [0, 1, 2]
         chart3.yLabelsFormatter = { self.highLowValues[Int($1)] }
     }
 
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + height + 8)
-        return 261 + 80 + 8
+        return 282 + 80 + 8
     }
 
 }

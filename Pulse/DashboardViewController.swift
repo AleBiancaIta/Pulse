@@ -31,7 +31,7 @@ class DashboardViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
 
-        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
+        tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
         
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
@@ -47,13 +47,13 @@ class DashboardViewController: UIViewController {
                     self.selectedCardsString = post["selectedCards"] as? String
                     for c in (self.selectedCardsString?.characters)! {
                         switch c {
-                        case "m":
-                            self.selectedCards.append(Constants.dashboardCards[0])
                         case "g":
+                            self.selectedCards.append(Constants.dashboardCards[0])
+                        case "d":
                             self.selectedCards.append(Constants.dashboardCards[1])
                         case "t":
                             self.selectedCards.append(Constants.dashboardCards[2])
-                        case "d":
+                        case "m":
                             self.selectedCards.append(Constants.dashboardCards[3])
                         default:
                             break
@@ -124,9 +124,9 @@ extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == selectedCards.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
             cell.layer.cornerRadius = 5
-            cell.message = "Tap here to manage cards"
+            cell.message = "Tap here to manage modules"
             return cell
         
         // The actual cards - TODO pull this out to separate functions
@@ -172,6 +172,7 @@ extension DashboardViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
@@ -203,7 +204,7 @@ extension DashboardViewController: UITableViewDataSource {
                 return cell
 
             default: // This shouldn't actually be reached
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
                 cell.layer.cornerRadius = 5
                 cell.message = selectedCards[indexPath.section].name
                 return cell

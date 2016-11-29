@@ -211,6 +211,7 @@ extension TeamViewDataSource: UICollectionViewDataSource {
         let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
         cell.nameLabel.text = "\(firstName) \(lastName)"
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
+        cell.profileImageView.layer.cornerRadius = 5
 
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) {(survey: PFObject?, error: Error?) in
             if let error = error {

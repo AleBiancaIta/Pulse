@@ -22,30 +22,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jil-jH-HK7" userLabel="Add Button">
-                                <rect key="frame" x="329" y="54" width="22" height="22"/>
-                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="329" y="65" width="22" height="22"/>
+                                <color key="tintColor" red="0.32549019607843138" green="0.42745098039215684" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="onAddButtonTap:" destination="p0f-yH-iaE" eventType="touchUpInside" id="6Zv-WE-OEs"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-Bh-2S4">
-                                <rect key="frame" x="8" y="50" width="47" height="30"/>
+                                <rect key="frame" x="8" y="61" width="47" height="30"/>
                                 <state key="normal" title="See All">
-                                    <color key="titleColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="r7D-jI-xXf" kind="show" identifier="SeeAllTeamList" id="g6U-Qz-8sR"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sH3-eb-hPa">
-                                <rect key="frame" x="8" y="28" width="110" height="18"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sH3-eb-hPa">
+                                <rect key="frame" x="8" y="28" width="91" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="exV-XO-J5A">
-                                <rect key="frame" x="0.0" y="88" width="375" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="0.0" y="99" width="375" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="U7F-Vw-y0Q"/>
                                 </constraints>
@@ -224,14 +223,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hPa-au-NY0">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="8" y="28" width="359" height="631"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamListCell" rowHeight="72" id="ZnN-Ym-Aiq" customClass="TeamTableViewCell" customModule="Pulse" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="72"/>
+                                        <rect key="frame" x="0.0" y="28" width="359" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZnN-Ym-Aiq" id="zgX-4b-Te7">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -240,10 +239,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hPa-au-NY0" firstAttribute="leading" secondItem="cXG-y6-5IS" secondAttribute="leading" id="Bb2-Oj-bCG"/>
-                            <constraint firstItem="aCi-ug-j7t" firstAttribute="top" secondItem="hPa-au-NY0" secondAttribute="bottom" id="JDG-zh-vC3"/>
-                            <constraint firstAttribute="trailing" secondItem="hPa-au-NY0" secondAttribute="trailing" id="PHc-iP-lOc"/>
-                            <constraint firstItem="hPa-au-NY0" firstAttribute="top" secondItem="TJ4-Yb-stN" secondAttribute="bottom" id="XXo-1T-Ovh"/>
+                            <constraint firstItem="hPa-au-NY0" firstAttribute="leading" secondItem="cXG-y6-5IS" secondAttribute="leading" constant="8" id="Bb2-Oj-bCG"/>
+                            <constraint firstItem="aCi-ug-j7t" firstAttribute="top" secondItem="hPa-au-NY0" secondAttribute="bottom" constant="8" id="JDG-zh-vC3"/>
+                            <constraint firstAttribute="trailing" secondItem="hPa-au-NY0" secondAttribute="trailing" constant="8" id="PHc-iP-lOc"/>
+                            <constraint firstItem="hPa-au-NY0" firstAttribute="top" secondItem="TJ4-Yb-stN" secondAttribute="bottom" constant="8" id="XXo-1T-Ovh"/>
                         </constraints>
                     </view>
                     <connections>

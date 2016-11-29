@@ -12,7 +12,7 @@ class Card: NSObject {
 
     var id: String?
     var name: String?
-    var cardType: String?
+    var descr: String?
     
     init(dictionary: [String: String]) {
         if let id = dictionary["id"] {
@@ -21,8 +21,8 @@ class Card: NSObject {
         if let name = dictionary["name"] {
             self.name = name
         }
-        if let cardType = dictionary["card_type"] {
-            self.cardType = cardType
+        if let descr = dictionary["descr"] {
+            self.descr = descr
         }
     }
     

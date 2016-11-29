@@ -27,10 +27,13 @@ class MeetingDetailsSelectionViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.layer.cornerRadius = 5
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        title = "Manage Cards"
+        tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
     
     // MARK: - IBAction
@@ -38,10 +41,6 @@ class MeetingDetailsSelectionViewController: UIViewController {
     @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
-    
-    /*@objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
-     
-    }*/
 }
 
 // MARK: - UITableViewDataSource
@@ -50,9 +49,9 @@ extension MeetingDetailsSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let card = Constants.meetingCards[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
-        cell.textLabel?.text = card.name
-        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+        cell.message = card.name
+        cell.submessage = card.descr
         
         if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark

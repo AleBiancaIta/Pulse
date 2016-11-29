@@ -16,7 +16,7 @@ class Person2DetailsViewController: UIViewController {
     var alertController: UIAlertController?
     
     var selectedCardsString: String = ""
-    var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
+    var selectedCards: [Card] = [Constants.personCards[0], Constants.personCards[1]] // Always include info card
     
     var personPFObject: PFObject?
 	var personInfoViewController: PersonDetailsViewController!
@@ -36,7 +36,7 @@ class Person2DetailsViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
+        tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
         
 		initPersonInfo()
 
@@ -159,9 +159,9 @@ extension Person2DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == selectedCards.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
             cell.layer.cornerRadius = 5
-            cell.message = "Tap here to manage cards"
+            cell.message = "Tap here to manage modules"
             return cell
             
         } else { // The actual cards
@@ -185,6 +185,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
@@ -242,6 +243,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
                 
                 if cell.contentView.subviews == [] {
                     let storyboard = UIStoryboard(name: "Notes", bundle: nil)
@@ -261,7 +263,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 return cell
                 
             default: // This shouldn't actually be reached
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
                 cell.layer.cornerRadius = 5
                 cell.message = selectedCards[indexPath.section].name
                 return cell

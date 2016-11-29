@@ -27,10 +27,13 @@ class PersonDetailsSelectionViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.layer.cornerRadius = 5
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        title = "Manage Cards"
+        tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
     
     
@@ -45,9 +48,9 @@ extension PersonDetailsSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let card = Constants.personCards[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
-        cell.textLabel?.text = card.name
-        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+        cell.message = card.name
+        cell.submessage = card.descr
         
         if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark
@@ -72,6 +75,7 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.row != 0 && indexPath.row != 1 else {
+            print("Sorry, info and team cards may not be manually updated")
             alertController.message = "Sorry, info and team cards may not be manually updated"
             present(alertController, animated: true)
             return

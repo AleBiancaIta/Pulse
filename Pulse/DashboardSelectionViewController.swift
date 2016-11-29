@@ -27,7 +27,11 @@ class DashboardSelectionViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
-        title = "Manage Cards"
+        tableView.layer.cornerRadius = 5
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
     
     // MARK: - IBAction
@@ -43,9 +47,9 @@ extension DashboardSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let card = Constants.dashboardCards[indexPath.row]
     
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectionCell", for: indexPath)
-        cell.textLabel?.text = card.name
-        cell.textLabel?.font = cell.textLabel?.font.withSize(14)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+        cell.message = card.name
+        cell.submessage = card.descr
         
         if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark
@@ -59,6 +63,10 @@ extension DashboardSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.dashboardCards.count
     }
+    
+    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }*/
 }
 
 // MARK: - UITableViewDelegate

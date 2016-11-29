@@ -32,10 +32,5 @@ class TodoShowCompletedCell: UITableViewCell {
     // MARK: - Helpers
     fileprivate func configureCellBackgroundView() {
         cellBackgroundView.layer.cornerRadius = 5.0
-        cellBackgroundView.layer.borderWidth = 1.0
-        cellBackgroundView.layer.borderColor = UIColor.darkGray.cgColor
-        cellBackgroundView.layer.shadowRadius = 5.0
-        cellBackgroundView.layer.shadowColor = UIColor.black.cgColor
-        cellBackgroundView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
     }
 }
