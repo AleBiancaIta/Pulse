@@ -20,14 +20,15 @@ class LoginSignUpViewController: UIViewController {
     
     // MARK: - Actions
 
+    @IBAction func onLoginButtonTap(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
+        let navController = UINavigationController(rootViewController: viewController)
+        present(navController, animated: true, completion: nil)
+    }
 //    @IBAction func onSignUpButtonTap(_ sender: UIButton) {
 //        let signUpVC = SignUpViewController(nibName: "SignUpViewController", bundle: nil)
 //        self.present(signUpVC, animated: true, completion: nil)
-//    }
-//    
-//    @IBAction func onLoginButtonTap(_ sender: UIButton) {
-//        let loginVC = LoginViewController(nibName: "LoginViewController", bundle: nil)
-//        self.present(loginVC, animated: true, completion: nil)
 //    }
     
     

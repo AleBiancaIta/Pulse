@@ -65,7 +65,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="YdN-Yd-wjs" kind="presentation" id="7lI-04-9Bb"/>
+                                    <action selector="onLoginButtonTap:" destination="Wt5-AZ-fui" eventType="touchUpInside" id="AVa-7x-QVr"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -87,7 +87,7 @@
         <!--Login View Controller-->
         <scene sceneID="zSb-X8-ccz">
             <objects>
-                <viewController id="YdN-Yd-wjs" customClass="LoginViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" id="YdN-Yd-wjs" customClass="LoginViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pjt-Ll-qAV"/>
                         <viewControllerLayoutGuide type="bottom" id="9pb-pC-MS6"/>
@@ -129,21 +129,8 @@
                                     <action selector="onLoginButtonTap:" destination="YdN-Yd-wjs" eventType="touchUpInside" id="Idi-xy-Wmo"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KEz-zk-X5D">
-                                <rect key="frame" x="16" y="20" width="48" height="30"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onCancelButtonTap:" destination="YdN-Yd-wjs" eventType="touchUpInside" id="75V-1O-xjP"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="KEz-zk-X5D" firstAttribute="top" secondItem="Pjt-Ll-qAV" secondAttribute="bottom" id="Tyy-gk-DS5"/>
-                            <constraint firstItem="KEz-zk-X5D" firstAttribute="leading" secondItem="8fx-P4-if2" secondAttribute="leading" constant="16" id="Yjc-XM-wWA"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="passwordTextField" destination="rr7-uE-Oug" id="Mds-iq-TOe"/>
@@ -610,7 +597,4 @@
     <resources>
         <image name="Launch" width="256" height="256"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="EVd-po-Ciy"/>
-    </inferredMetricsTieBreakers>
 </document>

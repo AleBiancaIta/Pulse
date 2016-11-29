@@ -32,6 +32,8 @@ class SettingsViewController: UIViewController {
         
         UIExtensions.gradientBackgroundFor(view: view)
         navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         
         settingsTableView.estimatedRowHeight = 50
         settingsTableView.rowHeight = UITableViewAutomaticDimension

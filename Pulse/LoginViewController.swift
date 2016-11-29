@@ -21,9 +21,15 @@ class LoginViewController: UIViewController {
         
         UIExtensions.gradientBackgroundFor(view: view)
         navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
+        title = "Login to Pulse"
         
         usernameTextField.delegate = self
         passwordTextField.delegate = self
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
     }
     
     // MARK: - Actions
