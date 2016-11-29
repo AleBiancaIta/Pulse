@@ -17,8 +17,6 @@ class TeamListViewController: UIViewController {
     var deletedPersonIndexPath: IndexPath? = nil
     var person: PFObject! = nil
     
-    fileprivate let parseClient = ParseClient.sharedInstance()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Team Members"
@@ -83,25 +81,27 @@ extension TeamListViewController: UITableViewDelegate {
         
         let storyboard = UIStoryboard(name: "Person2", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "Person2DetailsViewController") as! Person2DetailsViewController
-        //viewController.personPFObject = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
         
         let person = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
         viewController.personPFObject = person
-        parseClient.isPersonManager(personId: (person?.objectId)!, isDeleted: false) { (isManager: Bool, error: Error?) in
-            if let error = error {
-                debugPrint("in TeamListVC isPersonManager returned error: \(error.localizedDescription)")
-                viewController.isPersonManager = false
-            } else {
-                if isManager {
-                    viewController.isPersonManager = true
-                } else {
-                    viewController.isPersonManager = false
-                }
-            }
-            self.navigationController?.pushViewController(viewController, animated: true)
-        }
         
-        //self.navigationController?.pushViewController(viewController, animated: true)
+        if let person = person {
+            dataSource.isPersonManager(personId: person.objectId!, isDeleted: false) { (isManager: Bool, error: Error?) in
+                if let error = error {
+                    debugPrint("in TeamListVC isPersonManager returned error: \(error.localizedDescription)")
+                    viewController.isPersonManager = false
+                } else {
+                    if isManager {
+                        viewController.isPersonManager = true
+                    } else {
+                        viewController.isPersonManager = false
+                    }
+                }
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        } else {
+            debugPrint("in TeamListVC person is nil")
+        }
     }
 }
 

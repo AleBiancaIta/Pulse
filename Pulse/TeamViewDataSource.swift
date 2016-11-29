@@ -133,6 +133,10 @@ class TeamViewDataSource: NSObject {
         return teamMembers[indexPath.row]
     }
     
+    func isPersonManager(personId: String, isDeleted: Bool, isManager: @escaping (Bool, Error?)->()) {
+        parseClient.isPersonManager(personId: personId, isDeleted: isDeleted, isManager: isManager)
+    }
+    
     func removeSelectedPersonObjectAt(indexPath: IndexPath, completion: @escaping (Bool, Error?)->()) {
         // update Parse
         let person = teamMembers[indexPath.row]
