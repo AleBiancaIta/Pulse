@@ -15,7 +15,7 @@ class LoginSignUpViewController: UIViewController {
         super.viewDidLoad()
         
         UIExtensions.gradientBackgroundFor(view: view)
-        UIApplication.shared.statusBarStyle = .lightContent
+        // TODO statusbar light
     }
     
     // MARK: - Actions
@@ -26,6 +26,14 @@ class LoginSignUpViewController: UIViewController {
         let navController = UINavigationController(rootViewController: viewController)
         present(navController, animated: true, completion: nil)
     }
+    
+    @IBAction func onSignUpButtonTap(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "SignupVC")
+        let navController = UINavigationController(rootViewController: viewController)
+        present(navController, animated: true, completion: nil)
+    }
+    
 //    @IBAction func onSignUpButtonTap(_ sender: UIButton) {
 //        let signUpVC = SignUpViewController(nibName: "SignUpViewController", bundle: nil)
 //        self.present(signUpVC, animated: true, completion: nil)

@@ -35,6 +35,8 @@ class SignUpViewController: UIViewController {
         
         UIExtensions.gradientBackgroundFor(view: scrollView)
         navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
         
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
@@ -45,6 +47,8 @@ class SignUpViewController: UIViewController {
         scrollView.contentSize = UIScreen.main.bounds.size
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
     }
     
     func keyboardWillShow(notification: NSNotification) {
