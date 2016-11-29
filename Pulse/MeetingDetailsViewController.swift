@@ -95,6 +95,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
         
         if indexPath.section == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
+            cell.layer.cornerRadius = 5
             if isExistingMeeting {
                 cell.message = "Tap here to manage cards"
             } else {
@@ -106,6 +107,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             switch selectedCards[indexPath.section].id! {
             case "s":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
@@ -126,6 +128,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 
             case "d":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
@@ -145,6 +148,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 
             case "n":
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                cell.layer.cornerRadius = 5
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
