@@ -39,7 +39,9 @@ class TodoListCell: UITableViewCell {
                 squareImageView.image = UIImage(named: "Circle")
             }
             
+            
             if let personId = todoObject[ObjectKeys.ToDo.personId] as? String {
+                //nameLabel.text = "\(personId)"
                 
                 // Probably not the best place to do this?? TODO
                 parseClient.fetchPersonFor(personId: personId) { (person: PFObject?, error: Error?) in
@@ -54,11 +56,12 @@ class TodoListCell: UITableViewCell {
                         }
                     }
                 }
-            } else {
-                nameLabel.text = ""
-            }
+            } //else {
+               // nameLabel.text = ""
+            //}
             
             if let meetingId = todoObject[ObjectKeys.ToDo.meetingId] as? String {
+                //meetingLabel.text = "\(meetingId)"
                 
                 parseClient.fetchMeetingFor(meetingId: meetingId) { (meeting: PFObject?, error: Error?) in
                     if let error = error {
@@ -74,12 +77,30 @@ class TodoListCell: UITableViewCell {
                         }
                     }
                 }
-            } else {
-                meetingLabel.text = ""
-            }
+            } //else {
+               // meetingLabel.text = ""
+            //}
         }
     }
     
+    /*
+    var person: PFObject! {
+        didSet {
+            let firstName = person[ObjectKeys.Person.firstName] as! String
+            let lastName = person[ObjectKeys.Person.lastName] as! String
+            nameLabel.text = "\(firstName) \(lastName)"
+        }
+    }
+    
+    var meeting: PFObject! {
+        didSet {
+            let meetingDate = meeting[ObjectKeys.Meeting.meetingDate] as! Date
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            dateFormatter.timeStyle = .none
+            meetingLabel.text = dateFormatter.string(from: meetingDate)
+        }
+    }*/
     
     override func awakeFromNib() {
         super.awakeFromNib()

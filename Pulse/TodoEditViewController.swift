@@ -94,17 +94,6 @@ class TodoEditViewController: UIViewController {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -146,6 +135,12 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
                 cell.firstRow = true
                 cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                
+                if personRowSelected == nil {
+                    if let personId = todoItem[ObjectKeys.ToDo.personId] as? String {
+                        cell.personId = personId
+                    }
+                }
                 
                 if let selectedPerson = personRowSelected {
                     cell.selectedPerson = teamMembers[selectedPerson]

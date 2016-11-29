@@ -17,9 +17,27 @@ class TodoEditPersonCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var downArrowImageView: UIImageView!
     
+    fileprivate let parseClient = ParseClient.sharedInstance()
+    
     var highlightBackground: Bool! {
         didSet {
             cellBackgroundView.backgroundColor = highlightBackground! ? UIColor.lightGray : UIColor.white
+        }
+    }
+    
+    var personId: String! {
+        didSet {
+            parseClient.fetchPersonFor(personId: personId) { (person: PFObject?, error: Error?) in
+                if let error = error {
+                    debugPrint("Failed to fetch person in TodoEditPersonCell, error: \(error.localizedDescription)")
+                } else {
+                    if let person = person {
+                        self.configureNameLabel(person: person)
+                    } else {
+                        debugPrint("Fetch person in TodoEditPersonCell returned nil")
+                    }
+                }
+            }
         }
     }
     
