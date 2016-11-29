@@ -40,6 +40,9 @@ class Person2DetailsViewController: UIViewController {
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         /*
         // If person is a manager or above, include team card
         if let personObject = personPFObject, let positionId = personObject[ObjectKeys.Person.positionId] as? String {
@@ -73,6 +76,16 @@ class Person2DetailsViewController: UIViewController {
         }
     
         loadSelectedCards()
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.size.height = UIScreen.main.bounds.height
     }
     
 //    fileprivate func hasDirectReport(manager: PFObject, isManager: @escaping (Bool, Error?)->())  {

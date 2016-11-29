@@ -44,13 +44,20 @@ class MeetingDetailsViewController: UIViewController {
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         loadSelectedCards()
     }
     
-    @objc fileprivate func resetCell(_ cell: UITableViewCell) {
-        for view in cell.contentView.subviews {
-            view.removeFromSuperview()
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height
         }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        self.view.frame.size.height = UIScreen.main.bounds.height
     }
     
     func loadSelectedCards() {
