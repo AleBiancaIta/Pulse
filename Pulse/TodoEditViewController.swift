@@ -102,9 +102,14 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         switch viewTypes {
-        case .dashboard: // TODO - check if meetingId is populated
-            return cellSections.count
-        default:
+        case .dashboard:
+            // If meetingId is populated, do not show person drop down
+            if let _ = todoItem[ObjectKeys.ToDo.meetingId] as? String {
+                return cellSections.count - 1
+            } else {
+                return cellSections.count
+            }
+        default: // coming from Person or Meeting, can only edit the text
             return cellSections.count - 1
         }
     }
