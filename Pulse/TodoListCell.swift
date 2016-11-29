@@ -26,10 +26,29 @@ class TodoListCell: UITableViewCell {
     var isCompleted: Bool!
     weak var delegate: TodoListCellDelegate?
     
+    var hasMeeting: Bool! {
+        didSet {
+            if hasMeeting! {
+                meetingLabel.isHidden = false
+            } else {
+                meetingLabel.isHidden = true
+            }
+        }
+    }
+    
+    var hasPerson: Bool! {
+        didSet {
+            if hasPerson! {
+                nameLabel.isHidden = false
+            } else {
+                nameLabel.isHidden = true
+            }
+        }
+    }
+    
     var todoObject: PFObject! {
         didSet {
             todoLabel.text = todoObject[ObjectKeys.ToDo.text] as? String
-            //nameLabel.text = todoObject[ObjectKeys.ToDo.personId] as? String
             
             if let _ = todoObject[ObjectKeys.ToDo.completedAt] {
                 isCompleted = true
@@ -39,9 +58,7 @@ class TodoListCell: UITableViewCell {
                 squareImageView.image = UIImage(named: "Circle")
             }
             
-            
             if let personId = todoObject[ObjectKeys.ToDo.personId] as? String {
-                //nameLabel.text = "\(personId)"
                 
                 // Probably not the best place to do this?? TODO
                 parseClient.fetchPersonFor(personId: personId) { (person: PFObject?, error: Error?) in
@@ -56,12 +73,9 @@ class TodoListCell: UITableViewCell {
                         }
                     }
                 }
-            } //else {
-               // nameLabel.text = ""
-            //}
+            }
             
             if let meetingId = todoObject[ObjectKeys.ToDo.meetingId] as? String {
-                //meetingLabel.text = "\(meetingId)"
                 
                 parseClient.fetchMeetingFor(meetingId: meetingId) { (meeting: PFObject?, error: Error?) in
                     if let error = error {
@@ -77,30 +91,9 @@ class TodoListCell: UITableViewCell {
                         }
                     }
                 }
-            } //else {
-               // meetingLabel.text = ""
-            //}
+            }
         }
     }
-    
-    /*
-    var person: PFObject! {
-        didSet {
-            let firstName = person[ObjectKeys.Person.firstName] as! String
-            let lastName = person[ObjectKeys.Person.lastName] as! String
-            nameLabel.text = "\(firstName) \(lastName)"
-        }
-    }
-    
-    var meeting: PFObject! {
-        didSet {
-            let meetingDate = meeting[ObjectKeys.Meeting.meetingDate] as! Date
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeStyle = .none
-            meetingLabel.text = dateFormatter.string(from: meetingDate)
-        }
-    }*/
     
     override func awakeFromNib() {
         super.awakeFromNib()

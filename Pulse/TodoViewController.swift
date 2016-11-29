@@ -362,7 +362,21 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         case .list:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
-            cell.todoObject = todoItems[indexPath.row]
+            let todoObject = todoItems[indexPath.row]
+            cell.todoObject = todoObject
+            
+            if let _ = todoObject[ObjectKeys.ToDo.meetingId] as? String {
+                cell.hasMeeting = true
+            } else {
+                cell.hasMeeting = false
+            }
+            
+            if let _ = todoObject[ObjectKeys.ToDo.personId] as? String {
+                cell.hasPerson = true
+            } else {
+                cell.hasPerson = false
+            }
+            
             cell.delegate = self
             return cell
         case .showCompleted:
@@ -375,7 +389,21 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
         case .listCompleted:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
-            cell.todoObject = todoCompletedItems[indexPath.row]
+            let todoObject = todoCompletedItems[indexPath.row]
+            cell.todoObject = todoObject
+
+            if let _ = todoObject[ObjectKeys.ToDo.meetingId] as? String {
+                cell.hasMeeting = true
+            } else {
+                cell.hasMeeting = false
+            }
+            
+            if let _ = todoObject[ObjectKeys.ToDo.personId] as? String {
+                cell.hasPerson = true
+            } else {
+                cell.hasPerson = false
+            }
+            
             cell.delegate = self
             return cell
         }
