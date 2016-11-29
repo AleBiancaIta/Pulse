@@ -18,13 +18,25 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTextField.delegate = self
     }
     
     // MARK: - Actions
     
     @IBAction func onLoginButtonTap(_ sender: UIButton) {
-        // Login to Parse   
-        
+        loginToParse()
+    }
+    
+    @IBAction func onCancelButtonTap(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    //    @IBAction func onForgetPasswordButtonTap(_ sender: UIButton) {
+    //        let forgetVC = ForgetPasswordViewController(nibName: "ForgetPasswordViewController", bundle: nil)
+    //        self.present(forgetVC, animated: true, completion: nil)
+    //    }
+    
+    fileprivate func loginToParse() {
         if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
             ABIShowAlert(title: "Alert", message: "Username and password fields cannot be empty", sender: nil, handler: nil)
         } else {
@@ -43,13 +55,17 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    
-    @IBAction func onCancelButtonTap(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
+        return true
     }
     
-    //    @IBAction func onForgetPasswordButtonTap(_ sender: UIButton) {
-    //        let forgetVC = ForgetPasswordViewController(nibName: "ForgetPasswordViewController", bundle: nil)
-    //        self.present(forgetVC, animated: true, completion: nil)
-    //    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        loginToParse()
+        return true
+    }
 }
