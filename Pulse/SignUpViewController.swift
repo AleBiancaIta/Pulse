@@ -162,6 +162,10 @@ class SignUpViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
     // MARK: - Helpers
     
     // Only call this if validateEntry returns true

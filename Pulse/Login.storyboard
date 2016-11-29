@@ -340,6 +340,10 @@
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="gCu-WC-pby" appends="YES" id="MAv-S6-dln"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Lvc-Fe-hWV" id="lH0-Al-1vw"/>
@@ -350,6 +354,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XYc-qc-uwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="gCu-WC-pby">
+                    <connections>
+                        <action selector="onTap:" destination="xOd-iJ-9ak" id="o0F-Ve-kmo"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1090" y="1057"/>
         </scene>
@@ -557,6 +566,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="mwl-S3-4Lo" appends="YES" id="Jb8-rH-F9n"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="companyNameTextField" destination="che-2a-TOH" id="Wdh-4z-9zC"/>
@@ -575,6 +588,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OHF-Z0-DBz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="wN8-Ft-sK0"/>
+                <tapGestureRecognizer id="mwl-S3-4Lo">
+                    <connections>
+                        <action selector="onTap:" destination="Ea4-eZ-k3f" id="EFU-ON-nDr"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="590" y="-752"/>
         </scene>

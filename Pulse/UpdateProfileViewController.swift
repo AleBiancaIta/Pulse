@@ -30,9 +30,11 @@ class UpdateProfileViewController: UIViewController {
         
         getUserProfile()
         emailTextField.isUserInteractionEnabled = false
+        configureTextFieldDelegate()
     }
 
     // MARK: - Actions
+    
     @IBAction func onUpdateProfileButtonTap(_ sender: UIButton) {
         if validateEntry() {
             let lastName = (lastNameTextField.text?.isEmpty)! ? firstNameTextField.text : lastNameTextField.text
@@ -47,7 +49,7 @@ class UpdateProfileViewController: UIViewController {
                     self.person[ObjectKeys.Person.phone] = phone
                     //self.person[ObjectKeys.Person.email] =  self.emailTextField.text
                     
-                    self.person.saveInBackground(block: { (success: Bool, error: Error?) in
+                    self.person.saveInBackground { (success: Bool, error: Error?) in
                         if success {
                             self.ABIShowAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
                                 let _ = self.navigationController?.popViewController(animated: true)
@@ -55,12 +57,15 @@ class UpdateProfileViewController: UIViewController {
                         } else {
                             self.ABIShowAlert(title: "Error", message: "Unable to update user profile with error: \(error?.localizedDescription)", sender: nil, handler: nil)
                         }
-                    })
+                    }
                 }
             }
         }
     }
     
+    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     // MARK: - Helpers
     
@@ -113,19 +118,6 @@ class UpdateProfileViewController: UIViewController {
             return false
         }
 
-        /*
-        // Check if email is empty
-        guard !((emailTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
-            return false
-        }
-        
-        // Check if it's a valid email
-        guard emailTextField.text!.isValidEmail() else {
-            ABIShowAlert(title: "Error", message: "Please enter a valid email", sender: nil, handler: nil)
-            return false
-        }*/
-        
         // Check if it's a valid phone
         if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
             ABIShowAlert(title: "Error", message: "Please enter a valid phone", sender: nil, handler: nil)
@@ -134,4 +126,24 @@ class UpdateProfileViewController: UIViewController {
         
         return true
     }
+    
+    fileprivate func configureTextFieldDelegate() {
+        passwordTextField.delegate = self
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        phoneTextField.delegate = self
+    }
 }
+
+extension UpdateProfileViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        self.becomeFirstResponder()
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+}
+
