@@ -25,16 +25,23 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbG-Gv-M3G" userLabel="Top Section View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="54"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Up Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g03-c2-fMw">
                                                 <rect key="frame" x="8" y="8" width="114" height="18"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="18" id="5CP-Rd-inP"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-O2-1ul">
-                                                <rect key="frame" x="8" y="34" width="47" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-O2-1ul">
+                                                <rect key="frame" x="8" y="28" width="60" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="MUe-hV-tC0"/>
+                                                    <constraint firstAttribute="width" constant="60" id="mOJ-lO-Qoo"/>
+                                                </constraints>
                                                 <state key="normal" title="See All">
                                                     <color key="titleColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -45,42 +52,42 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="54" id="98A-LW-KJz"/>
                                             <constraint firstItem="g03-c2-fMw" firstAttribute="top" secondItem="UbG-Gv-M3G" secondAttribute="top" constant="8" id="HwR-27-OUV"/>
                                             <constraint firstItem="g03-c2-fMw" firstAttribute="leading" secondItem="UbG-Gv-M3G" secondAttribute="leading" constant="8" id="Oug-El-4FW"/>
-                                            <constraint firstItem="ui9-O2-1ul" firstAttribute="top" secondItem="g03-c2-fMw" secondAttribute="bottom" constant="8" id="pBc-Cf-uEF"/>
+                                            <constraint firstAttribute="bottom" secondItem="ui9-O2-1ul" secondAttribute="bottom" id="QAc-Kc-J47"/>
+                                            <constraint firstItem="ui9-O2-1ul" firstAttribute="top" secondItem="g03-c2-fMw" secondAttribute="bottom" constant="2" id="pBc-Cf-uEF"/>
                                             <constraint firstItem="ui9-O2-1ul" firstAttribute="leading" secondItem="g03-c2-fMw" secondAttribute="leading" id="tQc-xD-GZf"/>
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0OT-SV-twL">
-                                        <rect key="frame" x="0.0" y="66" width="359" height="581"/>
+                                        <rect key="frame" x="0.0" y="80" width="375" height="567"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoAddCell" id="tmF-vq-hUT" customClass="TodoAddCell" customModule="Pulse" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="56" width="359" height="44"/>
+                                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tmF-vq-hUT" id="s1J-mm-J3s">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoListCell" id="mt9-Cr-xc9" customClass="TodoListCell" customModule="Pulse" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="100" width="359" height="44"/>
+                                                <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mt9-Cr-xc9" id="eqF-Rs-aSx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TodoShowCompletedCell" id="Fmo-gH-LAp" customClass="TodoShowCompletedCell" customModule="Pulse" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="144" width="359" height="44"/>
+                                                <rect key="frame" x="0.0" y="144" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fmo-gH-LAp" id="tSJ-G7-PWW">
-                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -94,7 +101,7 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="0OT-SV-twL" firstAttribute="leading" secondItem="RmT-Mu-CGU" secondAttribute="leading" id="C7I-jj-vJl"/>
-                                    <constraint firstAttribute="trailing" secondItem="0OT-SV-twL" secondAttribute="trailing" constant="16" id="MRQ-pO-NFr"/>
+                                    <constraint firstAttribute="trailing" secondItem="0OT-SV-twL" secondAttribute="trailing" id="MRQ-pO-NFr"/>
                                     <constraint firstItem="UbG-Gv-M3G" firstAttribute="top" secondItem="RmT-Mu-CGU" secondAttribute="top" id="U9k-rN-5Hj"/>
                                     <constraint firstItem="UbG-Gv-M3G" firstAttribute="leading" secondItem="RmT-Mu-CGU" secondAttribute="leading" id="UVK-dL-ouy"/>
                                     <constraint firstAttribute="trailing" secondItem="UbG-Gv-M3G" secondAttribute="trailing" id="ZWk-tk-mMM"/>
