@@ -31,6 +31,11 @@ class SignUpViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UIExtensions.gradientBackgroundFor(view: view)
+        profileImageView.layer.cornerRadius = 5
+        profileImageView.clipsToBounds = true
+        positionSegmentedControl.layer.cornerRadius = 5
 
 		profileImageView.delegate = self
 		profileImageView.isEditable = true

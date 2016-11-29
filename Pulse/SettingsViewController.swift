@@ -29,6 +29,8 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIExtensions.gradientBackgroundFor(view: view)
+        
         settingsTableView.estimatedRowHeight = 50
         settingsTableView.rowHeight = UITableViewAutomaticDimension
         getCurrentPerson()

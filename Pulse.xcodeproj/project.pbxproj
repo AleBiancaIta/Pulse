@@ -13,7 +13,6 @@
 		431804991DD5AD7500B279C6 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431804971DD5AD7500B279C6 /* SignUpViewController.xib */; };
 		4318049C1DD5AE4C00B279C6 /* LoginSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */; };
 		4318049D1DD5AE4C00B279C6 /* LoginSignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */; };
-		431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */; };
 		431804A11DD5B0AD00B279C6 /* ForgetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */; };
 		431804A41DD6843700B279C6 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 431804A31DD6843700B279C6 /* Login.storyboard */; };
 		431804A71DD6975500B279C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431804A61DD6975500B279C6 /* Extensions.swift */; };
@@ -88,7 +87,6 @@
 		431804971DD5AD7500B279C6 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
 		4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginSignUpViewController.swift; sourceTree = "<group>"; };
 		4318049B1DD5AE4C00B279C6 /* LoginSignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginSignUpViewController.xib; sourceTree = "<group>"; };
-		4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		4318049F1DD5B0AD00B279C6 /* ForgetPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ForgetPasswordViewController.xib; sourceTree = "<group>"; };
 		431804A31DD6843700B279C6 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		431804A51DD68A3C00B279C6 /* Pulse.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pulse.entitlements; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				4318049A1DD5AE4C00B279C6 /* LoginSignUpViewController.swift */,
 				431804961DD5AD7500B279C6 /* SignUpViewController.swift */,
 				431804921DD5A8BE00B279C6 /* LoginViewController.swift */,
-				4318049E1DD5B0AD00B279C6 /* ForgetPasswordViewController.swift */,
 				431804AA1DD7C73400B279C6 /* SettingsViewController.swift */,
 				431804B01DD83A4A00B279C6 /* ChangePasswordViewController.swift */,
 				431804B21DD83A6200B279C6 /* UpdateProfileViewController.swift */,
@@ -512,7 +509,6 @@
 				431804981DD5AD7500B279C6 /* SignUpViewController.swift in Sources */,
 				437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */,
 				43EC9BBB1DE130C1006C8703 /* TodoListCell.swift in Sources */,
-				431804A01DD5B0AD00B279C6 /* ForgetPasswordViewController.swift in Sources */,
 				437DE0671DD9A7FF00B08988 /* ParseClient.swift in Sources */,
 				67A276181DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift in Sources */,
 				676CEF491DE29467000FA406 /* NotesViewController.swift in Sources */,

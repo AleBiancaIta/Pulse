@@ -60,11 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window?.rootViewController = loginSignUpVC
         
         // Customize UI
-        UIApplication.shared.statusBarStyle = .lightContent
         let navigationBarAppearance = UINavigationBar.appearance()
-        navigationBarAppearance.tintColor = UIColor.pulseTintColor()
-        navigationBarAppearance.barTintColor = UIColor.pulseBarTintColor()
-        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.pulseTintColor()]
+        navigationBarAppearance.isTranslucent = false
+        navigationBarAppearance.tintColor = UIColor.white
+        navigationBarAppearance.barTintColor = UIColor.black
+        navigationBarAppearance.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
 
         return true
     }

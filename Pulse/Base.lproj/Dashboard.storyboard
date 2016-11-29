@@ -68,7 +68,6 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="apc-nX-wLz" secondAttribute="trailing" constant="8" id="B8L-bd-Y71"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="apc-nX-wLz" secondAttribute="bottom" constant="8" id="MXy-uc-aby"/>

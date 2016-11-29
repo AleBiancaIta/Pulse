@@ -138,6 +138,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Artworks
 
+Icon made by [Retinaicons](http://www.flaticon.com/authors/retinaicons) from [Flaticon]www.flaticon.com 
+
 ## Notes
 
 Describe any challenges encountered while building the app.

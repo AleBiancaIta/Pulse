@@ -67,7 +67,6 @@
                                 </cells>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="exV-XO-J5A" secondAttribute="trailing" id="61R-Jn-FAD"/>
                             <constraint firstItem="Dre-Bh-2S4" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" constant="8" id="AN8-1N-coC"/>

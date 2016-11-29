@@ -61,7 +61,7 @@ class GraphViewController: UIViewController {
         }
 
         let survey1Series = ChartSeries(data: data1)
-        survey1Series.color = UIColor.pulseBarTintColor()
+        survey1Series.color = UIColor.pulseDarkPrimaryColor()
         survey1Series.area = true
         chart1.add(survey1Series)
         chart1.lineWidth = 1
@@ -69,7 +69,7 @@ class GraphViewController: UIViewController {
         chart1.yLabelsFormatter = { self.highLowValues[Int($1)] }
         
         let survey2Series = ChartSeries(data: data2)
-        survey2Series.color = UIColor.pulseBarTintColor()
+        survey2Series.color = UIColor.pulseDarkPrimaryColor()
         survey2Series.area = true
         chart2.add(survey2Series)
         chart2.lineWidth = 1
@@ -77,7 +77,7 @@ class GraphViewController: UIViewController {
         chart2.yLabelsFormatter = { self.highLowValues[Int($1)] }
 
         let survey3Series = ChartSeries(data: data3)
-        survey3Series.color = UIColor.pulseBarTintColor()
+        survey3Series.color = UIColor.pulseDarkPrimaryColor()
         survey3Series.area = true
         chart3.add(survey3Series)
         chart3.lineWidth = 1

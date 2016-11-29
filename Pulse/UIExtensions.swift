@@ -24,6 +24,13 @@ class UIExtensions: NSObject {
      * Headers
      */
     
+    class func gradientBackgroundFor(view: UIView) {
+        let gradient = CAGradientLayer()
+        gradient.frame = view.bounds
+        gradient.colors = [UIColor.pulseBackgroundColor().cgColor, UIColor.black.cgColor]
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+    
     // Convenience method to convert hex to UIColor
     class func uiColorWith(hex: String) -> UIColor {
         var colorString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -49,16 +56,23 @@ class UIExtensions: NSObject {
 
 extension UIColor {
     
-    class func pulseBarTintColor() -> UIColor {
-        return UIExtensions.uiColorWith(hex: "#1976D2") // Darker blue
+    class func pulseBackgroundColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#303F9F") // Darker indigo
     }
     
-    class func pulseTintColor() -> UIColor {
-        return UIColor.white
+    class func pulseDarkPrimaryColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#303F9F") // Darker indigo
     }
     
-    // TODO, use this for buttons, and tinted text, etc.
-    class func pulsePrimaryTintColor() -> UIColor {
-        return UIExtensions.uiColorWith(hex: "#2196F3") // Blue
+    class func pulsePrimaryColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#3F51B5") // Indigo
+    }
+    
+    class func pulseLightPrimaryColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#C5CAE9") // Light indigo
+    }
+
+    class func pulseAccentColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#536DFE") // Bright indigo
     }
 }

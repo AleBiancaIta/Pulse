@@ -20,6 +20,7 @@ class ChangePasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIExtensions.gradientBackgroundFor(view: view)
     }
 
     // MARK: - Actions

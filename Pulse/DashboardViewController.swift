@@ -21,6 +21,8 @@ class DashboardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UIExtensions.gradientBackgroundFor(view: view)
+        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
