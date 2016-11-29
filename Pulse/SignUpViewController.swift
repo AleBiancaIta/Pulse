@@ -11,9 +11,10 @@ import Parse
 import SVProgressHUD
 
 class SignUpViewController: UIViewController {
-
+    
     // MARK: - Properties
     
+    @IBOutlet var scrollView: UIScrollView!
     //@IBOutlet weak var usernameTextField: UITextField!
 	@IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var emailTextField: UITextField!
@@ -32,13 +33,28 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIExtensions.gradientBackgroundFor(view: view)
+        UIExtensions.gradientBackgroundFor(view: scrollView)
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         positionSegmentedControl.layer.cornerRadius = 5
 
 		profileImageView.delegate = self
 		profileImageView.isEditable = true
+        
+        scrollView.contentSize = UIScreen.main.bounds.size
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            scrollView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - keyboardSize.height)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        scrollView.frame = UIScreen.main.bounds
     }
     
     // MARK: - Actions
