@@ -314,10 +314,10 @@
 				431804A21DD5B0B700B279C6 /* SignUp/Login */,
 				676CEF451DE276BE000FA406 /* Storyboards */,
 				67D8D6491DD56D9800B6DE19 /* Constants.swift */,
+				431804A61DD6975500B279C6 /* Extensions.swift */,
 				67A276211DEA6F0200ED73B0 /* UIExtensions.swift */,
 				431804A51DD68A3C00B279C6 /* Pulse.entitlements */,
 				67A364AA1DCD8DA500BFD931 /* AppDelegate.swift */,
-				431804A61DD6975500B279C6 /* Extensions.swift */,
 				67A364B11DCD8DA500BFD931 /* Assets.xcassets */,
 				67A364B61DCD8DA500BFD931 /* Info.plist */,
 			);

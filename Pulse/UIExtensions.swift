@@ -75,4 +75,33 @@ extension UIColor {
     class func pulseAccentColor() -> UIColor {
         return UIExtensions.uiColorWith(hex: "#536DFE") // Bright indigo
     }
+    
+    // MARK: - Alert Colors
+    
+    class func pulseSuccessBackgroundColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#3F51B5")
+    }
+    
+    class func pulseFailureBackgroundColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#C5CAE9")
+    }
+    
+    class func pulseAlertBackgroundColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#536DFE")
+    }
+    
+    class func pulseSuccessTextColor() -> UIColor {
+        return UIColor.white
+        //return UIExtensions.uiColorWith(hex: <#T##String#>)
+    }
+
+    class func pulseFailureTextColor() -> UIColor {
+        return UIColor.white
+        //return UIExtensions.uiColorWith(hex: <#T##String#>)
+    }
+
+    class func pulseAlertTextColor() -> UIColor {
+        return UIColor.white
+        //return UIExtensions.uiColorWith(hex: <#T##String#>)
+    }
 }

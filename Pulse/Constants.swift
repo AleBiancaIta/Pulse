@@ -35,6 +35,12 @@ class Constants: NSObject {
     static let positions: [String: String] = ["Individual Contributor": "1", "Manager": "2", "Director": "3", "Vice President": "4", "CEO": "5"]
 }
 
+enum AlertTypes : String {
+    case alert = "Alert"
+    case success = "Success"
+    case failure = "Failure"
+}
+
 struct StoryboardID {
     static let dashboardNavVC = "DashboardNavVC"
     static let settingsNavVC = "SettingsNavVC"

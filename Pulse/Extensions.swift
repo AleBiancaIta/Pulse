@@ -8,6 +8,7 @@
 
 import Parse
 import UIKit
+import RKDropdownAlert
 
 extension UIViewController {
     func ABIShowAlert(title: String, message: String, sender: Any?, handler: ((UIAlertAction)->())?) {
@@ -38,6 +39,17 @@ extension UIViewController {
             show(personViewController, sender: nil)
         }
 	}
+    
+    func  ABIShowDropDownAlert(type: AlertTypes , title: String, message: String) {
+        switch type {
+        case .alert:
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseAlertBackgroundColor(), textColor: UIColor.pulseAlertTextColor(), time: 1)
+        case .success:
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseSuccessBackgroundColor(), textColor: UIColor.pulseSuccessTextColor(), time: 1)
+        case .failure:
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseFailureBackgroundColor(), textColor: UIColor.pulseFailureTextColor(), time: 1)
+        }
+    }
     
     @objc fileprivate func onCancelButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
