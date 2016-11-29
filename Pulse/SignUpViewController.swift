@@ -23,7 +23,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var companyNameTextField: UITextField!
-    @IBOutlet weak var positionTextField: UITextField!
+    //@IBOutlet weak var positionTextField: UITextField!
+    @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
     
     var person: Person!
 	var photoData: Data?
@@ -126,12 +127,17 @@ class SignUpViewController: UIViewController {
         let lastName = (lastNameTextField.text?.isEmpty)! ? firstNameTextField.text! : lastNameTextField.text!
         let phone = (phoneTextField.text?.isEmpty)! ? "" : phoneTextField.text!
         
+        /*
         // let positionId defaults to Individual Contributor (1)
         var positionId = "1"
         let positionDescription = positionTextField.text!
         if let positionIdString = Constants.positions[positionDescription] {
             positionId = positionIdString
-        }
+        }*/
+        
+        // TODO: Change this to use the Constants file instead of hardcoded
+        let offset = 2
+        let positionId = "\(positionSegmentedControl.selectedSegmentIndex + offset)"
         
         var dictionary = [String : String]()
         if let userId = PFUser.current()?.objectId {
@@ -189,11 +195,12 @@ class SignUpViewController: UIViewController {
             return false
         }
         
+        /*
         // Check if position field is empty
         guard !((positionTextField.text?.isEmpty)!) else {
             ABIShowAlert(title: "Error", message: "Position field cannot be empty", sender: nil, handler: nil)
             return false
-        }
+        }*/
         
         // Check if it's a valid email
         guard emailTextField.text!.isValidEmail() else {
