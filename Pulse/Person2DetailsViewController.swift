@@ -15,7 +15,7 @@ class Person2DetailsViewController: UIViewController {
     
     var alertController: UIAlertController?
     
-    var selectedCardsString: String? = ""
+    var selectedCardsString: String = ""
     var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
     
     var personPFObject: PFObject?
@@ -72,7 +72,7 @@ class Person2DetailsViewController: UIViewController {
             self.selectedCards.append(Constants.personCards[1])
         }
     
-        loadExistingPerson()
+        loadSelectedCards()
     }
     
 //    fileprivate func hasDirectReport(manager: PFObject, isManager: @escaping (Bool, Error?)->())  {
@@ -110,10 +110,11 @@ class Person2DetailsViewController: UIViewController {
 		navigationItem.rightBarButtonItem?.title = editing ? "Save" : "Edit"
 	}
 
-    func loadExistingPerson() {
+    func loadSelectedCards() {
         // Existing person
         if nil != self.personPFObject,
             let personPFObject = self.personPFObject {
+            
             let firstName =  personPFObject[ObjectKeys.Person.firstName] as! String
             let lastName = personPFObject[ObjectKeys.Person.lastName] as! String
             self.title = "\(firstName) \(lastName)"
@@ -344,12 +345,11 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
-                let id = card.id,
-                let selectedCardsString = self.selectedCardsString {
+                let id = card.id {
                 
                 if posts.count > 0 {
                     let post = posts[0]
-                    self.selectedCardsString = "\(id)\(selectedCardsString)"
+                    self.selectedCardsString = "\(id)\(self.selectedCardsString)"
                     
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
@@ -361,7 +361,7 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                     }
                 } else {
                     let post = PFObject(className: "Person")
-                    post["selectedCards"] = selectedCardsString
+                    post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground()
                 }
             } else {
@@ -389,12 +389,11 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
-                let id = card.id,
-                let selectedCardsString = self.selectedCardsString {
+                let id = card.id {
                 
                 if posts.count > 0 {
                     let post = posts[0]
-                    self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
+                    self.selectedCardsString = self.selectedCardsString.replacingOccurrences(of: id, with: "")
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
                         print("successfully removed person card")

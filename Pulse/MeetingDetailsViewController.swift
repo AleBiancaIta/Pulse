@@ -19,8 +19,8 @@ class MeetingDetailsViewController: UIViewController {
     
     var alertController: UIAlertController?
     
-    var selectedCardsString: String? = "s"
-    var selectedCards: [Card] = []
+    var selectedCardsString: String = ""
+    var selectedCards: [Card] = [Constants.meetingCards[0]] // Always include survey card
     
     var meeting: Meeting!
     var isExistingMeeting = true // False if new meeting, otherwise true
@@ -30,7 +30,7 @@ class MeetingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Meeting" // TODO: Add first and last name?
+        title = "Meeting"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
 
@@ -40,17 +40,10 @@ class MeetingDetailsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
-//        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
-//        tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
         
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        if !isExistingMeeting {
-            selectedCards.append(Constants.meetingCards[0])
-        }
-        
-        //loadExistingMeeting()
         loadSelectedCards()
     }
     
@@ -60,24 +53,18 @@ class MeetingDetailsViewController: UIViewController {
         }
     }
     
-    //func loadExistingMeeting() {
-    
     func loadSelectedCards() {
+        
         // Existing meeting
         if nil != meeting {
-            
             if let selectedCardsString = meeting.selectedCards {
                 self.selectedCardsString = selectedCardsString
                 for c in (meeting.selectedCards?.characters)! {
                     switch c {
-                    case "s":
-                        selectedCards.append(Constants.meetingCards[0])
                     case "d":
                         selectedCards.append(Constants.meetingCards[1])
                     case "n":
                         selectedCards.append(Constants.meetingCards[2])
-                    //case "p":
-                    //    selectedCards.append(Constants.meetingCards[2])
                     default:
                         break
                     }
@@ -106,7 +93,7 @@ class MeetingDetailsViewController: UIViewController {
 extension MeetingDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == selectedCards.count {
+        if indexPath.section == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
             if isExistingMeeting {
                 cell.message = "Tap here to manage cards"
@@ -116,24 +103,29 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             return cell
             
         } else { // The actual cards
-            switch selectedCards[indexPath.row].id! {
+            switch selectedCards[indexPath.section].id! {
             case "s":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
-                resetCell(cell)
-                let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
-                viewController.meeting = meeting
-                viewController.isExistingMeeting = isExistingMeeting
-                viewController.delegate = self
-                self.delegate = viewController
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
+                    viewController.meeting = meeting
+                    viewController.isExistingMeeting = isExistingMeeting
+                    viewController.delegate = self
+                    self.delegate = viewController
+                    
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
                 return cell
                 
             case "d":
-                //let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
@@ -141,7 +133,9 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                     viewController.currentMeeting = meeting
                     viewController.viewTypes = .meeting
+                    
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -150,8 +144,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 return cell
                 
             case "n":
-                //let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ContainerCell", for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 
                 if cell.contentView.subviews == [] {
@@ -159,7 +152,9 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                     viewController.delegate = self
                     viewController.notes = meeting.notes
+                    
                     viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     cell.contentView.addSubview(viewController.view)
                     self.addChildViewController(viewController)
                     viewController.didMove(toParentViewController: self)
@@ -169,7 +164,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                 
             default: // This shouldn't actually be reached
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell", for: indexPath) as! MessageCell
-                cell.message = selectedCards[indexPath.row].name
+                cell.message = selectedCards[indexPath.section].name
                 return cell
             }
             
@@ -177,6 +172,10 @@ extension MeetingDetailsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         return selectedCards.count + 1
     }
 }
@@ -185,14 +184,24 @@ extension MeetingDetailsViewController: UITableViewDataSource {
 
 extension MeetingDetailsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let defaultHeight: CGFloat = 44
-        guard indexPath.row < selectedCards.count else {
+        guard indexPath.section < selectedCards.count else {
             return defaultHeight
         }
         
-        switch selectedCards[indexPath.row].id! {
+        switch selectedCards[indexPath.section].id! {
         case "s":
             let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
@@ -218,7 +227,7 @@ extension MeetingDetailsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row == selectedCards.count && isExistingMeeting {
+        if indexPath.section == selectedCards.count && isExistingMeeting {
             onManageCards()
         }
     }
@@ -236,33 +245,31 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
-                let id = card.id,
-                let selectedCardsString = self.selectedCardsString {
+                let id = card.id {
                 
                 if posts.count > 0 {
                     let post = posts[0]
-                    self.selectedCardsString = "\(id)\(selectedCardsString)"
+                    self.selectedCardsString = "\(id)\(self.selectedCardsString)"
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
                         if success {
-                            print("successfully saved meeting card")
+                            print("successfully saved meeting cards")
                         } else {
-                            print("error saving meeting card")
+                            print("error saving meeting cards")
                         }
                     }
                 } else {
                     let post = PFObject(className: "Meetings")
-                    post["selectedCards"] = selectedCardsString
+                    post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground()
                 }
             } else {
-                print("error saving meeting card")
+                print("error saving meeting cards")
             }
         }
         
         // Insert new card at the top of the table view
-        selectedCards.insert(card, at: 0)
-        //selectedCards.append(card)
+        selectedCards.insert(card, at: 1)
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
@@ -276,12 +283,11 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
         
         query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
             if let posts = posts,
-                let id = card.id,
-                let selectedCardsString = self.selectedCardsString {
+                let id = card.id {
                 
                 if posts.count > 0 {
                     let post = posts[0]
-                    self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
+                    self.selectedCardsString = self.selectedCardsString.replacingOccurrences(of: id, with: "")
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
                         print("successfully removed meeting card")
@@ -368,65 +374,3 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
         }
     }
 }
-    /*
-        ParseClient.sharedInstance().getCurrentPerson(completion: { (person: PFObject?, error: Error?) in
-            if let userPerson = person {
-                let query = PFQuery(className: "Person")
-                let firstName = self.personTextField.text! as String
-                query.whereKey("firstName", equalTo: firstName)
-                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) -> Void in
-                    if let posts = posts {
-                        let person = posts[0]
-                        let personId = person.objectId
-                        
-                        debugPrint("no of items in posts: \(posts.count)")
-                        for post in posts {
-                            debugPrint("post contains \(post.objectId!)")
-                        }
-                        
-                        // Survey
-                        let post = PFObject(className: "Survey")
-                        post["surveyDesc1"] = "happiness"
-                        post["surveyValueId1"] = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
-                        post["surveyDesc2"] = "engagement"
-                        post["surveyValueId2"] = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
-                        post["surveyDesc3"] = "workload"
-                        post["surveyValueId3"] = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
-                        post["companyId"] = userPerson["companyId"]
-                        post["meetingDate"] = Date()
-                        post["personId"] = personId
-                        post.saveInBackground(block: { (success: Bool, error: Error?) in
-                            
-                            if success {
-                                let managerId = userPerson.objectId
-                                let dictionary: [String: Any] = [
-                                    "personId": personId as Any,
-                                    "managerId": managerId as Any,
-                                    "surveyId": post.objectId!,
-                                    "meetingDate": Date()
-                                ]
-                                self.meeting = Meeting(dictionary: dictionary)
-                                print("survey saved successfully")
-                                
-                                Meeting.saveMeetingToParse(meeting: self.meeting) { (success: Bool, error: Error?) in
-                                    if success {
-                                        self.isExistingMeeting = true
-                                        self.personTextField.isUserInteractionEnabled = false
-                                        self.tableView.reloadData()
-                                        self.alertController?.message = "Successfully saved meeting."
-                                        self.present(self.alertController!, animated: true)
-                                    } else {
-                                        self.alertController?.message = "Meeting was unable to be saved"
-                                        self.present(self.alertController!, animated: true)
-                                    }
-                                }
-                            } else {
-                                self.alertController?.message = "Meeting was unable to be saved"
-                                self.present(self.alertController!, animated: true)
-                            }
-                        })
-                    }
-                }
-            }
-        })
-    }*/

@@ -20,7 +20,7 @@ class PersonDetailsSelectionViewController: UIViewController {
     weak var delegate: PersonDetailsSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    var alertController: UIAlertController?
+    var alertController: UIAlertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +28,7 @@ class PersonDetailsSelectionViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
-        alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
-        alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         title = "Person Cards"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
@@ -73,8 +72,8 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.row != 0 && indexPath.row != 1 else {
-            alertController?.message = "Sorry, info and team cards may not be manually updated"
-            present(alertController!, animated: true)
+            alertController.message = "Sorry, info and team cards may not be manually updated"
+            present(alertController, animated: true)
             return
         }
         

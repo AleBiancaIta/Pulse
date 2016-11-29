@@ -20,13 +20,15 @@ class MeetingDetailsSelectionViewController: UIViewController {
     weak var delegate: MeetingDetailsSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    var alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
+    var alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         title = "Meeting Cards"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
@@ -71,8 +73,13 @@ extension MeetingDetailsSelectionViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let card = Constants.meetingCards[indexPath.row]
+        guard indexPath.row != 0 else {
+            alertController.message = "Sorry, survey card may not be manually updated"
+            present(alertController, animated: true)
+            return
+        }
         
+        let card = Constants.meetingCards[indexPath.row]
         if selectedCards.contains(card) {
             for (index, meetingCard) in selectedCards.enumerated() {
                 // Double check to avoid index out of bounds
