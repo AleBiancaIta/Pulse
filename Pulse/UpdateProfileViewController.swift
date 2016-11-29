@@ -25,6 +25,7 @@ class UpdateProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getUserProfile()
+        emailTextField.isUserInteractionEnabled = false
     }
 
     // MARK: - Actions
@@ -40,7 +41,7 @@ class UpdateProfileViewController: UIViewController {
                     self.person[ObjectKeys.Person.firstName] = self.firstNameTextField.text
                     self.person[ObjectKeys.Person.lastName] = lastName
                     self.person[ObjectKeys.Person.phone] = phone
-                    self.person[ObjectKeys.Person.email] =  self.emailTextField.text
+                    //self.person[ObjectKeys.Person.email] =  self.emailTextField.text
                     
                     self.person.saveInBackground(block: { (success: Bool, error: Error?) in
                         if success {
@@ -107,7 +108,8 @@ class UpdateProfileViewController: UIViewController {
             ABIShowAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
             return false
         }
-        
+
+        /*
         // Check if email is empty
         guard !((emailTextField.text?.isEmpty)!) else {
             ABIShowAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
@@ -118,7 +120,7 @@ class UpdateProfileViewController: UIViewController {
         guard emailTextField.text!.isValidEmail() else {
             ABIShowAlert(title: "Error", message: "Please enter a valid email", sender: nil, handler: nil)
             return false
-        }
+        }*/
         
         // Check if it's a valid phone
         if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
