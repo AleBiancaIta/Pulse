@@ -195,6 +195,18 @@ class SignUpViewController: UIViewController {
             return false
         }
         
+        // Check if it's a valid email
+        guard emailTextField.text!.isValidEmail() else {
+            ABIShowAlert(title: "Error", message: "Please enter a valid email", sender: nil, handler: nil)
+            return false
+        }
+        
+        // Check if it's a valid phone
+        if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
+            ABIShowAlert(title: "Error", message: "Please enter a valid phone", sender: nil, handler: nil)
+            return false
+        }
+        
         return true
     }    
 }
