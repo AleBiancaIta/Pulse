@@ -30,11 +30,11 @@ class PersonDetailsSelectionViewController: UIViewController {
         
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        title = "Person Cards"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
+        title = "Manage Cards"
     }
     
-    @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
+    
+    @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
 }

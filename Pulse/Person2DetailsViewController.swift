@@ -27,6 +27,7 @@ class Person2DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIExtensions.gradientBackgroundFor(view: view)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -279,8 +280,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
         let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsSelectionViewController") as! PersonDetailsSelectionViewController
         viewController.delegate = self
         viewController.selectedCards = selectedCards
-        let navController = UINavigationController(rootViewController: viewController)
-        present(navController, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
 }
 

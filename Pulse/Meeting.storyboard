@@ -23,7 +23,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lb5-MA-c6m" userLabel="Add Button">
                                 <rect key="frame" x="329" y="46" width="22" height="22"/>
-                                <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="onAddButton:" destination="Kf2-1e-xhq" eventType="touchUpInside" id="syP-Rz-nXs"/>
                                 </connections>
@@ -31,7 +31,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bsv-qF-A4D">
                                 <rect key="frame" x="10" y="42" width="47" height="30"/>
                                 <state key="normal" title="See All">
-                                    <color key="titleColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onSeeAllButton:" destination="Kf2-1e-xhq" eventType="touchUpInside" id="phm-Hk-vzl"/>
@@ -155,7 +155,7 @@
         <!--Meeting Details Selection View Controller-->
         <scene sceneID="4fy-Yl-egA">
             <objects>
-                <viewController storyboardIdentifier="MeetingDetailsSelectionViewController" id="WfY-bH-Mka" customClass="MeetingDetailsSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MeetingDetailsSelectionViewController" modalPresentationStyle="overCurrentContext" id="WfY-bH-Mka" customClass="MeetingDetailsSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eai-Iw-Y8f"/>
                         <viewControllerLayoutGuide type="bottom" id="2Cn-6i-LRc"/>
@@ -165,8 +165,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CUM-HO-hLv">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="535" width="375" height="132"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="132" id="DsL-Zl-ccV"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionCell" id="AJg-W7-43d">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -178,13 +182,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hq6-aj-2oP">
+                                <rect key="frame" x="0.0" y="20" width="375" height="515"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.55479525862068968" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="qL3-YS-52X" appends="YES" id="0Hx-xD-8mp"/>
+                                </connections>
+                            </view>
                         </subviews>
                         <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hq6-aj-2oP" secondAttribute="trailing" id="2cY-9N-07G"/>
+                            <constraint firstItem="hq6-aj-2oP" firstAttribute="leading" secondItem="irK-cs-kLi" secondAttribute="leading" id="B5a-C1-04L"/>
                             <constraint firstItem="CUM-HO-hLv" firstAttribute="leading" secondItem="irK-cs-kLi" secondAttribute="leading" id="JO5-iW-Of2"/>
-                            <constraint firstItem="CUM-HO-hLv" firstAttribute="top" secondItem="eai-Iw-Y8f" secondAttribute="bottom" id="V1m-KZ-cAd"/>
                             <constraint firstItem="2Cn-6i-LRc" firstAttribute="top" secondItem="CUM-HO-hLv" secondAttribute="bottom" id="fVB-X0-PYZ"/>
+                            <constraint firstItem="CUM-HO-hLv" firstAttribute="top" secondItem="hq6-aj-2oP" secondAttribute="bottom" id="jSq-q9-Yww"/>
                             <constraint firstAttribute="trailing" secondItem="CUM-HO-hLv" secondAttribute="trailing" id="qa9-RN-Olg"/>
+                            <constraint firstItem="hq6-aj-2oP" firstAttribute="top" secondItem="eai-Iw-Y8f" secondAttribute="bottom" id="zkh-4Y-8LT"/>
                         </constraints>
                     </view>
                     <connections>
@@ -192,6 +207,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XF4-Kd-fEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="qL3-YS-52X">
+                    <connections>
+                        <action selector="onDismiss:" destination="WfY-bH-Mka" id="hRo-6M-mNY"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1879" y="-189"/>
         </scene>
@@ -261,7 +281,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YAl-iX-tKQ">
                                         <rect key="frame" x="182" y="20" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey1LowSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="apq-FJ-w2b"/>
                                         </connections>
@@ -269,7 +289,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="br9-2U-0hb">
                                         <rect key="frame" x="239" y="20" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey1MedSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="5sb-0o-uZp"/>
                                         </connections>
@@ -277,7 +297,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Pp-O7-YW3">
                                         <rect key="frame" x="296" y="20" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey1HighSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="ntN-jI-G9n"/>
                                         </connections>
@@ -285,7 +305,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pXO-Oo-lDx">
                                         <rect key="frame" x="182" y="59" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey2LowSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="pZd-nh-afU"/>
                                         </connections>
@@ -293,7 +313,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4lU-d7-2kO">
                                         <rect key="frame" x="239" y="59" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey2MedSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="gfX-N2-I0Z"/>
                                         </connections>
@@ -301,7 +321,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vVa-Mi-DH4">
                                         <rect key="frame" x="296" y="60" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey2HighSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="One-Xj-b6u"/>
                                         </connections>
@@ -309,7 +329,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bs9-ae-7Tg">
                                         <rect key="frame" x="182" y="99" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey3LowSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="dsM-nq-RBK"/>
                                         </connections>
@@ -317,7 +337,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NQS-Sw-PfH">
                                         <rect key="frame" x="239" y="99" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey3MedSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="lvk-pf-Sl4"/>
                                         </connections>
@@ -325,7 +345,7 @@
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rbg-7T-sDt">
                                         <rect key="frame" x="296" y="99" width="51" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <action selector="onSurvey3HighSwitch:" destination="d9x-k4-hXl" eventType="valueChanged" id="dJz-6u-Mdl"/>
                                         </connections>

@@ -27,11 +27,12 @@ class DashboardSelectionViewController: UIViewController {
 
         tableView.dataSource = self
         tableView.delegate = self
+        title = "Manage Cards"
     }
     
     // MARK: - IBAction
     
-    @IBAction func onDoneButton(_ sender: UIBarButtonItem) {
+    @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
 }

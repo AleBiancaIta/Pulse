@@ -96,7 +96,7 @@
         <!--Person Details Selection View Controller-->
         <scene sceneID="RO6-74-fNq">
             <objects>
-                <viewController storyboardIdentifier="PersonDetailsSelectionViewController" id="EsF-ld-dfB" customClass="PersonDetailsSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonDetailsSelectionViewController" modalPresentationStyle="overCurrentContext" id="EsF-ld-dfB" customClass="PersonDetailsSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dj6-Sv-Xz4"/>
                         <viewControllerLayoutGuide type="bottom" id="aPj-IR-9hi"/>
@@ -106,8 +106,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bhn-2f-7bV">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="447" width="375" height="220"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="gU1-nG-aGM"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionCell" id="kAZ-xd-vbb">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -119,12 +123,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="geD-Ob-N3T">
+                                <rect key="frame" x="0.0" y="20" width="375" height="427"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.55654633620689653" colorSpace="calibratedRGB"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Wqt-Bt-DcD" appends="YES" id="9dk-rt-hj6"/>
+                                </connections>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="geD-Ob-N3T" secondAttribute="trailing" id="8Pd-Kk-mKt"/>
                             <constraint firstItem="bhn-2f-7bV" firstAttribute="leading" secondItem="Gxy-5Y-a1u" secondAttribute="leading" id="8z2-Zy-7Lb"/>
-                            <constraint firstItem="bhn-2f-7bV" firstAttribute="top" secondItem="dj6-Sv-Xz4" secondAttribute="bottom" id="KDS-9g-cyR"/>
+                            <constraint firstItem="geD-Ob-N3T" firstAttribute="leading" secondItem="Gxy-5Y-a1u" secondAttribute="leading" id="D0A-mV-yyO"/>
+                            <constraint firstItem="bhn-2f-7bV" firstAttribute="top" secondItem="geD-Ob-N3T" secondAttribute="bottom" id="DDn-Yh-yKU"/>
                             <constraint firstItem="aPj-IR-9hi" firstAttribute="top" secondItem="bhn-2f-7bV" secondAttribute="bottom" id="L73-mF-ARb"/>
+                            <constraint firstItem="geD-Ob-N3T" firstAttribute="top" secondItem="dj6-Sv-Xz4" secondAttribute="bottom" id="LAw-6o-7ok"/>
                             <constraint firstAttribute="trailing" secondItem="bhn-2f-7bV" secondAttribute="trailing" id="Zs1-yR-AJG"/>
                         </constraints>
                     </view>
@@ -133,6 +147,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="622-JN-LIN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Wqt-Bt-DcD">
+                    <connections>
+                        <action selector="onDismiss:" destination="EsF-ld-dfB" id="shX-Hu-DYm"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="735" y="152"/>
         </scene>

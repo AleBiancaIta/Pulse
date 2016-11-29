@@ -30,6 +30,7 @@ class MeetingDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIExtensions.gradientBackgroundFor(view: view)
         title = "Meeting"
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
@@ -90,8 +91,7 @@ class MeetingDetailsViewController: UIViewController {
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsSelectionViewController") as! MeetingDetailsSelectionViewController
         viewController.delegate = self
         viewController.selectedCards = selectedCards
-        let navController = UINavigationController(rootViewController: viewController)
-        present(navController, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
 }
 

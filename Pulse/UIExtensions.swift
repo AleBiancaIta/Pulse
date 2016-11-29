@@ -27,7 +27,7 @@ class UIExtensions: NSObject {
     class func gradientBackgroundFor(view: UIView) {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
-        gradient.colors = [UIColor.pulseBackgroundColor().cgColor, UIColor.black.cgColor]
+        gradient.colors = [UIColor.black.cgColor, UIColor.pulseBackgroundColor().cgColor]
         view.layer.insertSublayer(gradient, at: 0)
     }
     

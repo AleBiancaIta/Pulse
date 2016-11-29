@@ -30,15 +30,18 @@ class MeetingDetailsSelectionViewController: UIViewController {
         
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
-        title = "Meeting Cards"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
+        title = "Manage Cards"
     }
     
     // MARK: - IBAction
     
-    @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
+    @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
+    
+    /*@objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
+     
+    }*/
 }
 
 // MARK: - UITableViewDataSource

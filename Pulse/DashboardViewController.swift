@@ -22,6 +22,7 @@ class DashboardViewController: UIViewController {
         super.viewDidLoad()
         
         UIExtensions.gradientBackgroundFor(view: view)
+        UIApplication.shared.statusBarStyle = .lightContent
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -86,13 +87,12 @@ class DashboardViewController: UIViewController {
     
     // MARK: - IBAction
     
-    func onAddCard() {
+    func onManageCards() {
         let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionViewController") as! DashboardSelectionViewController
         viewController.delegate = self
         viewController.selectedCards = selectedCards
-        let navController = UINavigationController(rootViewController: viewController)
-        present(navController, animated: true, completion: nil)
+        present(viewController, animated: true, completion: nil)
     }
     
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
@@ -271,7 +271,7 @@ extension DashboardViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.section == selectedCards.count {
-            onAddCard()
+            onManageCards()
         }
     }
 }

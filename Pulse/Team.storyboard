@@ -23,7 +23,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jil-jH-HK7" userLabel="Add Button">
                                 <rect key="frame" x="329" y="54" width="22" height="22"/>
-                                <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="onAddButtonTap:" destination="p0f-yH-iaE" eventType="touchUpInside" id="6Zv-WE-OEs"/>
                                 </connections>
@@ -31,7 +31,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dre-Bh-2S4">
                                 <rect key="frame" x="8" y="50" width="47" height="30"/>
                                 <state key="normal" title="See All">
-                                    <color key="titleColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <segue destination="r7D-jI-xXf" kind="show" identifier="SeeAllTeamList" id="g6U-Qz-8sR"/>

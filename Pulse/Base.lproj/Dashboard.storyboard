@@ -93,7 +93,7 @@
         <!--Dashboard Cards-->
         <scene sceneID="1KV-Ti-0ds">
             <objects>
-                <viewController storyboardIdentifier="DashboardSelectionViewController" id="Pig-nt-sQL" customClass="DashboardSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DashboardSelectionViewController" modalPresentationStyle="overCurrentContext" id="Pig-nt-sQL" customClass="DashboardSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vvX-1r-wuv"/>
                         <viewControllerLayoutGuide type="bottom" id="x0Z-hX-ffh"/>
@@ -103,8 +103,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xge-BX-z5n">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="491" width="375" height="176"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="176" id="JUE-ZE-kU3"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectionCell" id="pDk-BY-3dG">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -116,13 +120,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PgP-Zp-Ep9">
+                                <rect key="frame" x="0.0" y="20" width="375" height="471"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5626346982758621" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="XCT-nc-TPb" appends="YES" id="6XY-l2-cYm"/>
+                                </connections>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="PgP-Zp-Ep9" firstAttribute="leading" secondItem="3Vu-IE-zwt" secondAttribute="leading" id="4iH-OW-pQQ"/>
                             <constraint firstItem="x0Z-hX-ffh" firstAttribute="top" secondItem="xge-BX-z5n" secondAttribute="bottom" id="DN2-eV-I4c"/>
                             <constraint firstItem="xge-BX-z5n" firstAttribute="leading" secondItem="3Vu-IE-zwt" secondAttribute="leading" id="MXo-S4-Ipw"/>
-                            <constraint firstItem="xge-BX-z5n" firstAttribute="top" secondItem="3Vu-IE-zwt" secondAttribute="top" id="f5n-rW-jOF"/>
+                            <constraint firstItem="PgP-Zp-Ep9" firstAttribute="top" secondItem="vvX-1r-wuv" secondAttribute="bottom" id="dWc-JW-yyI"/>
+                            <constraint firstItem="xge-BX-z5n" firstAttribute="top" secondItem="PgP-Zp-Ep9" secondAttribute="bottom" id="hy0-SG-Hg7"/>
                             <constraint firstAttribute="trailing" secondItem="xge-BX-z5n" secondAttribute="trailing" id="o2Q-wq-2eh"/>
+                            <constraint firstAttribute="trailing" secondItem="PgP-Zp-Ep9" secondAttribute="trailing" id="xhG-ql-FT8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard Cards" id="2Zs-uw-oIs">
@@ -137,6 +151,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bgp-i8-YzR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="XCT-nc-TPb">
+                    <connections>
+                        <action selector="onDismiss:" destination="Pig-nt-sQL" id="oBf-U4-seQ"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1775" y="11"/>
         </scene>
