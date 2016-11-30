@@ -76,16 +76,16 @@ class PersonDetailsViewController: UIViewController {
 
 	@IBAction func didTapCallButton(_ sender: UIButton) {
 
-		let okAction = UIAlertAction(title: "Phone", style: .default, handler: {
+		let okAction = UIAlertAction(title: "Call", style: .default, handler: {
 			(UIAlertAction) in
-			if let phone = self.person?.phone {
+			if let phone = self.phoneTextField.text {
 				UIApplication.shared.callNumber(phoneNumber: phone)
 			}
 		})
 
 		let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
 		let alertController = UIAlertController(
-			title: "Call",
+			title: "Phone Call",
 			message: "Are you sure you want to call this number?",
 			preferredStyle: .alert)
 
@@ -189,8 +189,8 @@ class PersonDetailsViewController: UIViewController {
 		lastNameTextField.borderStyle = isEditing ? .roundedRect : .none
 		firstNameTextField.borderStyle = isEditing ? .roundedRect : .none
 
-//		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
-		callButton.isHidden = true // TODO: This button is for tests, change to make the call pressing the phone number
+		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
+		// TODO: This button is for tests, change to make the call pressing the phone number
 	}
 
 	func editPerson() {

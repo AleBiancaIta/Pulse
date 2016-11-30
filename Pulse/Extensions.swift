@@ -70,7 +70,7 @@ extension UIViewController {
 extension UIApplication {
 
 	func callNumber(phoneNumber: String) {
-		if let phoneCallURL = URL(string:"tel://\(phoneNumber)") {
+		if let phoneCallURL = URL(string:"tel://\(phoneNumber.digits)") {
 			if (self.canOpenURL(phoneCallURL)) {
 				self.open(phoneCallURL, options: [:], completionHandler: nil)
 			}
@@ -84,5 +84,10 @@ extension String {
 		let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 		let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
 		return emailPredicate.evaluate(with: self)
+	}
+
+	var digits: String {
+		return components(separatedBy: CharacterSet.decimalDigits.inverted)
+			.joined(separator: "")
 	}
 }
