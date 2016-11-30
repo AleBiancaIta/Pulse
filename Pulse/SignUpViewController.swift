@@ -15,7 +15,6 @@ class SignUpViewController: UIViewController {
     // MARK: - Properties
     
     @IBOutlet var scrollView: UIScrollView!
-    //@IBOutlet weak var usernameTextField: UITextField!
 	@IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -24,7 +23,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var companyNameTextField: UITextField!
-    //@IBOutlet weak var positionTextField: UITextField!
     @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
     @IBOutlet weak var signUpButton: UIButton!
     
@@ -54,17 +52,6 @@ class SignUpViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            scrollView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - keyboardSize.height)
-        }
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        scrollView.frame = UIScreen.main.bounds
     }
     
     // MARK: - Actions
@@ -168,6 +155,17 @@ class SignUpViewController: UIViewController {
     
     // MARK: - Helpers
     
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            scrollView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - keyboardSize.height)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        scrollView.frame = UIScreen.main.bounds
+    }
+    
     // Only call this if validateEntry returns true
     fileprivate func prepPersonDictionary() -> [String: String] {
         // If last name is empty, last name = first name
@@ -241,13 +239,6 @@ class SignUpViewController: UIViewController {
             ABIShowAlert(title: "Error", message: "Company name field cannot be empty", sender: nil, handler: nil)
             return false
         }
-        
-        /*
-        // Check if position field is empty
-        guard !((positionTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Position field cannot be empty", sender: nil, handler: nil)
-            return false
-        }*/
         
         // Check if it's a valid email
         guard emailTextField.text!.isValidEmail() else {

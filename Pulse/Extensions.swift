@@ -51,6 +51,17 @@ extension UIViewController {
         }
     }
     
+    func  ABIShowDropDownAlertWithDelegate(type: AlertTypes , title: String, message: String, delegate: RKDropdownAlertDelegate!) {
+        switch type {
+        case .alert:
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseAlertBackgroundColor(), textColor: UIColor.pulseAlertTextColor(), time: 1, delegate: delegate)
+        case .success:
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseSuccessBackgroundColor(), textColor: UIColor.pulseSuccessTextColor(), time: 1, delegate: delegate)
+        case .failure:
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseFailureBackgroundColor(), textColor: UIColor.pulseFailureTextColor(), time: 1, delegate: delegate)
+        }
+    }
+    
     @objc fileprivate func onCancelButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }

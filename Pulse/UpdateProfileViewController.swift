@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import RKDropdownAlert
 
 class UpdateProfileViewController: UIViewController {
     
@@ -42,20 +43,22 @@ class UpdateProfileViewController: UIViewController {
             
             PFUser.logInWithUsername(inBackground: user.username!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
                 if let error = error {
-                    self.ABIShowAlert(title: "Error", message: "Your password is incorrect: \(error.localizedDescription)", sender: nil, handler: nil)
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "\(error.localizedDescription)")
                 } else {
                     self.person[ObjectKeys.Person.firstName] = self.firstNameTextField.text
                     self.person[ObjectKeys.Person.lastName] = lastName
                     self.person[ObjectKeys.Person.phone] = phone
-                    //self.person[ObjectKeys.Person.email] =  self.emailTextField.text
                     
                     self.person.saveInBackground { (success: Bool, error: Error?) in
                         if success {
-                            self.ABIShowAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-                                let _ = self.navigationController?.popViewController(animated: true)
-                            })
+                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Update profile successful", delegate: self)
+                            
+                            
+                            //self.ABIShowAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+                            //    let _ = self.navigationController?.popViewController(animated: true)
+                            //})
                         } else {
-                            self.ABIShowAlert(title: "Error", message: "Unable to update user profile with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to update user profile with error: \(error?.localizedDescription)")
                         }
                     }
                 }
@@ -80,7 +83,7 @@ class UpdateProfileViewController: UIViewController {
                     if persons.count > 0 {
                         let person = persons[0]
                         self.person = person
-                        debugPrint("after query person is \(self.person)")
+                        //debugPrint("after query person is \(self.person)")
                         self.configureTextFields()
                     }
                 }
@@ -108,19 +111,19 @@ class UpdateProfileViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if password is empty
         guard !((passwordTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Password field cannot be empty")
             return false
         }
         
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "First name field cannot be empty")
             return false
         }
 
         // Check if it's a valid phone
         if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
-            ABIShowAlert(title: "Error", message: "Please enter a valid phone", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Please enter a valid phone")
             return false
         }
         
@@ -135,6 +138,8 @@ class UpdateProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
+
 extension UpdateProfileViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         self.becomeFirstResponder()
@@ -144,6 +149,20 @@ extension UpdateProfileViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+
+// MARK: - RKDropDownAlertDelegate
+
+extension UpdateProfileViewController: RKDropdownAlertDelegate {
+    
+    func dropdownAlertWasDismissed() -> Bool {
+        let _ = self.navigationController?.popViewController(animated: true)
+        return true
+    }
+    
+    func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+        return false
     }
 }
 
