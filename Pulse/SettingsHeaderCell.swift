@@ -61,6 +61,6 @@ class SettingsHeaderCell: UITableViewCell {
 extension SettingsHeaderCell : PhotoImageViewDelegate {
 
 	func didSelectImage(sender: PhotoImageView) {
-		Person.savePhotoInPerson(pfObject: person, data: sender.photoData!)
+		Person.savePhotoInPerson(parsePerson: person, photo: sender.photoData!, withCompletion: nil)
 	}
 }

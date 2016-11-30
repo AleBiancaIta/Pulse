@@ -103,35 +103,24 @@ class Person: NSObject {
 		}
 
         if let photo = person.photo {
-
-			let parsePhotoFile = PFFile(data: photo)
-			parsePhotoFile?.saveInBackground(block: { (success: Bool, error: Error?) in
-				if success {
-					parsePerson[ObjectKeys.Person.photo] = parsePhotoFile
-					NSLog("File saved ok")
-				}
-				else {
-					print(error!.localizedDescription);
-				}
-				parsePerson.saveInBackground(block: completion)
-			})
+			savePhotoInPerson(parsePerson: parsePerson, photo: photo, withCompletion: completion)
         }
 		else {
 			parsePerson.saveInBackground(block: completion)
 		}
     }
 
-	class func savePhotoInPerson(pfObject: PFObject, data: Data) {
+	class func savePhotoInPerson(parsePerson: PFObject, photo: Data, withCompletion completion: PFBooleanResultBlock?) {
 
-		let parsePhotoFile = PFFile(data: data)
+		let parsePhotoFile = PFFile(data: photo)
 		parsePhotoFile?.saveInBackground(block: { (success: Bool, error: Error?) in
 			if success {
-				pfObject[ObjectKeys.Person.photo] = parsePhotoFile
-				pfObject.saveInBackground()
+				parsePerson[ObjectKeys.Person.photo] = parsePhotoFile
 			}
 			else {
 				print(error!.localizedDescription);
 			}
+			parsePerson.saveInBackground(block: completion)
 		})
 	}
 }

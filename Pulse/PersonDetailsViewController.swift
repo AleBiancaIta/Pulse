@@ -201,6 +201,7 @@ class PersonDetailsViewController: UIViewController {
 		NSLog("Editing current person")
 
 		if let pfPerson = personPFObject {
+			SVProgressHUD.show()
 			let firstName = firstNameTextField.text!
 			pfPerson[ObjectKeys.Person.firstName] = firstName
 
@@ -212,20 +213,37 @@ class PersonDetailsViewController: UIViewController {
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
 
 			if let photoData = photoData {
-				pfPerson[ObjectKeys.Person.photo] = photoData
-			}
+				SVProgressHUD.show()
 
-			pfPerson.saveInBackground(block: { (success: Bool, error: Error?) in
-				if success {
-					self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-						let _ = self.navigationController?.popViewController(animated: true)
-					})
-				} else {
-					self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
-				}
-			})
+				Person.savePhotoInPerson(parsePerson: pfPerson, photo: photoData, withCompletion: {
+					(success: Bool, error: Error?) in
+					self.updatePersonFinished(success: success, error: error)
+				})
+
+			}
+			else {
+				pfPerson.saveInBackground(block: {
+					(success: Bool, error: Error?) in
+					self.updatePersonFinished(success: success, error: error)
+				})
+			}
 		}
 	}
+
+	func updatePersonFinished(success: Bool, error: Error?) {
+
+		SVProgressHUD.dismiss()
+
+		if success {
+			self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
+				let _ = self.navigationController?.popViewController(animated: true)
+			})
+		}
+		else {
+			self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+		}
+	}
+
 
 	func createPerson() {
 
