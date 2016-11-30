@@ -194,7 +194,8 @@ class PersonDetailsViewController: UIViewController {
 		lastNameTextField.borderStyle = isEditing ? .roundedRect : .none
 		firstNameTextField.borderStyle = isEditing ? .roundedRect : .none
 
-		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
+//		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
+		callButton.isHidden = true // TODO: This button is for tests, change to make the call pressing the phone number
 	}
 
 	func editPerson() {
