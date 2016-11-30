@@ -85,10 +85,4 @@ extension String {
 		let emailPredicate = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
 		return emailPredicate.evaluate(with: self)
 	}
-
-	func isValidPhone() -> Bool {
-		let phoneRegEx = "^\\d{3}-\\d{3}-\\d{4}$"
-		let phonePredicate = NSPredicate(format:"SELF MATCHES %@", phoneRegEx)
-		return phonePredicate.evaluate(with: self)
-	}
 }

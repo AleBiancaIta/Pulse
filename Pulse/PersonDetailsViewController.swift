@@ -65,6 +65,7 @@ class PersonDetailsViewController: UIViewController {
 
 	func initViews() {
 		callButton.layer.cornerRadius = 5
+		phoneTextField.delegate = PhoneTextFieldDelegate.shared
 	}
 
 	func heightForView() -> CGFloat {
@@ -151,12 +152,6 @@ class PersonDetailsViewController: UIViewController {
 		if !emailTextField.text!.isValidEmail() {
 			ABIShowAlert(title: "Error!",
 			             message: "Please enter a valid email", sender: nil, handler: nil)
-			return false
-		}
-
-		if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
-			ABIShowAlert(title: "Error!",
-			             message: "Please enter a valid phone", sender: nil, handler: nil)
 			return false
 		}
 

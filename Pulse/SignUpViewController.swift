@@ -245,13 +245,7 @@ class SignUpViewController: UIViewController {
             ABIShowAlert(title: "Error", message: "Please enter a valid email", sender: nil, handler: nil)
             return false
         }
-        
-        // Check if it's a valid phone
-        if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
-            ABIShowAlert(title: "Error", message: "Please enter a valid phone", sender: nil, handler: nil)
-            return false
-        }
-        
+
         return true
     }
     
@@ -261,7 +255,7 @@ class SignUpViewController: UIViewController {
         confirmPasswordTextField.delegate = self
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
-        phoneTextField.delegate = self
+        phoneTextField.delegate = PhoneTextFieldDelegate.shared
         companyNameTextField.delegate = self
     }
 }

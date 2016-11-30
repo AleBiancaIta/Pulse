@@ -121,12 +121,6 @@ class UpdateProfileViewController: UIViewController {
             return false
         }
 
-        // Check if it's a valid phone
-        if !(phoneTextField.text?.isEmpty)! && !(phoneTextField.text?.isValidPhone())! {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Please enter a valid phone")
-            return false
-        }
-        
         return true
     }
     
@@ -134,7 +128,7 @@ class UpdateProfileViewController: UIViewController {
         passwordTextField.delegate = self
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
-        phoneTextField.delegate = self
+        phoneTextField.delegate = PhoneTextFieldDelegate.shared
     }
 }
 

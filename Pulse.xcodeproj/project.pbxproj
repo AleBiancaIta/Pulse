@@ -78,6 +78,7 @@
 		712FA7FB1DE233A600762EB6 /* PhotoImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712FA7FA1DE233A600762EB6 /* PhotoImageView.swift */; };
 		71ACDE611DD94AC4005D85DE /* Person.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71ACDE601DD94AC4005D85DE /* Person.storyboard */; };
 		71ACDE631DD94AF0005D85DE /* PersonDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71ACDE621DD94AF0005D85DE /* PersonDetailsViewController.swift */; };
+		71D471E41DEEC40900003524 /* PhoneTextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71D471E31DEEC40900003524 /* PhoneTextFieldDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -155,6 +156,7 @@
 		712FA7FA1DE233A600762EB6 /* PhotoImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoImageView.swift; sourceTree = "<group>"; };
 		71ACDE601DD94AC4005D85DE /* Person.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person.storyboard; sourceTree = "<group>"; };
 		71ACDE621DD94AF0005D85DE /* PersonDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsViewController.swift; sourceTree = "<group>"; };
+		71D471E31DEEC40900003524 /* PhoneTextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneTextFieldDelegate.swift; sourceTree = "<group>"; };
 		7747767799B8936708691A8F /* Pods-Pulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.release.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.release.xcconfig"; sourceTree = "<group>"; };
 		EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pulse.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -259,6 +261,7 @@
 				712FA7FA1DE233A600762EB6 /* PhotoImageView.swift */,
 				431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */,
 				431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */,
+				71D471E31DEEC40900003524 /* PhoneTextFieldDelegate.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				67D8D65B1DD5AF1500B6DE19 /* MeetingDetailsViewController.swift in Sources */,
 				437DE0621DD9648000B08988 /* Meeting.swift in Sources */,
 				437903A51DE51BB400945C63 /* TodoEditTextCell.swift in Sources */,
+				71D471E41DEEC40900003524 /* PhoneTextFieldDelegate.swift in Sources */,
 				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				67A2761A1DE662A600ED73B0 /* Person2DetailsViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
