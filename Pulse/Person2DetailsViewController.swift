@@ -115,6 +115,7 @@ class Person2DetailsViewController: UIViewController {
 		let storyboard = UIStoryboard(name: "Person", bundle: nil)
 		personInfoViewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsViewController") as! PersonDetailsViewController
 		personInfoViewController.personPFObject = personPFObject
+		personInfoViewController.personInfoParentViewController = self
 	}
 
 	func onRightBarButtonTap(_ sender: UIBarButtonItem) {

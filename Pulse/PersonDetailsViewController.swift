@@ -22,6 +22,7 @@ class PersonDetailsViewController: UIViewController {
 	var photoData: Data?
 	var person: Person?
     var personPFObject: PFObject?
+	var personInfoParentViewController: Person2DetailsViewController?
 
 	// MARK: - View Lifecycle
 
@@ -53,11 +54,11 @@ class PersonDetailsViewController: UIViewController {
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
 
-            parent?.navigationItem.title = firstName + " " + lastName
+            personInfoParentViewController?.navigationItem.title = firstName + " " + lastName
             setEditing(false, animated: true)
         }
 		else {
-			parent?.navigationItem.title = "New team member"
+			personInfoParentViewController?.navigationItem.title = "New team member"
 			setEditing(true, animated: true)
 		}
 	}
@@ -180,7 +181,7 @@ class PersonDetailsViewController: UIViewController {
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
 		super.setEditing(editing, animated: animated)
-		parent?.setEditing(editing, animated: animated)
+		personInfoParentViewController?.setEditing(editing, animated: animated)
 
 		phoneTextField.isUserInteractionEnabled = isEditing
 		emailTextField.isUserInteractionEnabled = isEditing
