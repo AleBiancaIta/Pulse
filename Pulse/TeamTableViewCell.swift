@@ -37,16 +37,20 @@ class TeamTableViewCell: UITableViewCell {
     fileprivate func setUpSurvey1(value: Int) {
         switch value {
         case 0:
+            surveyValue1Button.setImage(UIImage(named: "Grumpy"), for: .normal)
             surveyValue1Button.tintColor = UIColor.red
             surveyValue1Button.backgroundColor = UIColor.clear
         case 1:
+            surveyValue1Button.setImage(UIImage(named: "Speechless"), for: .normal)
             surveyValue1Button.tintColor = UIColor.yellow
             surveyValue1Button.backgroundColor = UIColor.clear
         case 2:
+            surveyValue1Button.setImage(UIImage(named: "Smiley"), for: .normal)
             surveyValue1Button.tintColor = UIColor.green
             surveyValue1Button.backgroundColor = UIColor.clear
         default:
-            surveyValue1Button.tintColor = UIColor.black
+            surveyValue1Button.setImage(UIImage(named: "Smiley"), for: .normal)
+            surveyValue1Button.tintColor = UIColor.darkGray
         }
     }
     
@@ -54,16 +58,20 @@ class TeamTableViewCell: UITableViewCell {
     fileprivate func setUpSurvey2(value: Int) {
         switch value {
         case 0:
+            surveyValue2Button.setImage(UIImage(named: "ThumbsDown"), for: .normal)
             surveyValue2Button.tintColor = UIColor.red
             surveyValue2Button.backgroundColor = UIColor.clear
         case 1:
+            surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
             surveyValue2Button.tintColor = UIColor.yellow
             surveyValue2Button.backgroundColor = UIColor.clear
         case 2:
+            surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
             surveyValue2Button.tintColor = UIColor.green
             surveyValue2Button.backgroundColor = UIColor.clear
         default:
-            surveyValue2Button.tintColor = UIColor.black
+            surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
+            surveyValue2Button.tintColor = UIColor.darkGray
         }
     }
     
@@ -71,16 +79,20 @@ class TeamTableViewCell: UITableViewCell {
     fileprivate func setUpSurvey3(value: Int) {
         switch value {
         case 0:
+            surveyValue3Button.setImage(UIImage(named: "SinglePaper"), for: .normal)
             surveyValue3Button.tintColor = UIColor.green
             surveyValue3Button.backgroundColor = UIColor.clear
         case 1:
+            surveyValue3Button.setImage(UIImage(named: "DoublePaper"), for: .normal)
             surveyValue3Button.tintColor = UIColor.yellow
             surveyValue3Button.backgroundColor = UIColor.clear
         case 2:
+            surveyValue3Button.setImage(UIImage(named: "DoublePaper"), for: .normal)
             surveyValue3Button.tintColor = UIColor.red
             surveyValue3Button.backgroundColor = UIColor.clear
         default:
-            surveyValue3Button.tintColor = UIColor.black
+            surveyValue3Button.setImage(UIImage(named: "DoublePaper"), for: .normal)
+            surveyValue3Button.tintColor = UIColor.darkGray
         }
     }
     

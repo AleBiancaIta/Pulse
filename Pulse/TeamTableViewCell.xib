@@ -45,22 +45,22 @@
                             <constraint firstAttribute="width" constant="35" id="XKQ-06-ccb"/>
                             <constraint firstAttribute="height" constant="35" id="ieW-st-J3e"/>
                         </constraints>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <state key="normal" title="1" image="SmileyTemp">
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="1" image="Smiley">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-1Q-Tnf">
-                        <rect key="frame" x="169" y="73" width="35" height="35"/>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <state key="normal" title="2" image="SmileyTemp">
+                        <rect key="frame" x="163" y="73" width="35" height="35"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="2" image="ThumbsUp">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fff-PY-x0G">
-                        <rect key="frame" x="218" y="73" width="35" height="35"/>
-                        <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <state key="normal" title="3" image="SmileyTemp">
+                        <rect key="frame" x="210" y="73" width="35" height="35"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="3" image="DoublePaper">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
@@ -69,10 +69,10 @@
                     <constraint firstItem="gHB-1Q-Tnf" firstAttribute="height" secondItem="aUV-os-yJO" secondAttribute="height" id="5xQ-OM-eTr"/>
                     <constraint firstItem="gHB-1Q-Tnf" firstAttribute="bottom" secondItem="aUV-os-yJO" secondAttribute="bottom" id="8oz-ie-g1F"/>
                     <constraint firstItem="JoK-2p-dmK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="CRF-Kf-8sO"/>
-                    <constraint firstItem="gHB-1Q-Tnf" firstAttribute="leading" secondItem="aUV-os-yJO" secondAttribute="trailing" constant="18" id="ICt-4j-TfG"/>
+                    <constraint firstItem="gHB-1Q-Tnf" firstAttribute="leading" secondItem="aUV-os-yJO" secondAttribute="trailing" constant="12" id="ICt-4j-TfG"/>
                     <constraint firstItem="vhn-cj-qby" firstAttribute="leading" secondItem="Gvd-xN-0Yt" secondAttribute="leading" id="M3b-Bs-v3K"/>
                     <constraint firstItem="gHB-1Q-Tnf" firstAttribute="width" secondItem="aUV-os-yJO" secondAttribute="width" id="N5W-cG-btl"/>
-                    <constraint firstItem="Fff-PY-x0G" firstAttribute="leading" secondItem="gHB-1Q-Tnf" secondAttribute="trailing" constant="14" id="NWh-f0-TUO"/>
+                    <constraint firstItem="Fff-PY-x0G" firstAttribute="leading" secondItem="gHB-1Q-Tnf" secondAttribute="trailing" constant="12" id="NWh-f0-TUO"/>
                     <constraint firstItem="Gvd-xN-0Yt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Vv3-06-cXV"/>
                     <constraint firstItem="Gvd-xN-0Yt" firstAttribute="leading" secondItem="JoK-2p-dmK" secondAttribute="trailing" constant="8" id="ZpF-UA-Jsx"/>
                     <constraint firstItem="vhn-cj-qby" firstAttribute="top" secondItem="Gvd-xN-0Yt" secondAttribute="bottom" constant="13" id="c9b-Go-Jqd"/>
@@ -96,6 +96,8 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="SmileyTemp" width="64" height="64"/>
+        <image name="DoublePaper" width="60" height="60"/>
+        <image name="Smiley" width="60" height="60"/>
+        <image name="ThumbsUp" width="60" height="60"/>
     </resources>
 </document>

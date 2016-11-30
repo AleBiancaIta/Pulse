@@ -201,7 +201,7 @@ extension TeamViewDataSource: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         debugPrint("teamMembers count: \(teamMembers.count)")
-        return teamMembers.count
+        return min(teamMembers.count, 5)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
