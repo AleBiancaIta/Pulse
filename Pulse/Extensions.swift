@@ -43,22 +43,22 @@ extension UIViewController {
     func  ABIShowDropDownAlert(type: AlertTypes , title: String, message: String) {
         switch type {
         case .alert:
-            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseAlertBackgroundColor(), textColor: UIColor.pulseAlertTextColor(), time: 1)
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseAlertBackgroundColor(), textColor: UIColor.pulseAlertTextColor(), time: 2)
         case .success:
-            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseSuccessBackgroundColor(), textColor: UIColor.pulseSuccessTextColor(), time: 1)
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseSuccessBackgroundColor(), textColor: UIColor.pulseSuccessTextColor(), time: 2)
         case .failure:
-            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseFailureBackgroundColor(), textColor: UIColor.pulseFailureTextColor(), time: 1)
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseFailureBackgroundColor(), textColor: UIColor.pulseFailureTextColor(), time: 2)
         }
     }
     
     func  ABIShowDropDownAlertWithDelegate(type: AlertTypes , title: String, message: String, delegate: RKDropdownAlertDelegate!) {
         switch type {
         case .alert:
-            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseAlertBackgroundColor(), textColor: UIColor.pulseAlertTextColor(), time: 1, delegate: delegate)
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseAlertBackgroundColor(), textColor: UIColor.pulseAlertTextColor(), time: 2, delegate: delegate)
         case .success:
-            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseSuccessBackgroundColor(), textColor: UIColor.pulseSuccessTextColor(), time: 1, delegate: delegate)
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseSuccessBackgroundColor(), textColor: UIColor.pulseSuccessTextColor(), time: 2, delegate: delegate)
         case .failure:
-            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseFailureBackgroundColor(), textColor: UIColor.pulseFailureTextColor(), time: 1, delegate: delegate)
+            RKDropdownAlert.title(title, message: message, backgroundColor: UIColor.pulseFailureBackgroundColor(), textColor: UIColor.pulseFailureTextColor(), time: 2, delegate: delegate)
         }
     }
     

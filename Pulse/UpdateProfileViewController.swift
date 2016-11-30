@@ -156,7 +156,7 @@ extension UpdateProfileViewController: RKDropdownAlertDelegate {
     }
     
     func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
-        return false
+        return true
     }
 }
 
