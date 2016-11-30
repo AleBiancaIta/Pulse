@@ -69,7 +69,7 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func heightForView() -> CGFloat {
-		return 160; // TODO heightForView
+		return 150; // TODO heightForView
 	}
 
 	// MARK: - UI Actions
