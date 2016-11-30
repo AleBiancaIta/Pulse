@@ -109,4 +109,21 @@ extension UIColor {
         return UIColor.white
         //return UIExtensions.uiColorWith(hex: <#T##String#>)
     }
+    
+    // MARK: - Survey Colors
+    class func pulseGoodSurveyColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#A5D6A7") // Green
+    }
+    
+    class func pulseNeutralSurveyColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#FFE082") // Yellow
+    }
+    
+    class func pulseBadSurveyColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#EF9A9A") // Red
+    }
+    
+    class func pulseNoDataSurveyColor() -> UIColor {
+        return UIColor.darkGray
+    }
 }

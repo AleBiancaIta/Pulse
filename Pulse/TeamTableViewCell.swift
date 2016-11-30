@@ -23,10 +23,7 @@ class TeamTableViewCell: UITableViewCell {
             let surveyValue1 = survey[ObjectKeys.Survey.surveyValueId1] as? Int ?? 99
             let surveyValue2 = survey[ObjectKeys.Survey.surveyValueId2] as? Int ?? 99
             let surveyValue3 = survey[ObjectKeys.Survey.surveyValueId3] as? Int ?? 99
-            debugPrint("surveyValue1 is \(surveyValue1)")
-            debugPrint("surveyValue2 is \(surveyValue2)")
-            debugPrint("surveyValue3 is \(surveyValue3)")
-            
+                        
             setUpSurvey1(value: surveyValue1)
             setUpSurvey2(value: surveyValue2)
             setUpSurvey3(value: surveyValue3)
@@ -38,19 +35,19 @@ class TeamTableViewCell: UITableViewCell {
         switch value {
         case 0:
             surveyValue1Button.setImage(UIImage(named: "Grumpy"), for: .normal)
-            surveyValue1Button.tintColor = UIColor.red
+            surveyValue1Button.tintColor = UIColor.pulseBadSurveyColor() //UIColor.red
             surveyValue1Button.backgroundColor = UIColor.clear
         case 1:
             surveyValue1Button.setImage(UIImage(named: "Speechless"), for: .normal)
-            surveyValue1Button.tintColor = UIColor.yellow
+            surveyValue1Button.tintColor = UIColor.pulseNeutralSurveyColor() //UIColor.yellow
             surveyValue1Button.backgroundColor = UIColor.clear
         case 2:
             surveyValue1Button.setImage(UIImage(named: "Smiley"), for: .normal)
-            surveyValue1Button.tintColor = UIColor.green
+            surveyValue1Button.tintColor = UIColor.pulseGoodSurveyColor() //UIColor.green
             surveyValue1Button.backgroundColor = UIColor.clear
         default:
             surveyValue1Button.setImage(UIImage(named: "Smiley"), for: .normal)
-            surveyValue1Button.tintColor = UIColor.darkGray
+            surveyValue1Button.tintColor = UIColor.pulseNoDataSurveyColor() //UIColor.darkGray
         }
     }
     
@@ -59,19 +56,19 @@ class TeamTableViewCell: UITableViewCell {
         switch value {
         case 0:
             surveyValue2Button.setImage(UIImage(named: "ThumbsDown"), for: .normal)
-            surveyValue2Button.tintColor = UIColor.red
+            surveyValue2Button.tintColor = UIColor.pulseBadSurveyColor() //UIColor.red
             surveyValue2Button.backgroundColor = UIColor.clear
         case 1:
             surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
-            surveyValue2Button.tintColor = UIColor.yellow
+            surveyValue2Button.tintColor = UIColor.pulseNeutralSurveyColor() //UIColor.yellow
             surveyValue2Button.backgroundColor = UIColor.clear
         case 2:
             surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
-            surveyValue2Button.tintColor = UIColor.green
+            surveyValue2Button.tintColor = UIColor.pulseGoodSurveyColor() //UIColor.green
             surveyValue2Button.backgroundColor = UIColor.clear
         default:
             surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
-            surveyValue2Button.tintColor = UIColor.darkGray
+            surveyValue2Button.tintColor = UIColor.pulseNoDataSurveyColor() //UIColor.darkGray
         }
     }
     
@@ -80,19 +77,19 @@ class TeamTableViewCell: UITableViewCell {
         switch value {
         case 0:
             surveyValue3Button.setImage(UIImage(named: "SinglePaper"), for: .normal)
-            surveyValue3Button.tintColor = UIColor.green
+            surveyValue3Button.tintColor = UIColor.pulseGoodSurveyColor() //UIColor.green
             surveyValue3Button.backgroundColor = UIColor.clear
         case 1:
             surveyValue3Button.setImage(UIImage(named: "DoublePaper"), for: .normal)
-            surveyValue3Button.tintColor = UIColor.yellow
+            surveyValue3Button.tintColor = UIColor.pulseNeutralSurveyColor() //UIColor.yellow
             surveyValue3Button.backgroundColor = UIColor.clear
         case 2:
             surveyValue3Button.setImage(UIImage(named: "DoublePaper"), for: .normal)
-            surveyValue3Button.tintColor = UIColor.red
+            surveyValue3Button.tintColor = UIColor.pulseBadSurveyColor() //UIColor.red
             surveyValue3Button.backgroundColor = UIColor.clear
         default:
             surveyValue3Button.setImage(UIImage(named: "DoublePaper"), for: .normal)
-            surveyValue3Button.tintColor = UIColor.darkGray
+            surveyValue3Button.tintColor = UIColor.pulseNoDataSurveyColor() //UIColor.darkGray
         }
     }
     
