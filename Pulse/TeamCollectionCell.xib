@@ -33,7 +33,7 @@
                         </constraints>
                     </view>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ogy-ZY-8AP">
-                        <rect key="frame" x="33" y="178" width="24" height="24"/>
+                        <rect key="frame" x="33.5" y="178" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="AiE-aK-FhC"/>
                             <constraint firstAttribute="width" constant="24" id="TQi-ok-g18"/>
@@ -43,7 +43,7 @@
                         <state key="normal" title="1" image="Smiley"/>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4o-8X-oVP">
-                        <rect key="frame" x="65" y="178" width="24" height="24"/>
+                        <rect key="frame" x="65.5" y="178" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="24" id="D76-VJ-1fV"/>
                             <constraint firstAttribute="height" constant="24" id="X4R-ep-5Ik"/>
@@ -53,7 +53,7 @@
                         <state key="normal" title="2" image="ThumbsUp"/>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0XC-0B-8om">
-                        <rect key="frame" x="110" y="172" width="24" height="24"/>
+                        <rect key="frame" x="97.5" y="178" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="BjA-hF-v9m"/>
                             <constraint firstAttribute="width" constant="24" id="DQs-Jw-xgJ"/>
@@ -67,7 +67,6 @@
             <constraints>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8Bk-0H-NLH" secondAttribute="trailing" constant="10" id="1VI-pm-6NT"/>
                 <constraint firstItem="V4o-8X-oVP" firstAttribute="leading" secondItem="Ogy-ZY-8AP" secondAttribute="trailing" constant="8" id="IvA-fD-kLX"/>
-                <constraint firstAttribute="trailing" secondItem="0XC-0B-8om" secondAttribute="trailing" constant="15" id="Apt-Bm-5LD"/>
                 <constraint firstItem="V4o-8X-oVP" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Rt2-bJ-KIq"/>
                 <constraint firstItem="0XC-0B-8om" firstAttribute="leading" secondItem="V4o-8X-oVP" secondAttribute="trailing" constant="8" id="Z0q-FM-StK"/>
                 <constraint firstItem="8Bk-0H-NLH" firstAttribute="top" secondItem="3wZ-O0-eNz" secondAttribute="bottom" constant="5" id="ZYg-Kt-USA"/>
@@ -78,7 +77,6 @@
                 <constraint firstItem="V4o-8X-oVP" firstAttribute="top" secondItem="8Bk-0H-NLH" secondAttribute="bottom" constant="5" id="ncs-4S-hrI"/>
                 <constraint firstItem="8Bk-0H-NLH" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="qlh-f2-hR2"/>
                 <constraint firstAttribute="bottom" secondItem="V4o-8X-oVP" secondAttribute="bottom" constant="8" id="r5I-ND-BBA"/>
-                <constraint firstItem="Ogy-ZY-8AP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="15" id="vov-S7-bUp"/>
                 <constraint firstItem="3wZ-O0-eNz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="y64-Wk-a9i"/>
             </constraints>
             <size key="customSize" width="155" height="213"/>
