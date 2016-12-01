@@ -21,6 +21,7 @@ class SettingsViewController: UIViewController {
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
     fileprivate let settingsContent = ["User Information", "Change Password", "Log Out"]
     fileprivate let settingsSubcontent = ["Update your Pulse user information with a few taps", "Change the password associated with your Pulse account", "Logging out already? Come back soon!"]
+    fileprivate let settingsImageName = ["Passport2", "Keylock2", "Logout2"]
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     
@@ -98,6 +99,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
             cell.message = settingsContent[indexPath.row]
             cell.submessage = settingsSubcontent[indexPath.row]
+            cell.imageName = settingsImageName[indexPath.row]
             // TODO cell image
             
             /*
