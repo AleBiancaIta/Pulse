@@ -120,6 +120,6 @@ extension UIColor {
     }
     
     class func pulseNoDataSurveyColor() -> UIColor {
-        return UIColor.darkGray
+        return UIColor.clear
     }
 }

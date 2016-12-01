@@ -39,7 +39,7 @@
                             <constraint firstAttribute="width" constant="24" id="TQi-ok-g18"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal" title="1" image="Smiley"/>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4o-8X-oVP">
@@ -49,7 +49,7 @@
                             <constraint firstAttribute="height" constant="24" id="X4R-ep-5Ik"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <state key="normal" title="2" image="ThumbsUp"/>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0XC-0B-8om">
@@ -59,8 +59,8 @@
                             <constraint firstAttribute="width" constant="24" id="DQs-Jw-xgJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                        <state key="normal" title="3" image="DoublePaper"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="3" image="Circle1"/>
                     </button>
                 </subviews>
             </view>
@@ -91,7 +91,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="DoublePaper" width="60" height="60"/>
+        <image name="Circle1" width="60" height="60"/>
         <image name="Smiley" width="60" height="60"/>
         <image name="ThumbsUp" width="60" height="60"/>
     </resources>
