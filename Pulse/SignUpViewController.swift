@@ -158,12 +158,12 @@ class SignUpViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             
-            scrollView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height - keyboardSize.height)
+            scrollView.frame.size.height = UIScreen.main.bounds.size.height - keyboardSize.height - 64
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        scrollView.frame = UIScreen.main.bounds
+        scrollView.frame.size.height = UIScreen.main.bounds.size.height - 64
     }
     
     // Only call this if validateEntry returns true

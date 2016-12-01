@@ -88,12 +88,12 @@ class DashboardViewController: UIViewController {
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height
+            self.view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height - 64
         }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        self.view.frame.size.height = UIScreen.main.bounds.height
+        self.view.frame.size.height = UIScreen.main.bounds.height - 64
     }
     
     // MARK: - IBAction
@@ -109,6 +109,7 @@ class DashboardViewController: UIViewController {
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
+        settingsVC.modalTransitionStyle = .flipHorizontal
         settingsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
         let navController = UINavigationController(rootViewController: settingsVC)
         present(navController, animated: true, completion: nil)
