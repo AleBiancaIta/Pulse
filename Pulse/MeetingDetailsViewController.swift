@@ -111,9 +111,11 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             cell.layer.cornerRadius = 5
             cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
+         
             if isExistingMeeting {
                 cell.addButton.tintColor = UIColor.pulseAccentColor()
                 cell.manageLabel.tintColor = UIColor.pulseAccentColor()
+                cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
             } else {
                cell.addButton.tintColor = UIColor.lightGray
                cell.manageLabel.textColor = UIColor.lightGray

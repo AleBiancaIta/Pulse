@@ -137,6 +137,8 @@ extension DashboardViewController: UITableViewDataSource {
             cell.layer.cornerRadius = 5
             cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
+            cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
+
             return cell
         
         } else {

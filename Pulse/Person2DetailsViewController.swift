@@ -170,6 +170,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
             cell.layer.cornerRadius = 5
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor.clear
+            cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
             return cell
             
         } else { // The actual cards
