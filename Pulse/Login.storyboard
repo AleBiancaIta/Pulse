@@ -394,10 +394,10 @@
             </objects>
             <point key="canvasLocation" x="2327" y="-367"/>
         </scene>
-        <!--Password-->
+        <!--Change Password View Controller-->
         <scene sceneID="ByT-gY-td5">
             <objects>
-                <viewController title="Password" id="sCn-2F-a8T" customClass="ChangePasswordViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="sCn-2F-a8T" customClass="ChangePasswordViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PwB-wI-F0O"/>
                         <viewControllerLayoutGuide type="bottom" id="Jbd-vS-2Ov"/>

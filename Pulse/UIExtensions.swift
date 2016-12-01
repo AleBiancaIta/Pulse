@@ -24,6 +24,10 @@ class UIExtensions: NSObject {
     
     // Convenience method to convert hex to UIColor
     class func uiColorWith(hex: String) -> UIColor {
+        return uiColorWith(hex: hex, alpha: 1.0)
+    }
+    
+    class func uiColorWith(hex: String, alpha: Float) -> UIColor {
         var colorString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
         if colorString.hasPrefix("#") {
@@ -40,7 +44,7 @@ class UIExtensions: NSObject {
             red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
-            alpha: CGFloat(1.0)
+            alpha: CGFloat(alpha)
         )
     }
 }
@@ -79,30 +83,27 @@ extension UIColor {
     // MARK: - Alert Colors
     
     class func pulseSuccessBackgroundColor() -> UIColor {
-        return UIExtensions.uiColorWith(hex: "#3F51B5") // TODO Bianca
+        return UIExtensions.uiColorWith(hex: "#303F9F", alpha: 0.9)
     }
     
     class func pulseFailureBackgroundColor() -> UIColor {
-        return UIExtensions.uiColorWith(hex: "#C5CAE9") // TODO Bianca
+        return UIExtensions.uiColorWith(hex: "#303F9F", alpha: 0.9)
     }
     
     class func pulseAlertBackgroundColor() -> UIColor {
-        return UIExtensions.uiColorWith(hex: "#536DFE") // TODO Bianca
+        return UIExtensions.uiColorWith(hex: "#303F9F", alpha: 0.9)
     }
     
     class func pulseSuccessTextColor() -> UIColor {
         return UIColor.white
-        //return UIExtensions.uiColorWith(hex: <#T##String#>)
     }
 
     class func pulseFailureTextColor() -> UIColor {
         return UIColor.white
-        //return UIExtensions.uiColorWith(hex: <#T##String#>)
     }
 
     class func pulseAlertTextColor() -> UIColor {
         return UIColor.white
-        //return UIExtensions.uiColorWith(hex: <#T##String#>)
     }
     
     // MARK: - Survey Colors
