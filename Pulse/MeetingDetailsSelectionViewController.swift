@@ -52,6 +52,7 @@ extension MeetingDetailsSelectionViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
         cell.message = card.name
         cell.submessage = card.descr
+        cell.imageName = card.imageName
         
         if selectedCards.contains(card) {
             cell.accessoryType =  .checkmark
