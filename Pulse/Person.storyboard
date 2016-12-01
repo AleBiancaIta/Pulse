@@ -53,7 +53,7 @@
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VZq-fp-qWE">
-                                <rect key="frame" x="144" y="132" width="159" height="24"/>
+                                <rect key="frame" x="144" y="132" width="143" height="24"/>
                                 <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="Y4E-DU-JKA"/>
@@ -71,10 +71,10 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouF-MC-VDc">
-                                <rect key="frame" x="311" y="129" width="32" height="30"/>
+                                <rect key="frame" x="295" y="129" width="48" height="30"/>
                                 <color key="backgroundColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="ifx-wL-khE"/>
+                                    <constraint firstAttribute="width" constant="48" id="ifx-wL-khE"/>
                                     <constraint firstAttribute="height" constant="30" id="t2R-kT-sCm"/>
                                 </constraints>
                                 <state key="normal" title="Call">
