@@ -32,6 +32,7 @@ class CustomTextCell: UITableViewCell {
         didSet {
             if let imageName = imageName {
                 cellImageView.image = UIImage(named: imageName)
+                cellImageView.tintColor = UIColor.pulseAccentColor()
             }
         }
     }
