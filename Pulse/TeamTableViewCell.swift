@@ -30,6 +30,13 @@ class TeamTableViewCell: UITableViewCell {
         }
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.pulseLightPrimaryColor()
+        selectedBackgroundView = bgColorView
+    }
+    
     // happiness
     fileprivate func setUpSurvey1(value: Int) {
         switch value {

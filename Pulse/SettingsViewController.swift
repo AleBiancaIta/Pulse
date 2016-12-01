@@ -100,7 +100,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             cell.message = settingsContent[indexPath.row]
             cell.submessage = settingsSubcontent[indexPath.row]
             cell.imageName = settingsImageName[indexPath.row]
-            // TODO cell image
             
             /*
             if indexPath.row == 0 || indexPath.row == 1 {

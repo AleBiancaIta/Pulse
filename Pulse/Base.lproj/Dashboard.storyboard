@@ -111,11 +111,11 @@
                                 </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xge-BX-z5n">
-                                <rect key="frame" x="8" y="395" width="359" height="280"/>
+                                <rect key="frame" x="8" y="359" width="359" height="316"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="JUE-ZE-kU3"/>
+                                    <constraint firstAttribute="height" constant="316" id="JUE-ZE-kU3"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTextCell" id="pDk-BY-3dG" customClass="CustomTextCell" customModule="Pulse" customModuleProvider="target">

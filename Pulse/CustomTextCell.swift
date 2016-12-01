@@ -14,6 +14,13 @@ class CustomTextCell: UITableViewCell {
     @IBOutlet weak var submessageLabel: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.pulseLightPrimaryColor()
+        selectedBackgroundView = bgColorView
+    }
+    
     var message: String! {
         didSet {
             messageLabel.text = message
