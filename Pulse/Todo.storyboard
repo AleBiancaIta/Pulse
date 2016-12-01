@@ -22,13 +22,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="-8" translatesAutoresizingMaskIntoConstraints="NO" id="RmT-Mu-CGU">
-                                <rect key="frame" x="8" y="28" width="359" height="631"/>
+                                <rect key="frame" x="8" y="20" width="359" height="639"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbG-Gv-M3G" userLabel="Top Section View">
-                                        <rect key="frame" x="0.0" y="0.0" width="359" height="74"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="82"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow Up Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g03-c2-fMw">
-                                                <rect key="frame" x="8" y="4" width="158.5" height="36"/>
+                                                <rect key="frame" x="8" y="8" width="158.5" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="5CP-Rd-inP"/>
                                                 </constraints>
@@ -36,7 +36,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ui9-O2-1ul">
-                                                <rect key="frame" x="8" y="40" width="47" height="22"/>
+                                                <rect key="frame" x="8" y="44" width="47" height="26"/>
                                                 <state key="normal" title="See All">
                                                     <color key="titleColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -48,7 +48,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="ui9-O2-1ul" firstAttribute="leading" secondItem="UbG-Gv-M3G" secondAttribute="leading" constant="8" id="3dl-b1-rPZ"/>
-                                            <constraint firstItem="g03-c2-fMw" firstAttribute="top" secondItem="UbG-Gv-M3G" secondAttribute="top" constant="4" id="HwR-27-OUV"/>
+                                            <constraint firstItem="g03-c2-fMw" firstAttribute="top" secondItem="UbG-Gv-M3G" secondAttribute="top" constant="8" id="HwR-27-OUV"/>
                                             <constraint firstItem="g03-c2-fMw" firstAttribute="leading" secondItem="UbG-Gv-M3G" secondAttribute="leading" constant="8" id="Oug-El-4FW"/>
                                             <constraint firstAttribute="bottom" secondItem="ui9-O2-1ul" secondAttribute="bottom" constant="12" id="QAc-Kc-J47"/>
                                             <constraint firstItem="ui9-O2-1ul" firstAttribute="top" secondItem="g03-c2-fMw" secondAttribute="bottom" id="pBc-Cf-uEF"/>
@@ -61,7 +61,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="0OT-SV-twL">
-                                        <rect key="frame" x="0.0" y="66" width="359" height="565"/>
+                                        <rect key="frame" x="0.0" y="74" width="359" height="565"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
@@ -119,7 +119,7 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="RmT-Mu-CGU" secondAttribute="bottom" constant="8" id="RlD-km-0Qo"/>
                             <constraint firstItem="RmT-Mu-CGU" firstAttribute="leading" secondItem="UPi-Mh-OBY" secondAttribute="leading" constant="8" id="ZoM-of-OwR"/>
-                            <constraint firstItem="RmT-Mu-CGU" firstAttribute="top" secondItem="Tea-Z8-mmE" secondAttribute="bottom" constant="8" id="kPK-n3-rSI"/>
+                            <constraint firstItem="RmT-Mu-CGU" firstAttribute="top" secondItem="Tea-Z8-mmE" secondAttribute="bottom" id="kPK-n3-rSI"/>
                             <constraint firstAttribute="trailing" secondItem="RmT-Mu-CGU" secondAttribute="trailing" constant="8" id="ywg-qD-jgj"/>
                         </constraints>
                     </view>

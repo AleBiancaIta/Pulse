@@ -71,9 +71,13 @@ class MeetingDetailsViewController: UIViewController {
                 for c in (meeting.selectedCards?.characters)! {
                     switch c {
                     case "d":
-                        selectedCards.append(Constants.meetingCards[1])
+                        if !self.selectedCards.contains(Constants.meetingCards[1]) {
+                            selectedCards.append(Constants.meetingCards[1])
+                        }
                     case "n":
-                        selectedCards.append(Constants.meetingCards[2])
+                        if !self.selectedCards.contains(Constants.meetingCards[2]) {
+                           selectedCards.append(Constants.meetingCards[2])
+                        }
                     default:
                         break
                     }
@@ -282,7 +286,9 @@ extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDel
         }
         
         // Insert new card at the top of the table view
-        selectedCards.insert(card, at: 1)
+        if !selectedCards.contains(card) {
+            selectedCards.insert(card, at: 1)
+        }
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }

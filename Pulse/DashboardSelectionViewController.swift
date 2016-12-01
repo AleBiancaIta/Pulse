@@ -89,8 +89,10 @@ extension DashboardSelectionViewController: UITableViewDelegate {
             }
             delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didRemoveCard: card)
         } else {
-            selectedCards.append(card)
-            delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didAddCard: card)
+            if 0 <= indexPath.row && indexPath.row < Constants.dashboardCards.count {
+                selectedCards.append(card)
+                delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didAddCard: card)
+            }
         }
         
         tableView.reloadData()

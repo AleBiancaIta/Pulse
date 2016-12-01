@@ -91,8 +91,10 @@ extension MeetingDetailsSelectionViewController: UITableViewDelegate {
             }
             delegate?.meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: self, didRemoveCard: card)
         } else {
-            selectedCards.append(card)
-            delegate?.meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: self, didAddCard: card)
+            if 0 <= indexPath.row && indexPath.row < Constants.meetingCards.count {
+                selectedCards.append(card)
+                delegate?.meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: self, didAddCard: card)
+            }
         }
         
         tableView.reloadData()

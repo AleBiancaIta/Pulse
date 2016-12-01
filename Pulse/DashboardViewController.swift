@@ -48,13 +48,21 @@ class DashboardViewController: UIViewController {
                     for c in (self.selectedCardsString?.characters)! {
                         switch c {
                         case "g":
-                            self.selectedCards.append(Constants.dashboardCards[0])
+                            if !self.selectedCards.contains(Constants.dashboardCards[0]) {
+                                self.selectedCards.append(Constants.dashboardCards[0])
+                            }
                         case "d":
-                            self.selectedCards.append(Constants.dashboardCards[1])
+                            if !self.selectedCards.contains(Constants.dashboardCards[1]) {
+                                self.selectedCards.append(Constants.dashboardCards[1])
+                            }
                         case "t":
-                            self.selectedCards.append(Constants.dashboardCards[2])
+                            if !self.selectedCards.contains(Constants.dashboardCards[2]) {
+                                self.selectedCards.append(Constants.dashboardCards[2])
+                            }
                         case "m":
-                            self.selectedCards.append(Constants.dashboardCards[3])
+                            if !self.selectedCards.contains(Constants.dashboardCards[3]) {
+                                self.selectedCards.append(Constants.dashboardCards[3])
+                            }
                         default:
                             break
                         }
@@ -310,7 +318,9 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
         }
         
         // Insert new card at the top of the table view
-        selectedCards.insert(card, at: 0)
+        if !selectedCards.contains(card) {
+            selectedCards.insert(card, at: 0)
+        }
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }

@@ -141,11 +141,17 @@ class Person2DetailsViewController: UIViewController {
                 for c in selectedCardsString.characters {
                     switch c {
                     case "d":
-                        selectedCards.append(Constants.personCards[2])
+                        if !self.selectedCards.contains(Constants.personCards[2]) {
+                            selectedCards.append(Constants.personCards[2])
+                        }
                     case "m":
-                        selectedCards.append(Constants.personCards[3])
+                        if !self.selectedCards.contains(Constants.personCards[3]) {
+                            selectedCards.append(Constants.personCards[3])
+                        }
                     case "n":
-                        selectedCards.append(Constants.personCards[4])
+                        if !self.selectedCards.contains(Constants.personCards[4]) {
+                            selectedCards.append(Constants.personCards[4])
+                        }
                     default:
                         break
                     }
@@ -389,9 +395,13 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
         
         // Insert new card at the top of the table view
         if isPersonManager {
-            selectedCards.insert(card, at: 2)
+            if !selectedCards.contains(card) {
+                selectedCards.insert(card, at: 2)
+            }
         } else {
-            selectedCards.insert(card, at: 1)
+            if !selectedCards.contains(card) {
+                selectedCards.insert(card, at: 1)
+            }
         }
         tableView.reloadData()
         tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)

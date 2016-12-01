@@ -59,7 +59,7 @@ class TodoViewController: UIViewController {
         super.viewDidLoad()
         
         tableViewTrailingConstraint.constant = todoLimit == .topEntries ? 16 : 0
-        stackViewTopConstraint.constant = todoLimit == .topEntries ? 0 : 8
+        //stackViewTopConstraint.constant = todoLimit == .topEntries ? 0 : 8
         stackViewLeadingConstraint.constant = todoLimit == .topEntries ? 0 : 8
         stackViewBottomConstraint.constant = todoLimit == .topEntries ? 0 : 8
         stackViewTrailingConstraint.constant = todoLimit == .topEntries ? 0 : 8

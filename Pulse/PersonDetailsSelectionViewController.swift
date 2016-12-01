@@ -91,8 +91,10 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
             }
             delegate?.personDetailsSelectionViewController(personDetailsSelectionViewController: self, didRemoveCard: card)
         } else {
-            selectedCards.append(card)
-            delegate?.personDetailsSelectionViewController(personDetailsSelectionViewController: self, didAddCard: card)
+            if 0 <= indexPath.row && indexPath.row < Constants.personCards.count {
+                selectedCards.append(card)
+                delegate?.personDetailsSelectionViewController(personDetailsSelectionViewController: self, didAddCard: card)
+            }
         }
         
         tableView.reloadData()
