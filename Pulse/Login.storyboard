@@ -204,7 +204,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ZVc-zy-z88" firstAttribute="leading" secondItem="Kl3-Cy-sEl" secondAttribute="leading" id="5Np-5n-1L1"/>
-                                                <constraint firstAttribute="bottom" secondItem="ZVc-zy-z88" secondAttribute="bottom" constant="40.5" id="7xc-MB-VO2"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ZVc-zy-z88" secondAttribute="bottom" constant="40.5" id="7xc-MB-VO2"/>
                                                 <constraint firstItem="ZVc-zy-z88" firstAttribute="top" secondItem="Kl3-Cy-sEl" secondAttribute="bottom" constant="14" id="BxU-tY-Uty"/>
                                                 <constraint firstAttribute="trailing" secondItem="Kl3-Cy-sEl" secondAttribute="trailing" constant="12" id="D6F-pc-zea"/>
                                                 <constraint firstItem="kYg-ax-twz" firstAttribute="leading" secondItem="rjn-La-yWo" secondAttribute="leadingMargin" constant="12" id="D73-if-Iwa"/>

@@ -13,6 +13,7 @@ class Card: NSObject {
     var id: String?
     var name: String?
     var descr: String?
+    var imageName: String?
     
     init(dictionary: [String: String]) {
         if let id = dictionary["id"] {
@@ -23,6 +24,9 @@ class Card: NSObject {
         }
         if let descr = dictionary["descr"] {
             self.descr = descr
+        }
+        if let image = dictionary["imageName"] {
+            self.imageName = image
         }
     }
     

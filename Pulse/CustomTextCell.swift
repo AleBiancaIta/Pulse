@@ -12,6 +12,7 @@ class CustomTextCell: UITableViewCell {
     
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var submessageLabel: UILabel!
+    @IBOutlet weak var cellImageView: UIImageView!
     
     var message: String! {
         didSet {
@@ -23,6 +24,14 @@ class CustomTextCell: UITableViewCell {
         didSet {
             if let submessage = submessage {
                 submessageLabel.text = submessage
+            }
+        }
+    }
+    
+    var imageName: String? {
+        didSet {
+            if let imageName = imageName {
+                cellImageView.image = UIImage(named: imageName)
             }
         }
     }

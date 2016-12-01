@@ -59,7 +59,7 @@ class TeamTableViewCell: UITableViewCell {
             surveyValue2Button.tintColor = UIColor.pulseBadSurveyColor() //UIColor.red
             surveyValue2Button.backgroundColor = UIColor.clear
         case 1:
-            surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
+            surveyValue2Button.setImage(UIImage(named: "ThumbsMiddle"), for: .normal)
             surveyValue2Button.tintColor = UIColor.pulseNeutralSurveyColor() //UIColor.yellow
             surveyValue2Button.backgroundColor = UIColor.clear
         case 2:
@@ -67,7 +67,7 @@ class TeamTableViewCell: UITableViewCell {
             surveyValue2Button.tintColor = UIColor.pulseGoodSurveyColor() //UIColor.green
             surveyValue2Button.backgroundColor = UIColor.clear
         default:
-            surveyValue2Button.setImage(UIImage(named: "ThumbsUp"), for: .normal)
+            surveyValue2Button.setImage(UIImage(named: "ThumbsMiddle"), for: .normal)
             surveyValue2Button.tintColor = UIColor.pulseNoDataSurveyColor() //UIColor.darkGray
         }
     }

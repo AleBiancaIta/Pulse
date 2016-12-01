@@ -11,24 +11,24 @@ import Foundation
 class Constants: NSObject {
 
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
-        ["id" : "g", "name": "Pulse Chart", "card_type": "pulse_graph", "descr": "See, at a glance, the survey results for your company from the past 60 days"],
-        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items"],
-        ["id" : "t", "name": "My Team", "card_type": "team", "descr": "A preview of your team members, including their most recent survey input"],
-        ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings in descending order"]
+        ["id" : "g", "name": "Pulse Chart", "card_type": "pulse_graph", "descr": "See, at a glance, the survey results for your company from the past 60 days", "imageName": "PulseGraph"],
+        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "CircleChecked"],
+        ["id" : "t", "name": "My Team", "card_type": "team", "descr": "A preview of your team members, including their most recent survey input", "imageName": "PulseGraph"],
+        ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings in descending order", "imageName": "PulseGraph"]
     ])
     
     static let meetingCards: [Card] = Card.cardsWithArray(dictionaries: [
-        ["id" : "s", "name": "Pulse Survey", "card_type": "survey", "descr": "This required module has the survey questions used to in the company pulse chart"],
-        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items"],
-        ["id" : "n", "name": "Notes", "card_type": "notes", "descr": "Have something on your mind? Keep track of your notes here"]
+        ["id" : "s", "name": "Pulse Survey", "card_type": "survey", "descr": "This required module has the survey questions used to in the company pulse chart", "imageName": "PulseGraph"],
+        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "PulseGraph"],
+        ["id" : "n", "name": "Notes", "card_type": "notes", "descr": "Have something on your mind? Keep track of your notes here", "imageName": "PulseGraph"]
     ])
     
     static let personCards: [Card] = Card.cardsWithArray(dictionaries: [
-        ["id" : "i", "name": "Info", "card_type": "info", "descr": "This required modules includes contact information for your team member"],
-        ["id" : "t", "name": "Team", "card_type": "team", "descr": "This module automatically displays if this team member is a manager-level (or higher) employee in the company"],
-        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items"],
-        ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings with this team member in descending order"],
-        ["id" : "n", "name": "Notes", "card_type": "notes", "descr": "Have something on your mind? Keep track of your notes here"]
+        ["id" : "i", "name": "Info", "card_type": "info", "descr": "This required modules includes contact information for your team member", "imageName": "PulseGraph"],
+        ["id" : "t", "name": "Team", "card_type": "team", "descr": "This module automatically displays if this team member is a manager-level (or higher) employee in the company", "imageName": "PulseGraph"],
+        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "PulseGraph"],
+        ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings with this team member in descending order", "imageName": "PulseGraph"],
+        ["id" : "n", "name": "Notes", "card_type": "notes", "descr": "Have something on your mind? Keep track of your notes here", "imageName": "PulseGraph"]
     ]);
     
     //static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],["positionId": "2", "description": "Individual Contributor"]]

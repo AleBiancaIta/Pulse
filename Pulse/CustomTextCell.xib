@@ -56,6 +56,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="cellImageView" destination="FM7-Bx-g3U" id="Rx9-z4-Rg9"/>
                 <outlet property="messageLabel" destination="rZ4-bK-jxN" id="Ebv-PF-u6j"/>
                 <outlet property="submessageLabel" destination="Vce-Wb-l7K" id="w9K-Cs-mrd"/>
             </connections>
