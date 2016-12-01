@@ -60,7 +60,7 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <state key="normal" title="3" image="Circle1"/>
+                        <state key="normal" title="3" image="Circle3"/>
                     </button>
                 </subviews>
             </view>
@@ -91,7 +91,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Circle1" width="60" height="60"/>
+        <image name="Circle3" width="60" height="60"/>
         <image name="Smiley" width="60" height="60"/>
         <image name="ThumbsUp" width="60" height="60"/>
     </resources>
