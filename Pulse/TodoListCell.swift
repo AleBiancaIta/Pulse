@@ -26,6 +26,13 @@ class TodoListCell: UITableViewCell {
     var isCompleted: Bool!
     weak var delegate: TodoListCellDelegate?
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor.pulseLightPrimaryColor()
+        selectedBackgroundView = bgColorView
+    }
+    
     var hasMeeting: Bool! {
         didSet {
             if hasMeeting! {
