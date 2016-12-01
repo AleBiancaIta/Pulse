@@ -42,7 +42,7 @@ class TeamCollectionViewController: UIViewController {
     
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + height)
-        return 88 + 190
+        return 99 + 200
     }
 
     // MARK: - Actions
