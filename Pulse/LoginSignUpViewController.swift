@@ -15,7 +15,9 @@ class LoginSignUpViewController: UIViewController {
         super.viewDidLoad()
         
         UIExtensions.gradientBackgroundFor(view: view)
-        UIApplication.shared.statusBarStyle = .lightContent // TODO this doesn't work for some reason
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     // MARK: - Actions
