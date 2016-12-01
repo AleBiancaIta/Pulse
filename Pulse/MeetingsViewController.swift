@@ -166,6 +166,7 @@ extension MeetingsViewController: UITableViewDataSource {
                     if let firstName = person[ObjectKeys.Person.firstName] as? String, let lastName = person[ObjectKeys.Person.lastName] as? String {
                         cell.message = "\(firstName) \(lastName)"
                         cell.submessage = "\(meetingDate)"
+                        cell.imageName = "Clipboard"
                     }
                 }
             }
