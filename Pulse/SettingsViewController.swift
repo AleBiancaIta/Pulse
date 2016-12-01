@@ -98,7 +98,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
             cell.message = settingsContent[indexPath.row]
             cell.submessage = settingsSubcontent[indexPath.row]
-            // TODO cell image
+            // TODO cell images - Ita
             
             /*
             if indexPath.row == 0 || indexPath.row == 1 {

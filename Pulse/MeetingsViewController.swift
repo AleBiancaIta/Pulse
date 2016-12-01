@@ -37,6 +37,7 @@ class MeetingsViewController: UIViewController {
             navigationController?.navigationBar.shadowImage = UIImage()
         }
         
+        tableView.isScrollEnabled = expanded
         selectAllButton.isHidden = expanded
         addButton.isHidden = expanded
         meetingsLabel.isHidden = expanded
