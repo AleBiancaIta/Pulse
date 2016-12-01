@@ -37,6 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="JnB-bi-nGG" firstAttribute="top" secondItem="Vim-zO-UlL" secondAttribute="bottom" constant="8" id="48b-Te-5N2"/>
                             <constraint firstAttribute="trailing" secondItem="JnB-bi-nGG" secondAttribute="trailing" constant="24" id="H1n-Df-gng"/>
@@ -44,12 +45,20 @@
                             <constraint firstItem="Vim-zO-UlL" firstAttribute="leading" secondItem="73p-hP-Hdv" secondAttribute="leading" constant="8" id="MkK-J7-qso"/>
                             <constraint firstItem="Vim-zO-UlL" firstAttribute="top" secondItem="1No-Q5-gWd" secondAttribute="bottom" constant="8" id="vow-xW-RYG"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="0wI-bc-VHB" appends="YES" id="NCF-8y-5O2"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="notesTextView" destination="JnB-bi-nGG" id="TwA-78-sBO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Vl-fJ-IBP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="0wI-bc-VHB">
+                    <connections>
+                        <action selector="onTap:" destination="tvH-dU-4Cf" id="TYT-4d-AIn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="561" y="-216"/>
         </scene>

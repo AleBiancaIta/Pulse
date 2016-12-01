@@ -35,8 +35,13 @@ class NotesViewController: UIViewController {
         // Calculated with bottom-most element (y position + height + 8)
         return 54 + 80 
     }
+    
+    @IBAction func onTap(_ sender: UITapGestureRecognizer) {
+        self.notesTextView.resignFirstResponder()
+    }
 }
 
+// MARK: - UITextViewDelegate
 
 extension NotesViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
