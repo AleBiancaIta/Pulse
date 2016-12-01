@@ -32,6 +32,10 @@ class TodoViewController: UIViewController {
     @IBOutlet weak var topSectionView: UIView!
     
     @IBOutlet weak var tableViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewTrailingConstraint: NSLayoutConstraint!
     
     fileprivate let cellSections = ["Add Todo", "List Todo", "Show Completed", "List Completed"]
     fileprivate let parseClient = ParseClient.sharedInstance()
@@ -53,7 +57,15 @@ class TodoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableViewTrailingConstraint.constant = todoLimit == .topEntries ? 16 : 0
+        stackViewTopConstraint.constant = todoLimit == .topEntries ? 0 : 8
+        stackViewLeadingConstraint.constant = todoLimit == .topEntries ? 0 : 8
+        stackViewBottomConstraint.constant = todoLimit == .topEntries ? 0 : 8
+        stackViewTrailingConstraint.constant = todoLimit == .topEntries ? 0 : 8
+        
+        UIExtensions.gradientBackgroundFor(view: view)
+        tableView.layer.cornerRadius = 5
         
         registerCellNibs()
         configureRowHeight()
