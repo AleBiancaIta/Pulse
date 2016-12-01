@@ -19,7 +19,8 @@ class SettingsViewController: UIViewController {
     
     // Note: Sign Up is for anonymous user who wants to sign up for the account
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
-    fileprivate let settingsContent = ["User Info", "Change Password", "Log Out"]
+    fileprivate let settingsContent = ["User Information", "Change Password", "Log Out"]
+    fileprivate let settingsSubcontent = ["Update your Pulse user information with a few taps", "Change the password associated with your Pulse account", "Logging out already? Come back soon!"]
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     
@@ -35,10 +36,12 @@ class SettingsViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         
-        settingsTableView.estimatedRowHeight = 50
+        settingsTableView.estimatedRowHeight = 100
         settingsTableView.rowHeight = UITableViewAutomaticDimension
         getCurrentPerson()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
+        
+        settingsTableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
     
     // MARK: - Private Methods
@@ -92,8 +95,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.selectionStyle = .none
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: settingsContentCell, for: indexPath)
-            cell.textLabel?.text = settingsContent[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+            cell.message = settingsContent[indexPath.row]
+            cell.submessage = settingsSubcontent[indexPath.row]
+            // TODO cell image
             
             /*
             if indexPath.row == 0 || indexPath.row == 1 {

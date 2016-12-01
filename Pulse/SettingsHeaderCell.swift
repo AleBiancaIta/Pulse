@@ -49,6 +49,9 @@ class SettingsHeaderCell: UITableViewCell {
 
 		profileImageView.delegate = self
 		profileImageView.isEditable = true
+        profileImageView.layer.cornerRadius = 5
+        profileImageView.layer.borderWidth = 1
+        profileImageView.layer.borderColor = UIColor.pulseLightPrimaryColor().cgColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
