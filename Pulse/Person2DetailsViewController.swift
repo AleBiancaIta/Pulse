@@ -37,6 +37,7 @@ class Person2DetailsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
+        tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
         
 		initPersonInfo()
 
@@ -165,9 +166,10 @@ extension Person2DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == selectedCards.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddCardCell", for: indexPath) as! CardManagementCell
             cell.layer.cornerRadius = 5
-            cell.message = "Tap here to manage modules"
+            cell.selectionStyle = .none
+            cell.backgroundColor = UIColor.clear
             return cell
             
         } else { // The actual cards

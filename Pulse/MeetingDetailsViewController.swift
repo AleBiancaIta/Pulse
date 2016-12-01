@@ -42,7 +42,8 @@ class MeetingDetailsViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         
         tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
-        
+        tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
+      
         alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
         alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
@@ -106,12 +107,17 @@ extension MeetingDetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == selectedCards.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddCardCell", for: indexPath) as! CardManagementCell
             cell.layer.cornerRadius = 5
+            cell.backgroundColor = UIColor.clear
+            cell.selectionStyle = .none
             if isExistingMeeting {
-                cell.message = "Tap here to manage modules"
+                cell.addButton.tintColor = UIColor.pulseAccentColor()
+                cell.manageLabel.tintColor = UIColor.pulseAccentColor()
             } else {
-                cell.message = "Save meeting to manage modules"
+               cell.addButton.tintColor = UIColor.lightGray
+               cell.manageLabel.textColor = UIColor.lightGray
+                cell.manageLabel.text = "Save meeting to manage modules"
             }
             return cell
             

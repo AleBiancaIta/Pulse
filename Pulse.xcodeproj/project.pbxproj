@@ -68,6 +68,8 @@
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
 		67BCA1511DD6E66100E7EE74 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */; };
+		67CE17381DEFE041008AE710 /* CardManagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CE17361DEFE041008AE710 /* CardManagementCell.swift */; };
+		67CE17391DEFE041008AE710 /* CardManagementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CE17371DEFE041008AE710 /* CardManagementCell.xib */; };
 		67D8D6231DD4E28900B6DE19 /* CustomTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* CustomTextCell.swift */; };
 		67D8D6241DD4E28900B6DE19 /* CustomTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67D8D6221DD4E28900B6DE19 /* CustomTextCell.xib */; };
 		67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6491DD56D9800B6DE19 /* Constants.swift */; };
@@ -146,6 +148,8 @@
 		67A364B41DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A364B61DCD8DA500BFD931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsViewController.swift; sourceTree = "<group>"; };
+		67CE17361DEFE041008AE710 /* CardManagementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManagementCell.swift; sourceTree = "<group>"; };
+		67CE17371DEFE041008AE710 /* CardManagementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardManagementCell.xib; sourceTree = "<group>"; };
 		67D8D6211DD4E28900B6DE19 /* CustomTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextCell.swift; sourceTree = "<group>"; };
 		67D8D6221DD4E28900B6DE19 /* CustomTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTextCell.xib; sourceTree = "<group>"; };
 		67D8D6491DD56D9800B6DE19 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -240,6 +244,8 @@
 		678802971DD41739001338A8 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				67CE17361DEFE041008AE710 /* CardManagementCell.swift */,
+				67CE17371DEFE041008AE710 /* CardManagementCell.xib */,
 				67D8D6211DD4E28900B6DE19 /* CustomTextCell.swift */,
 				67D8D6221DD4E28900B6DE19 /* CustomTextCell.xib */,
 				437DE0491DD90F0100B08988 /* TeamCollectionCell.swift */,
@@ -424,6 +430,7 @@
 				43EC9BC21DE16D97006C8703 /* TodoAddCell.xib in Resources */,
 				67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */,
 				67D8D6241DD4E28900B6DE19 /* CustomTextCell.xib in Resources */,
+				67CE17391DEFE041008AE710 /* CardManagementCell.xib in Resources */,
 				437DE0581DD936C200B08988 /* Team.storyboard in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
 				67A2761D1DE684D500ED73B0 /* Dashboard.storyboard in Resources */,
@@ -504,6 +511,7 @@
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
 				437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */,
 				437903A11DE5069600945C63 /* TodoEditPersonCell.swift in Sources */,
+				67CE17381DEFE041008AE710 /* CardManagementCell.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */,
 				431804941DD5A8BE00B279C6 /* LoginViewController.swift in Sources */,
