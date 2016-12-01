@@ -137,7 +137,6 @@ extension DashboardViewController: UITableViewDataSource {
             cell.message = "Tap here to manage modules"
             return cell
         
-        // The actual cards - TODO pull this out to separate functions
         } else {
             switch selectedCards[indexPath.section].id! {
             case "g":

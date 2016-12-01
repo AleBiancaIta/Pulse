@@ -15,7 +15,7 @@ class LoginSignUpViewController: UIViewController {
         super.viewDidLoad()
         
         UIExtensions.gradientBackgroundFor(view: view)
-        // TODO statusbar light
+        UIApplication.shared.statusBarStyle = .lightContent // TODO this doesn't work for some reason
     }
     
     // MARK: - Actions

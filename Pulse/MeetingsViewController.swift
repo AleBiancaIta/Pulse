@@ -89,7 +89,6 @@ class MeetingsViewController: UIViewController {
                             if let meetingDateString = post["meetingDate"] as? String,
                                 let meetingDate = dateFormatter.date(from: meetingDateString) {
                                 
-                                // TODO remove this chunk later, where meetingDate is string
                                 let dictionary = [
                                     "objectId": post.objectId as Any,
                                     "personId": post["personId"],

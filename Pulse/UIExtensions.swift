@@ -15,11 +15,6 @@ class UIExtensions: NSObject {
      * Subheader font: Helvetica Neue thin 17pt
      */
     
-    /* TODO - other things to address:
-     * Font size/attributes/type -- headers, subheaders, primary, button text, cell text, etc
-     * Assets (need all buttons, default pics, etc. to look the same) - TODO Ita
-     */
-    
     class func gradientBackgroundFor(view: UIView) {
         let gradient = CAGradientLayer()
         gradient.frame = view.bounds
