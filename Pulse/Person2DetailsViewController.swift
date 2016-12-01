@@ -16,7 +16,7 @@ class Person2DetailsViewController: UIViewController {
     var alertController: UIAlertController?
     
     var selectedCardsString: String = ""
-    var selectedCards: [Card] = [Constants.personCards[0], Constants.personCards[1]] // Always include info card
+    var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
     
     var personPFObject: PFObject?
 	var personInfoViewController: PersonDetailsViewController!
