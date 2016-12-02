@@ -13,6 +13,7 @@ class UIExtensions: NSObject {
      * Corner radius: 5.0
      * Header font: Helvetica Neue thin 24pt
      * Subheader font: Helvetica Neue thin 17pt
+     * Fade in duration: 1
      */
     
     class func gradientBackgroundFor(view: UIView) {
