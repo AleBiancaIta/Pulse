@@ -36,23 +36,19 @@ class TeamCollectionCell: UICollectionViewCell {
         switch value {
         case 0:
             surveyValue1Button.setImage(UIImage(named: "Grumpy"), for: .normal)
-            //surveyValue1Button.tintColor = UIColor.red
             surveyValue1Button.tintColor = UIColor.pulseBadSurveyColor()
             surveyValue1Button.backgroundColor = UIColor.clear
         case 1:
             surveyValue1Button.setImage(UIImage(named: "Speechless"), for: .normal)
-            //surveyValue1Button.tintColor = UIColor.yellow
             surveyValue1Button.tintColor = UIColor.pulseNeutralSurveyColor()
             surveyValue1Button.backgroundColor = UIColor.clear
         case 2:
             surveyValue1Button.setImage(UIImage(named: "Smiley"), for: .normal)
-            //surveyValue1Button.tintColor = UIColor.green
             surveyValue1Button.tintColor = UIColor.pulseGoodSurveyColor()
             surveyValue1Button.backgroundColor = UIColor.clear
         default:
             surveyValue1Button.setImage(UIImage(named: "Smiley"), for: .normal)
             surveyValue1Button.tintColor = UIColor.pulseNoDataSurveyColor()
-            //surveyValue1Button.tintColor = UIColor.darkGray
         }
     }
     
