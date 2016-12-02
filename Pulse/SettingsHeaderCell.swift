@@ -14,6 +14,7 @@ class SettingsHeaderCell: UITableViewCell {
     @IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var phoneLabel: UILabel!
 
 	weak var parent: UIViewController? {
 		didSet {
@@ -26,6 +27,7 @@ class SettingsHeaderCell: UITableViewCell {
             let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
             let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
             usernameLabel.text = "Hello, \(firstName) \(lastName)"
+            phoneLabel.text = person[ObjectKeys.Person.phone] as? String ?? ""
 			profileImageView.pffile = person[ObjectKeys.Person.photo] as? PFFile
         }
     }
