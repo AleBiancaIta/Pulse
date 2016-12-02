@@ -15,7 +15,7 @@ class Person2DetailsViewController: UIViewController {
     
     var alertController: UIAlertController?
     
-    var selectedCardsString: String = ""
+    var selectedCardsString: String = "dm"
     var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
     
     var personPFObject: PFObject?
@@ -139,24 +139,26 @@ class Person2DetailsViewController: UIViewController {
             
             if let selectedCardsString = personPFObject[ObjectKeys.Person.selectedCards] as? String {
                 self.selectedCardsString = selectedCardsString
-                for c in selectedCardsString.characters {
-                    switch c {
-                    case "d":
-                        if !self.selectedCards.contains(Constants.personCards[2]) {
-                            selectedCards.append(Constants.personCards[2])
-                        }
-                    case "m":
-                        if !self.selectedCards.contains(Constants.personCards[3]) {
-                            selectedCards.append(Constants.personCards[3])
-                        }
-                    case "n":
-                        if !self.selectedCards.contains(Constants.personCards[4]) {
-                            selectedCards.append(Constants.personCards[4])
-                        }
-                    default:
-                        break
-                    }
+            }
+            
+        }
+        
+        for c in selectedCardsString.characters {
+            switch c {
+            case "d":
+                if !self.selectedCards.contains(Constants.personCards[2]) {
+                    selectedCards.append(Constants.personCards[2])
                 }
+            case "m":
+                if !self.selectedCards.contains(Constants.personCards[3]) {
+                    selectedCards.append(Constants.personCards[3])
+                }
+            case "n":
+                if !self.selectedCards.contains(Constants.personCards[4]) {
+                    selectedCards.append(Constants.personCards[4])
+                }
+            default:
+                break
             }
         }
     }
