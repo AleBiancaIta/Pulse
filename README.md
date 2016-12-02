@@ -1,8 +1,34 @@
 # CodePath Group Project - Pulse
 
-Pulse is an app to help managers stay on top of the "pulse" of their team. Users can see a summary view of their teams "pulse" via happiness, engagement, and workload factors. Additional functionality allows users to maintain a schedule of their 1:1s, take notes and photos, access their app information using different devices, keep a history of their data, etc.
+## Instructions for Beta Testers
 
-Time spent: **X** hours spent in total
+1. Download Xcode 8.1
+2. Clone Pulse repo (git@github.com:AleBiancaIta/Pulse.git)
+3. Checkout the develop branch (for the most up-to-date code) or master branch (for the almost up-to-date code)
+3. Open Pulse.xcworkspace
+4. In Xcode, select device 
+   * If an iPhone is plugged into your computer, you can select this device (migth require some project configuration)
+   * Or select any of iPhone simulators in Xcode
+5. Build and run project (Cmd+R)
+6. Test
+
+## Sample User Tasks
+(If applicable, please refer to this section only after doing your own testing)
+
+* Sign up for new Pulse account 
+  * Preferred: Use actual data (e.g., email, company) 
+  * Or use Pulse for the company field if you want access to our test data
+* On Dashbaord, manage modules
+* Select all modules or some subset
+* Add new or edit existing team members; can also manage modules on detail page
+* Add new or edit existing meetings (includes Pulse survey); can also delete; can also manage modules on detail page
+* Add new or edit existing TODO items; can also delete or mark as completed
+
+
+===== 
+# // TODO: Need to rewrite everything below
+
+Pulse is an app to help managers stay on top of the "pulse" of their team. Users can see a summary view of their teams "pulse" via happiness, engagement, and workload factors. Additional functionality allows users to maintain a schedule of their 1:1s, take notes and photos, access their app information using different devices, keep a history of their data, etc.
 
 ## Wireframe
 
