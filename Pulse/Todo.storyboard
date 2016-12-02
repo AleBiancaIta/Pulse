@@ -124,6 +124,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="seeAllButton" destination="ui9-O2-1ul" id="AAc-c9-48I"/>
                         <outlet property="stackViewBottomConstraint" destination="RlD-km-0Qo" id="ZQ9-ON-3tq"/>
                         <outlet property="stackViewLeadingConstraint" destination="ZoM-of-OwR" id="p4W-Iu-KVm"/>
                         <outlet property="stackViewTopConstraint" destination="kPK-n3-rSI" id="qLB-wZ-AW8"/>
