@@ -46,34 +46,37 @@ class DashboardViewController: UIViewController {
                 if posts.count > 0 {
                     let post = posts[0]
                     self.selectedCardsString = post["selectedCards"] as? String
-                    for c in (self.selectedCardsString?.characters)! {
-                        switch c {
-                        case "g":
-                            if !self.selectedCards.contains(Constants.dashboardCards[0]) {
-                                self.selectedCards.append(Constants.dashboardCards[0])
-                            }
-                        case "d":
-                            if !self.selectedCards.contains(Constants.dashboardCards[1]) {
-                                self.selectedCards.append(Constants.dashboardCards[1])
-                            }
-                        case "t":
-                            if !self.selectedCards.contains(Constants.dashboardCards[2]) {
-                                self.selectedCards.append(Constants.dashboardCards[2])
-                            }
-                        case "m":
-                            if !self.selectedCards.contains(Constants.dashboardCards[3]) {
-                                self.selectedCards.append(Constants.dashboardCards[3])
-                            }
-                        default:
-                            break
-                        }
-                    }
                 } else {
+                    self.selectedCardsString = "gt" // Default cards (chart, team)
                     let post = PFObject(className: "Dashboard")
                     post["userId"] = userId
-                    post["selectedCards"] = ""
+                    post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground()
                 }
+                
+                for c in (self.selectedCardsString?.characters)! {
+                    switch c {
+                    case "g":
+                        if !self.selectedCards.contains(Constants.dashboardCards[0]) {
+                            self.selectedCards.append(Constants.dashboardCards[0])
+                        }
+                    case "d":
+                        if !self.selectedCards.contains(Constants.dashboardCards[1]) {
+                            self.selectedCards.append(Constants.dashboardCards[1])
+                        }
+                    case "t":
+                        if !self.selectedCards.contains(Constants.dashboardCards[2]) {
+                            self.selectedCards.append(Constants.dashboardCards[2])
+                        }
+                    case "m":
+                        if !self.selectedCards.contains(Constants.dashboardCards[3]) {
+                            self.selectedCards.append(Constants.dashboardCards[3])
+                        }
+                    default:
+                        break
+                    }
+                }
+                
                 self.tableView.reloadData()
                 
             } else {
