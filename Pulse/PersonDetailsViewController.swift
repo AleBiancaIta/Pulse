@@ -138,20 +138,17 @@ class PersonDetailsViewController: UIViewController {
 	func isValid() -> Bool {
 
 		if (firstNameTextField.text?.isEmpty)! {
-			ABIShowAlert(title: "Error!",
-			          message: "First Name cannot be empty", sender: nil, handler: nil)
+			ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "First Name cannot be empty")
 			return false
 		}
 
 		if (emailTextField.text?.isEmpty)! {
-			ABIShowAlert(title: "Error!",
-			          message: "Email cannot be empty", sender: nil, handler: nil)
+			ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Email cannot be empty")
 			return false
 		}
 
 		if !emailTextField.text!.isValidEmail() {
-			ABIShowAlert(title: "Error!",
-			             message: "Please enter a valid email", sender: nil, handler: nil)
+			ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Please enter a valid email")
 			return false
 		}
 
@@ -167,7 +164,7 @@ class PersonDetailsViewController: UIViewController {
 				completion(true, error)
 			}
 			else {
-				self.ABIShowAlert(title: "Error!", message: "User already exists. Please enter a new email", sender: nil, handler: nil)
+				self.ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "User already exists. Please enter a new email")
 			}
 		}
 	}
@@ -189,8 +186,19 @@ class PersonDetailsViewController: UIViewController {
 		lastNameTextField.borderStyle = isEditing ? .roundedRect : .none
 		firstNameTextField.borderStyle = isEditing ? .roundedRect : .none
 
+		updateCallButton()
+	}
+
+	func updateCallButton() {
 		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
-		// TODO: This button is for tests, change to make the call pressing the phone number
+		callButton.titleLabel?.text = phoneTextField.text
+
+		let buttonTitle = NSMutableAttributedString(
+			string:phoneTextField.text!,
+			attributes: [NSForegroundColorAttributeName : UIColor.pulseAccentColor(),
+			             NSUnderlineStyleAttributeName : 1] as [String : Any])
+		phoneTextField.isHidden = !callButton.isHidden
+		callButton.setAttributedTitle(buttonTitle, for: .normal)
 	}
 
 	func editPerson() {
