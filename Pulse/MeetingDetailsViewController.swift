@@ -346,19 +346,20 @@ extension MeetingDetailsViewController: NotesViewControllerDelegate {
 }
 
 extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
-   func meetingSurveyViewController(_ meetingSurveyViewController: MeetingSurveyViewController, meeting: Meeting, surveyChanged: Bool) {
-      if surveyChanged {
-         if isExistingMeeting {
-            saveExistingMeeting(meeting: meeting)
-         } else {
-            saveNewMeeting(meeting: meeting)
-         }
-      } else {
-         // save notes in case it's changed
-         saveExistingMeeting(meeting: meeting)
-      }
-   }
-   
+
+    func meetingSurveyViewController(_ meetingSurveyViewController: MeetingSurveyViewController, meeting: Meeting, surveyChanged: Bool) {
+        if surveyChanged {
+            if isExistingMeeting {
+                saveExistingMeeting(meeting: self.meeting)
+            } else {
+                saveNewMeeting(meeting: meeting)
+            }
+        } else {
+            // save notes in case it's changed
+            saveExistingMeeting(meeting: self.meeting)
+        }
+    }
+    
    fileprivate func saveExistingMeeting(meeting: Meeting) {
       parseClient.fetchMeetingFor(meetingId: meeting.objectId!) { (meeting: PFObject?, error: Error?) in
          if let meeting = meeting {

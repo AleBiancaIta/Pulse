@@ -58,7 +58,6 @@ class PersonDetailsViewController: UIViewController {
             setEditing(false, animated: true)
         }
 		else {
-			personInfoParentViewController?.navigationItem.title = "New team member"
 			setEditing(true, animated: true)
 		}
 	}

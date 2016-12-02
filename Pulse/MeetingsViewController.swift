@@ -12,7 +12,7 @@ import UIKit
 class MeetingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var selectAllButton: UIButton!
+    @IBOutlet weak var selectAllButton: UIButton! // See All Button
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var meetingsLabel: UILabel!
     
@@ -154,6 +154,8 @@ extension MeetingsViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
         if 0 < meetings.count {
             
+            selectAllButton.isHidden = false
+            
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
             formatter.timeStyle = .short
@@ -174,6 +176,7 @@ extension MeetingsViewController: UITableViewDataSource {
             cell.accessoryType = .disclosureIndicator
 
         } else {
+            selectAllButton.isHidden = true
             cell.messageLabel.text = "You have no meetings"
             cell.imageName = "Clipboard"
         }

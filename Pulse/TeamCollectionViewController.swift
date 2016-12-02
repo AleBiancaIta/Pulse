@@ -11,6 +11,7 @@ import Parse
 
 class TeamCollectionViewController: UIViewController {
     
+    @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     let dataSource = TeamViewDataSource.sharedInstance()
     var person: PFObject! = nil
@@ -32,6 +33,11 @@ class TeamCollectionViewController: UIViewController {
         dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")
+                if self.dataSource.teamMembers.count == 0 {
+                    self.seeAllButton.isHidden = true
+                } else {
+                    self.seeAllButton.isHidden = false
+                }
                 self.collectionView.reloadData()
             } else {
                 debugPrint("Unable to load data with error: \(error?.localizedDescription)")
