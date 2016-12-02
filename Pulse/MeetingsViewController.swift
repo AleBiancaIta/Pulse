@@ -27,6 +27,7 @@ class MeetingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Meetings"
 
         if expanded {
             UIExtensions.gradientBackgroundFor(view: view)

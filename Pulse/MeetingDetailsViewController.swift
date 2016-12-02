@@ -29,6 +29,14 @@ class MeetingDetailsViewController: UIViewController {
    
    override func viewDidLoad() {
       super.viewDidLoad()
+      if !isExistingMeeting {
+         title = "New Meeting"
+      } else {
+         let formatter = DateFormatter()
+         formatter.dateStyle = .medium
+         let meetingDate = formatter.string(from: meeting.meetingDate)
+         title = "\(meetingDate)"
+      }
       
       UIExtensions.gradientBackgroundFor(view: view)
       navigationController?.navigationBar.barStyle = .blackTranslucent

@@ -24,6 +24,7 @@ class MeetingDetailsSelectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Manage Modules"
         
         tableView.dataSource = self
         tableView.delegate = self

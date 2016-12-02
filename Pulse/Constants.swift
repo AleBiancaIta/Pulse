@@ -13,7 +13,7 @@ class Constants: NSObject {
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "g", "name": "Pulse Chart", "card_type": "pulse_graph", "descr": "See, at a glance, the survey results for your company from the past 60 days", "imageName": "PulseGraph"],
         ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "Todo"],
-        ["id" : "t", "name": "My Team", "card_type": "team", "descr": "A preview of your team members, including their most recent survey input", "imageName": "MyTeamDark"],
+        ["id" : "t", "name": "Team Members", "card_type": "team", "descr": "A preview of your team members, including their most recent survey input", "imageName": "MyTeamDark"],
         ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings in descending order", "imageName": "Clipboard"]
     ])
     

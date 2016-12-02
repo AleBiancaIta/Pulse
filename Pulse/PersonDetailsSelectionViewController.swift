@@ -20,10 +20,9 @@ class PersonDetailsSelectionViewController: UIViewController {
     weak var delegate: PersonDetailsSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    //var alertController: UIAlertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Manage Modules"
 
         tableView.dataSource = self
         tableView.delegate = self

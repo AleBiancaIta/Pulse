@@ -178,7 +178,7 @@
                                         <rect key="frame" x="0.0" y="28" width="359" height="163"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ur5-L0-q6U" id="rjn-La-yWo">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="162"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="162.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kl3-Cy-sEl">
@@ -234,11 +234,11 @@
                                         <rect key="frame" x="0.0" y="191" width="359" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eli-I7-lDT" id="9fB-LF-GoK">
-                                            <rect key="frame" x="0.0" y="0.0" width="326" height="46"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="326" height="46.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="c9h-Pg-ieb">
-                                                    <rect key="frame" x="15" y="0.0" width="309" height="46"/>
+                                                    <rect key="frame" x="15" y="0.0" width="309" height="46.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -278,10 +278,10 @@
             </objects>
             <point key="canvasLocation" x="3135" y="-503"/>
         </scene>
-        <!--Profile-->
+        <!--Pulse Profile-->
         <scene sceneID="hCI-F1-Ygd">
             <objects>
-                <viewController title="Profile" id="xOd-iJ-9ak" customClass="UpdateProfileViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Pulse Profile" id="xOd-iJ-9ak" customClass="UpdateProfileViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qoC-TF-qAM"/>
                         <viewControllerLayoutGuide type="bottom" id="IIW-3R-yQb"/>

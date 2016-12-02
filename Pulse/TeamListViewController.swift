@@ -19,6 +19,8 @@ class TeamListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Team Members"
+        
         UIExtensions.gradientBackgroundFor(view: view)
         
         tableView.register(UINib(nibName: "TeamTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Team.teamListCell)

@@ -31,6 +31,7 @@ class SettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Settings"
         
         UIExtensions.gradientBackgroundFor(view: view)
         navigationController?.navigationBar.barStyle = .blackTranslucent

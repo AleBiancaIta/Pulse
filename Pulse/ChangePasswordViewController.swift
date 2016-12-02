@@ -21,6 +21,7 @@ class ChangePasswordViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Change Password"
         
         UIExtensions.gradientBackgroundFor(view: view)
         navigationController?.navigationBar.barStyle = .blackTranslucent

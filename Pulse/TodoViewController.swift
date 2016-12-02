@@ -59,6 +59,7 @@ class TodoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Follow Up Items"
         
         tableViewTrailingConstraint.constant = todoLimit == .topEntries ? 16 : 0
         //stackViewTopConstraint.constant = todoLimit == .topEntries ? 0 : 8

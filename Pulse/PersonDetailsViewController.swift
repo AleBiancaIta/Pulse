@@ -28,6 +28,7 @@ class PersonDetailsViewController: UIViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        personInfoParentViewController?.navigationItem.title = "New Team Member"
 
 		initPerson()
 		initImage()
