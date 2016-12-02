@@ -111,13 +111,13 @@ class UpdateProfileViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if password is empty
         guard !((passwordTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Password field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Password field cannot be empty")
             return false
         }
         
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "First name field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "First name field cannot be empty")
             return false
         }
 

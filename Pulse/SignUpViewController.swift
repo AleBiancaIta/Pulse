@@ -188,43 +188,43 @@ class SignUpViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if email is empty
         guard !((emailTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Email field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "Email field cannot be empty")
             return false
         }
         
         // Check if password is empty
         guard !((passwordTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Password field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "Password field cannot be empty")
             return false
         }
         
         // Check if confirm password is empty
         guard !((confirmPasswordTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Confirm password field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "Confirm password field cannot be empty")
             return false
         }
         
         // Check to make sure password == confirm password
         guard passwordTextField.text == confirmPasswordTextField.text else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Password and confirm password must be the same")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "Password and confirm password must be the same")
             return false
         }
         
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "First name field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "First name field cannot be empty")
             return false
         }
         
         // Check if company name field is empty
         guard !((companyNameTextField.text?.isEmpty)!) else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Company name field cannot be empty")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "Company name field cannot be empty")
             return false
         }
         
         // Check if it's a valid email
         guard emailTextField.text!.isValidEmail() else {
-            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Please enter a valid email")
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Alert!", message: "Please enter a valid email")
             return false
         }
 

@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import RKDropdownAlert
 
 class LoginViewController: UIViewController {
 
@@ -51,14 +52,14 @@ class LoginViewController: UIViewController {
         loginButton.isEnabled = false
 
         if (usernameTextField.text?.isEmpty)! || (passwordTextField.text?.isEmpty)! {
-            ABIShowAlert(title: "Alert", message: "Username and password fields cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Username and password fields cannot be empty")
             loginButton.isEnabled = true
         } else {
             if let username = usernameTextField.text, let password = passwordTextField.text {
                 PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
                     if let error = error {
                         self.loginButton.isEnabled = true
-                        self.ABIShowAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "User login failed with error: \(error.localizedDescription)")
                     } else {
                         debugPrint("User logged in successfully")
                         self.loginButton.isEnabled = true
