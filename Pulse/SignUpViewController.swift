@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import SVProgressHUD
+import RKDropdownAlert
 
 class SignUpViewController: UIViewController {
     
@@ -78,7 +79,7 @@ class SignUpViewController: UIViewController {
                     debugPrint("Error in signing up new user: \(error.localizedDescription)")
                     SVProgressHUD.dismiss()
                     self.signUpButton.isEnabled = true
-                    self.ABIShowAlert(title: "Error", message: "New user sign up error: \(error.localizedDescription)", sender: nil, handler: nil)
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "New user sign up error: \(error.localizedDescription)")
                 } else {
                     debugPrint("User registered successfully")
                 
@@ -99,7 +100,7 @@ class SignUpViewController: UIViewController {
                                 if let persons = persons {
                                     let person = persons[0] // there should only be one match since Id is unique
                                     newUser[ObjectKeys.User.person] = person
-                                    newUser.saveInBackground(block: { (success: Bool, error: Error?) in
+                                    newUser.saveInBackground { (success: Bool, error: Error?) in
                                         if let error = error {
                                             print("error saving person: \(error.localizedDescription)")
                                             SVProgressHUD.dismiss()
@@ -108,27 +109,9 @@ class SignUpViewController: UIViewController {
                                             print("saved successfully: \(newUser)")
                                             SVProgressHUD.dismiss()
                                             self.signUpButton.isEnabled = true
-                                            self.ABIShowAlert(title: "Success", message: "Thank you for joining us!", sender: nil) { (alertAction: UIAlertAction) in
-                                                
-                                                if alertAction.title == "OK" {
-                                                    self.segueToDashboardVC()
-                                                }
-                                                
-                                                /*
-                                                if alertAction.title == "OK" {
-                                                    // Run login the background and segue to dashboard vc
-                                                    PFUser.logInWithUsername(inBackground: newUser.username!, password: newUser.password!) { (user: PFUser?, error: Error?) in
-                                                        if let error = error {
-                                                            self.ABIShowAlert(title: "Error", message: "User login failed with error: \(error.localizedDescription)", sender: nil, handler: nil)
-                                                        } else {
-                                                            debugPrint("User logged in successfully after sign up")
-                                                            self.segueToDashboardVC()
-                                                        }
-                                                    }
-                                                }*/
-                                            }
+                                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Thank you for joining us!", delegate: self)
                                         }
-                                    })
+                                    }
                                 }
                             })
                         } else {
@@ -157,7 +140,6 @@ class SignUpViewController: UIViewController {
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            
             scrollView.frame.size.height = UIScreen.main.bounds.size.height - keyboardSize.height - 64
         }
     }
@@ -206,43 +188,43 @@ class SignUpViewController: UIViewController {
     fileprivate func validateEntry() -> Bool {
         // Check if email is empty
         guard !((emailTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Email field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Email field cannot be empty")
             return false
         }
         
         // Check if password is empty
         guard !((passwordTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Password field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Password field cannot be empty")
             return false
         }
         
         // Check if confirm password is empty
         guard !((confirmPasswordTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Confirm password field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Confirm password field cannot be empty")
             return false
         }
         
         // Check to make sure password == confirm password
         guard passwordTextField.text == confirmPasswordTextField.text else {
-            ABIShowAlert(title: "Error", message: "Password and confirm password must be the same", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Password and confirm password must be the same")
             return false
         }
         
         // Check if first name is empty
         guard !((firstNameTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "First name field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "First name field cannot be empty")
             return false
         }
         
         // Check if company name field is empty
         guard !((companyNameTextField.text?.isEmpty)!) else {
-            ABIShowAlert(title: "Error", message: "Company name field cannot be empty", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Company name field cannot be empty")
             return false
         }
         
         // Check if it's a valid email
         guard emailTextField.text!.isValidEmail() else {
-            ABIShowAlert(title: "Error", message: "Please enter a valid email", sender: nil, handler: nil)
+            ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Please enter a valid email")
             return false
         }
 
@@ -278,3 +260,18 @@ extension SignUpViewController: UITextFieldDelegate {
         return true
     }
 }
+
+// MARK: - RKDropDownAlertDelegate
+
+extension SignUpViewController: RKDropdownAlertDelegate {
+    
+    func dropdownAlertWasDismissed() -> Bool {
+        self.segueToDashboardVC()
+        return true
+    }
+    
+    func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+        return true
+    }
+}
+
