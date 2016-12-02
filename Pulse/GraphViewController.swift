@@ -58,7 +58,6 @@ class GraphViewController: UIViewController {
         chart2.backgroundColor = UIColor.clear
         chart3.backgroundColor = UIColor.clear
         
-        
         if personIdValues.count > 0 {
             var data1: [(x: Float, y: Float)] = []
             var data2: [(x: Float, y: Float)] = []
@@ -101,6 +100,12 @@ class GraphViewController: UIViewController {
         chart3.lineWidth = 2
         chart3.yLabels = [0, 1, 2]
         chart3.yLabelsFormatter = { self.highLowValues[Int($1)] }
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.chart1.alpha = 1.0
+            self.chart2.alpha = 1.0
+            self.chart3.alpha = 1.0
+        })
     }
 
     func heightForView() -> CGFloat {
