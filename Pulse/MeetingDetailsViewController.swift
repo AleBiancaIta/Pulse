@@ -27,6 +27,7 @@ class MeetingDetailsViewController: UIViewController {
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     weak var delegate: MeetingDetailsViewControllerDelegate?
+    weak var delegate2: MeetingDetailsViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,6 +91,7 @@ class MeetingDetailsViewController: UIViewController {
     func onSaveButton(_ sender: UIBarButtonItem) {
         debugPrint("Save button tap")
         delegate?.meetingDetailsViewController?(self, onSave: true)
+        delegate2?.meetingDetailsViewController?(self, onSave: true)
     }
     
     func onManageCards() {
@@ -176,6 +178,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                     let storyboard = UIStoryboard(name: "Notes", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                     viewController.delegate = self
+                    self.delegate2 = viewController
                     viewController.notes = meeting.notes
                     
                     viewController.willMove(toParentViewController: self)

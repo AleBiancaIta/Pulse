@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="JnB-bi-nGG">
-                                <rect key="frame" x="8" y="64.5" width="343" height="80"/>
+                                <rect key="frame" x="8" y="65" width="343" height="80"/>
                                 <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="hbP-Kh-37K"/>
@@ -31,9 +31,15 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Notes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vim-zO-UlL">
-                                <rect key="frame" x="8" y="28" width="59.5" height="28.5"/>
+                                <rect key="frame" x="8" y="28" width="60" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Draft" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EIi-XR-Vn4">
+                                <rect key="frame" x="322" y="42" width="29" height="15"/>
+                                <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
+                                <color key="textColor" red="0.7725490196" green="0.79215686269999996" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -43,6 +49,8 @@
                             <constraint firstAttribute="trailing" secondItem="JnB-bi-nGG" secondAttribute="trailing" constant="24" id="H1n-Df-gng"/>
                             <constraint firstItem="JnB-bi-nGG" firstAttribute="leading" secondItem="73p-hP-Hdv" secondAttribute="leading" constant="8" id="MR4-0w-Gp0"/>
                             <constraint firstItem="Vim-zO-UlL" firstAttribute="leading" secondItem="73p-hP-Hdv" secondAttribute="leading" constant="8" id="MkK-J7-qso"/>
+                            <constraint firstItem="JnB-bi-nGG" firstAttribute="top" secondItem="EIi-XR-Vn4" secondAttribute="bottom" constant="8" id="P94-rI-B40"/>
+                            <constraint firstAttribute="trailing" secondItem="EIi-XR-Vn4" secondAttribute="trailing" constant="24" id="Upy-wm-eMD"/>
                             <constraint firstItem="Vim-zO-UlL" firstAttribute="top" secondItem="1No-Q5-gWd" secondAttribute="bottom" constant="8" id="vow-xW-RYG"/>
                         </constraints>
                         <connections>
@@ -50,6 +58,7 @@
                         </connections>
                     </view>
                     <connections>
+                        <outlet property="draftLabel" destination="EIi-XR-Vn4" id="w1C-Eg-Ai6"/>
                         <outlet property="notesTextView" destination="JnB-bi-nGG" id="TwA-78-sBO"/>
                     </connections>
                 </viewController>

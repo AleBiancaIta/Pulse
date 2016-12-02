@@ -175,6 +175,7 @@ extension MeetingsViewController: UITableViewDataSource {
 
         } else {
             cell.messageLabel.text = "You have no meetings"
+            cell.imageName = "Clipboard"
         }
         return cell
     }
