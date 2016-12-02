@@ -20,7 +20,7 @@ class GraphViewController: UIViewController {
     var survey2Values: [Float] = []
     var survey3Values: [Float] = []
     var personIdValues: [String] = []
-    var highLowValues = ["Low", "Med", "High"]
+    var highLowValues = ["Poor", "Good", "Great"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
