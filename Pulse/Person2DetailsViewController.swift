@@ -15,7 +15,6 @@ class Person2DetailsViewController: UIViewController {
     
     var selectedCardsString: String = ""
 //    var selectedCardsString: String = "dm" // Default cards (To Do, Meetings)
-
     var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
     
     var personPFObject: PFObject?

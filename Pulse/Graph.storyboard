@@ -63,6 +63,14 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nbg-gz-kyr">
+                                <rect key="frame" x="302" y="6" width="51" height="31"/>
+                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="onTintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="onChartSwitch:" destination="eWK-lS-6NH" eventType="valueChanged" id="CE6-1B-wek"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VGS-cs-X4k" firstAttribute="top" secondItem="E2n-X7-jUQ" secondAttribute="bottom" constant="8" id="3yu-re-CqZ"/>
@@ -70,6 +78,7 @@
                             <constraint firstAttribute="trailing" secondItem="NQT-G4-Nlh" secondAttribute="trailing" constant="24" id="6og-I5-e8A"/>
                             <constraint firstItem="ZQg-9M-sTy" firstAttribute="top" secondItem="nqc-DF-Fg9" secondAttribute="top" constant="8" id="7DW-vW-XrD"/>
                             <constraint firstItem="ZQg-9M-sTy" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="7dD-is-Y4B"/>
+                            <constraint firstAttribute="trailing" secondItem="nbg-gz-kyr" secondAttribute="trailing" constant="24" id="7mx-g3-eQO"/>
                             <constraint firstItem="kZN-RS-gWN" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="9x9-1n-1rh"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="BJj-oU-Rwg"/>
                             <constraint firstItem="E2n-X7-jUQ" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="D0q-ed-Pkg"/>
@@ -82,6 +91,7 @@
                             <constraint firstAttribute="trailing" secondItem="VGS-cs-X4k" secondAttribute="trailing" constant="24" id="nay-7I-inQ"/>
                             <constraint firstItem="Hci-68-o5z" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="rCu-Gz-X5v"/>
                             <constraint firstAttribute="trailing" secondItem="E2n-X7-jUQ" secondAttribute="trailing" constant="24" id="rMS-s5-4Xp"/>
+                            <constraint firstItem="sjY-oB-iX6" firstAttribute="top" secondItem="nbg-gz-kyr" secondAttribute="bottom" constant="8" id="tO9-uQ-uRg"/>
                             <constraint firstAttribute="trailing" secondItem="kZN-RS-gWN" secondAttribute="trailing" constant="24" id="xiu-8N-YDo"/>
                             <constraint firstItem="VGS-cs-X4k" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="xqy-eB-UrX"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="top" secondItem="ZQg-9M-sTy" secondAttribute="bottom" constant="8" id="zrG-AB-29q"/>
@@ -91,6 +101,7 @@
                         <outlet property="chart1" destination="E2n-X7-jUQ" id="Skx-pI-Y9j"/>
                         <outlet property="chart2" destination="kZN-RS-gWN" id="G45-Ys-mL8"/>
                         <outlet property="chart3" destination="Hci-68-o5z" id="o3s-li-ah5"/>
+                        <outlet property="chartTitleLabel" destination="ZQg-9M-sTy" id="aAO-RZ-1EU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KJi-De-zoa" userLabel="First Responder" sceneMemberID="firstResponder"/>
