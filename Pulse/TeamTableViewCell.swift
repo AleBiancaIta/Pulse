@@ -83,16 +83,16 @@ class TeamTableViewCell: UITableViewCell {
     fileprivate func setUpSurvey3(value: Int) {
         switch value {
         case 0:
-            surveyValue3Button.setImage(UIImage(named: "Checkmark5"), for: .normal)
-            surveyValue3Button.tintColor = UIColor.pulseGoodSurveyColor() //UIColor.green
+            surveyValue3Button.setImage(UIImage(named: "Cross4"), for: .normal)
+            surveyValue3Button.tintColor = UIColor.pulseBadSurveyColor() //UIColor.red
             surveyValue3Button.backgroundColor = UIColor.clear
         case 1:
             surveyValue3Button.setImage(UIImage(named: "Circle3"), for: .normal)
             surveyValue3Button.tintColor = UIColor.pulseNeutralSurveyColor() //UIColor.yellow
             surveyValue3Button.backgroundColor = UIColor.clear
         case 2:
-            surveyValue3Button.setImage(UIImage(named: "Cross4"), for: .normal)
-            surveyValue3Button.tintColor = UIColor.pulseBadSurveyColor() //UIColor.red
+            surveyValue3Button.setImage(UIImage(named: "Checkmark5"), for: .normal)
+            surveyValue3Button.tintColor = UIColor.pulseGoodSurveyColor() //UIColor.green
             surveyValue3Button.backgroundColor = UIColor.clear
         default:
             surveyValue3Button.setImage(UIImage(named: "Circle3"), for: .normal)
