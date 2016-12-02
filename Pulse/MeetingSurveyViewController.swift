@@ -493,7 +493,7 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
                         }
                     }
                 } else {
-                    ABIShowAlert(title: "Error", message: "Please complete the required fields", sender: nil, handler: nil)
+                    ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Please complete the required fields")
                 }
             } else { // existing meeting
                 if (isValue1Changed || isValue2Changed || isValue3Changed) {
