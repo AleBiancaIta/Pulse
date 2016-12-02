@@ -13,7 +13,8 @@ protocol NotesViewControllerDelegate: class {
 }
 
 class NotesViewController: UIViewController {
-
+    
+    @IBOutlet weak var draftLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     
     var notes: String?
@@ -45,6 +46,15 @@ class NotesViewController: UIViewController {
 
 extension NotesViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
+        draftLabel.isHidden = false
         delegate?.notesViewController(notesViewController: self, didUpdateNotes: notesTextView.text)
+    }
+}
+
+// MARK: - MeetingDetailsViewControllerDelegate
+
+extension NotesViewController: MeetingDetailsViewControllerDelegate {
+     func meetingDetailsViewController(_ meetingDetailsViewController: MeetingDetailsViewController, onSave: Bool) {
+        draftLabel.isHidden = true
     }
 }

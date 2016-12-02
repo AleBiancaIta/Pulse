@@ -71,6 +71,8 @@ class PhotoImageView: UIView {
 
 		imagePicker.delegate = self
 		imageView.layer.cornerRadius = 5
+        imageView.layer.borderColor = UIColor.pulseLightPrimaryColor().cgColor
+        imageView.layer.borderWidth = 1
 		imageView.clipsToBounds = true
 	}
 

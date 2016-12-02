@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="77.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iml-I3-uQh">
@@ -30,20 +30,20 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nm-SP-k1Z">
-                                <rect key="frame" x="36" y="8" width="33" height="16"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                <rect key="frame" x="36" y="8" width="37.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ssq-xC-LXi">
-                                <rect key="frame" x="36" y="25" width="31" height="15"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <rect key="frame" x="36" y="27" width="31" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soH-JR-xNb" userLabel="Meeting Label">
-                                <rect key="frame" x="271" y="26" width="31" height="15"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <rect key="frame" x="271" y="27" width="31" height="15"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -53,6 +53,7 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="4nm-SP-k1Z" secondAttribute="trailing" constant="8" id="3dv-Mn-rcu"/>
                             <constraint firstItem="4nm-SP-k1Z" firstAttribute="top" secondItem="iml-I3-uQh" secondAttribute="top" constant="8" id="4Ua-fE-3hj"/>
                             <constraint firstAttribute="trailing" secondItem="soH-JR-xNb" secondAttribute="trailing" constant="8" id="Aov-qb-xZD"/>
+                            <constraint firstItem="Ssq-xC-LXi" firstAttribute="leading" secondItem="4nm-SP-k1Z" secondAttribute="leading" id="KiI-1O-OKH"/>
                             <constraint firstItem="soH-JR-xNb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ssq-xC-LXi" secondAttribute="trailing" constant="8" id="LQs-id-EvA"/>
                             <constraint firstItem="Ssq-xC-LXi" firstAttribute="top" secondItem="4nm-SP-k1Z" secondAttribute="bottom" constant="1" id="MSQ-KR-RyM"/>
                             <constraint firstItem="Ssq-xC-LXi" firstAttribute="leading" secondItem="4nm-SP-k1Z" secondAttribute="leading" id="YFt-yw-Y8H"/>

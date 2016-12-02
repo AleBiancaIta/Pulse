@@ -17,6 +17,10 @@ class MeetingSurveyViewController: UIViewController {
     
     @IBOutlet weak var teamListTableView: UITableView!
     
+    @IBOutlet weak var surveyDescrView: UIView!
+    @IBOutlet weak var surveyDescrLabel: UILabel!
+    @IBOutlet weak var surveyDescrBackground: UIView!
+    
     @IBOutlet weak var survey1Low: UISwitch! // 0
     @IBOutlet weak var survey1Med: UISwitch! // 1
     @IBOutlet weak var survey1High: UISwitch! // 2
@@ -64,6 +68,8 @@ class MeetingSurveyViewController: UIViewController {
                 startNewMeeting()
             }
         }
+        
+        surveyDescrView.layer.cornerRadius = 5
     }
     
     fileprivate func configureRowHeight() {
@@ -194,6 +200,53 @@ class MeetingSurveyViewController: UIViewController {
     }
     
     // MARK: - Actions
+    
+    @IBAction func onDismissSurveyDescr(_ sender: UITapGestureRecognizer) {
+        surveyDescrView.isHidden = true
+        surveyDescrBackground.isHidden = true
+    }
+    
+    @IBAction func onSurvey1InfoButton(_ sender: Any) {
+        var name = "Team member"
+        if let person = person,
+            let firstName = person["firstName"] as? String {
+            name = firstName
+        }
+        surveyDescrLabel.text = "Poor: \(name) is currently in an unhappy state\n\nGood: \(name) is okay, but could be doing better\n\nGreat: \(name) feels great!"
+        
+        surveyDescrLabel.sizeToFit()
+        surveyDescrView.sizeToFit()
+        surveyDescrView.isHidden = false
+        surveyDescrBackground.isHidden = false
+    }
+    
+    @IBAction func onSurvey2InfoButton(_ sender: Any) {
+        var name = "Team member"
+        if let person = person,
+            let firstName = person["firstName"] as? String {
+            name = firstName
+        }
+        surveyDescrLabel.text = "Poor: \(name) is not feeling engaged\n\nGood: \(name) is feeling somewhat engaged\n\nGreat: \(name) is totally engaged!"
+        
+        surveyDescrLabel.sizeToFit()
+        surveyDescrView.sizeToFit()
+        surveyDescrView.isHidden = false
+        surveyDescrBackground.isHidden = false
+    }
+    
+    @IBAction func onSurvey3InfoButton(_ sender: Any) {
+        var name = "Team member"
+        if let person = person,
+            let firstName = person["firstName"] as? String {
+            name = firstName
+        }
+        surveyDescrLabel.text = "Poor: \(name)'s workload is too heavy or too light\n\nGood: \(name)'s workload is manageable\n\nGreat: \(name)'s workload is just right!"
+        
+        surveyDescrLabel.sizeToFit()
+        surveyDescrView.sizeToFit()
+        surveyDescrView.isHidden = false
+        surveyDescrBackground.isHidden = false
+    }
     
     @IBAction func onSurvey1LowSwitch(_ sender: AnyObject) {
         // survey1Low.isOn = !survey1Low.isOn not working properly
