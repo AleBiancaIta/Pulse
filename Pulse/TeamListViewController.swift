@@ -39,8 +39,8 @@ class TeamListViewController: UIViewController {
                 debugPrint("successfully fetching team members")
                 self.tableView.reloadData()
             } else {
-                debugPrint("Unable to load data with error: \(error?.localizedDescription)")
-                //self.showAlert(title: "Error", message: "Unable to load data", sender: nil, handler: nil)
+                //debugPrint("Unable to load data with error: \(error?.localizedDescription)")
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to load team data, error: \(error?.localizedDescription)")
             }
         }
     }

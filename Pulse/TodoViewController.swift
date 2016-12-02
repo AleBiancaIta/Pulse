@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import RKDropdownAlert
 
 enum CellTypes: Int {
     case add = 0, list, showCompleted, listCompleted
@@ -173,7 +174,8 @@ class TodoViewController: UIViewController {
         case .dashboard:
             fetchTodoDashboard(isCompleted: false) { (items: [PFObject]?, error: Error?) in
                 if let error = error {
-                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error in fetching todo items, error: \(error.localizedDescription)")
+                    //debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                 } else {
                     if let items = items, items.count > 0 {
                         self.todoItems = items
@@ -189,7 +191,8 @@ class TodoViewController: UIViewController {
         case .employeeDetail:
             fetchTodoEmployeeDetail(isCompleted: false) { (items: [PFObject]?, error: Error?) in
                 if let error = error {
-                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error in fetching todo items, error: \(error.localizedDescription)")
+                    //debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                 } else {
                     if let items = items, items.count > 0 {
                         self.todoItems = items
@@ -203,7 +206,8 @@ class TodoViewController: UIViewController {
         case .meeting:
             fetchTodoMeeting(isCompleted: false) { (items: [PFObject]?, error: Error?) in
                 if let error = error {
-                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error in fetching todo items, error: \(error.localizedDescription)")
+                    //debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                 } else {
                     if let items = items, items.count > 0 {
                         self.todoItems = items
@@ -222,7 +226,8 @@ class TodoViewController: UIViewController {
         case .dashboard:
             fetchTodoDashboard(isCompleted: true) { (items: [PFObject]?, error: Error?) in
                 if let error = error {
-                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error in fetching todo items, error: \(error.localizedDescription)")
+                    //debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                 } else {
                     if let items = items, items.count > 0 {
                         self.todoCompletedItems = items
@@ -236,7 +241,8 @@ class TodoViewController: UIViewController {
         case .employeeDetail:
             fetchTodoEmployeeDetail(isCompleted: true) { (items: [PFObject]?, error: Error?) in
                 if let error = error {
-                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error in fetching todo items, error: \(error.localizedDescription)")
+                    //debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                 } else {
                     if let items = items, items.count > 0 {
                         self.todoCompletedItems = items
@@ -250,7 +256,8 @@ class TodoViewController: UIViewController {
         case .meeting:
             fetchTodoMeeting(isCompleted: true) { (items: [PFObject]?, error: Error?) in
                 if let error = error {
-                    debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error in fetching todo items, error: \(error.localizedDescription)")
+                    //debugPrint("Error in fetching todo items, error: \(error.localizedDescription)")
                 } else {
                     if let items = items, items.count > 0 {
                         self.todoCompletedItems = items
@@ -277,7 +284,6 @@ class TodoViewController: UIViewController {
         // We only want to show the todo related to the current user account
         if let manager = self.currentManager, let currentTeamPerson = self.currentTeamPerson {
             parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
-            
         }  else {
             debugPrint("Manager or current team member is nil, cannot fetch todoItems")
         }
@@ -292,7 +298,6 @@ class TodoViewController: UIViewController {
             let managerId = manager.objectId!
             
             parseClient.fetchTodoFor(managerId: managerId, personId: personId, meetingId: meetingId, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
-            
         }  else {
             debugPrint("Manager or meeting object is nil, cannot fetch todoItems")
         }
@@ -502,7 +507,9 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
                 if success {
                     debugPrint("Successfully 'deleting' todo item")
                 } else {
-                    debugPrint("Failed to 'delete' todo item with error: \(error?.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to 'delete' todo item with error: \(error?.localizedDescription)")
+                    //debugPrint("Failed to 'delete' todo item with error: \(error?.localizedDescription)")
+                    
                     // TODO: reset deleted item or retry later?
                 }
             })
@@ -520,7 +527,6 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension TodoViewController: TodoAddCellDelegate {
     func todoAddCell(_ todoAddCell: TodoAddCell, todoString: String) {
-        debugPrint("textfield did return: \(todoString)")
         let newTodo = createTodoObject(todoString: todoString)
         
         if todoItems.count == 0 {
@@ -543,10 +549,12 @@ extension TodoViewController: TodoAddCellDelegate {
                 //self.tableView.reloadData()
             } else {
                 //remove the new todo added - need to test this
+                self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.failure, title: "Error!", message: "Adding new item: error \(error?.localizedDescription). Please try again later", delegate: self)
+                /*
                 self.ABIShowAlert(title: "Error", message: "Adding new item: error \(error?.localizedDescription). Please try again later", sender: nil, handler: { (alertAction: UIAlertAction) in
                     self.todoItems.remove(at: 0)
                     self.tableView.reloadData()
-                })
+                })*/
             }
         }
 
@@ -589,7 +597,6 @@ extension TodoViewController: TodoListCellDelegate {
     func todoListCell(_ todoListCell: TodoListCell, isCompleted: Bool) {
         
         if isCompleted {
-            debugPrint("need to uncomplete the task")
             if let indexPath = tableView.indexPath(for: todoListCell) {
                 let todo = todoCompletedItems.remove(at: indexPath.row)
                 todo.remove(forKey: ObjectKeys.ToDo.completedAt)
@@ -600,13 +607,14 @@ extension TodoViewController: TodoListCellDelegate {
                     if success {
                         debugPrint("Successfully uncompleting task")
                     } else {
-                        debugPrint("Failed to uncomplete task, error: \(error?.localizedDescription)")
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to uncomplete task, error: \(error?.localizedDescription)")
+                        //debugPrint("Failed to uncomplete task, error: \(error?.localizedDescription)")
+                        
                         // TODO: Retry or reset the changes?
                     }
                 })
             }
         } else {
-            debugPrint("need to complete the task")
             if let indexPath = tableView.indexPath(for: todoListCell) {
                 let todo = todoItems.remove(at: indexPath.row)
                 todo[ObjectKeys.ToDo.completedAt] = Date()
@@ -617,7 +625,9 @@ extension TodoViewController: TodoListCellDelegate {
                     if success {
                         debugPrint("Successfully updated completedAt for todo item")
                     } else {
-                        debugPrint("Failed to update completedAt for todo item, error: \(error?.localizedDescription)")
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update completedAt for todo item, error: \(error?.localizedDescription)")
+                        //debugPrint("Failed to update completedAt for todo item, error: \(error?.localizedDescription)")
+                        
                         // TODO: Retry or reset the changes?
                     }
                 })
@@ -626,12 +636,29 @@ extension TodoViewController: TodoListCellDelegate {
     }
 }
 
+// MARK: - TodoEditViewControllerDelegate
+
 extension TodoViewController: TodoEditViewControllerDelegate {
     func todoEditViewController(_ todoEditViewController: TodoEditViewController, didUpdate success: Bool) {
         if success {
             self.populateTodoTables()
             self.tableView.reloadData()
         }
+    }
+}
+
+// MARK: - RKDropDownAlertDelegate
+
+extension TodoViewController: RKDropdownAlertDelegate {
+    
+    func dropdownAlertWasDismissed() -> Bool {
+        self.todoItems.remove(at: 0)
+        self.tableView.reloadData()
+        return true
+    }
+    
+    func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+        return true
     }
 }
 

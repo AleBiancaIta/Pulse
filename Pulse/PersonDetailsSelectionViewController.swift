@@ -20,7 +20,7 @@ class PersonDetailsSelectionViewController: UIViewController {
     weak var delegate: PersonDetailsSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    var alertController: UIAlertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
+    //var alertController: UIAlertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class PersonDetailsSelectionViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+        //alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
@@ -76,9 +76,10 @@ extension PersonDetailsSelectionViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.row != 0 && indexPath.row != 1 else {
-            print("Sorry, info and team cards may not be manually updated")
-            alertController.message = "Sorry, info and team cards may not be manually updated"
-            present(alertController, animated: true)
+            //print("Sorry, info and team cards may not be manually updated")
+            //alertController.message = "Sorry, info and team cards may not be manually updated"
+            //present(alertController, animated: true)
+            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Sorry, info and team cards may not be manually updated")
             return
         }
         

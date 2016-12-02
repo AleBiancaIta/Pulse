@@ -17,8 +17,6 @@ class MeetingDetailsViewController: UIViewController {
    
    @IBOutlet weak var tableView: UITableView!
    
-   //var alertController: UIAlertController?
-   
    var selectedCardsString: String = ""
    var selectedCards: [Card] = [Constants.meetingCards[0]] // Always include survey card
    
@@ -44,9 +42,6 @@ class MeetingDetailsViewController: UIViewController {
       
       tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
       tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
-      
-      //alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
-      //alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
       
       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

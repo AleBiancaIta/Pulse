@@ -25,8 +25,6 @@ class MeetingsViewController: UIViewController {
     
     var personId: String? 
     
-    var alertController: UIAlertController?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -206,14 +204,12 @@ extension MeetingsViewController: UITableViewDataSource {
                     post["deletedAt"] = Date()
                     post.saveInBackground { (success: Bool, error: Error?) in
                         if success {
-                            //self.alertController?.message = "Successfully deleted meeting."
-                            //self.present(self.alertController!, animated: true)
+                            //self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success", message: "Successfully deleted meeting")
                             print("Successfully deleted meeting")
                             self.loadMeetings()
                         } else {
-                            //self.alertController?.message = "Error deleting meeting."
-                            //self.present(self.alertController!, animated: true)
-                            print("Error deleting meeting")
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error deleting meeting, error: \(error?.localizedDescription)")
+                            //print("Error deleting meeting")
                         }
                     }
                 }

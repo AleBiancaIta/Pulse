@@ -20,8 +20,6 @@ class DashboardSelectionViewController: UIViewController {
     weak var delegate: DashboardSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    var alertController = UIAlertController(title: "Error", message: "Error", preferredStyle: .alert)
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 

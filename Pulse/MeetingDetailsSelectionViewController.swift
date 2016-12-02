@@ -20,7 +20,7 @@ class MeetingDetailsSelectionViewController: UIViewController {
     weak var delegate: MeetingDetailsSelectionViewControllerDelegate?
     var selectedCards: [Card] = []
     
-    var alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
+    //var alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class MeetingDetailsSelectionViewController: UIViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
+        //alertController.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
@@ -77,8 +77,9 @@ extension MeetingDetailsSelectionViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         guard indexPath.row != 0 else {
-            alertController.message = "Sorry, survey card may not be manually updated"
-            present(alertController, animated: true)
+            //alertController.message = "Sorry, survey card may not be manually updated"
+            //present(alertController, animated: true)
+            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Sorry, survey card may not be manually updated")
             return
         }
         

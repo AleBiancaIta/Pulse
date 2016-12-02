@@ -11,6 +11,7 @@ import Parse
 
 @objc protocol TodoEditTextCellDelegate {
     @objc optional func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEdit: Bool)
+    @objc optional func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didSave: Bool)
 }
 
 class TodoEditTextCell: UITableViewCell {
@@ -90,6 +91,7 @@ extension TodoEditTextCell: UITextFieldDelegate {
             todoItem.saveInBackground { (success: Bool, error: Error?) in
                 if success {
                     debugPrint("successfully updating todoItem")
+                    self.delegate?.todoEditTextCell?(self, didSave: true)
                 } else {
                     debugPrint("Failed to save changes at this time, please try again later. Error: \(error?.localizedDescription)")
                 }

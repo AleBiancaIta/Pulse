@@ -13,8 +13,6 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var alertController: UIAlertController?
-    
     var selectedCardsString: String? = ""
     var selectedCards: [Card] = []
     
@@ -33,9 +31,6 @@ class DashboardViewController: UIViewController {
 
         tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
         tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
-        
-        alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
-        alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         let query = PFQuery(className: "Dashboard")
         let userId = (PFUser.current()?.objectId)! as String
@@ -80,7 +75,8 @@ class DashboardViewController: UIViewController {
                 self.tableView.reloadData()
                 
             } else {
-                print("error loading dashboard cards")
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error loading dashboard cards, error: \(error?.localizedDescription)")
+                //print("error loading dashboard cards")
             }
         }
         
@@ -316,11 +312,13 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
                     if success {
                         print("successfully saved dashboard card")
                     } else {
-                        print("error saving dashboard card")
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
+                        //print("error saving dashboard card")
                     }
                 }
             } else {
-                print("error saving dashboard card")
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
+                //print("error saving dashboard card")
             }
         }
         
@@ -349,7 +347,8 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
                     print("successfully removed dashboard card")
                 }
             } else {
-                print("error removing dashboard card")
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing dashboard card, error: \(error?.localizedDescription)")
+                //print("error removing dashboard card")
             }
         }
         

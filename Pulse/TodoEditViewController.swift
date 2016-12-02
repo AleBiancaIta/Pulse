@@ -27,6 +27,9 @@ class TodoEditViewController: UIViewController {
     var teamMembers = [PFObject]() // only applies to dashboard view type
     weak var delegate: TodoEditViewControllerDelegate?
 
+    var isTextUpdated: Bool = false
+    //var isSelectedPersonUpdated: Bool = false
+    
     enum EditCellTypes: Int {
         case text = 0, person
     }
@@ -54,12 +57,20 @@ class TodoEditViewController: UIViewController {
             
             todoItem.saveInBackground { (success: Bool, error: Error?) in
                 if success {
-                    debugPrint("Successfully updating todo item")
+                    //debugPrint("Successfully updating todo item")
+                    self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully updated todo item")
                     self.delegate?.todoEditViewController?(self, didUpdate: true)
                 } else {
-                    debugPrint("Failed to update todo with error: \(error?.localizedDescription)")
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update todo with error: \(error?.localizedDescription)")
+                    //debugPrint("Failed to update todo with error: \(error?.localizedDescription)")
                 }
             }
+        }
+        
+        // TODO: not the best solution as it's actually showing up twice
+        if isTextUpdated {
+            self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success", message: "Successfully updated todo item")
+            isTextUpdated = false
         }
     }
     
@@ -196,6 +207,13 @@ extension TodoEditViewController: TodoEditTextCellDelegate {
     func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEdit: Bool) {
         if didEdit {
             tableView.reloadData()
+        }
+    }
+    
+    func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didSave: Bool) {
+        if didSave {
+            isTextUpdated = true
+            //self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully updated todo item")
         }
     }
 }

@@ -13,9 +13,9 @@ class Person2DetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var alertController: UIAlertController?
-    
     var selectedCardsString: String = ""
+//    var selectedCardsString: String = "dm" // Default cards (To Do, Meetings)
+
     var selectedCards: [Card] = [Constants.personCards[0]] // Always include info card
     
     var personPFObject: PFObject?
@@ -40,9 +40,6 @@ class Person2DetailsViewController: UIViewController {
         tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
         
 		initPersonInfo()
-
-        alertController = UIAlertController(title: "", message: "Error", preferredStyle: .alert)
-        alertController?.addAction(UIAlertAction(title: "OK", style: .cancel))
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -385,7 +382,8 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                         if success {
                             print("successfully saved person card")
                         } else {
-                            print("error saving person card")
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card, error: \(error?.localizedDescription)")
+                            //print("error saving person card")
                         }
                     }
                 } else {
@@ -394,7 +392,8 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                     post.saveInBackground()
                 }
             } else {
-                print("error saving person card")
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card, error: \(error?.localizedDescription)")
+                //print("error saving person card")
             }
         }
         
@@ -433,7 +432,8 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                     }
                 }
             } else {
-                print("error removing person card")
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing person card, error: \(error?.localizedDescription)")
+                //print("error removing person card")
             }
         }
         
