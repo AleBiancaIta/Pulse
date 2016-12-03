@@ -198,7 +198,7 @@ extension MeetingsViewController: UITableViewDataSource {
 
         } else {
             selectAllButton.isHidden = true
-            cell.messageLabel.text = "You have no meetings"
+            cell.messageLabel.text = "You currently have no meetings"
             cell.imageName = "Clipboard"
         }
         return cell

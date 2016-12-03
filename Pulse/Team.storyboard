@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team Members" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sH3-eb-hPa">
-                                <rect key="frame" x="8" y="28" width="155.5" height="29"/>
+                                <rect key="frame" x="8" y="28" width="156" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -65,21 +65,31 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You currently have no team members" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsQ-lT-C4S">
+                                <rect key="frame" x="53" y="107" width="270" height="20"/>
+                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="exV-XO-J5A" firstAttribute="centerX" secondItem="8sD-cq-fM7" secondAttribute="centerX" id="2MF-k3-oFN"/>
                             <constraint firstAttribute="trailing" secondItem="exV-XO-J5A" secondAttribute="trailing" id="61R-Jn-FAD"/>
                             <constraint firstItem="Dre-Bh-2S4" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" constant="8" id="AN8-1N-coC"/>
                             <constraint firstItem="sH3-eb-hPa" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" constant="8" id="E5R-tI-l9b"/>
                             <constraint firstItem="exV-XO-J5A" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" id="QVm-7P-kW4"/>
                             <constraint firstItem="sH3-eb-hPa" firstAttribute="top" secondItem="9PD-MW-oph" secondAttribute="bottom" constant="8" id="c5z-xB-qYJ"/>
+                            <constraint firstItem="AsQ-lT-C4S" firstAttribute="centerX" secondItem="8sD-cq-fM7" secondAttribute="centerX" id="gge-ZJ-PUT"/>
                             <constraint firstItem="Dre-Bh-2S4" firstAttribute="centerY" secondItem="jil-jH-HK7" secondAttribute="centerY" id="phr-9O-Pve"/>
                             <constraint firstItem="jil-jH-HK7" firstAttribute="top" secondItem="sH3-eb-hPa" secondAttribute="bottom" constant="8" id="qq1-zF-dLf"/>
+                            <constraint firstItem="AsQ-lT-C4S" firstAttribute="top" secondItem="exV-XO-J5A" secondAttribute="top" constant="8" id="wIh-W1-ofS"/>
                             <constraint firstAttribute="trailing" secondItem="jil-jH-HK7" secondAttribute="trailing" constant="24" id="x4b-eO-xZg"/>
                             <constraint firstItem="exV-XO-J5A" firstAttribute="top" secondItem="Dre-Bh-2S4" secondAttribute="bottom" constant="8" id="xsE-SO-und"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="exV-XO-J5A" id="acf-Q9-14F"/>
+                        <outlet property="noTeamMembersLabel" destination="AsQ-lT-C4S" id="Z0w-uH-nfc"/>
                         <outlet property="seeAllButton" destination="Dre-Bh-2S4" id="4I1-Zb-gSX"/>
                     </connections>
                 </viewController>
@@ -115,7 +125,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcK-AF-ZAf">
-                                        <rect key="frame" x="118.5" y="28" width="138" height="21"/>
+                                        <rect key="frame" x="119" y="28" width="138" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -131,14 +141,14 @@
                                 </constraints>
                             </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="WIr-o1-Nou" userLabel="Profile Image View">
-                                <rect key="frame" x="37.5" y="79" width="300" height="300"/>
+                                <rect key="frame" x="38" y="79" width="300" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="N49-GW-vS1"/>
                                     <constraint firstAttribute="height" constant="300" id="wgO-Yl-R9m"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VYv-7M-NIs" userLabel="First Name Text Field">
-                                <rect key="frame" x="37.5" y="395" width="300" height="30"/>
+                                <rect key="frame" x="38" y="395" width="300" height="30"/>
                                 <color key="backgroundColor" red="0.78445512819999996" green="0.78445512819999996" blue="0.78445512819999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Gpi-cC-Esh"/>
@@ -149,21 +159,21 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5va-V4-Mf8" userLabel="Last Name Text Field">
-                                <rect key="frame" x="37.5" y="437" width="300" height="30"/>
+                                <rect key="frame" x="38" y="437" width="300" height="30"/>
                                 <color key="backgroundColor" red="0.78445512819999996" green="0.78445512819999996" blue="0.78445512819999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zmC-ws-OBf" userLabel="Phone Text Field">
-                                <rect key="frame" x="37.5" y="479" width="300" height="30"/>
+                                <rect key="frame" x="38" y="479" width="300" height="30"/>
                                 <color key="backgroundColor" red="0.78445512819999996" green="0.78445512819999996" blue="0.78445512819999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aUk-oa-epH" userLabel="Email Text Field">
-                                <rect key="frame" x="37.5" y="521" width="300" height="30"/>
+                                <rect key="frame" x="38" y="521" width="300" height="30"/>
                                 <color key="backgroundColor" red="0.78445512819999996" green="0.78445512819999996" blue="0.78445512819999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -228,10 +238,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TeamListCell" rowHeight="72" id="ZnN-Ym-Aiq" customClass="TeamTableViewCell" customModule="Pulse" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="584" height="72"/>
+                                        <rect key="frame" x="0.0" y="28" width="359" height="72"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZnN-Ym-Aiq" id="zgX-4b-Te7">
-                                            <rect key="frame" x="0.0" y="0.0" width="584" height="71.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>

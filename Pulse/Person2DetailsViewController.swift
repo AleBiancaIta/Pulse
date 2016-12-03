@@ -166,9 +166,18 @@ extension Person2DetailsViewController: UITableViewDataSource {
         if indexPath.section == selectedCards.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: "AddCardCell", for: indexPath) as! CardManagementCell
             cell.layer.cornerRadius = 5
-            cell.selectionStyle = .none
             cell.backgroundColor = UIColor.clear
-            cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
+            cell.selectionStyle = .none
+            
+            if personPFObject != nil {
+                cell.addButton.tintColor = UIColor.pulseAccentColor()
+                cell.manageLabel.tintColor = UIColor.pulseAccentColor()
+                cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
+            } else {
+                cell.addButton.tintColor = UIColor.lightGray
+                cell.manageLabel.textColor = UIColor.lightGray
+                cell.manageLabel.text = "Save team member to manage modules"
+            }
             return cell
             
         } else { // The actual cards
@@ -352,7 +361,7 @@ extension Person2DetailsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == selectedCards.count {
+        if indexPath.section == selectedCards.count && personPFObject != nil {
             onManageCards()
         }
     }

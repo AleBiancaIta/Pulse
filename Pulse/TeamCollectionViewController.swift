@@ -11,6 +11,7 @@ import Parse
 
 class TeamCollectionViewController: UIViewController {
     
+    @IBOutlet weak var noTeamMembersLabel: UILabel!
     @IBOutlet weak var seeAllButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     let dataSource = TeamViewDataSource.sharedInstance()
@@ -35,11 +36,8 @@ class TeamCollectionViewController: UIViewController {
         dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")
-                if self.dataSource.teamMembers.count == 0 {
-                    self.seeAllButton.isHidden = true
-                } else {
-                    self.seeAllButton.isHidden = false
-                }
+                self.noTeamMembersLabel.isHidden = !(self.dataSource.teamMembers.count == 0)
+                self.seeAllButton.isHidden = self.dataSource.teamMembers.count == 0
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
