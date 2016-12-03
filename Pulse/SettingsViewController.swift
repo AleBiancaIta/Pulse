@@ -19,9 +19,9 @@ class SettingsViewController: UIViewController {
     
     // Note: Sign Up is for anonymous user who wants to sign up for the account
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
-    fileprivate let settingsContent = ["User Information", "Change Password", "Feedback", "Log Out"]
-    fileprivate let settingsSubcontent = ["Update your Pulse user information or password with a few taps", "Change the password associated with your Pulse account", "Send us an email to provide feedback, ask questions, or report bugs", "Logging out already? Come back soon!"]
-    fileprivate let settingsImageName = ["Passport2", "Keylock2", "Help", "Logout2"]
+    fileprivate let settingsContent = ["User Information", "Change Password", "Feedback"]
+    fileprivate let settingsSubcontent = ["Update your Pulse user information or password with a few taps", "Change the password associated with your Pulse account", "Send us an email to provide feedback, ask questions, or report bugs"]
+    fileprivate let settingsImageName = ["Passport2", "Keylock2", "Help"]
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     
@@ -145,56 +145,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 2 { // Help
                 let url = URL(string: "mailto:2b8wad2qg5@snkmail.com?subject=Pulse%20Feedback")
                 UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-            } else if indexPath.row == 3 { // Log Out
-                logOut()
-            }
+            } //else if indexPath.row == 3 { // Log Out
+              //  logOut()
+            //}
         }
-    }
-    
-    // MARK: - Helpers
-
-    fileprivate func logOut() {
-        
-        /*
-        // If anonymous user, give them a heads up that their data will be deleted if they don't sign up
-        if PFAnonymousUtils.isLinked(with: user) {
-            debugPrint("user is anonymous, give them a warning")
-            ABIShowAlertWithActions(title: "Alert", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
-                if alertAction1.title == "Sign Up" {
-                    debugPrint("Sign Up is being clicked")
-                    self.segueToStoryboard(id: StoryboardID.signupVC)
-                }
-            }, handler2: { (alertAction2: UIAlertAction) in
-                if alertAction2.title == "Log Out" {
-                    debugPrint("Log Out is being clicked")
-                    PFUser.logOutInBackground(block: { (error: Error?) in
-                        if let error = error {
-                            debugPrint("Log out failed with error: \(error.localizedDescription)")
-                        } else {
-                            debugPrint("User log out successfully")
-                            self.segueToStoryboard(id: StoryboardID.loginSignupVC)
-                        }
-                    })
-                }
-            })
-        } else { */
-            // If not anonymous, log out user and take them back to the sign up page
-            PFUser.logOutInBackground(block: { (error: Error?) in
-                if let error = error {
-                    debugPrint("Log out failed with error: \(error.localizedDescription)")
-                } else {
-                    debugPrint("User log out successfully")
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Logout"), object: self, userInfo: nil)
-                    //self.segueToStoryboard(id: StoryboardID.loginSignupVC)
-                }
-            })
-        //}
-    }
-
-    fileprivate func segueToStoryboard(id: String) {
-        let storyboard = UIStoryboard(name: "Login", bundle: nil)
-        let loginSignUpVC = storyboard.instantiateViewController(withIdentifier: id)
-        self.present(loginSignUpVC, animated: true, completion: nil)
-        //(UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = loginSignUpVC
     }
 }

@@ -459,7 +459,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2940" y="-330.58470764617692"/>
+            <point key="canvasLocation" x="2438" y="-503"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="ByT-gY-td5">

@@ -76,6 +76,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Dashboard" id="rhG-hT-WVt">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="esq-bv-oOw">
+                            <connections>
+                                <action selector="onLogoutButtonTap:" destination="BYZ-38-t0r" id="JAV-Uf-mq7"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Settings" id="z4O-Xw-Bd7">
                             <connections>
                                 <action selector="onSettingsButtonTap:" destination="BYZ-38-t0r" id="b8t-2j-uWh"/>

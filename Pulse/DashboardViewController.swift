@@ -109,7 +109,7 @@ class DashboardViewController: UIViewController {
  
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
-        settingsVC.modalTransitionStyle = .flipHorizontal
+        //settingsVC.modalTransitionStyle = .flipHorizontal
         settingsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
         let navController = UINavigationController(rootViewController: settingsVC)
         present(navController, animated: true, completion: nil)
@@ -123,11 +123,61 @@ class DashboardViewController: UIViewController {
         self.present(settingsNavVC, animated: true, completion: nil)
         */
     }
+    
+    @IBAction func onLogoutButtonTap(_ sender: UIBarButtonItem) {
+        logOut()
+    }
  
     // MARK: - Private Methods
  
     @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Helpers
+    
+    fileprivate func logOut() {
+        /*
+         // If anonymous user, give them a heads up that their data will be deleted if they don't sign up
+         if PFAnonymousUtils.isLinked(with: user) {
+         debugPrint("user is anonymous, give them a warning")
+         ABIShowAlertWithActions(title: "Alert", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
+         if alertAction1.title == "Sign Up" {
+         debugPrint("Sign Up is being clicked")
+         self.segueToStoryboard(id: StoryboardID.signupVC)
+         }
+         }, handler2: { (alertAction2: UIAlertAction) in
+         if alertAction2.title == "Log Out" {
+         debugPrint("Log Out is being clicked")
+         PFUser.logOutInBackground(block: { (error: Error?) in
+         if let error = error {
+         debugPrint("Log out failed with error: \(error.localizedDescription)")
+         } else {
+         debugPrint("User log out successfully")
+         self.segueToStoryboard(id: StoryboardID.loginSignupVC)
+         }
+         })
+         }
+         })
+         } else { */
+        // If not anonymous, log out user and take them back to the sign up page
+        PFUser.logOutInBackground { (error: Error?) in
+            if let error = error {
+                debugPrint("Log out failed with error: \(error.localizedDescription)")
+            } else {
+                debugPrint("User log out successfully")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Logout"), object: self, userInfo: nil)
+                //self.segueToStoryboard(id: StoryboardID.loginSignupVC)
+            }
+        }
+        //}
+    }
+    
+    fileprivate func segueToStoryboard(id: String) {
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let loginSignUpVC = storyboard.instantiateViewController(withIdentifier: id)
+        self.present(loginSignUpVC, animated: true, completion: nil)
+        //(UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = loginSignUpVC
     }
 }
 
