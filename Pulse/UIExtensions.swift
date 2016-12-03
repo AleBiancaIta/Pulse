@@ -43,7 +43,7 @@ class UIExtensions: NSObject {
     // This textfield setup only shows well for light backgrounds
     class func setupDarkViewFor(textField: UITextField) {
         let border = CALayer()
-        border.borderColor = UIColor.pulseDarkPrimaryColor().cgColor
+        border.borderColor = UIColor.pulseLightPrimaryColor().cgColor
         border.frame = CGRect(x: 0, y: textField.frame.size.height - 1, width:  textField.frame.size.width, height: textField.frame.size.height)
         border.borderWidth = 1
         textField.layer.addSublayer(border)

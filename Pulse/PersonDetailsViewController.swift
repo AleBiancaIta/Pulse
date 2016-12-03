@@ -188,10 +188,19 @@ class PersonDetailsViewController: UIViewController {
 		firstNameTextField.isUserInteractionEnabled = isEditing
 		photoImageView.isUserInteractionEnabled = isEditing
 
-		phoneTextField.borderStyle = isEditing ? .roundedRect : .none
-		emailTextField.borderStyle = isEditing ? .roundedRect : .none
-		lastNameTextField.borderStyle = isEditing ? .roundedRect : .none
-		firstNameTextField.borderStyle = isEditing ? .roundedRect : .none
+        if isEditing {
+            // Format editabl textfields to match the UI of textfields in the rest of the app
+            UIExtensions.setupDarkViewFor(textField: firstNameTextField)
+            UIExtensions.setupDarkViewFor(textField: lastNameTextField)
+            UIExtensions.setupDarkViewFor(textField: emailTextField)
+            UIExtensions.setupDarkViewFor(textField: phoneTextField)
+        } else {
+            // Remove custom textfield formatting
+            phoneTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            emailTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            lastNameTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            firstNameTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+        }
 
 		updateCallButton()
 	}
