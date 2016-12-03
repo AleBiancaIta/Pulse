@@ -126,9 +126,7 @@ class GraphViewController: UIViewController {
         }
         
         // Initial load (or error, still show empty graph)
-        if chart1.series.count == 0 && chart2.series.count == 0 && chart3.series.count == 0 {
-            self.setupCharts()
-        }
+        self.setupCharts()
     }
     
     func setupCharts() {
