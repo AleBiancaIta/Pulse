@@ -32,7 +32,8 @@ class Constants: NSObject {
     ]);
     
     //static let positions: [[String: String]] = [["positionId": "1", "description": "Manager"],["positionId": "2", "description": "Individual Contributor"]]
-    static let positions: [String: String] = ["Individual Contributor": "1", "Manager": "2", "Director": "3", "Vice President": "4", "CEO": "5"]
+    //static let positions: [String: String] = ["Individual Contributor": "1", "Manager": "2", "Director": "3", "Vice President": "4", "CEO": "5"]
+    static let positions: [String: String] = ["1": "Individual Contributor", "2": "Manager", "3": "Director", "4": "Vice President", "5": "CEO"]
 }
 
 enum AlertTypes : String {

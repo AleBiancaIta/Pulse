@@ -19,6 +19,8 @@ class UpdateProfileViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var positionLabel: UILabel!
+    @IBOutlet weak var companyLabel: UILabel!
     
     var user: PFUser! = PFUser.current()
     var person: PFObject!
@@ -104,6 +106,12 @@ class UpdateProfileViewController: UIViewController {
             }
             if let email = person[ObjectKeys.Person.email] as? String {
                 emailTextField.text = email
+            }
+            if let id = person[ObjectKeys.Person.positionId] as? String {
+                positionLabel.text = Constants.positions[id]
+            }
+            if let company = person[ObjectKeys.Person.companyId] as? String {
+                companyLabel.text = company
             }
         }
     }
