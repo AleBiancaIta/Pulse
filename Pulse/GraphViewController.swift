@@ -24,7 +24,6 @@ class GraphViewController: UIViewController {
     var personIdValues: [String] = []
     var highLowValues = ["Poor", "Good", "Great"]
     
-    var parseClient = ParseClient.sharedInstance()
     var teamMemberIds = [String]()
     
     override func viewDidLoad() {
@@ -38,65 +37,85 @@ class GraphViewController: UIViewController {
     func loadChartForCompany(_ isCompany: Bool) {
         
         // Reset values
+        personIdValues = []
         survey1Values = []
         survey2Values = []
         survey3Values = []
         
-        chartTitleLabel.text = isCompany ? "Company Pulse" : "Team Pulse"
+        UIView.transition(with: chartTitleLabel, duration: 1, options: .transitionCrossDissolve, animations: {
+            self.chartTitleLabel.text = isCompany ? "Company Pulse" : "Team Pulse"
+        }, completion: nil)
         
-        ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
-            if let person = person {
-                let query = PFQuery(className: "Survey")
-                query.whereKey("companyId", equalTo: person["companyId"])
-                
-                // filter by last 30 days
-                var pastDate = Date() // this is current date
-                pastDate.addTimeInterval(-30*24*60*60)
-                query.whereKey("meetingDate", greaterThan: pastDate)
-                
-                query.order(byDescending: "meetingDate") // TODO
-                
-                
-                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-                    if let posts = posts {
-                        for post in posts {
-                            if let personId = post["personId"] as? String {
-                                if !self.personIdValues.contains(personId) {
-                                    self.survey1Values.append(post["surveyValueId1"] as! Float)
-                                    self.survey2Values.append(post["surveyValueId2"] as! Float)
-                                    self.survey3Values.append(post["surveyValueId3"] as! Float)
-                                    self.personIdValues.append(personId)
+        if isCompany {
+            ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
+                if let person = person {
+                    let query = PFQuery(className: "Survey")
+                    query.whereKey("companyId", equalTo: person["companyId"])
+                    
+                    // filter by last 30 days
+                    var pastDate = Date() // this is current date
+                    pastDate.addTimeInterval(-30*24*60*60)
+                    query.whereKey("meetingDate", greaterThan: pastDate)
+                    query.order(byDescending: "meetingDate")
+                    
+                    query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                        if let posts = posts {
+                            for post in posts {
+                                if let personId = post["personId"] as? String {
+                                    if !self.personIdValues.contains(personId) {
+                                        self.survey1Values.append(post["surveyValueId1"] as! Float)
+                                        self.survey2Values.append(post["surveyValueId2"] as! Float)
+                                        self.survey3Values.append(post["surveyValueId3"] as! Float)
+                                        self.personIdValues.append(personId)
+                                    }
                                 }
                             }
+                            self.setupCharts()
                         }
-                        self.setupCharts()
                     }
                 }
             }
-        }
-    }
-    
-    func fetchMyTeamMembers(completion: @escaping (_ success: Bool, _ error: Error?) -> ()) {
-        parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
-            if let error = error {
-                completion(false, error)
-            } else {
+        } else { // Team
+            ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
                 if let person = person {
-                    self.parseClient.fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false) { (members: [PFObject]?, error: Error?) in
-                        if let error = error {
-                            completion(false, error)
-                        } else {
-                            if let members = members, members.count > 0 {
-                                for member in members {
-                                    if let personId = member.objectId,
-                                        !self.teamMemberIds.contains(personId) {
-                                        self.teamMemberIds.append(personId)
+                    let query = PFQuery(className: "Survey")
+                    query.whereKey("companyId", equalTo: person["companyId"])
+                    
+                    // filter by last 30 days
+                    var pastDate = Date() // this is current date
+                    pastDate.addTimeInterval(-30*24*60*60)
+                    query.whereKey("meetingDate", greaterThan: pastDate)
+                    query.order(byDescending: "meetingDate")
+                    
+                    query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                        if let posts = posts {
+                            ParseClient.sharedInstance().fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false) { (members: [PFObject]?, error: Error?) in
+                                if let error = error {
+                                    print(error.localizedDescription)
+                                } else {
+                                    if let members = members, members.count > 0 {
+                                        for member in members {
+                                            if let personId = member.objectId,
+                                                !self.teamMemberIds.contains(personId) {
+                                                self.teamMemberIds.append(personId)
+                                            }
+                                        }
+                                        for post in posts {
+                                            if let personId = post["personId"] as? String {
+                                                if !self.personIdValues.contains(personId) &&
+                                                    self.teamMemberIds.contains(personId) {
+                                                    self.survey1Values.append(post["surveyValueId1"] as! Float)
+                                                    self.survey2Values.append(post["surveyValueId2"] as! Float)
+                                                    self.survey3Values.append(post["surveyValueId3"] as! Float)
+                                                    self.personIdValues.append(personId)
+                                                }
+                                            }
+                                        }
+                                        self.setupCharts()
+                                    } else {
+                                        debugPrint("Fetch members returned 0 members")
                                     }
                                 }
-                                completion(true, nil)
-                            } else {
-                                debugPrint("Fetch members returned 0 members")
-                                completion(true, nil)
                             }
                         }
                     }
@@ -109,6 +128,10 @@ class GraphViewController: UIViewController {
         chart1.backgroundColor = UIColor.clear
         chart2.backgroundColor = UIColor.clear
         chart3.backgroundColor = UIColor.clear
+        
+        chart1.removeAllSeries()
+        chart2.removeAllSeries()
+        chart3.removeAllSeries()
         
         if personIdValues.count > 0 {
             var data1: [(x: Float, y: Float)] = []
@@ -164,6 +187,21 @@ class GraphViewController: UIViewController {
             self.chart2.alpha = 1.0
             self.chart3.alpha = 1.0
         })
+        
+        chart1.setNeedsDisplay()
+        UIView.transition(with: chart1, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.chart1.layer.displayIfNeeded()
+        }, completion: nil)
+        
+        chart2.setNeedsDisplay()
+        UIView.transition(with: chart2, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.chart2.layer.displayIfNeeded()
+        }, completion: nil)
+        
+        chart3.setNeedsDisplay()
+        UIView.transition(with: chart3, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.chart3.layer.displayIfNeeded()
+        }, completion: nil)
     }
 
     func heightForView() -> CGFloat {
