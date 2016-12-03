@@ -74,6 +74,11 @@ class PhotoImageView: UIView {
         imageView.layer.borderColor = UIColor.pulseLightPrimaryColor().cgColor
         imageView.layer.borderWidth = 1
 		imageView.clipsToBounds = true
+        
+        imageView.alpha = 0
+        UIView.animate(withDuration: 1, animations: {
+            self.imageView.alpha = 1
+        })
 	}
 
 	@IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
