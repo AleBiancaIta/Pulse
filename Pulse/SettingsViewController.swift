@@ -19,9 +19,9 @@ class SettingsViewController: UIViewController {
     
     // Note: Sign Up is for anonymous user who wants to sign up for the account
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
-    fileprivate let settingsContent = ["User Information", "Change Password", "Log Out"]
-    fileprivate let settingsSubcontent = ["Update your Pulse user information with a few taps", "Change the password associated with your Pulse account", "Logging out already? Come back soon!"]
-    fileprivate let settingsImageName = ["Passport2", "Keylock2", "Logout2"]
+    fileprivate let settingsContent = ["User Information", "Change Password", "Feedback", "Log Out"]
+    fileprivate let settingsSubcontent = ["Update your Pulse user information or password with a few taps", "Change the password associated with your Pulse account", "Send us an email to provide feedback, ask questions, or report bugs", "Logging out already? Come back soon!"]
+    fileprivate let settingsImageName = ["Passport2", "Keylock2", "Help", "Logout2"]
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     
@@ -142,10 +142,10 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
             } else if indexPath.row == 1 { // Change Password
                 debugPrint("did select row Change Password")
                 performSegue(withIdentifier: changePasswordSegue, sender: nil)
-            //} else if indexPath.row == 2 { // Sign Up
-              //  debugPrint("did select row Sign Up")
-              //  self.segueToStoryboard(id: StoryboardID.signupVC)
-            } else if indexPath.row == 2 { // Log Out
+            } else if indexPath.row == 2 { // Help
+                let url = URL(string: "mailto:2b8wad2qg5@snkmail.com?subject=Pulse%20Feedback")
+                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+            } else if indexPath.row == 3 { // Log Out
                 logOut()
             }
         }
