@@ -32,9 +32,7 @@ extension UIViewController {
 			personViewController.personPFObject = personPFObject
 		}
         if nil == personPFObject {
-            let navController = UINavigationController(rootViewController: personViewController)
-            personViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButton(_:)))
-            present(navController, animated: true, completion: nil)
+            navigationController?.pushViewController(personViewController, animated: true)
         } else {
             show(personViewController, sender: nil)
         }
