@@ -26,6 +26,7 @@ class NotesViewController: UIViewController {
         notesTextView.layer.cornerRadius = 5
         notesTextView.layer.borderWidth = 1
         notesTextView.layer.borderColor = UIColor.pulseLightPrimaryColor().cgColor
+        notesTextView.backgroundColor = UIColor(red: 192/255, green: 202/255, blue: 233/255, alpha: 0.5)
 
         if let notes = notes {
             notesTextView.text = notes
