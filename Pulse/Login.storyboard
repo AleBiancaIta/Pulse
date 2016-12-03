@@ -267,6 +267,7 @@
                             <constraint firstAttribute="trailing" secondItem="xAj-FO-GiG" secondAttribute="trailing" constant="8" id="hNK-YK-KTp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="9Sj-61-0Gu"/>
                     <connections>
                         <outlet property="settingsTableView" destination="xAj-FO-GiG" id="7k0-qQ-Ord"/>
                         <segue destination="xOd-iJ-9ak" kind="show" identifier="updateProfileSegue" id="2UP-pI-Xm4"/>
@@ -275,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ifd-JU-Hau" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857.5" y="-367.5"/>
+            <point key="canvasLocation" x="3135" y="-503"/>
         </scene>
         <!--Profile-->
         <scene sceneID="hCI-F1-Ygd">
@@ -440,7 +441,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2912.8000000000002" y="-368.36581709145429"/>
+            <point key="canvasLocation" x="3852" y="-368.36581709145429"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="ByT-gY-td5">
@@ -737,7 +738,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hrm-Ns-bhi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-554.5" y="-186.5"/>
+            <point key="canvasLocation" x="-786" y="-187"/>
         </scene>
     </scenes>
     <resources>

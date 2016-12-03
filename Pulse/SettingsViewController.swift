@@ -67,6 +67,10 @@ class SettingsViewController: UIViewController {
         }
         
     }
+    
+    deinit {
+        print("SettingsViewController deinitialized")
+    }
 }
 
 // MARK: - SettingsViewController: UITableViewDelegate, UITableViewDataSource
@@ -179,7 +183,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     debugPrint("Log out failed with error: \(error.localizedDescription)")
                 } else {
                     debugPrint("User log out successfully")
-                    self.segueToStoryboard(id: StoryboardID.loginSignupVC)
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Logout"), object: self, userInfo: nil)
+                    //self.segueToStoryboard(id: StoryboardID.loginSignupVC)
+                    
                 }
             })
         //}
@@ -189,5 +195,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let loginSignUpVC = storyboard.instantiateViewController(withIdentifier: id)
         self.present(loginSignUpVC, animated: true, completion: nil)
+        //(UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController = loginSignUpVC
     }
 }

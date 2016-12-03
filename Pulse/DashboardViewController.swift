@@ -106,12 +106,22 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
+ 
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
         settingsVC.modalTransitionStyle = .flipHorizontal
         settingsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
         let navController = UINavigationController(rootViewController: settingsVC)
         present(navController, animated: true, completion: nil)
+ 
+        /*
+        let storyboard = UIStoryboard(name: "Login", bundle: nil)
+        let settingsNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.settingsNavVC) as! UINavigationController
+        let settingsVC = settingsNavVC.viewControllers[0] as! SettingsViewController
+        settingsVC.modalTransitionStyle = .flipHorizontal
+        settingsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
+        self.present(settingsNavVC, animated: true, completion: nil)
+        */
     }
  
     // MARK: - Private Methods

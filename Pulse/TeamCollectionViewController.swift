@@ -25,6 +25,8 @@ class TeamCollectionViewController: UIViewController {
         collectionView.backgroundColor = UIColor.clear
         subscribeToNotifications()
         
+        dataSource.printTeamMembers()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,7 +40,12 @@ class TeamCollectionViewController: UIViewController {
                 } else {
                     self.seeAllButton.isHidden = false
                 }
-                self.collectionView.reloadData()
+                
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+                
+                
             } else {
                 //debugPrint("Unable to load data with error: \(error?.localizedDescription)")
                 self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to load team data, error: \(error?.localizedDescription)")
@@ -62,6 +69,7 @@ class TeamCollectionViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        print("team collection view controller being deinitialized")
     }
     
     // MARK: - Helpers
