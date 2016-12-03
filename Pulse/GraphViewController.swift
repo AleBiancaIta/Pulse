@@ -42,10 +42,6 @@ class GraphViewController: UIViewController {
         survey2Values = []
         survey3Values = []
         
-        UIView.transition(with: chartTitleLabel, duration: 1, options: .transitionCrossDissolve, animations: {
-            self.chartTitleLabel.text = isCompany ? "Company Pulse" : "Team Pulse"
-        }, completion: nil)
-        
         if isCompany {
             ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
                 if let person = person {
@@ -72,6 +68,9 @@ class GraphViewController: UIViewController {
                             }
                             self.setupCharts()
                         }
+                        UIView.transition(with: self.chartTitleLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                            self.chartTitleLabel.text = "Company Pulse"
+                        }, completion: nil)
                     }
                 }
             }
@@ -116,11 +115,19 @@ class GraphViewController: UIViewController {
                                         debugPrint("Fetch members returned 0 members")
                                     }
                                 }
+                                UIView.transition(with: self.chartTitleLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                                    self.chartTitleLabel.text = "Team Pulse"
+                                }, completion: nil)
                             }
                         }
                     }
                 }
             }
+        }
+        
+        // Initial load (or error, still show empty graph)
+        if chart1.series.count == 0 && chart2.series.count == 0 && chart3.series.count == 0 {
+            self.setupCharts()
         }
     }
     
