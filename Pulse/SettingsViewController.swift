@@ -185,7 +185,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                     debugPrint("User log out successfully")
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Logout"), object: self, userInfo: nil)
                     //self.segueToStoryboard(id: StoryboardID.loginSignupVC)
-                    
                 }
             })
         //}

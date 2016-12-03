@@ -20,7 +20,6 @@ class TeamViewDataSource: NSObject {
     var parseClient = ParseClient.sharedInstance()
     //var teamMembers = [Person]()
     var teamMembers = [PFObject]()
-    //var teamMembers: [PFObject]! = nil
     //var meetings = [Meeting]()
     var currentPerson: PFObject?
     
@@ -45,6 +44,8 @@ class TeamViewDataSource: NSObject {
     }
     
     func fetchTeamMembersForCurrentPerson(person: PFObject?, completion: @escaping (_ success: Bool, _ error: Error?) -> ()) {
+        self.teamMembers.removeAll() // reset the datasource
+        
         if person == nil { // In Dashboard
             parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
                 if let error = error {
@@ -57,19 +58,13 @@ class TeamViewDataSource: NSObject {
                                 completion(false, error)
                             } else {
                                 if let members = members {
+                                    self.teamMembers = members
+                                    completion(true, nil)
+                                    
                                     if members.count > 0 {
-                                        self.teamMembers = members
-                                        
-                                        for member in self.teamMembers {
-                                            debugPrint("in teamcell data source, member is \(member)")
-                                            
-                                        }
-                                        
-                                        completion(true, nil)
+                                        debugPrint("Fetch members returned \(members.count) members")
                                     } else {
                                         debugPrint("Fetch members returned 0 members")
-                                        self.teamMembers = members
-                                        completion(true, nil)
                                     }
                                 }
                             }
@@ -83,14 +78,16 @@ class TeamViewDataSource: NSObject {
                 if let error = error {
                     completion(false, error)
                 } else {
-                    if let members = members {//, members.count > 0 {
+                    if let members = members {
                         self.teamMembers = members
                         completion(true, nil)
-                    } //else {
-                      //  debugPrint("Fetch members returned 0 members")
-                        //self.teamMembers = members
-                       // completion(true, nil)
-                    //}
+                        
+                        if members.count > 0 {
+                            debugPrint("Fetch members returned \(members.count) members")
+                        } else {
+                            debugPrint("Fetch members returned 0 members")
+                        }
+                    }
                 }
             }
         }
