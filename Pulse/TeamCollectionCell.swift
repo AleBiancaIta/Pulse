@@ -99,5 +99,6 @@ class TeamCollectionCell: UICollectionViewCell {
         surveyValue1Button.tintColor = UIColor.clear
         surveyValue2Button.tintColor = UIColor.clear
         surveyValue3Button.tintColor = UIColor.clear
+        profileImageView.pffile = nil
     }
 }
