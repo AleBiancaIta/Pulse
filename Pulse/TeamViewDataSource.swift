@@ -192,7 +192,7 @@ extension TeamViewDataSource: UITableViewDataSource {
         let firstName = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String ?? ""
         let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
         cell.firstNameLabel.text = "\(firstName) \(lastName)"
-        cell.emailLabel.text = teamMembers[indexPath.row][ObjectKeys.Person.email] as? String
+        cell.emailButton.setTitle(teamMembers[indexPath.row][ObjectKeys.Person.email] as? String, for: .normal)
 
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
 

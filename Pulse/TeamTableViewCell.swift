@@ -13,7 +13,7 @@ class TeamTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
-    @IBOutlet weak var emailLabel: UILabel!
+    @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!
     @IBOutlet weak var surveyValue3Button: UIButton!
@@ -97,6 +97,14 @@ class TeamTableViewCell: UITableViewCell {
         default:
             surveyValue3Button.setImage(UIImage(named: "Circle3"), for: .normal)
             surveyValue3Button.tintColor = UIColor.pulseNoDataSurveyColor() //UIColor.darkGray
+        }
+    }
+    
+    @IBAction func onEmailButton(_ sender: Any) {
+        if let emailLabel = emailButton.titleLabel,
+            let email = emailLabel.text {
+            let url = URL(string: "mailto:\(email)")
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         }
     }
     

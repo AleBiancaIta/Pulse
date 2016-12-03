@@ -75,7 +75,7 @@ class PersonDetailsViewController: UIViewController {
 	// MARK: - UI Actions
 
     @IBAction func didTapEmailButton(_ sender: Any) {
-        if let email = self.emailTextField.text {
+        if let email = emailTextField.text {
             let url = URL(string: "mailto:\(email)")
             UIApplication.shared.open(url!, options: [:], completionHandler: nil)
         }
