@@ -66,7 +66,7 @@
                                 </cells>
                             </collectionView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You currently have no team members" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AsQ-lT-C4S">
-                                <rect key="frame" x="53" y="107" width="270" height="20"/>
+                                <rect key="frame" x="8" y="107" width="359" height="20"/>
                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -77,9 +77,10 @@
                             <constraint firstAttribute="trailing" secondItem="exV-XO-J5A" secondAttribute="trailing" id="61R-Jn-FAD"/>
                             <constraint firstItem="Dre-Bh-2S4" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" constant="8" id="AN8-1N-coC"/>
                             <constraint firstItem="sH3-eb-hPa" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" constant="8" id="E5R-tI-l9b"/>
+                            <constraint firstAttribute="trailing" secondItem="AsQ-lT-C4S" secondAttribute="trailing" constant="8" id="Nlw-HB-zHh"/>
                             <constraint firstItem="exV-XO-J5A" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" id="QVm-7P-kW4"/>
                             <constraint firstItem="sH3-eb-hPa" firstAttribute="top" secondItem="9PD-MW-oph" secondAttribute="bottom" constant="8" id="c5z-xB-qYJ"/>
-                            <constraint firstItem="AsQ-lT-C4S" firstAttribute="centerX" secondItem="8sD-cq-fM7" secondAttribute="centerX" id="gge-ZJ-PUT"/>
+                            <constraint firstItem="AsQ-lT-C4S" firstAttribute="leading" secondItem="8sD-cq-fM7" secondAttribute="leading" constant="8" id="pft-0n-LVZ"/>
                             <constraint firstItem="Dre-Bh-2S4" firstAttribute="centerY" secondItem="jil-jH-HK7" secondAttribute="centerY" id="phr-9O-Pve"/>
                             <constraint firstItem="jil-jH-HK7" firstAttribute="top" secondItem="sH3-eb-hPa" secondAttribute="bottom" constant="8" id="qq1-zF-dLf"/>
                             <constraint firstItem="AsQ-lT-C4S" firstAttribute="top" secondItem="exV-XO-J5A" secondAttribute="top" constant="8" id="wIh-W1-ofS"/>
