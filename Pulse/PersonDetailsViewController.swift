@@ -241,7 +241,7 @@ class PersonDetailsViewController: UIViewController {
 
 		if success {
 			self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-				let _ = self.navigationController?.popViewController(animated: true)
+				//let _ = self.navigationController?.popViewController(animated: true)
 			})
 		}
 		else {
@@ -284,7 +284,7 @@ class PersonDetailsViewController: UIViewController {
 					if success {
 						self.ABIShowAlert(title: "Success", message: "Team member created successfully!", sender: nil, handler: { (alertAction: UIAlertAction) in
 							SVProgressHUD.dismiss()
-							self.dismiss(animated: true, completion: nil)
+							//self.dismiss(animated: true, completion: nil)
 							NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
 						})
 					}
