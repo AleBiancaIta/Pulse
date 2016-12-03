@@ -74,6 +74,13 @@ class PersonDetailsViewController: UIViewController {
 
 	// MARK: - UI Actions
 
+    @IBAction func didTapEmailButton(_ sender: Any) {
+        if let email = self.emailTextField.text {
+            let url = URL(string: "mailto:\(email)")
+            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+        }
+    }
+    
 	@IBAction func didTapCallButton(_ sender: UIButton) {
 
 		let okAction = UIAlertAction(title: "Call", style: .default, handler: {
