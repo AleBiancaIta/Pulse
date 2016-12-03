@@ -54,6 +54,9 @@ class MeetingSurveyViewController: UIViewController {
     var meeting: Meeting!
     var isExistingMeeting: Bool! // False if new meeting, otherwise true
     
+    var viewTypes: ViewTypes = .dashboard // Default
+    var teamMember: PFObject? // passed from Person page
+    
     weak var delegate: MeetingSurveyViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -398,10 +401,15 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
         if let isExistingMeeting = isExistingMeeting, isExistingMeeting == true  {
             return 1
         } else {
-            if isPersonExpanded {
-                return teamMembers.count + 1
-            } else {
+            // New meeting coming from Person (and have a non-nil personId)
+            if viewTypes == .employeeDetail && teamMember != nil {
                 return 1
+            } else { // New meeting coming from Dashboard
+                if isPersonExpanded {
+                    return teamMembers.count + 1
+                } else {
+                    return 1
+                }
             }
         }
     }
@@ -419,14 +427,21 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
                     cell.person = person
                 }
             } else {
-                cell.isUserInteractionEnabled = isPersonExpanded ? false : true
-                cell.firstRow = true // only applies to new user
-                if let selectedPerson = personRowSelected {
-                    cell.selectedPerson = teamMembers[selectedPerson]
+                // New meeting coming from Person (and have a non-nil personId)
+                if viewTypes == .employeeDetail && teamMember != nil {
+                    cell.isUserInteractionEnabled = false
+                    cell.firstRow = false
+                    cell.selectedPerson = teamMember
+                } else { // New meeting coming from Dashboard
+                    cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                    cell.firstRow = true // only applies to new user with not yet selected team member (show carrot or not)
+                    if let selectedPerson = personRowSelected {
+                        cell.selectedPerson = teamMembers[selectedPerson]
+                    }
                 }
             }
             return cell
-        default:
+        default: // should only get here if teamMember == nil
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Meeting.meetingPersonListCell, for: indexPath) as! MeetingPersonListCell
             cell.firstRow = false
             cell.isUserInteractionEnabled = true
@@ -446,7 +461,7 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 && !(isExistingMeeting!) {
+        if indexPath.section == 0 && !(isExistingMeeting!) && (teamMember == nil) {
             if isPersonExpanded { // need to collapse
                 personRowSelected = indexPath.row - 1
                 isPersonExpanded = !isPersonExpanded
@@ -471,7 +486,7 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
         if onSave {
             if !isExistingMeeting { // new meeting
                 if validateNewMeeting() {
-                    let person = teamMembers[personRowSelected!]
+                    let person = self.teamMember != nil ? self.teamMember! : teamMembers[personRowSelected!]
                     let personId = person.objectId!
                     let companyId = person[ObjectKeys.Person.companyId] as! String
                     
@@ -530,7 +545,7 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
     }
     
     fileprivate func validateNewMeeting() -> Bool {
-        return (personRowSelected != nil) && (survey1Low.isOn || survey1Med.isOn || survey1High.isOn) && (survey2Low.isOn || survey2Med.isOn || survey2High.isOn) && (survey3Low.isOn || survey3Med.isOn || survey3High.isOn)
+        return ((personRowSelected != nil) || (teamMember != nil)) && (survey1Low.isOn || survey1Med.isOn || survey1High.isOn) && (survey2Low.isOn || survey2Med.isOn || survey2High.isOn) && (survey3Low.isOn || survey3Med.isOn || survey3High.isOn)
     }
     
     fileprivate func saveNewSurvey(personId: String, companyId: String, completion: @escaping (Bool, PFObject?, Error?)->()) {

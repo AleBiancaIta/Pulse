@@ -22,6 +22,8 @@ class MeetingDetailsViewController: UIViewController {
    
    var meeting: Meeting!
    var isExistingMeeting = true // False if new meeting, otherwise true
+   var viewTypes: ViewTypes = .dashboard // Default
+   var teamMember: PFObject? // Passed on from Person page
    
    fileprivate let parseClient = ParseClient.sharedInstance()
    weak var delegate: MeetingDetailsViewControllerDelegate?
@@ -140,6 +142,12 @@ extension MeetingDetailsViewController: UITableViewDataSource {
                let viewController = storyboard.instantiateViewController(withIdentifier: StoryboardID.meetingSurveyVC) as! MeetingSurveyViewController
                viewController.meeting = meeting
                viewController.isExistingMeeting = isExistingMeeting
+               
+               if self.viewTypes == .employeeDetail && self.teamMember != nil {
+                  viewController.viewTypes = self.viewTypes
+                  viewController.teamMember = self.teamMember!
+               }
+               
                viewController.delegate = self
                self.delegate = viewController
                

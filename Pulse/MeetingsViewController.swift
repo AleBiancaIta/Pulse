@@ -22,8 +22,10 @@ class MeetingsViewController: UIViewController {
     
     var meetings: [Meeting] = []
     var expanded = false
+    var personId: String?
+    var viewTypes: ViewTypes = .dashboard // Default
     
-    var personId: String? 
+    fileprivate let parseClient = ParseClient.sharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,7 +146,27 @@ class MeetingsViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
         viewController.isExistingMeeting = false
-        navigationController?.pushViewController(viewController, animated: true)
+        
+        // If adding meeting from a Person page
+        if self.viewTypes == .employeeDetail {
+            viewController.viewTypes = .employeeDetail
+            
+            if let personId = self.personId {
+                parseClient.fetchPersonFor(personId: personId) { (person: PFObject?, error: Error?) in
+                    if let error = error {
+                        debugPrint("Failed to fetch teamMember, error: \(error.localizedDescription)")
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                    } else {
+                        viewController.teamMember = person
+                        self.navigationController?.pushViewController(viewController, animated: true)
+                    }
+                }
+            } else {
+                navigationController?.pushViewController(viewController, animated: true)
+            }
+        } else { // From Dashboard
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 
