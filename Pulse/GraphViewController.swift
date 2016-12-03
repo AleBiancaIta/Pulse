@@ -25,30 +25,34 @@ class GraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let query = PFQuery(className: "Survey")
-        query.whereKey("companyId", equalTo: "Pulse")
+        ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
+            if let person = person {
+                let query = PFQuery(className: "Survey")
+                query.whereKey("companyId", equalTo: person["companyId"])
         
-        // filter by last 30 days
-        var pastDate = Date() // this is current date
-        pastDate.addTimeInterval(-30*24*60*60)
-        query.whereKey("meetingDate", greaterThan: pastDate)
-        
-        query.order(byDescending: "meetingDate") // TODO
-        
-        
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let posts = posts {
-                for post in posts {
-                    if let personId = post["personId"] as? String {
-                        if !self.personIdValues.contains(personId) {
-                            self.survey1Values.append(post["surveyValueId1"] as! Float)
-                            self.survey2Values.append(post["surveyValueId2"] as! Float)
-                            self.survey3Values.append(post["surveyValueId3"] as! Float)
-                            self.personIdValues.append(personId)
+                // filter by last 30 days
+                var pastDate = Date() // this is current date
+                pastDate.addTimeInterval(-30*24*60*60)
+                query.whereKey("meetingDate", greaterThan: pastDate)
+                
+                query.order(byDescending: "meetingDate") // TODO
+                
+                
+                query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                    if let posts = posts {
+                        for post in posts {
+                            if let personId = post["personId"] as? String {
+                                if !self.personIdValues.contains(personId) {
+                                    self.survey1Values.append(post["surveyValueId1"] as! Float)
+                                    self.survey2Values.append(post["surveyValueId2"] as! Float)
+                                    self.survey3Values.append(post["surveyValueId3"] as! Float)
+                                    self.personIdValues.append(personId)
+                                }
+                            }
                         }
+                        self.setupCharts()
                     }
                 }
-                self.setupCharts()
             }
         }
     }
