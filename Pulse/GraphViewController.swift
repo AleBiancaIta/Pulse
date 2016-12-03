@@ -73,31 +73,37 @@ class GraphViewController: UIViewController {
             survey1Series.color = UIColor.pulseAccentColor()
             survey1Series.area = true
             chart1.add(survey1Series)
+            chart1.xLabels = [0, Float(data1.count-1)]
             
             let survey2Series = ChartSeries(data: data2)
             survey2Series.color = UIColor.pulseAccentColor()
             survey2Series.area = true
             chart2.add(survey2Series)
+            chart2.xLabels = [0, Float(data2.count-1)]
             
             let survey3Series = ChartSeries(data: data3)
             survey3Series.color = UIColor.pulseAccentColor()
             survey3Series.area = true
             chart3.add(survey3Series)
+            chart3.xLabels = [0, Float(data3.count-1)]
         }
 
         chart1.labelColor = UIColor.pulseLightPrimaryColor()
         chart1.lineWidth = 2
+        chart1.highlightLineColor = UIColor.clear
         chart1.yLabels = [0, 1, 2]
         chart1.yLabelsFormatter = { self.highLowValues[Int($1)] }
         
         
         chart2.labelColor = UIColor.pulseLightPrimaryColor()
         chart2.lineWidth = 2
+        chart2.highlightLineColor = UIColor.clear
         chart2.yLabels = [0, 1, 2]
         chart2.yLabelsFormatter = { self.highLowValues[Int($1)] }
 
         chart3.labelColor = UIColor.pulseLightPrimaryColor()
         chart3.lineWidth = 2
+        chart3.highlightLineColor = UIColor.clear
         chart3.yLabels = [0, 1, 2]
         chart3.yLabelsFormatter = { self.highLowValues[Int($1)] }
         
