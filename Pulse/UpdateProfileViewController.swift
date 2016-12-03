@@ -34,6 +34,12 @@ class UpdateProfileViewController: UIViewController {
         getUserProfile()
         emailTextField.isUserInteractionEnabled = false
         configureTextFieldDelegate()
+        
+        UIExtensions.setupViewFor(textField: passwordTextField)
+        UIExtensions.setupViewFor(textField: firstNameTextField)
+        UIExtensions.setupViewFor(textField: lastNameTextField)
+        UIExtensions.setupViewFor(textField: phoneTextField)
+        UIExtensions.setupViewFor(textField: emailTextField)
     }
 
     // MARK: - Actions

@@ -53,6 +53,14 @@ class SignUpViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
+        
+        UIExtensions.setupViewFor(textField: emailTextField)
+        UIExtensions.setupViewFor(textField: passwordTextField)
+        UIExtensions.setupViewFor(textField: confirmPasswordTextField)
+        UIExtensions.setupViewFor(textField: firstNameTextField)
+        UIExtensions.setupViewFor(textField: lastNameTextField)
+        UIExtensions.setupViewFor(textField: phoneTextField)
+        UIExtensions.setupViewFor(textField: companyNameTextField)
     }
     
     // MARK: - Actions

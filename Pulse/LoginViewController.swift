@@ -31,6 +31,9 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancelButtonTap(_:)))
+        
+        UIExtensions.setupViewFor(textField: usernameTextField)
+        UIExtensions.setupViewFor(textField: passwordTextField)
     }
     
     // MARK: - Actions

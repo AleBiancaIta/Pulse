@@ -14,6 +14,8 @@ class UIExtensions: NSObject {
      * Header font: Helvetica Neue thin 24pt
      * Subheader font: Helvetica Neue thin 17pt
      * Fade in duration: 1
+     * Primary text color (light background): Black
+     * Primary text color (dark background): White
      */
     
     class func gradientBackgroundFor(view: UIView) {
@@ -21,6 +23,36 @@ class UIExtensions: NSObject {
         gradient.frame = view.bounds
         gradient.colors = [UIColor.black.cgColor, UIColor.pulseBackgroundColor().cgColor]
         view.layer.insertSublayer(gradient, at: 0)
+    }
+    
+    // This textfield setup only shows well for dark backgrounds
+    class func setupViewFor(textField: UITextField) {
+        let border = CALayer()
+        border.borderColor = UIColor.pulseLightPrimaryColor().cgColor
+        border.frame = CGRect(x: 0, y: textField.frame.size.height - 1, width:  textField.frame.size.width, height: textField.frame.size.height)
+        border.borderWidth = 1
+        textField.layer.addSublayer(border)
+        textField.layer.masksToBounds = true
+        textField.backgroundColor = UIColor.clear
+        textField.textColor = UIColor.white
+        if let placeholder = textField.placeholder {
+            textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes:[NSForegroundColorAttributeName: UIColor.pulseDividerColor()])
+        }
+    }
+    
+    // This textfield setup only shows well for light backgrounds
+    class func setupDarkViewFor(textField: UITextField) {
+        let border = CALayer()
+        border.borderColor = UIColor.pulseDarkPrimaryColor().cgColor
+        border.frame = CGRect(x: 0, y: textField.frame.size.height - 1, width:  textField.frame.size.width, height: textField.frame.size.height)
+        border.borderWidth = 1
+        textField.layer.addSublayer(border)
+        textField.layer.masksToBounds = true
+        textField.backgroundColor = UIColor.clear
+        textField.textColor = UIColor.black
+        if let placeholder = textField.placeholder {
+            textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes:[NSForegroundColorAttributeName: UIColor.pulseDividerColor()])
+        }
     }
     
     // Convenience method to convert hex to UIColor
@@ -71,14 +103,24 @@ extension UIColor {
         return UIExtensions.uiColorWith(hex: "#3F51B5") // Indigo
     }
     
-    // Used for secondary text
+    // Used for secondary text on dark background
     class func pulseLightPrimaryColor() -> UIColor {
         return UIExtensions.uiColorWith(hex: "#C5CAE9") // Light indigo
+    }
+    
+    // Used for secondary text on light background
+    class func pulseSecondaryTextColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#757575")
     }
 
     // Used for graph line, text links, and clear background icons
     class func pulseAccentColor() -> UIColor {
         return UIExtensions.uiColorWith(hex: "#536DFE") // Bright indigo
+    }
+    
+    // Used for clear textfields with dark background
+    class func pulseDividerColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#BDBDBD") // Light grey
     }
     
     // MARK: - Alert Colors

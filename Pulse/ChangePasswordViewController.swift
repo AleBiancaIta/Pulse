@@ -25,6 +25,10 @@ class ChangePasswordViewController: UIViewController {
         
         UIExtensions.gradientBackgroundFor(view: view)
         navigationController?.navigationBar.barStyle = .blackTranslucent
+        
+        UIExtensions.setupViewFor(textField: oldPasswordTextField)
+        UIExtensions.setupViewFor(textField: newPasswordTextField)
+        UIExtensions.setupViewFor(textField: confirmNewPasswordTextField)
     }
 
     // MARK: - Actions
