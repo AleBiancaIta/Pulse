@@ -85,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="32.5" y="-186.5"/>
         </scene>
-        <!--Login View Controller-->
+        <!--User Login-->
         <scene sceneID="zSb-X8-ccz">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" id="YdN-Yd-wjs" customClass="LoginViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="User Login" id="YdN-Yd-wjs" customClass="LoginViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pjt-Ll-qAV"/>
                         <viewControllerLayoutGuide type="bottom" id="9pb-pC-MS6"/>
@@ -547,10 +547,10 @@
             </objects>
             <point key="canvasLocation" x="2912.5" y="362.5"/>
         </scene>
-        <!--Sign Up View Controller-->
+        <!--Sign Up-->
         <scene sceneID="ioL-Rq-dlY">
             <objects>
-                <viewController storyboardIdentifier="SignupVC" id="Ea4-eZ-k3f" customClass="SignUpViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignupVC" title="Sign Up" id="Ea4-eZ-k3f" customClass="SignUpViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Htj-Ng-xOa"/>
                         <viewControllerLayoutGuide type="bottom" id="feP-1Z-Ln2"/>

@@ -42,7 +42,7 @@ class DashboardViewController: UIViewController {
                     let post = posts[0]
                     self.selectedCardsString = post["selectedCards"] as? String
                 } else {
-                    self.selectedCardsString = "gt" // Default cards (chart, team)
+                    self.selectedCardsString = "gtdm" // Default cards (all)
                     let post = PFObject(className: "Dashboard")
                     post["userId"] = userId
                     post["selectedCards"] = self.selectedCardsString
