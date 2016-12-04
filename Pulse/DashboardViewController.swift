@@ -18,6 +18,7 @@ class DashboardViewController: UIViewController {
     
     var selectedCardsString: String? = ""
     var selectedCards: [Card] = []
+    var toDoIndexPath: IndexPath? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,6 +86,7 @@ class DashboardViewController: UIViewController {
         
         configureDCPathButton()
         
+        tableView.keyboardDismissMode = .onDrag
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -111,7 +113,7 @@ class DashboardViewController: UIViewController {
         let chartSelectedImage = selectedCards.contains(Constants.dashboardCards[0]) ? chartHighlightedImage : chartImage
         let chartButton = DCPathItemButton(image: chartSelectedImage, highlightedImage: chartHighlightedImage, backgroundImage: chartImage, backgroundHighlightedImage: chartHighlightedImage)
         
-        var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Todo")!, newSize: CGSize(width: size, height: size))
+        var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Clipboard")!, newSize: CGSize(width: size, height: size))
         toDoImage = UIImage.recolorImageWithColor(image: toDoImage, color: color)
         let toDoHighlightedImage = UIImage.recolorImageWithColor(image: toDoImage, color: highlightColor)
         let toDoSelectedImage = selectedCards.contains(Constants.dashboardCards[1]) ? toDoHighlightedImage : toDoImage
@@ -123,7 +125,7 @@ class DashboardViewController: UIViewController {
         let teamSelectedImage = selectedCards.contains(Constants.dashboardCards[2]) ? teamHighlightedImage : teamImage
         let teamButton = DCPathItemButton(image: teamSelectedImage, highlightedImage: teamHighlightedImage, backgroundImage: teamImage, backgroundHighlightedImage: teamHighlightedImage)
         
-        var meetingsImage = UIImage.resizeImageWithSize(image: UIImage(named: "Clipboard")!, newSize: CGSize(width: size, height: size))
+        var meetingsImage = UIImage.resizeImageWithSize(image: UIImage(named: "Todo")!, newSize: CGSize(width: size, height: size))
         meetingsImage = UIImage.recolorImageWithColor(image: meetingsImage, color: color)
         let meetingsHighlightedImage = UIImage.recolorImageWithColor(image: meetingsImage, color: highlightColor)
         let meetingsSelectedImage = selectedCards.contains(Constants.dashboardCards[3]) ? meetingsHighlightedImage : meetingsImage
@@ -137,10 +139,15 @@ class DashboardViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             //view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height - 64
-            if view.frame.origin.y != 0 {
-                view.frame.origin.y = 0
+            
+            // Only need to move keyboard if bottom fields are being edited
+            // Currently, the only card that activates keyboard is ToDo
+            if tableView.rectForRow(at: toDoIndexPath!).origin.y > keyboardSize.height {
+                if view.frame.origin.y != 0 {
+                    view.frame.origin.y = 0
+                }
+                view.frame.origin.y -= keyboardSize.height - 64
             }
-            view.frame.origin.y -= keyboardSize.height - 64*3
         }
     }
     
@@ -171,7 +178,7 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func onLogoutButtonTap(_ sender: UIBarButtonItem) {
-        self.ABIShowAlertWithActions(title: "Alert!", message: "Are you sure you want to log out?", actionTitle1: "Yes", actionTitle2: "No", sender: nil, handler1: { (yesAction: UIAlertAction) in
+        self.ABIShowAlertWithActions(title: "", message: "Are you sure you want to log out?", actionTitle1: "Yes", actionTitle2: "No", sender: nil, handler1: { (yesAction: UIAlertAction) in
             self.logOut()
         }, handler2: { (noAction: UIAlertAction) in
             // do nothing
@@ -192,7 +199,7 @@ class DashboardViewController: UIViewController {
          // If anonymous user, give them a heads up that their data will be deleted if they don't sign up
          if PFAnonymousUtils.isLinked(with: user) {
          debugPrint("user is anonymous, give them a warning")
-         ABIShowAlertWithActions(title: "Alert", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
+         ABIShowAlertWithActions(title: "", message: "You're currently logged in as anonymous user. To save your data, sign up for an account", actionTitle1: "Sign Up", actionTitle2: "Log Out", sender: nil, handler1: { (alertAction1: UIAlertAction) in
          if alertAction1.title == "Sign Up" {
          debugPrint("Sign Up is being clicked")
          self.segueToStoryboard(id: StoryboardID.signupVC)
@@ -298,6 +305,7 @@ extension DashboardViewController: UITableViewDataSource {
             return cell
             
         case "d":
+            toDoIndexPath = indexPath
             let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
             cell.selectionStyle = .none
             cell.layer.cornerRadius = 5

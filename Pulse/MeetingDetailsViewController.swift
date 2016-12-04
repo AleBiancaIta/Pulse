@@ -9,6 +9,7 @@
 import DCPathButton
 import Parse
 import UIKit
+import RKDropdownAlert
 
 @objc protocol MeetingDetailsViewControllerDelegate {
    @objc optional func meetingDetailsViewController(_ meetingDetailsViewController: MeetingDetailsViewController, onSave: Bool)
@@ -55,6 +56,7 @@ class MeetingDetailsViewController: UIViewController {
       
       tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
       
+      tableView.keyboardDismissMode = .onDrag
       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
       
@@ -103,7 +105,7 @@ class MeetingDetailsViewController: UIViewController {
       let surveySelectedImage = selectedCards.contains(Constants.meetingCards[0]) ? surveyHighlightedImage : surveyImage
       let surveyButton = DCPathItemButton(image: surveySelectedImage, highlightedImage: surveyHighlightedImage, backgroundImage: surveyImage, backgroundHighlightedImage: surveyHighlightedImage)
       
-      var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Todo")!, newSize: CGSize(width: size, height: size))
+      var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Clipboard")!, newSize: CGSize(width: size, height: size))
       toDoImage = UIImage.recolorImageWithColor(image: toDoImage, color: color)
       let toDoHighlightedImage = UIImage.recolorImageWithColor(image: toDoImage, color: highlightColor)
       let toDoSelectedImage = selectedCards.contains(Constants.meetingCards[1]) ? toDoHighlightedImage : toDoImage
@@ -320,7 +322,7 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
                if success {
                   self.isExistingMeeting = true
                   self.tableView.reloadData()
-                  self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Meeting saved")
+                  self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully saved meeting")
                } else {
                   if let error = error {
                      self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to saved meeting, error: \(error.localizedDescription)")
@@ -349,7 +351,7 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
                   self.meeting.objectId = meetingObject?.objectId
                   self.isExistingMeeting = true
                   self.tableView.reloadData()
-                  self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Meeting saved")
+                  self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully saved meeting", delegate: self)
                }
             }
          } else {
@@ -358,6 +360,20 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
             }
          }
       }
+   }
+}
+
+// MARK: - RKDropDownAlertDelegate
+
+extension MeetingDetailsViewController: RKDropdownAlertDelegate {
+   
+   func dropdownAlertWasDismissed() -> Bool {
+      self.navigationController?.popViewController(animated: true)
+      return true
+   }
+   
+   func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+      return true
    }
 }
 

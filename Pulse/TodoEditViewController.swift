@@ -278,7 +278,7 @@ extension TodoEditViewController: TodoEditTextCellDelegate {
 extension TodoEditViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        let _ = self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         return true
     }
     

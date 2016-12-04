@@ -59,6 +59,7 @@ class Person2DetailsViewController: UIViewController {
             }
         }
         
+        tableView.keyboardDismissMode = .onDrag
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -157,13 +158,13 @@ class Person2DetailsViewController: UIViewController {
         let teamSelectedImage = selectedCards.contains(Constants.personCards[1]) ? teamHighlightedImage : teamImage
         let teamButton = DCPathItemButton(image: teamSelectedImage, highlightedImage: teamHighlightedImage, backgroundImage: teamImage, backgroundHighlightedImage: teamHighlightedImage)
         
-        var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Todo")!, newSize: CGSize(width: size, height: size))
+        var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Clipboard")!, newSize: CGSize(width: size, height: size))
         toDoImage = UIImage.recolorImageWithColor(image: toDoImage, color: color)
         let toDoHighlightedImage = UIImage.recolorImageWithColor(image: toDoImage, color: highlightColor)
         let toDoSelectedImage = selectedCards.contains(Constants.personCards[2]) ? toDoHighlightedImage : toDoImage
         let toDoButton = DCPathItemButton(image: toDoSelectedImage, highlightedImage: toDoHighlightedImage, backgroundImage: toDoImage, backgroundHighlightedImage: toDoHighlightedImage)
         
-        var meetingsImage = UIImage.resizeImageWithSize(image: UIImage(named: "Clipboard")!, newSize: CGSize(width: size, height: size))
+        var meetingsImage = UIImage.resizeImageWithSize(image: UIImage(named: "Todo")!, newSize: CGSize(width: size, height: size))
         meetingsImage = UIImage.recolorImageWithColor(image: meetingsImage, color: color)
         let meetingsHighlightedImage = UIImage.recolorImageWithColor(image: meetingsImage, color: highlightColor)
         let meetingsSelectedImage = selectedCards.contains(Constants.personCards[3]) ? meetingsHighlightedImage : meetingsImage

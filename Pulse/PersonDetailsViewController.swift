@@ -249,7 +249,7 @@ class PersonDetailsViewController: UIViewController {
 		SVProgressHUD.dismiss()
 
 		if success {
-			ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Update team member successful")
+			ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully updated team member")
 		}
 		else {
 			ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error", message: "Unable to update team member")
@@ -299,7 +299,7 @@ class PersonDetailsViewController: UIViewController {
                         
                         // Temporary fix to pop page after new person was created to "hide" bugs
                         // Really though, if new person is created, page shouldn't be popped so the user can still use that page to add To Do items, meetings, etc.
-                        let _ = self.navigationController?.popViewController(animated: true)
+                        self.navigationController?.popViewController(animated: true)
 					}
 				}
 			}

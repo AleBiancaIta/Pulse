@@ -47,7 +47,7 @@ class ChangePasswordViewController: UIViewController {
                     PFUser.current()?.password = self.newPasswordTextField.text!
                     PFUser.current()?.saveInBackground { (success: Bool, error: Error?) in
                         if success {
-                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Password change successful", delegate: self)
+                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully changed password", delegate: self)
                         } else {
                             self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error: \(error?.localizedDescription)")
                         }
@@ -80,7 +80,7 @@ class ChangePasswordViewController: UIViewController {
         
         // Check to make sure password == confirm password
         guard newPasswordTextField.text == confirmNewPasswordTextField.text else {
-            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "New Password and Confirm New Password must be the same")
+            ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "New Password and Confirm New Password fields must be the same")
             return false
         }
         
@@ -93,7 +93,7 @@ class ChangePasswordViewController: UIViewController {
 extension ChangePasswordViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        let _ = self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         return true
     }
     

@@ -159,7 +159,7 @@ extension TeamListViewController: TeamViewDataSourceDelegate {
     }
     
     fileprivate func confirmDelete(person: PFObject) {
-        ABIShowAlertWithActions(title: "Alert", message: "Are you sure you want to delete this person?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
+        ABIShowAlertWithActions(title: "", message: "Are you sure you want to delete this person?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
             if alertAction.title == "Confirm" {
                 self.handleDeletingPerson()
             }

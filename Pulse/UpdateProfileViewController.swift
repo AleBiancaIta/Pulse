@@ -61,11 +61,10 @@ class UpdateProfileViewController: UIViewController {
                     
                     self.person.saveInBackground { (success: Bool, error: Error?) in
                         if success {
-                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Update profile successful", delegate: self)
-                            
+                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully updated profile", delegate: self)
                             
                             //self.ABIShowAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-                            //    let _ = self.navigationController?.popViewController(animated: true)
+                            //  self.navigationController?.popViewController(animated: true)
                             //})
                         } else {
                             self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to update user profile with error: \(error?.localizedDescription)")
@@ -167,7 +166,7 @@ extension UpdateProfileViewController: UITextFieldDelegate {
 extension UpdateProfileViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        let _ = self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
         return true
     }
     

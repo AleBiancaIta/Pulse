@@ -24,8 +24,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var phoneTextField: UITextField!
     @IBOutlet weak var companyNameTextField: UITextField!
-    @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
     
     var person: Person!
 	var photoData: Data?
@@ -37,7 +37,7 @@ class SignUpViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .blackTranslucent
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        
+            
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         positionSegmentedControl.layer.cornerRadius = 5
@@ -49,6 +49,7 @@ class SignUpViewController: UIViewController {
 		profileImageView.isEditable = true
         
         scrollView.contentSize = UIScreen.main.bounds.size
+        scrollView.keyboardDismissMode = .onDrag
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -151,10 +152,28 @@ class SignUpViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             //scrollView.frame.size.height = UIScreen.main.bounds.size.height - keyboardSize.height - 64
-            if scrollView.frame.origin.y != 0 {
-                scrollView.frame.origin.y = 0
+            
+            // Only need to move keyboard if bottom fields are being edited
+            var activeTextField: UITextField = emailTextField
+            if passwordTextField.isEditing {
+                activeTextField = passwordTextField
+            } else if confirmPasswordTextField.isEditing {
+                activeTextField = confirmPasswordTextField
+            } else if firstNameTextField.isEditing {
+                activeTextField = firstNameTextField
+            } else if lastNameTextField.isEditing {
+                activeTextField = lastNameTextField
+            } else if phoneTextField.isEditing {
+                activeTextField = phoneTextField
+            } else if companyNameTextField.isEditing {
+                activeTextField = companyNameTextField
             }
-            scrollView.frame.origin.y -= keyboardSize.height - 64
+            if activeTextField.frame.origin.y > keyboardSize.height {
+                if scrollView.frame.origin.y != 0 {
+                    scrollView.frame.origin.y = 0
+                }
+                scrollView.frame.origin.y -= keyboardSize.height - 64
+            }
         }
     }
     

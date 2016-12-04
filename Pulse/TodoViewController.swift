@@ -483,7 +483,7 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Helpers
     fileprivate func confirmDelete(todoItem: PFObject) {
-        ABIShowAlertWithActions(title: "Alert", message: "Are you sure you want to delete this item?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
+        ABIShowAlertWithActions(title: "", message: "Are you sure you want to delete this item?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in
             if alertAction.title == "Confirm" {
                 self.handleDeletingItem()
             }
