@@ -24,7 +24,8 @@ class SettingsHeaderCell: UITableViewCell {
         didSet {
             let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
             let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
-            usernameLabel.text = "Hello,\n\(firstName) \(lastName)"
+            let name = firstName != lastName ? "\(firstName) \(lastName)" : firstName
+            usernameLabel.text = "Hello,\n\(name)"
 			profileImageView.pffile = person[ObjectKeys.Person.photo] as? PFFile
         }
     }

@@ -76,7 +76,7 @@ class TodoListCell: UITableViewCell {
                             let firstName = person[ObjectKeys.Person.firstName] as! String
                             let lastName = person[ObjectKeys.Person.lastName] as! String
                             
-                            self.nameLabel.text = "\(firstName) \(lastName)"
+                            self.nameLabel.text = firstName != lastName ? "\(firstName) \(lastName)" : firstName
                         }
                     }
                 }

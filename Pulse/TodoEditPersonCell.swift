@@ -71,7 +71,7 @@ class TodoEditPersonCell: UITableViewCell {
     fileprivate func configureNameLabel(person: PFObject) {
         let firstName = person[ObjectKeys.Person.firstName] as? String ?? ""
         let lastName = person[ObjectKeys.Person.lastName] as? String ?? ""
-        nameLabel.text = "\(firstName) \(lastName)"
+        nameLabel.text = firstName != lastName ? "\(firstName) \(lastName)" : firstName
     }
     
     override func awakeFromNib() {

@@ -206,7 +206,7 @@ class Person2DetailsViewController: UIViewController {
             
             let firstName =  personPFObject[ObjectKeys.Person.firstName] as! String
             let lastName = personPFObject[ObjectKeys.Person.lastName] as! String
-            self.title = "\(firstName) \(lastName)"
+            self.title = firstName != lastName ? "\(firstName) \(lastName)" : firstName
             
             if let selectedCardsString = personPFObject[ObjectKeys.Person.selectedCards] as? String {
                 self.selectedCardsString = selectedCardsString
