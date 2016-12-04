@@ -230,7 +230,6 @@ class PersonDetailsViewController: UIViewController {
 					(success: Bool, error: Error?) in
 					self.updatePersonFinished(success: success, error: error)
 				})
-
 			}
 			else {
 				pfPerson.saveInBackground(block: {
@@ -246,12 +245,11 @@ class PersonDetailsViewController: UIViewController {
 		SVProgressHUD.dismiss()
 
 		if success {
-			self.ABIShowAlert(title: "Success", message: "Update team member successful", sender: nil, handler: { (alertAction: UIAlertAction) in
-				//let _ = self.navigationController?.popViewController(animated: true)
-			})
+			ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Update team member successful")
 		}
 		else {
-			self.ABIShowAlert(title: "Error", message: "Unable to update team member with error: \(error?.localizedDescription)", sender: nil, handler: nil)
+			ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error", message: "Unable to update team member")
+			debugPrint(error?.localizedDescription as Any)
 		}
 	}
 
