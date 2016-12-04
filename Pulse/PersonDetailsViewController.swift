@@ -83,23 +83,9 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	@IBAction func didTapCallButton(_ sender: UIButton) {
-
-		let okAction = UIAlertAction(title: "Call", style: .default, handler: {
-			(UIAlertAction) in
-			if let phone = self.phoneTextField.text {
-				UIApplication.shared.call(phoneNumber: phone)
-			}
-		})
-
-		let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-		let alertController = UIAlertController(
-			title: "Phone Call",
-			message: "Are you sure you want to call this number?",
-			preferredStyle: .alert)
-
-		alertController.addAction(okAction)
-		alertController.addAction(cancelAction)
-		present(alertController, animated: true, completion: nil)
+		if let phone = self.phoneTextField.text {
+			UIApplication.shared.call(phoneNumber: phone)
+		}
 	}
 
 	func onRightBarButtonTap(_ sender: UIBarButtonItem) {

@@ -78,7 +78,7 @@ extension UIApplication {
 	func mailTo(email: String) {
 		if let emailUrl = URL(string: "mailto:\(email)") {
 			if canOpenURL(emailUrl) {
-				UIApplication.shared.open(emailUrl, options: [:], completionHandler: nil)
+				open(emailUrl, options: [:], completionHandler: nil)
 			}
 		}
 	}
