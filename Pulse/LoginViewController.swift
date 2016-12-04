@@ -58,7 +58,10 @@ class LoginViewController: UIViewController {
             ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "Username and password fields cannot be empty")
             loginButton.isEnabled = true
         } else {
-            if let username = usernameTextField.text, let password = passwordTextField.text {
+            if var username = usernameTextField.text, let password = passwordTextField.text {
+                // Trim trailing spaces from username (email)
+                username = username.trimmingCharacters(in: .whitespacesAndNewlines)
+                
                 PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
                     if let error = error {
                         self.loginButton.isEnabled = true
