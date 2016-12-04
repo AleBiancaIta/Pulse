@@ -57,6 +57,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableCell" id="hWo-g4-1P0">
+                                        <rect key="frame" x="0.0" y="72" width="359" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hWo-g4-1P0" id="PSX-BL-0Xl">
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
@@ -77,7 +85,7 @@
                     <connections>
                         <outlet property="addButton" destination="lb5-MA-c6m" id="XOa-FF-sXK"/>
                         <outlet property="meetingsLabel" destination="RXM-OU-A5o" id="yhk-bH-D83"/>
-                        <outlet property="selectAllButton" destination="Bsv-qF-A4D" id="e3o-aH-M0g"/>
+                        <outlet property="seeAllButton" destination="Bsv-qF-A4D" id="sLT-YK-yDv"/>
                         <outlet property="tableView" destination="ndN-v1-9TM" id="TFN-bt-SOI"/>
                         <outlet property="tableViewLeadingConstraint" destination="8Vp-xC-jlb" id="ARA-jC-gOI"/>
                         <outlet property="tableViewTopConstraint" destination="qe4-4c-hYI" id="j8d-kM-6mt"/>

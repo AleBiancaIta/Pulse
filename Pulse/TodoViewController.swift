@@ -182,10 +182,10 @@ class TodoViewController: UIViewController {
                         self.todoItems = items
                         self.tableView.reloadData()
                         debugPrint("Fetching todo items successful, reloading table")
-                        self.seeAllButton.isHidden = false
+                        //self.seeAllButton.isHidden = false
                     } else {
                         debugPrint("TodoItems is nil or contains 0 items")
-                        self.seeAllButton.isHidden = true
+                        //self.seeAllButton.isHidden = true
                     }
                 }
             }

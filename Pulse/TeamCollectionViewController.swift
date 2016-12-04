@@ -38,7 +38,7 @@ class TeamCollectionViewController: UIViewController {
             if success {
                 debugPrint("successfully fetching team members")
                 self.noTeamMembersLabel.isHidden = !(self.dataSource.teamMembers.count == 0)
-                self.seeAllButton.isHidden = self.dataSource.teamMembers.count == 0
+                //self.seeAllButton.isHidden = self.dataSource.teamMembers.count == 0
                 
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()

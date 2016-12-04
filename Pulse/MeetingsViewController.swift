@@ -12,7 +12,7 @@ import UIKit
 class MeetingsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var selectAllButton: UIButton! // See All Button
+    @IBOutlet weak var seeAllButton: UIButton! // See All Button
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var meetingsLabel: UILabel!
     
@@ -39,7 +39,7 @@ class MeetingsViewController: UIViewController {
         }
         
         tableView.isScrollEnabled = expanded
-        selectAllButton.isHidden = expanded
+        //seeAllButton.isHidden = expanded
         addButton.isHidden = expanded
         meetingsLabel.isHidden = expanded
         
@@ -172,10 +172,9 @@ class MeetingsViewController: UIViewController {
 
 extension MeetingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
         if 0 < meetings.count {
-            
-            selectAllButton.isHidden = false
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+            //selectAllButton.isHidden = false
             
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
@@ -195,12 +194,12 @@ extension MeetingsViewController: UITableViewDataSource {
                 }
             }
             cell.accessoryType = .disclosureIndicator
-
-        } else {
-            selectAllButton.isHidden = true
-            cell.messageLabel.text = "You currently have no meetings"
-            cell.imageName = "Clipboard"
+            return cell
         }
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableCell", for: indexPath)
+        //seeAllButton.isHidden = true
+        cell.textLabel?.text = "You currently have no meetings"
         return cell
     }
     
