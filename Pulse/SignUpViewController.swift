@@ -61,6 +61,8 @@ class SignUpViewController: UIViewController {
         UIExtensions.setupViewFor(textField: lastNameTextField)
         UIExtensions.setupViewFor(textField: phoneTextField)
         UIExtensions.setupViewFor(textField: companyNameTextField)
+        
+        emailTextField.becomeFirstResponder()
     }
     
     // MARK: - Actions

@@ -39,7 +39,9 @@ class UpdateProfileViewController: UIViewController {
         UIExtensions.setupViewFor(textField: firstNameTextField)
         UIExtensions.setupViewFor(textField: lastNameTextField)
         UIExtensions.setupViewFor(textField: phoneTextField)
-        UIExtensions.setupViewFor(textField: emailTextField)
+        //UIExtensions.setupViewFor(textField: emailTextField) // email not editable
+        
+        passwordTextField.becomeFirstResponder()
     }
 
     // MARK: - Actions

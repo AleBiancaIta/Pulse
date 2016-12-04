@@ -34,6 +34,8 @@ class LoginViewController: UIViewController {
         
         UIExtensions.setupViewFor(textField: usernameTextField)
         UIExtensions.setupViewFor(textField: passwordTextField)
+        
+        usernameTextField.becomeFirstResponder()
     }
     
     // MARK: - Actions

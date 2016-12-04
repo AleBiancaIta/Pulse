@@ -29,6 +29,8 @@ class ChangePasswordViewController: UIViewController {
         UIExtensions.setupViewFor(textField: oldPasswordTextField)
         UIExtensions.setupViewFor(textField: newPasswordTextField)
         UIExtensions.setupViewFor(textField: confirmNewPasswordTextField)
+        
+        oldPasswordTextField.becomeFirstResponder()
     }
 
     // MARK: - Actions
