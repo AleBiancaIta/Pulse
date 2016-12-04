@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="1yb-Pw-bB9">
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto0" translatesAutoresizingMaskIntoConstraints="NO" id="1yb-Pw-bB9">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                 </imageView>
             </subviews>
@@ -44,6 +44,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="DefaultPhoto" width="256" height="256"/>
+        <image name="DefaultPhoto0" width="256" height="256"/>
     </resources>
 </document>

@@ -39,7 +39,7 @@ class PhotoImageView: UIView {
 				}
 			}
 			else {
-				initRandomDefaultPhoto()
+				initDefaultPhoto()
 			}
 		}
 	}
@@ -74,7 +74,7 @@ class PhotoImageView: UIView {
         imageView.layer.borderColor = UIColor.pulseLightPrimaryColor().cgColor
         imageView.layer.borderWidth = 1
 		imageView.clipsToBounds = true
-		initRandomDefaultPhoto()
+		initDefaultPhoto()
         
         imageView.alpha = 0
         UIView.animate(withDuration: 1, animations: {
@@ -82,24 +82,8 @@ class PhotoImageView: UIView {
         })
 	}
 
-	func initRandomDefaultPhoto() {
-		let random = arc4random_uniform(6)
-		switch random {
-		case 0:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto0")
-		case 1:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto1")
-		case 2:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto2")
-		case 3:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto3")
-		case 4:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto4")
-		case 5:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto5")
-		default:
-			imageView.image = #imageLiteral(resourceName: "DefaultPhoto0")
-		}
+	func initDefaultPhoto() {
+		imageView.image = #imageLiteral(resourceName: "DefaultPhoto0")
 	}
 
 	@IBAction func didTapProfileImageView(_ sender: UITapGestureRecognizer) {
