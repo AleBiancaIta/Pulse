@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoImageView" customModule="Pulse" customModuleProvider="target">
             <connections>
+                <outlet property="cameraButton" destination="C2K-OS-E0e" id="onB-Ne-6h5"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="YqC-9h-hOz"/>
                 <outlet property="imageView" destination="1yb-Pw-bB9" id="DpI-Ao-qE9"/>
             </connections>
@@ -23,12 +24,20 @@
                 <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DefaultPhoto0" translatesAutoresizingMaskIntoConstraints="NO" id="1yb-Pw-bB9">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                 </imageView>
+                <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C2K-OS-E0e" userLabel="Camera Button">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
+                    <state key="normal" image="Camera-full"/>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1yb-Pw-bB9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="1Mw-h0-do4"/>
+                <constraint firstItem="C2K-OS-E0e" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9kv-fI-NoK"/>
+                <constraint firstItem="C2K-OS-E0e" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="ch4-QC-gp1"/>
+                <constraint firstItem="C2K-OS-E0e" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="clf-jl-B5X"/>
                 <constraint firstItem="1yb-Pw-bB9" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="ero-oK-Nl3"/>
                 <constraint firstItem="1yb-Pw-bB9" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="pgW-ZR-ya9"/>
+                <constraint firstItem="C2K-OS-E0e" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="vv1-wj-OPs"/>
                 <constraint firstItem="1yb-Pw-bB9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="wtN-Ij-27f"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -44,6 +53,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="Camera-full" width="30" height="30"/>
         <image name="DefaultPhoto0" width="256" height="256"/>
     </resources>
 </document>

@@ -18,6 +18,7 @@ class PhotoImageView: UIView {
 
 	@IBOutlet weak var imageView: UIImageView!
 	@IBOutlet var contentView: UIView!
+	@IBOutlet weak var cameraButton: UIButton!
 
 	var viewController: UIViewController!
 	let imagePicker = UIImagePickerController()
@@ -25,6 +26,7 @@ class PhotoImageView: UIView {
 		didSet {
             if let photoData = photoData {
                 self.imageView.image = UIImage(data: photoData)
+				self.cameraButton.isHidden = true
             }
 		}
 	}
@@ -44,7 +46,13 @@ class PhotoImageView: UIView {
 		}
 	}
 
-	var isEditable = false
+	override var isUserInteractionEnabled: Bool {
+		didSet {
+			self.cameraButton.isHidden = !isUserInteractionEnabled
+		}
+	}
+
+	var isEditable = false 
 	let imageDefaultSize = 200.0
 
 	weak var delegate:PhotoImageViewDelegate? {
@@ -75,8 +83,12 @@ class PhotoImageView: UIView {
         imageView.layer.borderWidth = 1
 		imageView.clipsToBounds = true
 		initDefaultPhoto()
-        
-        imageView.alpha = 0
+
+		let tintedImage = cameraButton.imageView?.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
+		cameraButton.imageView?.tintColor = UIColor.pulseLightPrimaryColor()
+		cameraButton.imageView?.image = tintedImage
+
+		imageView.alpha = 0
         UIView.animate(withDuration: 1, animations: {
             self.imageView.alpha = 1
         })
