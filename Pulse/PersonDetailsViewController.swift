@@ -51,10 +51,9 @@ class PersonDetailsViewController: UIViewController {
 			let lastName = pfObject[ObjectKeys.Person.lastName] as! String
 
             firstNameTextField.text = firstName
-            lastNameTextField.text = lastName
+			lastNameTextField.text = firstName == lastName ? "" : lastName
             phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
-			configureButton(textField: emailTextField, button: emailButton)
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
 
             personInfoParentViewController?.navigationItem.title = firstName + " " + lastName
@@ -164,11 +163,13 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func configureButton(textField: UITextField, button: UIButton) {
+		let text = textField.text ?? ""
 		let buttonTitle = NSMutableAttributedString(
-			string:textField.text!,
+			string:text,
 			attributes: [NSForegroundColorAttributeName : UIColor.pulseAccentColor(),
 			             NSUnderlineStyleAttributeName : 1] as [String : Any])
-		textField.isHidden = !button.isHidden
+		textField.isHidden = !isEditing
+		button.isHidden = isEditing || text == ""
 		button.setAttributedTitle(buttonTitle, for: .normal)
 	}
 
@@ -206,13 +207,8 @@ class PersonDetailsViewController: UIViewController {
             }
         }
 
-		updateCallButton()
-	}
-
-	func updateCallButton() {
-		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
-		callButton.titleLabel?.text = phoneTextField.text
 		configureButton(textField: phoneTextField, button: callButton)
+		configureButton(textField: emailTextField, button: emailButton)
 	}
 
 	func editPerson() {
