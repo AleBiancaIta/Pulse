@@ -151,6 +151,32 @@ class ParseClient: NSObject {
         }
     }
     
+    func fetchMeetingFor(surveyId: String, isDeleted: Bool, completion: @escaping (PFObject?, Error?) -> ()) {
+        let query = PFQuery(className: "Meetings")
+        query.whereKey(ObjectKeys.Meeting.surveyId, equalTo: surveyId)
+        
+        if isDeleted {
+            query.whereKeyExists(ObjectKeys.Meeting.deletedAt)
+        } else {
+            query.whereKeyDoesNotExist(ObjectKeys.Meeting.deletedAt)
+        }
+        
+        query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
+            if let error = error {
+                completion(nil, error)
+            } else {
+                if let meetings = meetings, meetings.count > 0 {
+                    let meeting = meetings[0]
+                    completion(meeting, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "fetchMeetingForSurveyId query returns no meeting"]
+                    let error = NSError(domain: "ParseClient fetchMeetingFor", code: 0, userInfo: userInfo) as Error
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     func fetchMeetingFor(personId: String, managerId: String, surveyId: String, isDeleted: Bool, completion: @escaping (PFObject?, Error?) -> ()) {
         let query = PFQuery(className: "Meetings")
         query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)

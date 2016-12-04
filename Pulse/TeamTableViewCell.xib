@@ -43,6 +43,9 @@
                         <state key="normal" title="1" image="Smiley">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="onSurveyButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Rvb-dB-5Qb"/>
+                        </connections>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHB-1Q-Tnf">
                         <rect key="frame" x="156" y="80" width="24" height="24"/>
@@ -50,6 +53,9 @@
                         <state key="normal" title="2" image="ThumbsUp">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="onSurveyButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dr9-Vq-dvi"/>
+                        </connections>
                     </button>
                     <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fff-PY-x0G">
                         <rect key="frame" x="196" y="80" width="24" height="24"/>
@@ -57,6 +63,9 @@
                         <state key="normal" title="3" image="Circle3">
                             <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="onSurveyButtonTap:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Jc3-Zs-fwP"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hcq-XM-jTC">
                         <rect key="frame" x="116" y="46" width="196" height="22"/>

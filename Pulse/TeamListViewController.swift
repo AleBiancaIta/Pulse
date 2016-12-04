@@ -16,6 +16,7 @@ class TeamListViewController: UIViewController {
     let dataSource = TeamViewDataSource.sharedInstance()
     var deletedPersonIndexPath: IndexPath? = nil
     var person: PFObject! = nil
+    fileprivate let parseClient = ParseClient.sharedInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +117,46 @@ extension TeamListViewController: TeamViewDataSourceDelegate {
         confirmDelete(person: personToDelete!)
     }
     
+    func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, surveyButtonTap survey: PFObject) {
+        debugPrint("survey button tapped, \(survey)")
+        
+        // fetch meeting object associated with the survey
+        parseClient.fetchMeetingFor(surveyId: survey.objectId!, isDeleted: false) { (meeting: PFObject?, error: Error?) in
+            if let error = error {
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to fetch meeting survey, error: \(error.localizedDescription)")
+            } else {
+                if let meeting = meeting {
+                    
+                    let personId = meeting[ObjectKeys.Meeting.personId] as! String
+                    self.parseClient.fetchPersonFor(personId: personId) { (teamMember: PFObject?, error: Error?) in
+                        if let error = error {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to fetch survey person, error: \(error.localizedDescription)")
+                        } else {
+                            if let teamMember = teamMember {
+                                self.segueToMeetingDetailsVC(meeting: meeting, person: teamMember)
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Couldn't find the team member associated with survey")
+                            }
+                        }
+                    }
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Couldn't find meeting associated with survey")
+                }
+            }
+        }
+    }
+    
     // MARK: - Helpers
+    
+    func segueToMeetingDetailsVC(meeting: PFObject, person: PFObject) {
+        let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
+        viewController.meeting = Meeting(meeting: meeting)
+        viewController.teamMember = person
+        viewController.isExistingMeeting = true
+        viewController.viewTypes = .employeeDetail
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
     
     fileprivate func confirmDelete(person: PFObject) {
         ABIShowAlertWithActions(title: "Alert", message: "Are you sure you want to delete this person?", actionTitle1: "Confirm", actionTitle2: "Cancel", sender: nil, handler1: { (alertAction:UIAlertAction) in

@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+@objc protocol TeamTableViewCellDelegate {
+    @objc optional func teamTableViewCell(_ teamTableViewCell: TeamTableViewCell, survey: PFObject)
+}
+
 class TeamTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: PhotoImageView!
@@ -17,6 +21,8 @@ class TeamTableViewCell: UITableViewCell {
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!
     @IBOutlet weak var surveyValue3Button: UIButton!
+    
+    weak var delegate: TeamTableViewCellDelegate?
     
     var survey: PFObject! {
         didSet {
@@ -112,5 +118,11 @@ class TeamTableViewCell: UITableViewCell {
         surveyValue1Button.tintColor = UIColor.clear
         surveyValue2Button.tintColor = UIColor.clear
         surveyValue3Button.tintColor = UIColor.clear
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func onSurveyButtonTap(_ sender: UIButton) {
+        delegate?.teamTableViewCell?(self, survey: self.survey)
     }
 }

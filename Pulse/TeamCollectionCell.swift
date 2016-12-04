@@ -9,6 +9,10 @@
 import UIKit
 import Parse
 
+@objc protocol TeamCollectionCellDelegate {
+    @objc optional func teamCollectionCell(_ teamCollectionCell: TeamCollectionCell, survey: PFObject)
+}
+
 class TeamCollectionCell: UICollectionViewCell {
     
     // MARK: - Properties
@@ -18,6 +22,8 @@ class TeamCollectionCell: UICollectionViewCell {
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!
     @IBOutlet weak var surveyValue3Button: UIButton!
+    
+    weak var delegate: TeamCollectionCellDelegate?
     
     var survey: PFObject! {
         didSet {
@@ -100,5 +106,11 @@ class TeamCollectionCell: UICollectionViewCell {
         surveyValue2Button.tintColor = UIColor.clear
         surveyValue3Button.tintColor = UIColor.clear
         profileImageView.pffile = nil
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func onSurveyButtonTap(_ sender: UIButton) {
+        delegate?.teamCollectionCell?(self, survey: self.survey)
     }
 }

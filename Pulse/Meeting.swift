@@ -48,6 +48,29 @@ class Meeting: NSObject {
         deletedAt = dictionary[ObjectKeys.Meeting.deletedAt] as? Date
     }
     
+    init(meeting: PFObject) {
+        objectId = meeting.objectId
+        createdAt = meeting.createdAt
+        updatedAt = meeting.updatedAt
+        personId = meeting[ObjectKeys.Meeting.personId] as! String
+        managerId = meeting[ObjectKeys.Meeting.managerId] as! String
+        surveyId = meeting[ObjectKeys.Meeting.surveyId] as! String
+        notes = meeting[ObjectKeys.Meeting.notes] as? String
+        
+        if let notesPhotoUrlString = meeting[ObjectKeys.Meeting.notesPhotoUrlString] as? String {
+            self.notesPhotoUrlString = notesPhotoUrlString
+            
+            if let photoUrl = URL(string: notesPhotoUrlString) {
+                self.notesPhotoUrl = photoUrl
+            }
+        }
+        
+        meetingDate = meeting[ObjectKeys.Meeting.meetingDate] as! Date
+        meetingPlace = meeting[ObjectKeys.Meeting.meetingPlace] as? String
+        selectedCards = meeting[ObjectKeys.Meeting.selectedCards] as? String
+        deletedAt = meeting[ObjectKeys.Meeting.deletedAt] as? Date
+    }
+    
     class func saveMeetingToParse(meeting: Meeting, withCompletion completion: PFBooleanResultBlock?) {
         let parseMeeting = PFObject(className: "Meetings")
         

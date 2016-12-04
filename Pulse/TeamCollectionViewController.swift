@@ -16,6 +16,7 @@ class TeamCollectionViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     let dataSource = TeamViewDataSource.sharedInstance()
     var person: PFObject! = nil
+    fileprivate let parseClient = ParseClient.sharedInstance()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,7 @@ class TeamCollectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.clear
         subscribeToNotifications()
-        
+        dataSource.delegate = self
         dataSource.printTeamMembers()
         
     }
@@ -124,5 +125,45 @@ extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionVi
         } else {
             debugPrint("in TeamCollectionVC person is nil")
         }
+    }
+}
+
+extension TeamCollectionViewController: TeamViewDataSourceDelegate {
+    func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, surveyButtonTap survey: PFObject) {
+        
+        // fetch meeting object associated with the survey
+        parseClient.fetchMeetingFor(surveyId: survey.objectId!, isDeleted: false) { (meeting: PFObject?, error: Error?) in
+            if let error = error {
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to fetch meeting survey, error: \(error.localizedDescription)")
+            } else {
+                if let meeting = meeting {
+                    
+                    let personId = meeting[ObjectKeys.Meeting.personId] as! String
+                    self.parseClient.fetchPersonFor(personId: personId) { (teamMember: PFObject?, error: Error?) in
+                        if let error = error {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to fetch survey person, error: \(error.localizedDescription)")
+                        } else {
+                            if let teamMember = teamMember {
+                                self.segueToMeetingDetailsVC(meeting: meeting, person: teamMember)
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Couldn't find the team member associated with survey")
+                            }
+                        }
+                    }
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Couldn't find meeting associated with survey")
+                }
+            }
+        }
+    }
+    
+    func segueToMeetingDetailsVC(meeting: PFObject, person: PFObject) {
+        let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingDetailsViewController") as! MeetingDetailsViewController
+        viewController.meeting = Meeting(meeting: meeting)
+        viewController.teamMember = person
+        viewController.isExistingMeeting = true
+        viewController.viewTypes = .employeeDetail
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
 }

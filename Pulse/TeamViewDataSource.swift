@@ -11,6 +11,7 @@ import Parse
 
 @objc protocol TeamViewDataSourceDelegate {
     @objc optional func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, at indexPath: IndexPath)
+    @objc optional func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, surveyButtonTap survey: PFObject)
 }
 
 class TeamViewDataSource: NSObject {
@@ -193,7 +194,7 @@ extension TeamViewDataSource: UITableViewDataSource {
         let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
         cell.firstNameLabel.text = "\(firstName) \(lastName)"
         cell.emailButton.setTitle(teamMembers[indexPath.row][ObjectKeys.Person.email] as? String, for: .normal)
-
+        cell.delegate = self
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
 
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) { (survey: PFObject?, error: Error?) in
@@ -230,7 +231,7 @@ extension TeamViewDataSource: UICollectionViewDataSource {
         cell.nameLabel.text = "\(firstName) \(lastName)"
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
         cell.profileImageView.layer.cornerRadius = 5
-
+        cell.delegate = self
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) {(survey: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")
@@ -244,3 +245,12 @@ extension TeamViewDataSource: UICollectionViewDataSource {
     }
 }
 
+extension TeamViewDataSource: TeamTableViewCellDelegate, TeamCollectionCellDelegate {
+    func teamTableViewCell(_ teamTableViewCell: TeamTableViewCell, survey: PFObject) {
+        delegate?.teamViewDataSource?(self, surveyButtonTap: survey)
+    }
+    
+    func teamCollectionCell(_ teamCollectionCell: TeamCollectionCell, survey: PFObject) {
+        delegate?.teamViewDataSource?(self, surveyButtonTap: survey)
+    }
+}
