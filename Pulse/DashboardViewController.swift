@@ -6,15 +6,12 @@
 //  Copyright © 2016 ABI. All rights reserved.
 //
 
-import DCPathButton
 import Parse
 import UIKit
 
 class DashboardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var dcPathButton:DCPathButton!
     
     var selectedCardsString: String? = ""
     var selectedCards: [Card] = []
@@ -34,6 +31,7 @@ class DashboardViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
 
         tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
+        tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
         
         let query = PFQuery(className: "Dashboard")
         let userId = (PFUser.current()?.objectId)! as String
@@ -75,7 +73,6 @@ class DashboardViewController: UIViewController {
                     }
                 }
                 
-                self.configureDCPathButton()
                 self.tableView.reloadData()
                 
             } else {
@@ -84,56 +81,9 @@ class DashboardViewController: UIViewController {
             }
         }
         
-        configureDCPathButton()
-        
         tableView.keyboardDismissMode = .onDrag
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    func configureDCPathButton() {
-        let size: CGFloat = 40
-        let color = UIColor.pulseLightPrimaryColor()
-        let highlightColor = UIColor.pulseAccentColor()
-        
-        var pathImage = UIImage.resizeImageWithSize(image: UIImage(named: "Plus")!, newSize: CGSize(width: size, height: size))
-        pathImage = UIImage.recolorImageWithColor(image: pathImage, color: color)
-        let pathHighlightedImage = UIImage.recolorImageWithColor(image: pathImage, color: highlightColor)
-        dcPathButton = DCPathButton(center: pathImage, highlightedImage: pathHighlightedImage)
-        
-        dcPathButton.delegate = self
-        dcPathButton.dcButtonCenter = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height - 25.5)
-        dcPathButton.allowSounds = true
-        //dcPathButton.allowCenterButtonRotation = true
-        dcPathButton.bloomRadius = 80
-        
-        var chartImage = UIImage.resizeImageWithSize(image: UIImage(named: "PulseGraph")!, newSize: CGSize(width: size, height: size))
-        chartImage = UIImage.recolorImageWithColor(image: chartImage, color: color)
-        let chartHighlightedImage = UIImage.recolorImageWithColor(image: chartImage, color: highlightColor)
-        let chartSelectedImage = selectedCards.contains(Constants.dashboardCards[0]) ? chartHighlightedImage : chartImage
-        let chartButton = DCPathItemButton(image: chartSelectedImage, highlightedImage: chartHighlightedImage, backgroundImage: chartImage, backgroundHighlightedImage: chartHighlightedImage)
-        
-        var toDoImage = UIImage.resizeImageWithSize(image: UIImage(named: "Clipboard")!, newSize: CGSize(width: size, height: size))
-        toDoImage = UIImage.recolorImageWithColor(image: toDoImage, color: color)
-        let toDoHighlightedImage = UIImage.recolorImageWithColor(image: toDoImage, color: highlightColor)
-        let toDoSelectedImage = selectedCards.contains(Constants.dashboardCards[1]) ? toDoHighlightedImage : toDoImage
-        let toDoButton = DCPathItemButton(image: toDoSelectedImage, highlightedImage: toDoHighlightedImage, backgroundImage: toDoImage, backgroundHighlightedImage: toDoHighlightedImage)
-        
-        var teamImage = UIImage.resizeImageWithSize(image: UIImage(named: "MyTeamDark")!, newSize: CGSize(width: size, height: size))
-        teamImage = UIImage.recolorImageWithColor(image: teamImage, color: color)
-        let teamHighlightedImage = UIImage.recolorImageWithColor(image: teamImage, color: highlightColor)
-        let teamSelectedImage = selectedCards.contains(Constants.dashboardCards[2]) ? teamHighlightedImage : teamImage
-        let teamButton = DCPathItemButton(image: teamSelectedImage, highlightedImage: teamHighlightedImage, backgroundImage: teamImage, backgroundHighlightedImage: teamHighlightedImage)
-        
-        var meetingsImage = UIImage.resizeImageWithSize(image: UIImage(named: "Todo")!, newSize: CGSize(width: size, height: size))
-        meetingsImage = UIImage.recolorImageWithColor(image: meetingsImage, color: color)
-        let meetingsHighlightedImage = UIImage.recolorImageWithColor(image: meetingsImage, color: highlightColor)
-        let meetingsSelectedImage = selectedCards.contains(Constants.dashboardCards[3]) ? meetingsHighlightedImage : meetingsImage
-        let meetingsButton = DCPathItemButton(image: meetingsSelectedImage, highlightedImage: meetingsHighlightedImage, backgroundImage: meetingsImage, backgroundHighlightedImage: meetingsHighlightedImage)
-        
-        dcPathButton.addPathItems([chartButton, toDoButton, teamButton, meetingsButton])
-        dcPathButton.frame = CGRect(x: view.center.x - size/2, y: UIScreen.main.bounds.height - 64 - 8 - size, width: size, height: size)
-        view.addSubview(dcPathButton)
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -157,7 +107,15 @@ class DashboardViewController: UIViewController {
     }
     
     // MARK: - IBAction
-
+    
+    func onManageCards() {
+        let storyboard = UIStoryboard(name: "Dashboard", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "DashboardSelectionViewController") as! DashboardSelectionViewController
+        viewController.delegate = self
+        viewController.selectedCards = selectedCards
+        present(viewController, animated: true, completion: nil)
+    }
+    
     @IBAction func onSettingsButtonTap(_ sender: UIBarButtonItem) {
  
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
@@ -249,84 +207,96 @@ extension DashboardViewController: UIGestureRecognizerDelegate {
 
 extension DashboardViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch selectedCards[indexPath.section].id! {
-        case "g":
-            let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
-            cell.selectionStyle = .none
+        
+        if indexPath.section == selectedCards.count {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AddCardCell", for: indexPath) as! CardManagementCell
             cell.layer.cornerRadius = 5
             cell.backgroundColor = UIColor.clear
-            
-            if cell.contentView.subviews == [] {
-                let storyboard = UIStoryboard(name: "Graph", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
-                viewController.willMove(toParentViewController: self)
-                viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
-            }
-            
-            return cell
-            
-        case "m":
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
             cell.selectionStyle = .none
-            cell.layer.cornerRadius = 5
-            
-            if cell.contentView.subviews == [] {
-                let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
-                viewController.personId = nil
-                viewController.willMove(toParentViewController: self)
-                viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
-            }
-            
-            return cell
-            
-        case "t":
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
-            cell.selectionStyle = .none
-            cell.layer.cornerRadius = 5
-            cell.backgroundColor = UIColor.clear
-            
-            if cell.contentView.subviews == [] {
-                let storyboard = UIStoryboard(name: "Team", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
-                viewController.willMove(toParentViewController: self)
-                viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
-            }
-                
-            return cell
-            
-        case "d":
-            toDoIndexPath = indexPath
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
-            cell.selectionStyle = .none
-            cell.layer.cornerRadius = 5
-            
-            if cell.contentView.subviews == [] {
-                let storyboard = UIStoryboard(name: "Todo", bundle: nil)
-                let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
-                viewController.willMove(toParentViewController: self)
-                viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                cell.contentView.addSubview(viewController.view)
-                self.addChildViewController(viewController)
-                viewController.didMove(toParentViewController: self)
-            }
-            
-            return cell
+            cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
 
-        default: // This shouldn't actually be reached
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
-            cell.layer.cornerRadius = 5
-            cell.message = selectedCards[indexPath.section].name
             return cell
+        
+        } else {
+            switch selectedCards[indexPath.section].id! {
+            case "g":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
+                return cell
+                
+            case "m":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
+                    viewController.personId = nil
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
+                return cell
+                
+            case "t":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                    
+                return cell
+                
+            case "d":
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                
+                if cell.contentView.subviews == [] {
+                    let storyboard = UIStoryboard(name: "Todo", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    cell.contentView.addSubview(viewController.view)
+                    self.addChildViewController(viewController)
+                    viewController.didMove(toParentViewController: self)
+                }
+                
+                return cell
+
+            default: // This shouldn't actually be reached
+                let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+                cell.layer.cornerRadius = 5
+                cell.message = selectedCards[indexPath.section].name
+                return cell
+            }
+            
         }
     }
     
@@ -335,7 +305,7 @@ extension DashboardViewController: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return selectedCards.count
+        return selectedCards.count + 1
     }
 }
 
@@ -390,84 +360,81 @@ extension DashboardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.section == selectedCards.count {
+            onManageCards()
+        }
     }
 }
 
-extension DashboardViewController: DCPathButtonDelegate {
-    func didDismissDCPathButtonItems(_ dcPathButton: DCPathButton!) {
-        if !dcPathButton.isDescendant(of: view) {
-            configureDCPathButton()
-        } else {
-            dcPathButton.removeFromSuperview()
-            configureDCPathButton()
+// MARK: - DashboardSelectionViewControllerDelegate
+
+extension DashboardViewController: DashboardSelectionViewControllerDelegate {
+    
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card) {
+        
+        let query = PFQuery(className: "Dashboard")
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCardsString = self.selectedCardsString {
+                let post = posts[0]
+                post["userId"] = userId
+                self.selectedCardsString = "\(id)\(selectedCardsString)"
+                post["selectedCards"] = self.selectedCardsString
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    if success {
+                        print("successfully saved dashboard card")
+                    } else {
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
+                        //print("error saving dashboard card")
+                    }
+                }
+            } else {
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
+                //print("error saving dashboard card")
+            }
         }
+        
+        // Insert new card at the top of the table view
+        if !selectedCards.contains(card) {
+            selectedCards.insert(card, at: 0)
+        }
+        tableView.reloadData()
+        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
     
-    func pathButton(_ dcPathButton: DCPathButton!, clickItemButtonAt itemButtonIndex: UInt) {
-        let card = Constants.dashboardCards[Int(itemButtonIndex)]
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card) {
         
-        if selectedCards.contains(card) {
-            let query = PFQuery(className: "Dashboard")
-            let userId = (PFUser.current()?.objectId)! as String
-            query.whereKey("userId", equalTo: userId)
-            query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-                if let posts = posts,
-                    let id = card.id,
-                    let selectedCardsString = self.selectedCardsString {
-                    let post = posts[0]
-                    post["userId"] = userId
-                    self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
-                    post["selectedCards"] = self.selectedCardsString
-                    post.saveInBackground { (success: Bool, error: Error?) in
-                        print("successfully removed dashboard card")
-                    }
-                } else {
-                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing dashboard card, error: \(error?.localizedDescription)")
-                    //print("error removing dashboard card")
+        let query = PFQuery(className: "Dashboard")
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts,
+                let id = card.id,
+                let selectedCardsString = self.selectedCardsString {
+                let post = posts[0]
+                post["userId"] = userId
+                self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
+                post["selectedCards"] = self.selectedCardsString
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    print("successfully removed dashboard card")
                 }
+            } else {
+                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing dashboard card, error: \(error?.localizedDescription)")
+                //print("error removing dashboard card")
             }
-            
-            // Remove card from table view
-            for (index, dashboardCard) in selectedCards.enumerated() {
-                if dashboardCard.id == card.id {
-                    selectedCards.remove(at: index)
-                }
-            }
-            tableView.reloadData()
-            tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
-            
-        } else {
-            let query = PFQuery(className: "Dashboard")
-            let userId = (PFUser.current()?.objectId)! as String
-            query.whereKey("userId", equalTo: userId)
-            query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-                if let posts = posts,
-                    let id = card.id,
-                    let selectedCardsString = self.selectedCardsString {
-                    let post = posts[0]
-                    post["userId"] = userId
-                    self.selectedCardsString = "\(id)\(selectedCardsString)"
-                    post["selectedCards"] = self.selectedCardsString
-                    post.saveInBackground { (success: Bool, error: Error?) in
-                        if success {
-                            print("successfully saved dashboard card")
-                        } else {
-                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
-                            //print("error saving dashboard card")
-                        }
-                    }
-                } else {
-                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
-                    //print("error saving dashboard card")
-                }
-            }
-            
-            // Insert new card at the top of the table view
-            if !selectedCards.contains(card) {
-                selectedCards.insert(card, at: 0)
-            }
-            tableView.reloadData()
-            tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
         }
+        
+        // Remove card from table view
+        for (index, dashboardCard) in selectedCards.enumerated() {
+            if dashboardCard.id == card.id {
+                selectedCards.remove(at: index)
+            }
+        }
+        tableView.reloadData()
+        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
 }

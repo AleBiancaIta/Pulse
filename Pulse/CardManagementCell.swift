@@ -6,7 +6,6 @@
 //  Copyright © 2016 ABI. All rights reserved.
 //
 
-import DCPathButton
 import UIKit
 
 class CardManagementCell: UITableViewCell {
