@@ -177,8 +177,8 @@ extension Person2DetailsViewController: UITableViewDataSource {
             if let personPFObject = personPFObject,
                 let managerId = personPFObject["managerId"] as? String {
                 parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
-                    if error != nil {
-                        print(error?.localizedDescription)
+                    if let error = error {
+                        print(error.localizedDescription)
                     } else {
                         self.personManagerId = managerId
                         if let person = person, managerId != person.objectId {

@@ -293,9 +293,13 @@ class PersonDetailsViewController: UIViewController {
 						self.ABIShowDropDownAlert(
 							type: AlertTypes.success,
 							title: "Success!",
-							message: "Team member created")
+							message: "Successfully added team member")
 						SVProgressHUD.dismiss()
 						NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
+                        
+                        // Temporary fix to pop page after new person was created to "hide" bugs
+                        // Really though, if new person is created, page shouldn't be popped so the user can still use that page to add To Do items, meetings, etc.
+                        let _ = self.navigationController?.popViewController(animated: true)
 					}
 				}
 			}
