@@ -61,12 +61,17 @@ class MeetingDetailsViewController: UIViewController {
    
    func keyboardWillShow(notification: NSNotification) {
       if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-         self.view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height - 64
+         //view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height - 64
+         if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+         }
+         view.frame.origin.y -= keyboardSize.height - 64
       }
    }
    
    func keyboardWillHide(notification: NSNotification) {
-      self.view.frame.size.height = UIScreen.main.bounds.height - 64
+      view.frame.size.height = UIScreen.main.bounds.height - 64
+      view.frame.origin.y = 64
    }
    
    func loadSelectedCards() {
