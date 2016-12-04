@@ -130,7 +130,12 @@ class DashboardViewController: UIViewController {
     }
     
     @IBAction func onLogoutButtonTap(_ sender: UIBarButtonItem) {
-        logOut()
+        self.ABIShowAlertWithActions(title: "Alert!", message: "Are you sure you want to log out?", actionTitle1: "Yes", actionTitle2: "No", sender: nil, handler1: { (yesAction: UIAlertAction) in
+            self.logOut()
+        }, handler2: { (noAction: UIAlertAction) in
+            // do nothing
+            debugPrint("Cancel logout")
+        })
     }
  
     // MARK: - Private Methods
