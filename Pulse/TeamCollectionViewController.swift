@@ -68,7 +68,7 @@ class TeamCollectionViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        print("team collection view controller being deinitialized")
+        //print("team collection view controller being deinitialized")
     }
     
     // MARK: - Helpers

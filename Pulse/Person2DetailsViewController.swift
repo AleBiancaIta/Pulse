@@ -142,28 +142,45 @@ class Person2DetailsViewController: UIViewController {
             let lastName = personPFObject[ObjectKeys.Person.lastName] as! String
             title = firstName != lastName ? "\(firstName) \(lastName)" : firstName
             
-            if let selectedCardsString = personPFObject[ObjectKeys.Person.selectedCards] as? String {
-                self.selectedCardsString = selectedCardsString
-            }
-            
-        }
-        
-        for c in selectedCardsString.characters {
-            switch c {
-            case "d":
-                if !self.selectedCards.contains(Constants.personCards[2]) {
-                    selectedCards.append(Constants.personCards[2])
+            // Hide customizable modules if user is not this person's manager
+            if let managerId = personPFObject["managerId"] as? String {
+                parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        self.personManagerId = managerId
+                        if let selectedCardsString = personPFObject[ObjectKeys.Person.selectedCards] as? String {
+                            self.selectedCardsString = selectedCardsString
+                        }
+                        if let person = person, managerId != person.objectId {
+                            self.userPersonId = person.objectId
+                            self.selectedCardsString = self.selectedCardsString.replacingOccurrences(of: "d", with: "")
+                            self.selectedCardsString = self.selectedCardsString.replacingOccurrences(of: "m", with: "")
+                            self.selectedCardsString = self.selectedCardsString.replacingOccurrences(of: "n", with: "")
+                        }
+                        
+                        for c in self.selectedCardsString.characters {
+                            switch c {
+                            case "d":
+                                if !self.selectedCards.contains(Constants.personCards[2]) {
+                                    self.selectedCards.append(Constants.personCards[2])
+                                }
+                            case "m":
+                                if !self.selectedCards.contains(Constants.personCards[3]) {
+                                    self.selectedCards.append(Constants.personCards[3])
+                                }
+                            case "n":
+                                if !self.selectedCards.contains(Constants.personCards[4]) {
+                                    self.selectedCards.append(Constants.personCards[4])
+                                }
+                            default:
+                                break
+                            }
+                        }
+                        
+                        self.tableView.reloadData()
+                    }
                 }
-            case "m":
-                if !self.selectedCards.contains(Constants.personCards[3]) {
-                    selectedCards.append(Constants.personCards[3])
-                }
-            case "n":
-                if !self.selectedCards.contains(Constants.personCards[4]) {
-                    selectedCards.append(Constants.personCards[4])
-                }
-            default:
-                break
             }
         }
     }

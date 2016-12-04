@@ -149,7 +149,10 @@ class TeamViewDataSource: NSObject {
     }
     
     func getSelectedPersonObjectAt(indexPath: IndexPath) -> PFObject? {
-        return teamMembers[indexPath.row]
+        if 0 <= indexPath.row && indexPath.row < teamMembers.count {
+            return teamMembers[indexPath.row]
+        }
+        return nil
     }
     
     func isPersonManager(personId: String, isDeleted: Bool, isManager: @escaping (Bool, Error?)->()) {
