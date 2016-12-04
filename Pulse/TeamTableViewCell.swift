@@ -103,8 +103,7 @@ class TeamTableViewCell: UITableViewCell {
     @IBAction func onEmailButton(_ sender: Any) {
         if let emailLabel = emailButton.titleLabel,
             let email = emailLabel.text {
-            let url = URL(string: "mailto:\(email)")
-            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+			UIApplication.shared.mailTo(email: email)
         }
     }
     

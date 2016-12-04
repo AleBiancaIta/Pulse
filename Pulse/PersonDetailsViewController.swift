@@ -18,6 +18,7 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var emailTextField: UITextField!
 	@IBOutlet weak var phoneTextField: UITextField!
 	@IBOutlet weak var callButton: UIButton!
+	@IBOutlet weak var emailButton: UIButton!
 
 	var photoData: Data?
 	var person: Person?
@@ -53,6 +54,7 @@ class PersonDetailsViewController: UIViewController {
             lastNameTextField.text = lastName
             phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
+			configureButton(textField: emailTextField, button: emailButton)
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
 
             personInfoParentViewController?.navigationItem.title = firstName + " " + lastName
@@ -74,19 +76,18 @@ class PersonDetailsViewController: UIViewController {
 
 	// MARK: - UI Actions
 
-    @IBAction func didTapEmailButton(_ sender: Any) {
-        if let email = emailTextField.text {
-            let url = URL(string: "mailto:\(email)")
-            UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-        }
-    }
-    
+	@IBAction func didTapEmailButton(_ sender: UIButton) {
+		if let email = emailTextField.text {
+			UIApplication.shared.mailTo(email: email)
+		}
+	}
+
 	@IBAction func didTapCallButton(_ sender: UIButton) {
 
 		let okAction = UIAlertAction(title: "Call", style: .default, handler: {
 			(UIAlertAction) in
 			if let phone = self.phoneTextField.text {
-				UIApplication.shared.callNumber(phoneNumber: phone)
+				UIApplication.shared.call(phoneNumber: phone)
 			}
 		})
 
@@ -176,6 +177,15 @@ class PersonDetailsViewController: UIViewController {
 		}
 	}
 
+	func configureButton(textField: UITextField, button: UIButton) {
+		let buttonTitle = NSMutableAttributedString(
+			string:textField.text!,
+			attributes: [NSForegroundColorAttributeName : UIColor.pulseAccentColor(),
+			             NSUnderlineStyleAttributeName : 1] as [String : Any])
+		textField.isHidden = !button.isHidden
+		button.setAttributedTitle(buttonTitle, for: .normal)
+	}
+
 	// MARK: - Edit/Save
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
@@ -208,13 +218,7 @@ class PersonDetailsViewController: UIViewController {
 	func updateCallButton() {
 		callButton.isHidden = isEditing || (phoneTextField.text?.isEmpty)!
 		callButton.titleLabel?.text = phoneTextField.text
-
-		let buttonTitle = NSMutableAttributedString(
-			string:phoneTextField.text!,
-			attributes: [NSForegroundColorAttributeName : UIColor.pulseAccentColor(),
-			             NSUnderlineStyleAttributeName : 1] as [String : Any])
-		phoneTextField.isHidden = !callButton.isHidden
-		callButton.setAttributedTitle(buttonTitle, for: .normal)
+		configureButton(textField: phoneTextField, button: callButton)
 	}
 
 	func editPerson() {

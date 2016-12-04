@@ -143,8 +143,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 debugPrint("did select row Change Password")
                 performSegue(withIdentifier: changePasswordSegue, sender: nil)
             } else if indexPath.row == 2 { // Help
-                let url = URL(string: "mailto:2b8wad2qg5@snkmail.com?subject=Pulse%20Feedback")
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+				UIApplication.shared.mailTo(email: "mailto:2b8wad2qg5@snkmail.com?subject=Pulse%20Feedback")
             } //else if indexPath.row == 3 { // Log Out
               //  logOut()
             //}

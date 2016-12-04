@@ -42,6 +42,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bhr-aV-uRu" userLabel="Email Button">
+                                <rect key="frame" x="140" y="100" width="156" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="q4c-IQ-dtO"/>
+                                </constraints>
+                                <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="didTapEmailButton:" destination="Uwy-PO-bTJ" eventType="touchUpInside" id="1eF-AU-B9c"/>
+                                </connections>
+                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email*" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ee3-O0-BO6">
                                 <rect key="frame" x="140" y="100" width="156" height="24"/>
                                 <gestureRecognizers/>
@@ -91,12 +109,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bhr-aV-uRu" firstAttribute="leading" secondItem="UGc-GT-hsk" secondAttribute="leading" id="19M-MF-nVL"/>
                             <constraint firstItem="ouF-MC-VDc" firstAttribute="trailing" secondItem="UGc-GT-hsk" secondAttribute="trailing" id="1xs-KO-KKj"/>
-                            <constraint firstItem="VZq-fp-qWE" firstAttribute="top" secondItem="ee3-O0-BO6" secondAttribute="bottom" constant="8" id="EBu-h4-zru"/>
+                            <constraint firstItem="bhr-aV-uRu" firstAttribute="top" secondItem="fSb-46-36I" secondAttribute="bottom" constant="8" id="Ahg-fx-ZDd"/>
                             <constraint firstItem="ouF-MC-VDc" firstAttribute="top" secondItem="ee3-O0-BO6" secondAttribute="bottom" constant="8" id="Ie6-j6-3IZ"/>
                             <constraint firstItem="fSb-46-36I" firstAttribute="top" secondItem="UGc-GT-hsk" secondAttribute="bottom" constant="8" id="KOV-yx-VTJ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UGc-GT-hsk" secondAttribute="trailing" constant="8" id="OqQ-Yt-vAN"/>
                             <constraint firstItem="ee3-O0-BO6" firstAttribute="top" secondItem="fSb-46-36I" secondAttribute="bottom" constant="8" id="QAB-yh-GS2"/>
+                            <constraint firstItem="bhr-aV-uRu" firstAttribute="trailing" secondItem="ee3-O0-BO6" secondAttribute="trailing" id="RNj-K5-fSc"/>
                             <constraint firstItem="UGc-GT-hsk" firstAttribute="leading" secondItem="aoC-vI-Cpq" secondAttribute="trailing" constant="8" id="RaW-cf-bOH"/>
                             <constraint firstItem="aoC-vI-Cpq" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="16" id="VEI-wg-o6L"/>
                             <constraint firstItem="VZq-fp-qWE" firstAttribute="leading" secondItem="ee3-O0-BO6" secondAttribute="leading" id="Vwh-IG-dPQ"/>
@@ -104,6 +124,8 @@
                             <constraint firstItem="ee3-O0-BO6" firstAttribute="trailing" secondItem="UGc-GT-hsk" secondAttribute="trailing" id="fzW-Pn-QU3"/>
                             <constraint firstItem="fSb-46-36I" firstAttribute="leading" secondItem="UGc-GT-hsk" secondAttribute="leading" id="gv7-zw-sNS"/>
                             <constraint firstItem="fSb-46-36I" firstAttribute="trailing" secondItem="UGc-GT-hsk" secondAttribute="trailing" id="imz-f5-5uf"/>
+                            <constraint firstItem="VZq-fp-qWE" firstAttribute="top" secondItem="ee3-O0-BO6" secondAttribute="bottom" constant="8" id="jah-K4-Cfp"/>
+                            <constraint firstItem="ouF-MC-VDc" firstAttribute="trailing" secondItem="ee3-O0-BO6" secondAttribute="trailing" id="jcN-iM-Qsx"/>
                             <constraint firstItem="aoC-vI-Cpq" firstAttribute="leading" secondItem="Dd2-dU-vf8" secondAttribute="leading" constant="12" id="nG2-A4-xAs"/>
                             <constraint firstItem="VZq-fp-qWE" firstAttribute="trailing" secondItem="UGc-GT-hsk" secondAttribute="trailing" id="rtf-0e-87s"/>
                             <constraint firstItem="UGc-GT-hsk" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="16" id="uKm-4u-sv1"/>
@@ -113,6 +135,7 @@
                     <navigationItem key="navigationItem" id="9mV-B5-MGU"/>
                     <connections>
                         <outlet property="callButton" destination="ouF-MC-VDc" id="vNr-CT-e6u"/>
+                        <outlet property="emailButton" destination="bhr-aV-uRu" id="jiO-8a-0cN"/>
                         <outlet property="emailTextField" destination="ee3-O0-BO6" id="SM9-xy-7LD"/>
                         <outlet property="firstNameTextField" destination="UGc-GT-hsk" id="b5E-tk-UbZ"/>
                         <outlet property="lastNameTextField" destination="fSb-46-36I" id="2Ld-f9-7B3"/>

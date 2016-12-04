@@ -67,10 +67,18 @@ extension UIViewController {
 
 extension UIApplication {
 
-	func callNumber(phoneNumber: String) {
+	func call(phoneNumber: String) {
 		if let phoneCallURL = URL(string:"tel://\(phoneNumber.digits)") {
-			if (self.canOpenURL(phoneCallURL)) {
-				self.open(phoneCallURL, options: [:], completionHandler: nil)
+			if canOpenURL(phoneCallURL) {
+				open(phoneCallURL, options: [:], completionHandler: nil)
+			}
+		}
+	}
+
+	func mailTo(email: String) {
+		if let emailUrl = URL(string: "mailto:\(email)") {
+			if canOpenURL(emailUrl) {
+				UIApplication.shared.open(emailUrl, options: [:], completionHandler: nil)
 			}
 		}
 	}
