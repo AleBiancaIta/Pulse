@@ -95,7 +95,7 @@ class MeetingDetailsViewController: UIViewController {
       dcPathButton.dcButtonCenter = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height - 25.5)
       dcPathButton.allowSounds = true
       //dcPathButton.allowCenterButtonRotation = true
-      dcPathButton.bloomRadius = 70
+      dcPathButton.bloomRadius = 60
       
       var surveyImage = UIImage.resizeImageWithSize(image: UIImage(named: "Smiley")!, newSize: CGSize(width: size, height: size))
       surveyImage = UIImage.recolorImageWithColor(image: surveyImage, color: color)

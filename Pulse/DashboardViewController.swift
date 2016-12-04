@@ -103,7 +103,7 @@ class DashboardViewController: UIViewController {
         dcPathButton.dcButtonCenter = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height - 25.5)
         dcPathButton.allowSounds = true
         //dcPathButton.allowCenterButtonRotation = true
-        dcPathButton.bloomRadius = 70
+        dcPathButton.bloomRadius = 80
         
         var chartImage = UIImage.resizeImageWithSize(image: UIImage(named: "PulseGraph")!, newSize: CGSize(width: size, height: size))
         chartImage = UIImage.recolorImageWithColor(image: chartImage, color: color)

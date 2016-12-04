@@ -55,7 +55,6 @@
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
 		678802A81DD44A4C001338A8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A71DD44A4C001338A8 /* Card.swift */; };
 		67A276161DE5FDBE00ED73B0 /* Person2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A276151DE5FDBE00ED73B0 /* Person2.storyboard */; };
-		67A276181DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */; };
 		67A2761A1DE662A600ED73B0 /* Person2DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */; };
 		67A2761B1DE684D500ED73B0 /* Todo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BB71DE12D6A006C8703 /* Todo.storyboard */; };
 		67A2761C1DE684D500ED73B0 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EC9BBA1DE130C1006C8703 /* TodoListCell.xib */; };
@@ -134,7 +133,6 @@
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
 		678802A71DD44A4C001338A8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		67A276151DE5FDBE00ED73B0 /* Person2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person2.storyboard; sourceTree = "<group>"; };
-		67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsSelectionViewController.swift; sourceTree = "<group>"; };
 		67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person2DetailsViewController.swift; sourceTree = "<group>"; };
 		67A276211DEA6F0200ED73B0 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		67A364A71DCD8DA500BFD931 /* Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,7 +274,6 @@
 				67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
 				431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */,
-				67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */,
 				67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */,
 				67F0DB361DE2D516006C7925 /* GraphViewController.swift */,
 				437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */,
@@ -515,7 +512,6 @@
 				437DE05C1DD93E9D00B08988 /* TeamListViewController.swift in Sources */,
 				43EC9BBB1DE130C1006C8703 /* TodoListCell.swift in Sources */,
 				437DE0671DD9A7FF00B08988 /* ParseClient.swift in Sources */,
-				67A276181DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift in Sources */,
 				676CEF491DE29467000FA406 /* NotesViewController.swift in Sources */,
 				431804AD1DD7D0F000B279C6 /* SettingsHeaderCell.swift in Sources */,
 				431AF13D1DEA9368007B8B8A /* MeetingPersonListCell.swift in Sources */,
