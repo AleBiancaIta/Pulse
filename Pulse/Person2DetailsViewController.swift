@@ -6,12 +6,15 @@
 //  Copyright © 2016 ABI. All rights reserved.
 //
 
+import DCPathButton
 import Parse
 import UIKit
 
 class Person2DetailsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var dcPathButton:DCPathButton!
     
     var selectedCardsString: String = ""
 //    var selectedCardsString: String = "dm" // Default cards (To Do, Meetings)
@@ -41,6 +44,7 @@ class Person2DetailsViewController: UIViewController {
         tableView.register(UINib(nibName: "CardManagementCell", bundle: nil), forCellReuseIdentifier: "AddCardCell")
         
 		initPersonInfo()
+        //configureDCPathButton()
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)

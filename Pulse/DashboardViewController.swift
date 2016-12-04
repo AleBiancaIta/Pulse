@@ -14,10 +14,10 @@ class DashboardViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
+    var dcPathButton:DCPathButton!
+    
     var selectedCardsString: String? = ""
     var selectedCards: [Card] = []
-    
-    var dcPathButton:DCPathButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,7 +102,7 @@ class DashboardViewController: UIViewController {
         dcPathButton.delegate = self
         dcPathButton.dcButtonCenter = CGPoint(x: self.view.bounds.width/2, y: self.view.bounds.height - 25.5)
         dcPathButton.allowSounds = true
-        dcPathButton.allowCenterButtonRotation = true
+        //dcPathButton.allowCenterButtonRotation = true
         dcPathButton.bloomRadius = 70
         
         var chartImage = UIImage.resizeImageWithSize(image: UIImage(named: "PulseGraph")!, newSize: CGSize(width: size, height: size))
@@ -382,78 +382,6 @@ extension DashboardViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-// MARK: - DashboardSelectionViewControllerDelegate
-
-extension DashboardViewController: DashboardSelectionViewControllerDelegate {
-    
-    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card) {
-        
-        let query = PFQuery(className: "Dashboard")
-        let userId = (PFUser.current()?.objectId)! as String
-        query.whereKey("userId", equalTo: userId)
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let posts = posts,
-                let id = card.id,
-                let selectedCardsString = self.selectedCardsString {
-                let post = posts[0]
-                post["userId"] = userId
-                self.selectedCardsString = "\(id)\(selectedCardsString)"
-                post["selectedCards"] = self.selectedCardsString
-                post.saveInBackground { (success: Bool, error: Error?) in
-                    if success {
-                        print("successfully saved dashboard card")
-                    } else {
-                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
-                        //print("error saving dashboard card")
-                    }
-                }
-            } else {
-                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving dashboard card, error: \(error?.localizedDescription)")
-                //print("error saving dashboard card")
-            }
-        }
-        
-        // Insert new card at the top of the table view
-        if !selectedCards.contains(card) {
-            selectedCards.insert(card, at: 0)
-        }
-        tableView.reloadData()
-        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
-    }
-    
-    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card) {
-        
-        let query = PFQuery(className: "Dashboard")
-        let userId = (PFUser.current()?.objectId)! as String
-        query.whereKey("userId", equalTo: userId)
-        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-            if let posts = posts,
-                let id = card.id,
-                let selectedCardsString = self.selectedCardsString {
-                let post = posts[0]
-                post["userId"] = userId
-                self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
-                post["selectedCards"] = self.selectedCardsString
-                post.saveInBackground { (success: Bool, error: Error?) in
-                    print("successfully removed dashboard card")
-                }
-            } else {
-                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing dashboard card, error: \(error?.localizedDescription)")
-                //print("error removing dashboard card")
-            }
-        }
-        
-        // Remove card from table view
-        for (index, dashboardCard) in selectedCards.enumerated() {
-            if dashboardCard.id == card.id {
-                selectedCards.remove(at: index)
-            }
-        }
-        tableView.reloadData()
-        tableView.reloadRows(at: tableView.indexPathsForVisibleRows!, with: .none)
     }
 }
 

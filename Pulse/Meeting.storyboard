@@ -100,7 +100,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Jo-fp-c6F">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3Jo-fp-c6F">
                                 <rect key="frame" x="8" y="8" width="359" height="651"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -108,7 +108,7 @@
                                         <rect key="frame" x="0.0" y="28" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A7y-Cu-fdb" id="ASq-hW-1Cb">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -116,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="72" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gth-5T-19e" id="1Ad-BO-peK">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -124,7 +124,7 @@
                                         <rect key="frame" x="0.0" y="116" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ILN-pM-jtd" id="9DY-fz-0af">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -132,7 +132,7 @@
                                         <rect key="frame" x="0.0" y="160" width="359" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXb-AC-px3" id="Prf-81-XbE">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -154,69 +154,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJm-lh-SWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1196" y="-189.3553223388306"/>
-        </scene>
-        <!--Meeting Details Selection View Controller-->
-        <scene sceneID="4fy-Yl-egA">
-            <objects>
-                <viewController storyboardIdentifier="MeetingDetailsSelectionViewController" modalPresentationStyle="overCurrentContext" id="WfY-bH-Mka" customClass="MeetingDetailsSelectionViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eai-Iw-Y8f"/>
-                        <viewControllerLayoutGuide type="bottom" id="2Cn-6i-LRc"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="irK-cs-kLi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hq6-aj-2oP">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.55479525862068968" colorSpace="calibratedWhite"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="qL3-YS-52X" appends="YES" id="0Hx-xD-8mp"/>
-                                </connections>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CUM-HO-hLv">
-                                <rect key="frame" x="8" y="435" width="359" height="240"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.2470588235" green="0.31764705879999999" blue="0.70980392160000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="DsL-Zl-ccV"/>
-                                </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomTextCell" id="AJg-W7-43d" customClass="CustomTextCell" customModule="Pulse" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="359" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AJg-W7-43d" id="pJS-SR-Q9E">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="tintColor" red="0.12941176469999999" green="0.58823529409999997" blue="0.95294117649999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hq6-aj-2oP" secondAttribute="trailing" id="2cY-9N-07G"/>
-                            <constraint firstItem="2Cn-6i-LRc" firstAttribute="top" secondItem="hq6-aj-2oP" secondAttribute="bottom" id="8wu-FQ-Q7E"/>
-                            <constraint firstItem="hq6-aj-2oP" firstAttribute="leading" secondItem="irK-cs-kLi" secondAttribute="leading" id="B5a-C1-04L"/>
-                            <constraint firstItem="CUM-HO-hLv" firstAttribute="leading" secondItem="irK-cs-kLi" secondAttribute="leading" constant="8" id="JO5-iW-Of2"/>
-                            <constraint firstItem="2Cn-6i-LRc" firstAttribute="top" secondItem="CUM-HO-hLv" secondAttribute="bottom" constant="-8" id="fVB-X0-PYZ"/>
-                            <constraint firstAttribute="trailing" secondItem="CUM-HO-hLv" secondAttribute="trailing" constant="8" id="qa9-RN-Olg"/>
-                            <constraint firstItem="hq6-aj-2oP" firstAttribute="top" secondItem="eai-Iw-Y8f" secondAttribute="bottom" id="zkh-4Y-8LT"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="CUM-HO-hLv" id="zf2-ig-l86"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XF4-Kd-fEj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="qL3-YS-52X">
-                    <connections>
-                        <action selector="onDismiss:" destination="WfY-bH-Mka" id="hRo-6M-mNY"/>
-                    </connections>
-                </tapGestureRecognizer>
-            </objects>
-            <point key="canvasLocation" x="1877.5999999999999" y="-189.3553223388306"/>
         </scene>
         <!--Meeting Survey View Controller-->
         <scene sceneID="eWp-Ed-uNj">

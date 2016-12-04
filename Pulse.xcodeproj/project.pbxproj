@@ -50,11 +50,9 @@
 		5E0FFC9EBCADD96162F32770 /* Pods_Pulse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF11F3E6D9CFC2CE9908CF3B /* Pods_Pulse.framework */; };
 		672A891F1DDA9B6400935085 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672A891E1DDA9B6400935085 /* Survey.swift */; };
 		676CEF421DE26493000FA406 /* Meeting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 676CEF411DE26493000FA406 /* Meeting.storyboard */; };
-		676CEF441DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CEF431DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift */; };
 		676CEF471DE29429000FA406 /* Notes.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 676CEF461DE29429000FA406 /* Notes.storyboard */; };
 		676CEF491DE29467000FA406 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676CEF481DE29467000FA406 /* NotesViewController.swift */; };
 		678802921DD41540001338A8 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802901DD41540001338A8 /* DashboardViewController.swift */; };
-		678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */; };
 		678802A81DD44A4C001338A8 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678802A71DD44A4C001338A8 /* Card.swift */; };
 		67A276161DE5FDBE00ED73B0 /* Person2.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A276151DE5FDBE00ED73B0 /* Person2.storyboard */; };
 		67A276181DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */; };
@@ -131,11 +129,9 @@
 		4621C0292163DDA112D8B768 /* Pods-Pulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pulse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Pulse/Pods-Pulse.debug.xcconfig"; sourceTree = "<group>"; };
 		672A891E1DDA9B6400935085 /* Survey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		676CEF411DE26493000FA406 /* Meeting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Meeting.storyboard; sourceTree = "<group>"; };
-		676CEF431DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingDetailsSelectionViewController.swift; sourceTree = "<group>"; };
 		676CEF461DE29429000FA406 /* Notes.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notes.storyboard; sourceTree = "<group>"; };
 		676CEF481DE29467000FA406 /* NotesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		678802901DD41540001338A8 /* DashboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
-		678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardSelectionViewController.swift; sourceTree = "<group>"; };
 		678802A71DD44A4C001338A8 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		67A276151DE5FDBE00ED73B0 /* Person2.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Person2.storyboard; sourceTree = "<group>"; };
 		67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonDetailsSelectionViewController.swift; sourceTree = "<group>"; };
@@ -277,11 +273,9 @@
 			children = (
 				676CEF481DE29467000FA406 /* NotesViewController.swift */,
 				678802901DD41540001338A8 /* DashboardViewController.swift */,
-				678802A11DD4469C001338A8 /* DashboardSelectionViewController.swift */,
 				67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */,
 				67D8D6591DD5AF1500B6DE19 /* MeetingDetailsViewController.swift */,
 				431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */,
-				676CEF431DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift */,
 				67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */,
 				67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */,
 				67F0DB361DE2D516006C7925 /* GraphViewController.swift */,
@@ -506,7 +500,6 @@
 				437DE0621DD9648000B08988 /* Meeting.swift in Sources */,
 				437903A51DE51BB400945C63 /* TodoEditTextCell.swift in Sources */,
 				71D471E41DEEC40900003524 /* PhoneTextFieldDelegate.swift in Sources */,
-				678802A31DD4469C001338A8 /* DashboardSelectionViewController.swift in Sources */,
 				67A2761A1DE662A600ED73B0 /* Person2DetailsViewController.swift in Sources */,
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
 				437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */,
@@ -540,7 +533,6 @@
 				67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */,
 				431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */,
 				437DE05E1DD9433E00B08988 /* TeamViewDataSource.swift in Sources */,
-				676CEF441DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift in Sources */,
 				437DE0641DD976F000B08988 /* ToDo.swift in Sources */,
 				67F0DB371DE2D516006C7925 /* GraphViewController.swift in Sources */,
 				431804A71DD6975500B279C6 /* Extensions.swift in Sources */,
