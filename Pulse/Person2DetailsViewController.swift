@@ -19,6 +19,8 @@ class Person2DetailsViewController: UIViewController {
     
     var personPFObject: PFObject?
 	var personInfoViewController: PersonDetailsViewController!
+    var personManagerId: String?
+    var userPersonId: String?
     
     var isPersonManager: Bool = false
     
@@ -168,16 +170,34 @@ extension Person2DetailsViewController: UITableViewDataSource {
             cell.layer.cornerRadius = 5
             cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
+            cell.addButton.tintColor = UIColor.lightGray
+            cell.manageLabel.textColor = UIColor.lightGray
+            cell.manageLabel.text = "Save team member to manage modules"
             
-            if personPFObject != nil {
-                cell.addButton.tintColor = UIColor.pulseAccentColor()
-                cell.manageLabel.tintColor = UIColor.pulseAccentColor()
-                cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
-            } else {
-                cell.addButton.tintColor = UIColor.lightGray
-                cell.manageLabel.textColor = UIColor.lightGray
-                cell.manageLabel.text = "Save team member to manage modules"
+            if let personPFObject = personPFObject,
+                let managerId = personPFObject["managerId"] as? String {
+                parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                    } else {
+                        self.personManagerId = managerId
+                        if let person = person, managerId != person.objectId {
+                            self.userPersonId = person.objectId
+                            cell.addButton.tintColor = UIColor.lightGray
+                            cell.manageLabel.textColor = UIColor.lightGray
+                            cell.manageLabel.text = "Cannot manage modules for this team member"
+                        }
+                    }
+                }
             }
+            
+            if personPFObject != nil { // Manage Cards
+                cell.addButton.tintColor = UIColor.pulseAccentColor()
+                cell.manageLabel.textColor = UIColor.pulseAccentColor()
+                cell.manageLabel.text = "Manage Modules"
+                cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
+            }
+            
             return cell
             
         } else { // The actual cards
@@ -361,7 +381,7 @@ extension Person2DetailsViewController: UITableViewDelegate {
         // Deselect row appearance after it has been selected
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == selectedCards.count && personPFObject != nil {
+        if indexPath.section == selectedCards.count && personPFObject != nil && personManagerId == userPersonId {
             onManageCards()
         }
     }

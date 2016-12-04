@@ -192,10 +192,18 @@ class PersonDetailsViewController: UIViewController {
             UIExtensions.setupDarkViewFor(textField: phoneTextField)
         } else {
             // Remove custom textfield formatting
-            phoneTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            emailTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            lastNameTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            firstNameTextField.layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            if let layer = phoneTextField.layer as? CALayer {
+                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            }
+            if let layer = emailTextField.layer as? CALayer {
+                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            }
+            if let layer = lastNameTextField.layer as? CALayer {
+                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            }
+            if let layer = firstNameTextField.layer as? CALayer {
+                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            }
         }
 
 		updateCallButton()
