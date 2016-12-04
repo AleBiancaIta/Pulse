@@ -83,7 +83,7 @@ class TodoViewController: UIViewController {
     }
     
     func heightForView() -> CGFloat {
-        return 240; // TODO heightForView
+        return 290;
     }
 
     // MARK: - Helpers
