@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import RKDropdownAlert
+import SVProgressHUD
 
 class ChangePasswordViewController: UIViewController {
     
@@ -37,19 +38,27 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction func onChangePasswordButtonTap(_ sender: UIButton) {
         if validateEntry() {
-            //debugPrint("current user username is \(user.username!)")
+            
+            SVProgressHUD.show()
             
             // Re-login user to confirm they're entering the correct password
             PFUser.logInWithUsername(inBackground: user.username!, password: oldPasswordTextField.text!) { (user: PFUser?, error: Error?) in
                 if let error = error {
+                    SVProgressHUD.dismiss()
                     self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Your old password is incorrect: \(error.localizedDescription)")
                 } else {
                     PFUser.current()?.password = self.newPasswordTextField.text!
                     PFUser.current()?.saveInBackground { (success: Bool, error: Error?) in
                         if success {
+                            SVProgressHUD.dismiss()
                             self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully changed password", delegate: self)
                         } else {
-                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error: \(error?.localizedDescription)")
+                            SVProgressHUD.dismiss()
+                            if let error = error {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error: \(error.localizedDescription)")
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error")
+                            }
                         }
                     }
                 }
@@ -93,7 +102,7 @@ class ChangePasswordViewController: UIViewController {
 extension ChangePasswordViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popViewController(animated: true)
         return true
     }
     

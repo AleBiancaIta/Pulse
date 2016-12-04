@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import RKDropdownAlert
+import SVProgressHUD
 
 class UpdateProfileViewController: UIViewController {
     
@@ -51,8 +52,11 @@ class UpdateProfileViewController: UIViewController {
             let lastName = (lastNameTextField.text?.isEmpty)! ? firstNameTextField.text : lastNameTextField.text
             let phone = (phoneTextField.text?.isEmpty)! ? "" : phoneTextField.text
             
+            SVProgressHUD.show()
+            
             PFUser.logInWithUsername(inBackground: user.username!, password: passwordTextField.text!) { (user: PFUser?, error: Error?) in
                 if let error = error {
+                    SVProgressHUD.dismiss()
                     self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "\(error.localizedDescription)")
                 } else {
                     self.person[ObjectKeys.Person.firstName] = self.firstNameTextField.text
@@ -61,13 +65,19 @@ class UpdateProfileViewController: UIViewController {
                     
                     self.person.saveInBackground { (success: Bool, error: Error?) in
                         if success {
+                            SVProgressHUD.dismiss()
                             self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully updated profile", delegate: self)
                             
                             //self.ABIShowAlert(title: "Success", message: "Update profile successful", sender: nil, handler: { (alertAction: UIAlertAction) in
                             //  self.navigationController?.popViewController(animated: true)
                             //})
                         } else {
-                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to update user profile with error: \(error?.localizedDescription)")
+                            SVProgressHUD.dismiss()
+                            if let error = error {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to update user profile with error: \(error.localizedDescription)")
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Unable to update user profile with error")
+                            }
                         }
                     }
                 }
@@ -166,7 +176,7 @@ extension UpdateProfileViewController: UITextFieldDelegate {
 extension UpdateProfileViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popViewController(animated: true)
         return true
     }
     
