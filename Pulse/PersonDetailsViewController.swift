@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import SVProgressHUD
+import RKDropdownAlert
 
 class PersonDetailsViewController: UIViewController {
 
@@ -290,16 +291,13 @@ class PersonDetailsViewController: UIViewController {
 				Person.savePersonToParse(person: self.person!) {
 					(success: Bool, error: Error?) in
 					if success {
-						self.ABIShowDropDownAlert(
+						self.ABIShowDropDownAlertWithDelegate(
 							type: AlertTypes.success,
 							title: "Success!",
-							message: "Successfully added team member")
+							message: "Successfully added team member",
+                            delegate: self)
 						SVProgressHUD.dismiss()
 						NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
-                        
-                        // Temporary fix to pop page after new person was created to "hide" bugs
-                        // Really though, if new person is created, page shouldn't be popped so the user can still use that page to add To Do items, meetings, etc.
-                        self.navigationController?.popViewController(animated: true)
 					}
 				}
 			}
@@ -314,4 +312,20 @@ extension PersonDetailsViewController : PhotoImageViewDelegate {
 	func didSelectImage(sender: PhotoImageView) {
 		self.photoData = sender.photoData
 	}
+}
+
+// MARK: - RKDropDownAlertDelegate
+
+extension PersonDetailsViewController: RKDropdownAlertDelegate {
+    
+    func dropdownAlertWasDismissed() -> Bool {
+        // Temporary fix to pop page after new person was created to "hide" bugs
+        // Really though, if new person is created, page shouldn't be popped so the user can still use that page to add To Do items, meetings, etc.
+        self.navigationController?.popViewController(animated: true)
+        return true
+    }
+    
+    func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+        return true
+    }
 }

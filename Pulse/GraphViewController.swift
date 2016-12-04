@@ -25,16 +25,20 @@ class GraphViewController: UIViewController {
     var highLowValues = ["Poor", "Good", "Great"]
     
     var teamMemberIds = [String]()
+    var isCompany = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loadChartForCompany(false)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadChartForCompany()
     }
     
     // isCompany == true, load chart for whole company
     // isCompany == false, load chart for my team only
-    func loadChartForCompany(_ isCompany: Bool) {
+    func loadChartForCompany() {
         
         // Reset values
         personIdValues = []
@@ -216,9 +220,11 @@ class GraphViewController: UIViewController {
 
     @IBAction func onChartSwitch(_ sender: UISwitch) {
         if sender.isOn { // Team pulse
-            loadChartForCompany(false)
+            isCompany = false
+            loadChartForCompany()
         } else { // Company pulse
-            loadChartForCompany(true)
+            isCompany = true
+            loadChartForCompany()
         }
     }
 }
