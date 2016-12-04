@@ -173,6 +173,26 @@ class PersonDetailsViewController: UIViewController {
 		button.setAttributedTitle(buttonTitle, for: .normal)
 	}
 
+	override func viewDidLayoutSubviews() {
+		setupViews()
+	}
+
+	func setupViews() {
+
+		if isEditing {
+			UIExtensions.setupDarkViewFor(textField: firstNameTextField)
+			UIExtensions.setupDarkViewFor(textField: lastNameTextField)
+			UIExtensions.setupDarkViewFor(textField: emailTextField)
+			UIExtensions.setupDarkViewFor(textField: phoneTextField)
+		}
+		else {
+			phoneTextField.layer.sublayers?[0].removeFromSuperlayer()
+			emailTextField.layer.sublayers?[0].removeFromSuperlayer()
+			lastNameTextField.layer.sublayers?[0].removeFromSuperlayer()
+			firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
+		}
+	}
+
 	// MARK: - Edit/Save
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
@@ -185,30 +205,10 @@ class PersonDetailsViewController: UIViewController {
 		firstNameTextField.isUserInteractionEnabled = isEditing
 		photoImageView.isUserInteractionEnabled = isEditing
 
-        if isEditing {
-            // Format editabl textfields to match the UI of textfields in the rest of the app
-            UIExtensions.setupDarkViewFor(textField: firstNameTextField)
-            UIExtensions.setupDarkViewFor(textField: lastNameTextField)
-            UIExtensions.setupDarkViewFor(textField: emailTextField)
-            UIExtensions.setupDarkViewFor(textField: phoneTextField)
-        } else {
-            // Remove custom textfield formatting
-            if let layer = phoneTextField.layer as? CALayer {
-                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            }
-            if let layer = emailTextField.layer as? CALayer {
-                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            }
-            if let layer = lastNameTextField.layer as? CALayer {
-                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            }
-            if let layer = firstNameTextField.layer as? CALayer {
-                layer.sublayers?.forEach { $0.removeFromSuperlayer() }
-            }
-        }
-
 		configureButton(textField: phoneTextField, button: callButton)
 		configureButton(textField: emailTextField, button: emailButton)
+
+		setupViews()
 	}
 
 	func editPerson() {
