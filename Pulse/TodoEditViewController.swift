@@ -8,9 +8,11 @@
 
 import UIKit
 import Parse
+import RKDropdownAlert
 
 @objc protocol TodoEditViewControllerDelegate {
     @objc optional func todoEditViewController(_ todoEditViewController: TodoEditViewController, didUpdate success: Bool)
+    @objc optional func todoEditViewController(_ todoEditViewController: TodoEditViewController, onSaveButtonTap success: Bool)
 }
 
 class TodoEditViewController: UIViewController {
@@ -26,8 +28,10 @@ class TodoEditViewController: UIViewController {
     var todoItem: PFObject!
     var teamMembers = [PFObject]() // only applies to dashboard view type
     weak var delegate: TodoEditViewControllerDelegate?
+    //weak var delegate2: TodoEditViewControllerDelegate?
 
     var isTextUpdated: Bool = false
+    var newTextFromEdit: String? = nil
     //var isSelectedPersonUpdated: Bool = false
     
     enum EditCellTypes: Int {
@@ -39,6 +43,8 @@ class TodoEditViewController: UIViewController {
         title = "Follow Up Item"
         registerCellNibs()
         configureRowHeight()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,6 +58,7 @@ class TodoEditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        /*
         if let selectedPerson = personRowSelected {
             todoItem[ObjectKeys.ToDo.personId] = teamMembers[selectedPerson].objectId!
             
@@ -71,7 +78,48 @@ class TodoEditViewController: UIViewController {
         if isTextUpdated {
             self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success", message: "Successfully updated todo item")
             isTextUpdated = false
+        }*/
+    }
+    
+    func onSaveButton(_ sender: UIBarButtonItem) {
+        debugPrint("Save button tapped")
+        delegate?.todoEditViewController?(self, onSaveButtonTap: true)
+        
+        if isTextUpdated || (personRowSelected != nil) {
+            if let newText = newTextFromEdit {
+                debugPrint("in todo edit view controller, \(newText)")
+                todoItem[ObjectKeys.ToDo.text] = newText
+            } else {
+                debugPrint("newTextFromEdit is nil")
+            }
+            
+            if let selectedPerson = personRowSelected {
+                debugPrint("in todo edit view controller, selectedPerson: \(selectedPerson)")
+                todoItem[ObjectKeys.ToDo.personId] = teamMembers[selectedPerson].objectId!
+            }
+            
+            todoItem.saveInBackground { (success: Bool, error: Error?) in
+                if success {
+                    //debugPrint("Successfully updating todo item")
+                    //self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully updated todo item")
+                    self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully updated todo item", delegate: self)
+                    self.delegate?.todoEditViewController?(self, didUpdate: true)
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update todo with error: \(error?.localizedDescription)")
+                    //debugPrint("Failed to update todo with error: \(error?.localizedDescription)")
+                }
+            }
+        } else {
+            self.ABIShowDropDownAlert(type: AlertTypes.alert, title: "Alert!", message: "No new update. Nothing to saved")
         }
+        
+        /*
+        // TODO: not the best solution as it's actually showing up twice
+        if isTextUpdated {
+            self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success", message: "Successfully updated todo item")
+            isTextUpdated = false
+        }*/
+        
     }
     
     // MARK: - Helpers
@@ -144,6 +192,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditTextCell, for: indexPath) as! TodoEditTextCell
             cell.todoItem = todoItem
             cell.delegate = self
+            self.delegate = cell
             return cell
         case .person:
             switch indexPath.row {
@@ -215,5 +264,25 @@ extension TodoEditViewController: TodoEditTextCellDelegate {
             isTextUpdated = true
             //self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully updated todo item")
         }
+    }
+    
+    func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEditOnSave newText: String) {
+        isTextUpdated = true
+        newTextFromEdit = newText
+        //tableView.reloadData()
+    }
+}
+
+// MARK: - RKDropDownAlertDelegate
+
+extension TodoEditViewController: RKDropdownAlertDelegate {
+    
+    func dropdownAlertWasDismissed() -> Bool {
+        let _ = self.navigationController?.popViewController(animated: true)
+        return true
+    }
+    
+    func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+        return true
     }
 }

@@ -12,6 +12,7 @@ import Parse
 @objc protocol TodoEditTextCellDelegate {
     @objc optional func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEdit: Bool)
     @objc optional func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didSave: Bool)
+    @objc optional func todoEditTextCell(_ todoEditTextCell: TodoEditTextCell, didEditOnSave newText: String)
 }
 
 class TodoEditTextCell: UITableViewCell {
@@ -85,9 +86,11 @@ extension TodoEditTextCell: UITextFieldDelegate {
         if let originalText = originalTodoText, todoTextField.text != originalText {
             todoItem[ObjectKeys.ToDo.text] = todoTextField.text!
             todoLabel.text = todoTextField.text
-            originalTodoText = todoTextField.text
+            //originalTodoText = todoTextField.text
+            delegate?.todoEditTextCell?(self, didEditOnSave: todoTextField.text!)
             delegate?.todoEditTextCell?(self, didEdit: true)
             
+            /*
             todoItem.saveInBackground { (success: Bool, error: Error?) in
                 if success {
                     debugPrint("successfully updating todoItem")
@@ -95,10 +98,26 @@ extension TodoEditTextCell: UITextFieldDelegate {
                 } else {
                     debugPrint("Failed to save changes at this time, please try again later. Error: \(error?.localizedDescription)")
                 }
-            }
+            }*/
         } else {
             debugPrint("same text, do nothing")
         }
         return true
+    }
+}
+
+extension TodoEditTextCell: TodoEditViewControllerDelegate {
+    func todoEditViewController(_ todoEditViewController: TodoEditViewController, onSaveButtonTap : Bool) {
+        debugPrint("onSaveButton tap in todo edit text cell")
+        
+        todoTextField.isHidden = true
+        todoLabel.isHidden = false
+        if let originalText = originalTodoText, todoTextField.text != originalText {
+            todoLabel.text = todoTextField.text
+            //originalTodoText = todoTextField.text
+            delegate?.todoEditTextCell?(self, didEditOnSave: todoTextField.text!)
+        } else {
+            debugPrint("same text, do nothing")
+        }
     }
 }
