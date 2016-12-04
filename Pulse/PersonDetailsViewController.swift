@@ -56,7 +56,7 @@ class PersonDetailsViewController: UIViewController {
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
 
-            personInfoParentViewController?.navigationItem.title = firstName + " " + lastName
+            personInfoParentViewController?.navigationItem.title = firstName != lastName ? "\(firstName) \(lastName)" : "\(firstName)"
             setEditing(false, animated: true)
         }
 		else {
@@ -222,7 +222,7 @@ class PersonDetailsViewController: UIViewController {
 
 			let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
 			pfPerson[ObjectKeys.Person.lastName] = lastName
-			lastNameTextField.text = lastName
+            lastNameTextField.text = firstName != lastName ? lastName : ""
 
 			pfPerson[ObjectKeys.Person.email] = emailTextField.text
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
