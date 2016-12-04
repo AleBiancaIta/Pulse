@@ -82,6 +82,32 @@ class UIExtensions: NSObject {
     }
 }
 
+extension UIImage {
+    class func recolorImageWithColor(image: UIImage, color: UIColor) -> UIImage {
+        var coloredImage = UIImage()
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        if let context = UIGraphicsGetCurrentContext() {
+            color.setFill()
+            context.translateBy(x: 0, y: image.size.height)
+            context.scaleBy(x: 1.0, y: -1.0)
+            context.clip(to: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height), mask: image.cgImage!)
+            context.fill(CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+            coloredImage = UIGraphicsGetImageFromCurrentImageContext()!
+        }
+        UIGraphicsEndImageContext()
+        return coloredImage
+    }
+    
+    // Resize UIImage with new size
+    class func resizeImageWithSize(image: UIImage, newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
+    }
+}
+
 extension UIColor {
     
     /* Other color notes:

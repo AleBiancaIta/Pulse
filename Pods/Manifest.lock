@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.0.0):
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.8.4)
+  - DCPathButton (2.1.4)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
   - ParseUI (1.2.0):
@@ -26,6 +27,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (= 3.0.0)
+  - DCPathButton (~> 2.1.3)
   - Parse
   - ParseUI
   - RKDropdownAlert
@@ -35,12 +37,13 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 932ff751f9d6fb1dad0b3af58b7e3ffba0a4e7fd
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DCPathButton: 99c8211ef3eafc3b438c917a4c7b4502fa77eee7
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
   RKDropdownAlert: f4b3364c251829ad439dc666836a1f2dad26f4c7
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftChart: 39b48ba287a9f77a2a958726ff58fc05d5d9129f
 
-PODFILE CHECKSUM: 7dc44e74eb0d5928632f205484cc2e4b48f896e9
+PODFILE CHECKSUM: a8e24c9ac68547a5e8d85a6bdf135467afd410c9
 
 COCOAPODS: 1.0.1

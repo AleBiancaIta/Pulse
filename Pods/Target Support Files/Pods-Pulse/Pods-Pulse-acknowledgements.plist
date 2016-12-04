@@ -78,6 +78,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>The DCPathButton use the MIT license</string>
+			<key>Title</key>
+			<string>DCPathButton</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>BSD License
 
 For Parse iOS/OSX SDK software
