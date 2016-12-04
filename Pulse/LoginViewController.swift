@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import RKDropdownAlert
+import SVProgressHUD
 
 class LoginViewController: UIViewController {
 
@@ -64,12 +65,16 @@ class LoginViewController: UIViewController {
                 // Trim trailing spaces from username (email)
                 username = username.trimmingCharacters(in: .whitespacesAndNewlines)
                 
+                SVProgressHUD.show()
+                
                 PFUser.logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
                     if let error = error {
                         self.loginButton.isEnabled = true
+                        SVProgressHUD.dismiss()
                         self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "User login failed with error: \(error.localizedDescription)")
                     } else {
                         debugPrint("User logged in successfully")
+                        SVProgressHUD.dismiss()
                         self.loginButton.isEnabled = true
                         // Segue to Dashboard view controller
                         let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
