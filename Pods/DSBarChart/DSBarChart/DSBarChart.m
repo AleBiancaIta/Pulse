@@ -40,6 +40,7 @@
     /// Drawing code
     [self calculate];
     float rectWidth = (float)(rect.size.width-(self.numberOfBars)) / (float)self.numberOfBars;
+    rectWidth = rectWidth > 30 ? 30 : rectWidth;
     CGContextRef context = UIGraphicsGetCurrentContext();
     float LBL_HEIGHT = 20.0f, iLen, x, heightRatio, height, y;
     UIColor *iColor ;
