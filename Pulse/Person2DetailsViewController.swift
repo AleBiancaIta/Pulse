@@ -490,7 +490,7 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                     self.selectedCardsString = self.selectedCardsString.replacingOccurrences(of: id, with: "")
                     post["selectedCards"] = self.selectedCardsString
                     post.saveInBackground { (success: Bool, error: Error?) in
-                        print("successfully removed person card")
+                        //print("successfully removed person card")
                     }
                 }
             } else {

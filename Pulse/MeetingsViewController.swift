@@ -36,6 +36,7 @@ class MeetingsViewController: UIViewController {
             navigationController?.navigationBar.barStyle = .blackTranslucent
             navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             navigationController?.navigationBar.shadowImage = UIImage()
+            navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAddButton(_:)))
         }
         
         tableView.isScrollEnabled = expanded

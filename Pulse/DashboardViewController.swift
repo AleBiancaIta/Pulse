@@ -429,7 +429,7 @@ extension DashboardViewController: DashboardSelectionViewControllerDelegate {
                 self.selectedCardsString = selectedCardsString.replacingOccurrences(of: id, with: "")
                 post["selectedCards"] = self.selectedCardsString
                 post.saveInBackground { (success: Bool, error: Error?) in
-                    print("successfully removed dashboard card")
+                    //print("successfully removed dashboard card")
                 }
             } else {
                 if let error = error {
