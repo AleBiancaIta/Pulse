@@ -105,6 +105,7 @@ class TeamViewDataSource: NSObject {
         }
     }*/
     
+    /*
     func fetchLatestSurveyFor(personId: String, orderBy: String, limit: Int, completion: @escaping (PFObject?, Error?) -> ()) {
         parseClient.getCurrentPerson { (manager: PFObject?, error: Error?) in
             if let error = error {
@@ -146,15 +147,49 @@ class TeamViewDataSource: NSObject {
                 }
             }
         }
-    }
+    }*/
     
+    func fetchLatestSurveyFor(personId: String, orderBy: String, limit: Int, completion: @escaping (PFObject?, Error?) -> ()) {
+        // TODO: check if meeting < current date?
+        
+        self.parseClient.fetchMeetingsFor(personId: personId, meetingDate: nil, isAscending: false, orderBy: orderBy, limit: limit, isDeleted: false) { (meetings: [PFObject]?, error: Error?) in
+            
+            if let error = error {
+                debugPrint("Failed in fetching meetings: \(error.localizedDescription)")
+                completion(nil, error)
+            } else {
+                debugPrint("Success in fetching meetings, \(meetings?.count)")
+                if let meetings = meetings, meetings.count > 0 {
+                    let meeting = meetings[0]
+                    
+                    if let surveyId = meeting[ObjectKeys.Meeting.surveyId] as? String {
+                        self.parseClient.fetchSurveyFor(surveyId: surveyId, isAscending: nil, orderBy: nil) { (survey: PFObject?, error: Error?) in
+                            if let error = error {
+                                completion(nil, error)
+                            } else {
+                                completion(survey, nil)
+                            }
+                        }
+                    } else {
+                        debugPrint("Could not find key surveyId in Meeting object")
+                        completion(nil, error)
+                    }
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "Fetch meeting returned 0 meeting"]
+                    let error = NSError(domain: "TeamViewDataSource fetchLatestSurvey", code: 0, userInfo: userInfo)
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+
     func getSelectedPersonObjectAt(indexPath: IndexPath) -> PFObject? {
         if 0 <= indexPath.row && indexPath.row < teamMembers.count {
             return teamMembers[indexPath.row]
         }
         return nil
     }
-    
+
     func isPersonManager(personId: String, isDeleted: Bool, isManager: @escaping (Bool, Error?)->()) {
         parseClient.isPersonManager(personId: personId, isDeleted: isDeleted, isManager: isManager)
     }

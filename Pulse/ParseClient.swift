@@ -205,6 +205,53 @@ class ParseClient: NSObject {
         }
     }
     
+    func fetchMeetingsFor(personId: String, meetingDate: Date?, isAscending: Bool?, orderBy: String?, limit: Int?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
+        
+        let query = PFQuery(className: "Meetings")
+        
+        // TODO: Add check for meeting date < current date?
+        
+        query.whereKey(ObjectKeys.Meeting.personId, equalTo: personId)
+        
+        if let meetingDate = meetingDate {
+            query.whereKey(ObjectKeys.Meeting.meetingDate, equalTo: meetingDate)
+        }
+        
+        if let isAscending = isAscending, let orderBy = orderBy {
+            if isAscending {
+                query.order(byAscending: orderBy)
+            } else {
+                query.order(byDescending: orderBy)
+            }
+        }
+        
+        if let limit = limit {
+            query.limit = limit
+        }
+        
+        if isDeleted {
+            query.whereKeyExists(ObjectKeys.Meeting.deletedAt)
+        } else {
+            query.whereKeyDoesNotExist(ObjectKeys.Meeting.deletedAt)
+        }
+        
+        query.findObjectsInBackground { (meetings: [PFObject]?, error: Error?) in
+            if let error = error {
+                debugPrint("Unable to fetch meetings for person: \(personId)")
+                completion(nil, error)
+            } else {
+                if let meetings = meetings, meetings.count > 0 {
+                    //debugPrint("fetchMeetingsFor returned \(meetings.count)")
+                    completion(meetings, nil)
+                } else {
+                    let userInfo = [NSLocalizedDescriptionKey: "fetchMeetingsForPersonId \(personId) query returns no meeting"]
+                    let error = NSError(domain: "ParseClient fetchMeetingsFor", code: 0, userInfo: userInfo) as Error
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     func fetchMeetingsFor(personId: String, managerId: String, meetingDate: Date?, isAscending: Bool?, orderBy: String?, limit: Int?, isDeleted: Bool, completion: @escaping ([PFObject]?, Error?) -> ()) {
         
         let query = PFQuery(className: "Meetings")
