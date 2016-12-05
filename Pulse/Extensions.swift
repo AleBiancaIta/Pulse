@@ -97,3 +97,16 @@ extension String {
 			.joined(separator: "")
 	}
 }
+
+extension UIView {
+    
+    func shake(count: Float? = nil, forDuration duration: Double? = nil, withTranslation translation: Float? = nil) {
+        let shakeAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+        shakeAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        shakeAnimation.autoreverses = true
+        shakeAnimation.repeatCount = count ?? 2.0
+        shakeAnimation.duration = (duration ?? 0.5)/Double(shakeAnimation.repeatCount)
+        shakeAnimation.byValue = translation ?? -5.0
+        layer.add(shakeAnimation, forKey: "shake")
+    }
+}
