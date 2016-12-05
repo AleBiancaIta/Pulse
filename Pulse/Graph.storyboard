@@ -28,31 +28,32 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engagement" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGS-cs-X4k">
-                                <rect key="frame" x="24" y="154" width="327" height="21"/>
+                                <rect key="frame" x="24" y="158" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workload" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NQT-G4-Nlh">
-                                <rect key="frame" x="24" y="263" width="327" height="21"/>
+                                <rect key="frame" x="24" y="271" width="327" height="21"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2n-X7-jUQ" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="8" y="66" width="343" height="80"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E2n-X7-jUQ">
+                                <rect key="frame" x="8" y="70" width="359" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="Cng-dh-oUD"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZN-RS-gWN" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="8" y="175" width="343" height="80"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZN-RS-gWN">
+                                <rect key="frame" x="8" y="183" width="359" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="k2T-pq-0rQ"/>
                                 </constraints>
                             </view>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hci-68-o5z" customClass="Chart" customModule="SwiftChart">
-                                <rect key="frame" x="8" y="284" width="343" height="80"/>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hci-68-o5z">
+                                <rect key="frame" x="8" y="296" width="359" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="jL2-1h-Led"/>
                                 </constraints>
@@ -83,24 +84,24 @@
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="BJj-oU-Rwg"/>
                             <constraint firstItem="E2n-X7-jUQ" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="D0q-ed-Pkg"/>
                             <constraint firstAttribute="trailing" secondItem="sjY-oB-iX6" secondAttribute="trailing" constant="24" id="EQa-7j-HS2"/>
-                            <constraint firstItem="Hci-68-o5z" firstAttribute="top" secondItem="NQT-G4-Nlh" secondAttribute="bottom" id="Oh6-wQ-gmx"/>
-                            <constraint firstItem="kZN-RS-gWN" firstAttribute="top" secondItem="VGS-cs-X4k" secondAttribute="bottom" id="dXg-Va-nbL"/>
+                            <constraint firstItem="Hci-68-o5z" firstAttribute="top" secondItem="NQT-G4-Nlh" secondAttribute="bottom" constant="4" id="Oh6-wQ-gmx"/>
+                            <constraint firstItem="kZN-RS-gWN" firstAttribute="top" secondItem="VGS-cs-X4k" secondAttribute="bottom" constant="4" id="dXg-Va-nbL"/>
                             <constraint firstItem="NQT-G4-Nlh" firstAttribute="top" secondItem="kZN-RS-gWN" secondAttribute="bottom" constant="8" id="hBB-B5-ydo"/>
-                            <constraint firstItem="E2n-X7-jUQ" firstAttribute="top" secondItem="sjY-oB-iX6" secondAttribute="bottom" id="iE8-s8-ogy"/>
-                            <constraint firstAttribute="trailing" secondItem="Hci-68-o5z" secondAttribute="trailing" constant="24" id="lWS-e6-JlX"/>
+                            <constraint firstItem="E2n-X7-jUQ" firstAttribute="top" secondItem="sjY-oB-iX6" secondAttribute="bottom" constant="4" id="iE8-s8-ogy"/>
+                            <constraint firstAttribute="trailing" secondItem="Hci-68-o5z" secondAttribute="trailing" constant="8" id="lWS-e6-JlX"/>
                             <constraint firstAttribute="trailing" secondItem="VGS-cs-X4k" secondAttribute="trailing" constant="24" id="nay-7I-inQ"/>
                             <constraint firstItem="Hci-68-o5z" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="rCu-Gz-X5v"/>
-                            <constraint firstAttribute="trailing" secondItem="E2n-X7-jUQ" secondAttribute="trailing" constant="24" id="rMS-s5-4Xp"/>
+                            <constraint firstAttribute="trailing" secondItem="E2n-X7-jUQ" secondAttribute="trailing" constant="8" id="rMS-s5-4Xp"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="top" secondItem="nbg-gz-kyr" secondAttribute="bottom" constant="8" id="tO9-uQ-uRg"/>
-                            <constraint firstAttribute="trailing" secondItem="kZN-RS-gWN" secondAttribute="trailing" constant="24" id="xiu-8N-YDo"/>
+                            <constraint firstAttribute="trailing" secondItem="kZN-RS-gWN" secondAttribute="trailing" constant="8" id="xiu-8N-YDo"/>
                             <constraint firstItem="VGS-cs-X4k" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="xqy-eB-UrX"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="top" secondItem="ZQg-9M-sTy" secondAttribute="bottom" constant="8" id="zrG-AB-29q"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="chart1" destination="E2n-X7-jUQ" id="Skx-pI-Y9j"/>
-                        <outlet property="chart2" destination="kZN-RS-gWN" id="G45-Ys-mL8"/>
-                        <outlet property="chart3" destination="Hci-68-o5z" id="o3s-li-ah5"/>
+                        <outlet property="chart1" destination="E2n-X7-jUQ" id="8bP-Ic-E5a"/>
+                        <outlet property="chart2" destination="kZN-RS-gWN" id="VjY-Rj-0wJ"/>
+                        <outlet property="chart3" destination="Hci-68-o5z" id="jpg-fy-4Qi"/>
                         <outlet property="chartTitleLabel" destination="ZQg-9M-sTy" id="aAO-RZ-1EU"/>
                     </connections>
                 </viewController>

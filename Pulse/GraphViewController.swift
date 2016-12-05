@@ -7,16 +7,24 @@
 //
 
 import Parse
-import SwiftChart
+import DSBarChart
 import UIKit
 
 class GraphViewController: UIViewController {
 
     @IBOutlet weak var chartTitleLabel: UILabel!
     
-    @IBOutlet weak var chart1: Chart!
-    @IBOutlet weak var chart2: Chart!
-    @IBOutlet weak var chart3: Chart!
+    @IBOutlet weak var chart1: UIView!
+    @IBOutlet weak var chart2: UIView!
+    @IBOutlet weak var chart3: UIView!
+    
+    var barChart1: DSBarChart?
+    var barChart2: DSBarChart?
+    var barChart3: DSBarChart?
+    
+    /*@IBOutlet weak var chart1: RWBarChartView!
+    @IBOutlet weak var chart2: RWBarChartView!
+    @IBOutlet weak var chart3: RWBarChartView!*/
     
     var survey1Values: [Float] = []
     var survey2Values: [Float] = []
@@ -52,9 +60,9 @@ class GraphViewController: UIViewController {
                     let query = PFQuery(className: "Survey")
                     query.whereKey("companyId", equalTo: person["companyId"])
                     
-                    // filter by last 30 days
+                    // filter by last 60 days
                     var pastDate = Date() // this is current date
-                    pastDate.addTimeInterval(-30*24*60*60)
+                    pastDate.addTimeInterval(-60*24*60*60)
                     query.whereKey("meetingDate", greaterThan: pastDate)
                     query.order(byDescending: "meetingDate")
                     
@@ -130,11 +138,90 @@ class GraphViewController: UIViewController {
         }
         
         // Initial load (or error, still show empty graph)
-        self.setupCharts()
+        //self.setupCharts()
     }
     
     func setupCharts() {
-        chart1.backgroundColor = UIColor.clear
+        
+        
+        var vals1: [Float] = [] // Values
+        var vals2: [Float] = [] // Values
+        var vals3: [Float] = [] // Values
+        var refs: [String] = [] // References, doesn't actually do anything in our case
+        
+        //let vals = [2, 1, 3, 2, 3, 1, 1, 2, 3, 1, 1, 2, 2, 2]
+        //let refs = ["M", "T", "W", "Th", "F", "S", "Su", "M", "T", "W", "Th", "F", "S", "Su"]
+
+        if personIdValues.count > 0 {
+            for i in 0...personIdValues.count-1 {
+                vals1.append(survey1Values[i] + 1) // Happiness
+                vals2.append(survey2Values[i] + 1) // Engagement
+                vals3.append(survey3Values[i] + 1) // Workload
+                refs.append("")
+            }
+        }
+        
+        if barChart1 != nil {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.barChart1?.alpha = 0
+            })
+        }
+        barChart1 = DSBarChart.init(frame: chart1.bounds, color: UIColor.pulseLightPrimaryColor(), references: refs, andValues: vals1)
+        barChart1?.backgroundColor = UIColor.clear
+        barChart1?.frame.origin.y = chart1.frame.origin.y
+        barChart1?.alpha = 0
+        view.addSubview(barChart1!)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.barChart1?.alpha = 1
+        })
+        let xLabel1 = UILabel(frame: CGRect(x: 8, y: chart1.frame.origin.y + chart1.frame.size.height - 20, width: chart1.frame.size.width, height: 20))
+        xLabel1.text = "Pulse from the last 60 days"
+        xLabel1.textColor = UIColor.pulseLightPrimaryColor()
+        xLabel1.textAlignment = .center
+        xLabel1.font = xLabel1.font.withSize(12)
+        view.addSubview(xLabel1)
+        
+        if barChart2 != nil {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.barChart2?.alpha = 0
+            })
+        }
+        barChart2 = DSBarChart.init(frame: chart2.bounds, color: UIColor.pulseLightPrimaryColor(), references: refs, andValues: vals2)
+        barChart2?.backgroundColor = UIColor.clear
+        barChart2?.frame.origin.y = chart2.frame.origin.y
+        barChart2?.alpha = 0
+        view.addSubview(barChart2!)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.barChart2?.alpha = 1
+        })
+        let xLabel2 = UILabel(frame: CGRect(x: 8, y: chart2.frame.origin.y + chart2.frame.size.height - 20, width: chart2.frame.size.width, height: 20))
+        xLabel2.text = "Pulse from the last 60 days"
+        xLabel2.textColor = UIColor.pulseLightPrimaryColor()
+        xLabel2.textAlignment = .center
+        xLabel2.font = xLabel2.font.withSize(12)
+        view.addSubview(xLabel2)
+        
+        if barChart3 != nil {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.barChart3?.alpha = 0
+            })
+        }
+        barChart3 = DSBarChart.init(frame: chart3.bounds, color: UIColor.pulseLightPrimaryColor(), references: refs, andValues: vals3)
+        barChart3?.backgroundColor = UIColor.clear
+        barChart3?.frame.origin.y = chart3.frame.origin.y
+        barChart3?.alpha = 0
+        view.addSubview(barChart3!)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.barChart3?.alpha = 1
+        })
+        let xLabel3 = UILabel(frame: CGRect(x: 8, y: chart3.frame.origin.y + chart3.frame.size.height - 20, width: chart3.frame.size.width, height: 20))
+        xLabel3.text = "Pulse from the last 60 days"
+        xLabel3.textColor = UIColor.pulseLightPrimaryColor()
+        xLabel3.textAlignment = .center
+        xLabel3.font = xLabel3.font.withSize(12)
+        view.addSubview(xLabel3)
+        
+        /*chart1.backgroundColor = UIColor.clear
         chart2.backgroundColor = UIColor.clear
         chart3.backgroundColor = UIColor.clear
         
@@ -210,12 +297,12 @@ class GraphViewController: UIViewController {
         chart3.setNeedsDisplay()
         UIView.transition(with: chart3, duration: 0.5, options: .transitionCrossDissolve, animations: {
             self.chart3.layer.displayIfNeeded()
-        }, completion: nil)
+        }, completion: nil)*/
     }
 
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + height + 8)
-        return 282 + 80 + 8
+        return 296 + 80 + 8
     }
 
     @IBAction func onChartSwitch(_ sender: UISwitch) {
