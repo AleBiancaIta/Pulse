@@ -274,7 +274,7 @@ class PersonDetailsViewController: UIViewController {
 
 		let firstName = firstNameTextField.text!
 		let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
-		lastNameTextField.text = lastName
+        lastNameTextField.text = firstName != lastName ? lastName : ""
 
 		person = Person(firstName: firstName,
 		                lastName: lastName!)
