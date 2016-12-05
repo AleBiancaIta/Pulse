@@ -195,6 +195,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
             cell.backgroundColor = UIColor.clear
             cell.selectionStyle = .none
             cell.addButton.tintColor = UIColor.lightGray
+            cell.addButton.isEnabled = false
             cell.manageLabel.textColor = UIColor.lightGray
             cell.manageLabel.text = "Save team member to manage modules"
             
@@ -208,6 +209,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                         if let person = person, managerId != person.objectId {
                             self.userPersonId = person.objectId
                             cell.addButton.tintColor = UIColor.lightGray
+                            cell.addButton.isEnabled = false
                             cell.manageLabel.textColor = UIColor.lightGray
                             cell.manageLabel.text = "Cannot manage modules for this team member"
                         }
@@ -217,6 +219,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
             
             if personPFObject != nil { // Manage Cards
                 cell.addButton.tintColor = UIColor.pulseAccentColor()
+                cell.addButton.isEnabled = true
                 cell.manageLabel.textColor = UIColor.pulseAccentColor()
                 cell.manageLabel.text = "Manage Modules"
                 cell.addButton.addTarget(self, action: #selector(onManageCards), for: .touchUpInside)
