@@ -26,14 +26,17 @@ class TeamCollectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.clear
         subscribeToNotifications()
-        dataSource.delegate = self
-        dataSource.printTeamMembers()
+//        dataSource.delegate = self
+//        dataSource.printTeamMembers()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         collectionView.dataSource = self.dataSource
+        dataSource.delegate = self
+        dataSource.printTeamMembers()
+
         dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")
@@ -134,7 +137,7 @@ extension TeamCollectionViewController: UICollectionViewDelegate, UICollectionVi
 
 extension TeamCollectionViewController: TeamViewDataSourceDelegate {
     func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, surveyButtonTap survey: PFObject) {
-        
+        debugPrint("team view data source delegate called")
         // fetch meeting object associated with the survey
         parseClient.fetchMeetingFor(surveyId: survey.objectId!, isDeleted: false) { (meeting: PFObject?, error: Error?) in
             if let error = error {

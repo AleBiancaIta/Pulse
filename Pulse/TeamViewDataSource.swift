@@ -236,6 +236,7 @@ extension TeamViewDataSource: UICollectionViewDataSource {
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
         cell.profileImageView.layer.cornerRadius = 5
         cell.delegate = self
+        
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) {(survey: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")

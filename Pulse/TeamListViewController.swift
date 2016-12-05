@@ -28,7 +28,7 @@ class TeamListViewController: UIViewController {
         tableView.delegate = self
         tableView.layer.cornerRadius = 5
         
-        dataSource.delegate = self
+        //dataSource.delegate = self
         
         subscribeToNotifications()
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onAddButtonTap(_:)))
@@ -37,6 +37,7 @@ class TeamListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.dataSource = self.dataSource
+        dataSource.delegate = self
         dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
                 debugPrint("successfully fetching team members")

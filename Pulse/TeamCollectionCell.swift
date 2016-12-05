@@ -28,6 +28,7 @@ class TeamCollectionCell: UICollectionViewCell {
     var survey: PFObject? {
         didSet {
             if survey != nil {
+                //debugPrint("in team collection cell, survey is \(survey)")
                 configureValidSurvey()
                 
                 let surveyValue1 = survey![ObjectKeys.Survey.surveyValueId1] as? Int ?? 99
@@ -38,6 +39,7 @@ class TeamCollectionCell: UICollectionViewCell {
                 setUpSurvey2(value: surveyValue2)
                 setUpSurvey3(value: surveyValue3)
             } else {
+                //debugPrint("in team collection cell, survey is \(survey)")
                 configureNilSurvey()
             }
         }
@@ -151,6 +153,7 @@ class TeamCollectionCell: UICollectionViewCell {
     // MARK: - Actions
     
     @IBAction func onSurveyButtonTap(_ sender: UIButton) {
+        debugPrint("onSurveyButton tap, survey is \(self.survey)")
         if self.survey != nil {
             delegate?.teamCollectionCell?(self, survey: self.survey!)
         }
