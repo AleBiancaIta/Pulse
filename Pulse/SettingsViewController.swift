@@ -19,7 +19,7 @@ class SettingsViewController: UIViewController {
     
     // Note: Sign Up is for anonymous user who wants to sign up for the account
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
-    fileprivate let settingsContent = ["User Information", "Change Password", "Feedback"]
+    fileprivate let settingsContent = ["User Information", "Change Password", "Send Feedback"]
     fileprivate let settingsSubcontent = ["Update your Pulse user information or password with a few taps", "Change the password associated with your Pulse account", "Send us an email to provide feedback, ask questions, or report bugs"]
     fileprivate let settingsImageName = ["Passport2", "Keylock2", "Help"]
     
