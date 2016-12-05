@@ -50,7 +50,7 @@
         /// Calculate dimensions
         iLen = [[vals objectAtIndex:barCount] floatValue];
         x = barCount * (rectWidth);
-        heightRatio = iLen / self.maxLen;
+        heightRatio = iLen / 3;
         height = heightRatio * (rect.size.height - LBL_HEIGHT);
         if (height < 0.1f) height = 1.0f;
         y = rect.size.height - height - LBL_HEIGHT;
