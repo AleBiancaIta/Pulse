@@ -25,16 +25,56 @@ class TeamCollectionCell: UICollectionViewCell {
     
     weak var delegate: TeamCollectionCellDelegate?
     
-    var survey: PFObject! {
+    var survey: PFObject? {
         didSet {
-            let surveyValue1 = survey[ObjectKeys.Survey.surveyValueId1] as? Int ?? 99
-            let surveyValue2 = survey[ObjectKeys.Survey.surveyValueId2] as? Int ?? 99
-            let surveyValue3 = survey[ObjectKeys.Survey.surveyValueId3] as? Int ?? 99
-            
-            setUpSurvey1(value: surveyValue1)
-            setUpSurvey2(value: surveyValue2)
-            setUpSurvey3(value: surveyValue3)
+            if survey != nil {
+                configureValidSurvey()
+                
+                let surveyValue1 = survey![ObjectKeys.Survey.surveyValueId1] as? Int ?? 99
+                let surveyValue2 = survey![ObjectKeys.Survey.surveyValueId2] as? Int ?? 99
+                let surveyValue3 = survey![ObjectKeys.Survey.surveyValueId3] as? Int ?? 99
+                
+                setUpSurvey1(value: surveyValue1)
+                setUpSurvey2(value: surveyValue2)
+                setUpSurvey3(value: surveyValue3)
+            } else {
+                configureNilSurvey()
+            }
         }
+    }
+    
+    fileprivate func configureNilSurvey() {
+        disableButtons()
+        hideButtons()
+    }
+    
+    fileprivate func configureValidSurvey() {
+        enableButtons()
+        unhideButtons()
+    }
+    
+    fileprivate func enableButtons() {
+        surveyValue1Button.isEnabled = true
+        surveyValue2Button.isEnabled = true
+        surveyValue3Button.isEnabled = true
+    }
+    
+    fileprivate func disableButtons() {
+        surveyValue1Button.isEnabled = false
+        surveyValue2Button.isEnabled = false
+        surveyValue3Button.isEnabled = false
+    }
+    
+    fileprivate func unhideButtons() {
+        surveyValue1Button.isHidden = false
+        surveyValue2Button.isHidden = false
+        surveyValue3Button.isHidden = false
+    }
+    
+    fileprivate func hideButtons() {
+        surveyValue1Button.isHidden = true
+        surveyValue2Button.isHidden = true
+        surveyValue3Button.isHidden = true
     }
     
     // happiness
@@ -111,6 +151,8 @@ class TeamCollectionCell: UICollectionViewCell {
     // MARK: - Actions
     
     @IBAction func onSurveyButtonTap(_ sender: UIButton) {
-        delegate?.teamCollectionCell?(self, survey: self.survey)
+        if self.survey != nil {
+            delegate?.teamCollectionCell?(self, survey: self.survey!)
+        }
     }
 }

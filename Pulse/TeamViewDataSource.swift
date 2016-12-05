@@ -203,6 +203,7 @@ extension TeamViewDataSource: UITableViewDataSource {
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) { (survey: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("Unable to fetch survey data: \(error.localizedDescription)")
+                cell.survey = nil
             } else {
                 debugPrint("survey is \(survey)")
                 cell.survey = survey
@@ -238,8 +239,9 @@ extension TeamViewDataSource: UICollectionViewDataSource {
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) {(survey: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("error: \(error.localizedDescription)")
+                cell.survey = nil
             } else {
-                //debugPrint("survey is \(survey)")
+                debugPrint("survey is \(survey)")
                 cell.survey = survey
             }
         }
