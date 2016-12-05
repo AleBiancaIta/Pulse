@@ -18,6 +18,8 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var chart2: UIView!
     @IBOutlet weak var chart3: UIView!
     
+    @IBOutlet weak var chartSegmentedControl: UISegmentedControl!
+    
     var barChart1: DSBarChart?
     var barChart2: DSBarChart?
     var barChart3: DSBarChart?
@@ -40,6 +42,7 @@ class GraphViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        chartSegmentedControl.layer.cornerRadius = 5
         loadChartForCompany()
     }
     
@@ -59,9 +62,9 @@ class GraphViewController: UIViewController {
                     let query = PFQuery(className: "Survey")
                     query.whereKey("companyId", equalTo: person["companyId"])
                     
-                    // filter by last 60 days
+                    // filter by last 30 days
                     var pastDate = Date() // this is current date
-                    pastDate.addTimeInterval(-60*24*60*60)
+                    pastDate.addTimeInterval(-30*24*60*60)
                     query.whereKey("meetingDate", greaterThan: pastDate)
                     query.order(byDescending: "meetingDate")
                     
@@ -142,8 +145,6 @@ class GraphViewController: UIViewController {
     }
     
     func setupCharts() {
-        
-        
         var vals1: [Float] = [] // Values
         var vals2: [Float] = [] // Values
         var vals3: [Float] = [] // Values
@@ -211,7 +212,7 @@ class GraphViewController: UIViewController {
             })
         }
         barChartLabel1 = UILabel(frame: CGRect(x: 8, y: chart1.frame.origin.y + chart1.frame.size.height - 20, width: chart1.frame.size.width, height: 20))
-        barChartLabel1?.text = vals1.count > 0 ? "Pulse from the last 60 days" : "No Pulse data from the last 60 days"
+        barChartLabel1?.text = vals1.count > 0 ? "Pulse for \(vals1.count) employees" : "No Pulse data from the last 30 days"
         barChartLabel1?.textColor = UIColor.pulseLightPrimaryColor()
         barChartLabel1?.textAlignment = .center
         barChartLabel1?.font = barChartLabel1?.font.withSize(12)
@@ -226,7 +227,7 @@ class GraphViewController: UIViewController {
             })
         }
         barChartLabel2 = UILabel(frame: CGRect(x: 8, y: chart2.frame.origin.y + chart2.frame.size.height - 20, width: chart2.frame.size.width, height: 20))
-        barChartLabel2?.text = vals2.count > 0 ? "Pulse from the last 60 days" : "No Pulse data from the last 60 days"
+        barChartLabel2?.text = vals2.count > 0 ? "Pulse for \(vals2.count) employees" : "No Pulse data from the last 30 days"
         barChartLabel2?.textColor = UIColor.pulseLightPrimaryColor()
         barChartLabel2?.textAlignment = .center
         barChartLabel2?.font = barChartLabel2?.font.withSize(12)
@@ -241,7 +242,7 @@ class GraphViewController: UIViewController {
             })
         }
         barChartLabel3 = UILabel(frame: CGRect(x: 8, y: chart3.frame.origin.y + chart3.frame.size.height - 20, width: chart3.frame.size.width, height: 20))
-        barChartLabel3?.text = vals3.count > 0 ? "Pulse from the last 60 days" : "No Pulse data from the last 60 days"
+        barChartLabel3?.text = vals3.count > 0 ? "Pulse for \(vals3.count) employees" : "No Pulse data from the last 30 days"
         barChartLabel3?.textColor = UIColor.pulseLightPrimaryColor()
         barChartLabel3?.textAlignment = .center
         barChartLabel3?.font = barChartLabel3?.font.withSize(12)
@@ -256,13 +257,16 @@ class GraphViewController: UIViewController {
         return 296 + 80 + 8
     }
 
-    @IBAction func onChartSwitch(_ sender: UISwitch) {
-        if sender.isOn { // Team pulse
+    @IBAction func onSegmentedControlChange(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
             isCompany = false
             loadChartForCompany()
-        } else { // Company pulse
+        case 1:
             isCompany = true
             loadChartForCompany()
+        default:
+            break
         }
     }
 }
