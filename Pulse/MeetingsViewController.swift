@@ -230,8 +230,11 @@ extension MeetingsViewController: UITableViewDataSource {
                             print("Successfully deleted meeting")
                             self.loadMeetings()
                         } else {
-                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error deleting meeting, error: \(error?.localizedDescription)")
-                            //print("Error deleting meeting")
+                            if let error = error {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error deleting meeting, error: \(error.localizedDescription)")
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error deleting meeting")
+                            }
                         }
                     }
                 }

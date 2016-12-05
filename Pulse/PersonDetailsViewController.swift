@@ -253,8 +253,11 @@ class PersonDetailsViewController: UIViewController {
 			ABIShowDropDownAlert(type: AlertTypes.success, title: "Success!", message: "Successfully updated team member")
 		}
 		else {
-			ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error", message: "Unable to update team member")
-			debugPrint(error?.localizedDescription as Any)
+            if let error = error {
+                ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error", message: "Unable to update team member, error: \(error.localizedDescription)")
+            } else {
+                ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error", message: "Unable to update team member")
+            }
 		}
 	}
 

@@ -438,8 +438,11 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                         if success {
                             print("successfully saved person card")
                         } else {
-                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card, error: \(error?.localizedDescription)")
-                            //print("error saving person card")
+                            if let error = error {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card, error: \(error.localizedDescription)")
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card")
+                            }
                         }
                     }
                 } else {
@@ -448,8 +451,11 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                     post.saveInBackground()
                 }
             } else {
-                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card, error: \(error?.localizedDescription)")
-                //print("error saving person card")
+                if let error = error {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card, error: \(error.localizedDescription)")
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving person card")
+                }
             }
         }
         
@@ -488,8 +494,11 @@ extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDele
                     }
                 }
             } else {
-                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing person card, error: \(error?.localizedDescription)")
-                //print("error removing person card")
+                if let error = error {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing person card, error: \(error.localizedDescription)")
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error removing person card")
+                }
             }
         }
         

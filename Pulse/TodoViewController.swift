@@ -509,7 +509,11 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
                 if success {
                     debugPrint("Successfully 'deleting' todo item")
                 } else {
-                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to 'delete' todo item with error: \(error?.localizedDescription)")
+                    if let error = error {
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to 'delete' todo item with error: \(error.localizedDescription)")
+                    } else {
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to 'delete' todo item with error")
+                    }
                     //debugPrint("Failed to 'delete' todo item with error: \(error?.localizedDescription)")
                     
                     // TODO: reset deleted item or retry later?
@@ -551,7 +555,11 @@ extension TodoViewController: TodoAddCellDelegate {
                 //self.tableView.reloadData()
             } else {
                 //remove the new todo added - need to test this
-                self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.failure, title: "Error!", message: "Adding new item: error \(error?.localizedDescription). Please try again later", delegate: self)
+                if let error = error {
+                    self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.failure, title: "Error!", message: "Adding new item: error \(error.localizedDescription). Please try again later", delegate: self)
+                } else {
+                    self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.failure, title: "Error!", message: "Error in adding new item. Please try again later", delegate: self)
+                }
                 /*
                 self.ABIShowAlert(title: "Error", message: "Adding new item: error \(error?.localizedDescription). Please try again later", sender: nil, handler: { (alertAction: UIAlertAction) in
                     self.todoItems.remove(at: 0)
@@ -605,16 +613,20 @@ extension TodoViewController: TodoListCellDelegate {
                 todoItems.append(todo)
                 tableView.reloadData()
                 
-                todo.saveInBackground(block: { (success: Bool, error: Error?) in
+                todo.saveInBackground { (success: Bool, error: Error?) in
                     if success {
                         debugPrint("Successfully uncompleting task")
                     } else {
-                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to uncomplete task, error: \(error?.localizedDescription)")
+                        if let error = error {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to uncomplete task, error: \(error.localizedDescription)")
+                        } else {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to uncomplete task")
+                        }
                         //debugPrint("Failed to uncomplete task, error: \(error?.localizedDescription)")
                         
                         // TODO: Retry or reset the changes?
                     }
-                })
+                }
             }
         } else {
             if let indexPath = tableView.indexPath(for: todoListCell) {
@@ -623,16 +635,20 @@ extension TodoViewController: TodoListCellDelegate {
                 todoCompletedItems.insert(todo, at: 0)
                 tableView.reloadData()
                 
-                todo.saveInBackground(block: { (success: Bool, error: Error?) in
+                todo.saveInBackground { (success: Bool, error: Error?) in
                     if success {
                         debugPrint("Successfully updated completedAt for todo item")
                     } else {
-                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update completedAt for todo item, error: \(error?.localizedDescription)")
+                        if let error = error {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update completedAt for todo item, error: \(error.localizedDescription)")
+                        } else {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update completedAt for todo item")
+                        }
                         //debugPrint("Failed to update completedAt for todo item, error: \(error?.localizedDescription)")
                         
                         // TODO: Retry or reset the changes?
                     }
-                })
+                }
             }
         }
     }

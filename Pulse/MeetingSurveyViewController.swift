@@ -504,8 +504,11 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
                             self.meeting = Meeting(dictionary: dictionary)
                             self.delegate?.meetingSurveyViewController?(self, meeting: self.meeting, surveyChanged: true)
                         } else {
-                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save new survey with error: \(error?.localizedDescription)")
-                            //debugPrint("Failed to save new survey with error: \(error?.localizedDescription)")
+                            if let error = error {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save new survey with error: \(error.localizedDescription)")
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save new survey with error")
+                            }
                         }
                     }
                 } else {
@@ -527,8 +530,11 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
                                     if success {
                                         self.delegate?.meetingSurveyViewController?(self, meeting: self.meeting, surveyChanged: true)
                                     } else {
-                                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save survey, error: \(error?.localizedDescription)")
-                                        //debugPrint("Failed to save survey, error: \(error?.localizedDescription)")
+                                        if let error = error {
+                                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save survey, error: \(error.localizedDescription)")
+                                        } else {
+                                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save survey")
+                                        }
                                     }
                                 }
                             } else {

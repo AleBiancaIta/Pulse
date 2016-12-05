@@ -105,7 +105,11 @@ class TodoEditViewController: UIViewController {
                     self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully updated todo item", delegate: self)
                     self.delegate?.todoEditViewController?(self, didUpdate: true)
                 } else {
-                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update todo with error: \(error?.localizedDescription)")
+                    if let error = error {
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update todo with error: \(error.localizedDescription)")
+                    } else {
+                        self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to update todo with error")
+                    }
                     //debugPrint("Failed to update todo with error: \(error?.localizedDescription)")
                 }
             }
