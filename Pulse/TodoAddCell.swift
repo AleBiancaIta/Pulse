@@ -16,6 +16,7 @@ class TodoAddCell: UITableViewCell {
     
     @IBOutlet weak var cellBackgroundView: UIView!
     @IBOutlet weak var todoTextField: UITextField!
+    @IBOutlet weak var addButton: UIButton!
     
     weak var delegate: TodoAddCellDelegate?
     
@@ -24,6 +25,7 @@ class TodoAddCell: UITableViewCell {
         todoTextField.placeholder = "Add a follow-up item..."
         configureCellBackgroundView()
         todoTextField.delegate = self
+        addButton.tintColor = UIColor.pulseAccentColor()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,11 +33,27 @@ class TodoAddCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Actions
+    
+    @IBAction func onAddButtonTap(_ sender: UIButton) {
+        addTodo()
+    }
+    
     // MARK: - Helpers
+    
     fileprivate func configureCellBackgroundView() {
         cellBackgroundView.layer.cornerRadius = 5.0
         cellBackgroundView.layer.borderWidth = 1.0
         cellBackgroundView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    fileprivate func addTodo() {
+        endEditing(true)
+        
+        if !((todoTextField.text?.isEmpty)!) {
+            delegate?.todoAddCell?(self, todoString: todoTextField.text!)
+            todoTextField.text = ""
+        }
     }
 }
 
@@ -46,12 +64,7 @@ extension TodoAddCell: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        endEditing(true) // Resign first responder is not working for whatever reason
-        
-        if !((todoTextField.text?.isEmpty)!) {
-            delegate?.todoAddCell?(self, todoString: todoTextField.text!)
-            todoTextField.text = ""
-        }
+        addTodo()
         return true
     }   
 }

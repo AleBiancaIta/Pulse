@@ -379,6 +379,7 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
         case .add:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoAddCell, for: indexPath) as! TodoAddCell
             cell.delegate = self
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         case .list:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoListCell, for: indexPath) as! TodoListCell
