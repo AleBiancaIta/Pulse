@@ -274,7 +274,7 @@ class TodoViewController: UIViewController {
     
     fileprivate func fetchTodoDashboard(isCompleted: Bool, completion: @escaping ([PFObject]?, Error?)->()) {
         if let manager = self.currentManager {
-            parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
+            parseClient.fetchTodoFor(managerId: manager.objectId!, personId: nil, meetingId: nil, limit: limitParameter, isAscending: false, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
         } else {
             debugPrint("Manager is nil, cannot fetch todoItems")
         }
@@ -284,7 +284,7 @@ class TodoViewController: UIViewController {
         // pass in managerId, personId
         // We only want to show the todo related to the current user account
         if let manager = self.currentManager, let currentTeamPerson = self.currentTeamPerson {
-            parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
+            parseClient.fetchTodoFor(managerId: manager.objectId!, personId: currentTeamPerson.objectId!, meetingId: nil, limit: limitParameter, isAscending: false, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
         }  else {
             debugPrint("Manager or current team member is nil, cannot fetch todoItems")
         }
@@ -298,7 +298,7 @@ class TodoViewController: UIViewController {
             let meetingId = meeting.objectId!
             let managerId = manager.objectId!
             
-            parseClient.fetchTodoFor(managerId: managerId, personId: personId, meetingId: meetingId, limit: limitParameter, isAscending: true, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
+            parseClient.fetchTodoFor(managerId: managerId, personId: personId, meetingId: meetingId, limit: limitParameter, isAscending: false, orderBy: ObjectKeys.ToDo.updatedAt, isDeleted: false, isCompleted: isCompleted, completion: completion)
         }  else {
             debugPrint("Manager or meeting object is nil, cannot fetch todoItems")
         }
