@@ -22,10 +22,18 @@ class Person2DetailsViewController: UIViewController {
     var personManagerId: String?
     var userPersonId: String?
     
-    var toDoIndexPath: IndexPath? = nil
-    var notesIndexPath: IndexPath? = nil
+    // For keyboard display
+    var toDoIndexPath: IndexPath?
+    var notesIndexPath: IndexPath?
     
     var isPersonManager: Bool = false
+    
+    // Card View Controllers
+    var infoViewController: PersonDetailsViewController?
+    var teamViewController: TeamCollectionViewController?
+    var toDoViewController: TodoViewController?
+    var meetingsViewController: MeetingsViewController?
+    var notesViewController: NotesViewController?
     
     fileprivate let parseClient = ParseClient.sharedInstance()
 
@@ -252,66 +260,81 @@ extension Person2DetailsViewController: UITableViewDataSource {
             
         } else { // The actual cards
             switch selectedCards[indexPath.section].id! {
-			case "i": 
+			case "i":
+                if infoViewController == nil {
+                    personInfoViewController.willMove(toParentViewController: self)
+                    personInfoViewController.view.frame = CGRect(x: 0, y: 0, width: personInfoViewController.view.frame.size.width, height: personInfoViewController.heightForView())
+                    infoViewController = personInfoViewController
+                }
+                
 				let cell = tableView.dequeueReusableCell(withIdentifier: "InfoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 
-                if cell.contentView.subviews == [] {
-                    personInfoViewController.willMove(toParentViewController: self)
-                    personInfoViewController.view.frame = CGRect(x: 0, y: 0, width: personInfoViewController.view.frame.size.width, height: personInfoViewController.heightForView())
-                    cell.contentView.addSubview(personInfoViewController.view)
-                    self.addChildViewController(personInfoViewController)
-                    personInfoViewController.didMove(toParentViewController: self)
+                if let infoViewController = infoViewController {
+                    if !cell.contentView.subviews.contains(infoViewController.view) {
+                        cell.contentView.addSubview(infoViewController.view)
+                        self.addChildViewController(infoViewController)
+                        infoViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
 				return cell
                 
             case "t":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
-                cell.selectionStyle = .none
-                cell.layer.cornerRadius = 5
-                cell.backgroundColor = UIColor.clear
-                
-                if cell.contentView.subviews == [] {
+                if teamViewController == nil {
                     let storyboard = UIStoryboard(name: "Team", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
                     viewController.person = personPFObject
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                    teamViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
+                
+                if let teamViewController = teamViewController {
+                    if !cell.contentView.subviews.contains(teamViewController.view) {
+                        cell.contentView.addSubview(teamViewController.view)
+                        self.addChildViewController(teamViewController)
+                        teamViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell
 
             case "d":
-                toDoIndexPath = indexPath
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
-                cell.selectionStyle = .none
-                cell.layer.cornerRadius = 5
+                toDoIndexPath = indexPath // For keyboard display
                 
-                if cell.contentView.subviews == [] {
+                if toDoViewController == nil {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                     viewController.currentTeamPerson = personPFObject
                     viewController.viewTypes = .employeeDetail
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                    toDoViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                
+                if let toDoViewController = toDoViewController {
+                    if !cell.contentView.subviews.contains(toDoViewController.view) {
+                        cell.contentView.addSubview(toDoViewController.view)
+                        self.addChildViewController(toDoViewController)
+                        toDoViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell
                 
             case "m":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
-                cell.selectionStyle = .none
-                cell.layer.cornerRadius = 5
-                
-                if cell.contentView.subviews == [] {
+                if meetingsViewController == nil {
                     let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
                     if let personPFObject = personPFObject {
@@ -320,21 +343,27 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     viewController.viewTypes = .employeeDetail
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                    meetingsViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                
+                if let meetingsViewController = meetingsViewController {
+                    if !cell.contentView.subviews.contains(meetingsViewController.view) {
+                        cell.contentView.addSubview(meetingsViewController.view)
+                        self.addChildViewController(meetingsViewController)
+                        meetingsViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell
                 
             case "n":
-                notesIndexPath = indexPath
-                let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
-                cell.selectionStyle = .none
-                cell.layer.cornerRadius = 5
-                cell.backgroundColor = UIColor.clear
+                notesIndexPath = indexPath // For keyboard display
                 
-                if cell.contentView.subviews == [] {
+                if notesViewController == nil {
                     let storyboard = UIStoryboard(name: "Notes", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "NotesViewController") as! NotesViewController
                     viewController.delegate = self
@@ -344,9 +373,20 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     }
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                    notesViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
+                
+                if let notesViewController = notesViewController {
+                    if !cell.contentView.subviews.contains(notesViewController.view) {
+                        cell.contentView.addSubview(notesViewController.view)
+                        self.addChildViewController(notesViewController)
+                        notesViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell

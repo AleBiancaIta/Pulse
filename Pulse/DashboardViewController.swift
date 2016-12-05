@@ -15,7 +15,14 @@ class DashboardViewController: UIViewController {
     
     var selectedCardsString: String? = ""
     var selectedCards: [Card] = []
-    var toDoIndexPath: IndexPath? = nil
+    
+    var toDoIndexPath: IndexPath? // For keyboard display
+    
+    // Card View Controllers
+    var graphViewController: GraphViewController?
+    var toDoViewController: TodoViewController?
+    var teamViewController: TeamCollectionViewController?
+    var meetingsViewController: MeetingsViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -228,73 +235,98 @@ extension DashboardViewController: UITableViewDataSource {
         } else {
             switch selectedCards[indexPath.section].id! {
             case "g":
+                if graphViewController == nil {
+                    let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    graphViewController = viewController
+                }
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 cell.backgroundColor = UIColor.clear
                 
-                if cell.contentView.subviews == [] {
-                    let storyboard = UIStoryboard(name: "Graph", bundle: nil)
-                    let viewController = storyboard.instantiateViewController(withIdentifier: "GraphViewController") as! GraphViewController
-                    viewController.willMove(toParentViewController: self)
-                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                if let graphViewController = graphViewController {
+                    if !cell.contentView.subviews.contains(graphViewController.view) {
+                        cell.contentView.addSubview(graphViewController.view)
+                        self.addChildViewController(graphViewController)
+                        graphViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell
                 
             case "m":
-                let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
-                cell.selectionStyle = .none
-                cell.layer.cornerRadius = 5
-                
-                if cell.contentView.subviews == [] {
+                if meetingsViewController == nil {
                     let storyboard = UIStoryboard(name: "Meeting", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
                     viewController.personId = nil
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                    meetingsViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                
+                if let meetingsViewController = meetingsViewController {
+                    if !cell.contentView.subviews.contains(meetingsViewController.view) {
+                        cell.contentView.addSubview(meetingsViewController.view)
+                        self.addChildViewController(meetingsViewController)
+                        meetingsViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell
                 
             case "t":
+                if teamViewController == nil {
+                    let storyboard = UIStoryboard(name: "Team", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    teamViewController = viewController
+                }
+                
                 let cell = tableView.dequeueReusableCell(withIdentifier: "TeamContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 cell.backgroundColor = UIColor.clear
                 
-                if cell.contentView.subviews == [] {
-                    let storyboard = UIStoryboard(name: "Team", bundle: nil)
-                    let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
-                    viewController.willMove(toParentViewController: self)
-                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                if let teamViewController = teamViewController {
+                    if !cell.contentView.subviews.contains(teamViewController.view) {
+                        cell.contentView.addSubview(teamViewController.view)
+                        self.addChildViewController(teamViewController)
+                        teamViewController.didMove(toParentViewController: self)
+                    }
                 }
                     
                 return cell
                 
             case "d":
-                toDoIndexPath = indexPath
-                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
-                cell.selectionStyle = .none
-                cell.layer.cornerRadius = 5
+                toDoIndexPath = indexPath // For keyboard display
                 
-                if cell.contentView.subviews == [] {
+                if toDoViewController == nil {
                     let storyboard = UIStoryboard(name: "Todo", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "TodoVC") as! TodoViewController
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
-                    cell.contentView.addSubview(viewController.view)
-                    self.addChildViewController(viewController)
-                    viewController.didMove(toParentViewController: self)
+                    toDoViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                
+                if let toDoViewController = toDoViewController {
+                    if !cell.contentView.subviews.contains(toDoViewController.view) {
+                        cell.contentView.addSubview(toDoViewController.view)
+                        self.addChildViewController(toDoViewController)
+                        toDoViewController.didMove(toParentViewController: self)
+                    }
                 }
                 
                 return cell
