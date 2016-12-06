@@ -13,7 +13,7 @@ class MeetingListCell: UITableViewCell {
 
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var submessageLabel: UILabel!
-    @IBOutlet weak var cellImageView: UIImageView!
+    //@IBOutlet weak var cellImageView: UIImageView!
     //@IBOutlet weak var surveyView: UIView!
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!
@@ -39,7 +39,7 @@ class MeetingListCell: UITableViewCell {
             }
         }
     }
-    
+    /*
     var imageName: String? {
         didSet {
             if let imageName = imageName {
@@ -47,7 +47,7 @@ class MeetingListCell: UITableViewCell {
                 cellImageView.tintColor = UIColor.pulseAccentColor()
             }
         }
-    }
+    }*/
     
     var survey: PFObject? {
         didSet {

@@ -131,10 +131,10 @@ class MeetingsViewController: UIViewController {
     
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + displayed rows height - status bar height)
-        //return 95 + (56 * 3) - 20
-        let nonExpandedHeight = 95 + (58 * 3) - 20
-        let expandedHeight = nonExpandedHeight + 32
-        return expanded ? CGFloat(expandedHeight) : CGFloat(nonExpandedHeight)
+        return 95 + (60 * 3) - 20
+        //let nonExpandedHeight = 95 + (58 * 3) - 20
+        //let expandedHeight = nonExpandedHeight + 32
+        //return expanded ? CGFloat(expandedHeight) : CGFloat(nonExpandedHeight)
     }
     
     // MARK: - IBAction
@@ -195,9 +195,9 @@ extension MeetingsViewController: UITableViewDataSource {
                     if let firstName = person[ObjectKeys.Person.firstName] as? String, let lastName = person[ObjectKeys.Person.lastName] as? String {
                         cell.message = firstName != lastName ? "\(firstName) \(lastName)" : firstName
                         cell.submessage = "\(meetingDate)"
-                        cell.imageName = "Clipboard"
+                        //cell.imageName = "Clipboard"
                         
-                        if self.expanded {
+                        //if self.expanded {
                             self.parseClient.fetchSurveyFor(surveyId: self.meetings[indexPath.row].surveyId, isAscending: nil, orderBy: nil) { (survey: PFObject?, error: Error?) in
                                 if let error = error {
                                     debugPrint("Failed to fetch survey, error: \(error.localizedDescription)")
@@ -206,7 +206,7 @@ extension MeetingsViewController: UITableViewDataSource {
                                     cell.survey = survey
                                 }
                             }
-                        }
+                        //}
                     }
                 }
             }
@@ -262,7 +262,8 @@ extension MeetingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //return 56
-        return expanded ? 88 : 58
+        return 60
+        //return expanded ? 88 : 58
     }
 }
 
