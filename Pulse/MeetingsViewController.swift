@@ -132,7 +132,9 @@ class MeetingsViewController: UIViewController {
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + displayed rows height - status bar height)
         //return 95 + (56 * 3) - 20
-        return 95 + (88 * 3) - 20
+        let nonExpandedHeight = 95 + (58 * 3) - 20
+        let expandedHeight = nonExpandedHeight + 32
+        return expanded ? CGFloat(expandedHeight) : CGFloat(nonExpandedHeight)
     }
     
     // MARK: - IBAction
@@ -195,12 +197,14 @@ extension MeetingsViewController: UITableViewDataSource {
                         cell.submessage = "\(meetingDate)"
                         cell.imageName = "Clipboard"
                         
-                        self.parseClient.fetchSurveyFor(surveyId: self.meetings[indexPath.row].surveyId, isAscending: nil, orderBy: nil) { (survey: PFObject?, error: Error?) in
-                            if let error = error {
-                                debugPrint("Failed to fetch survey, error: \(error.localizedDescription)")
-                                cell.survey = nil
-                            } else {
-                                cell.survey = survey
+                        if self.expanded {
+                            self.parseClient.fetchSurveyFor(surveyId: self.meetings[indexPath.row].surveyId, isAscending: nil, orderBy: nil) { (survey: PFObject?, error: Error?) in
+                                if let error = error {
+                                    debugPrint("Failed to fetch survey, error: \(error.localizedDescription)")
+                                    cell.survey = nil
+                                } else {
+                                    cell.survey = survey
+                                }
                             }
                         }
                     }
@@ -258,7 +262,7 @@ extension MeetingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         //return 56
-        return 88
+        return expanded ? 88 : 58
     }
 }
 
