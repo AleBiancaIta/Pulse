@@ -96,6 +96,7 @@ class GraphViewController: UIViewController {
                     pastDate.addTimeInterval(-30*24*60*60)
                     query.whereKey("meetingDate", greaterThan: pastDate)
                     query.order(byDescending: "meetingDate")
+                    query.limit = 1000
                     
                     query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
                         if let posts = posts {
