@@ -53,10 +53,10 @@ class GraphViewController: UIViewController {
         control?.frame = CGRect(x: 180, y: 9, width: 180, height: 30)
         control?.backgroundColor = UIColor.clear
         control?.selectionIndicatorLocation = .down
-        control?.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.pulseAccentColor(), NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 16.0)!]
-        control?.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.pulseLightPrimaryColor()]
+        control?.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.pulseLightPrimaryColor(), NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 16.0)!]
+        control?.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.pulseAccentColor()]
         control?.selectionStyle = .fullWidthStripe
-        control?.selectionIndicatorHeight = 2.0
+        control?.selectionIndicatorHeight = 1.5
         control?.selectionIndicatorColor = UIColor.pulseAccentColor()
         control?.addTarget(self, action: #selector(onControlChange(_:)), for: UIControlEvents.valueChanged)
         self.view.addSubview(control!)
