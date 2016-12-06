@@ -70,7 +70,6 @@
                             <constraint firstItem="NQT-G4-Nlh" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="4mE-u1-ytC"/>
                             <constraint firstAttribute="trailing" secondItem="NQT-G4-Nlh" secondAttribute="trailing" constant="24" id="6og-I5-e8A"/>
                             <constraint firstItem="ZQg-9M-sTy" firstAttribute="top" secondItem="nqc-DF-Fg9" secondAttribute="top" constant="8" id="7DW-vW-XrD"/>
-                            <constraint firstItem="ZQg-9M-sTy" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="7dD-is-Y4B"/>
                             <constraint firstItem="kZN-RS-gWN" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="9x9-1n-1rh"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="BJj-oU-Rwg"/>
                             <constraint firstItem="E2n-X7-jUQ" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="D0q-ed-Pkg"/>
@@ -83,6 +82,7 @@
                             <constraint firstAttribute="trailing" secondItem="VGS-cs-X4k" secondAttribute="trailing" constant="24" id="nay-7I-inQ"/>
                             <constraint firstItem="Hci-68-o5z" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="rCu-Gz-X5v"/>
                             <constraint firstAttribute="trailing" secondItem="E2n-X7-jUQ" secondAttribute="trailing" constant="8" id="rMS-s5-4Xp"/>
+                            <constraint firstItem="ZQg-9M-sTy" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="uj2-Ct-MDw"/>
                             <constraint firstAttribute="trailing" secondItem="kZN-RS-gWN" secondAttribute="trailing" constant="8" id="xiu-8N-YDo"/>
                             <constraint firstItem="VGS-cs-X4k" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="xqy-eB-UrX"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="top" secondItem="ZQg-9M-sTy" secondAttribute="bottom" constant="8" id="zrG-AB-29q"/>
