@@ -205,8 +205,16 @@ class MeetingSurveyViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func onDismissSurveyDescr(_ sender: UITapGestureRecognizer) {
-        surveyDescrView.isHidden = true
-        surveyDescrBackground.isHidden = true
+        surveyDescrView.alpha = 0.9
+        surveyDescrBackground.alpha = 0.5
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: .transitionCrossDissolve, animations: {
+            self.surveyDescrView.alpha = 0.0
+            self.surveyDescrBackground.alpha = 0.0
+        }, completion: { (Bool) in
+            self.surveyDescrView.isHidden = true
+            self.surveyDescrBackground.isHidden = true
+        })
     }
     
     @IBAction func onSurvey1InfoButton(_ sender: Any) {
@@ -219,8 +227,16 @@ class MeetingSurveyViewController: UIViewController {
         
         surveyDescrLabel.sizeToFit()
         surveyDescrView.sizeToFit()
-        surveyDescrView.isHidden = false
-        surveyDescrBackground.isHidden = false
+        
+        surveyDescrView.alpha = 0
+        surveyDescrBackground.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCrossDissolve, animations: {
+            self.surveyDescrView.isHidden = false
+            self.surveyDescrBackground.isHidden = false
+            self.surveyDescrView.alpha = 0.9
+            self.surveyDescrBackground.alpha = 0.5
+        }, completion: nil)
     }
     
     @IBAction func onSurvey2InfoButton(_ sender: Any) {
@@ -233,8 +249,16 @@ class MeetingSurveyViewController: UIViewController {
         
         surveyDescrLabel.sizeToFit()
         surveyDescrView.sizeToFit()
-        surveyDescrView.isHidden = false
-        surveyDescrBackground.isHidden = false
+        
+        surveyDescrView.alpha = 0
+        surveyDescrBackground.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCrossDissolve, animations: {
+            self.surveyDescrView.isHidden = false
+            self.surveyDescrBackground.isHidden = false
+            self.surveyDescrView.alpha = 0.9
+            self.surveyDescrBackground.alpha = 0.5
+        }, completion: nil)
     }
     
     @IBAction func onSurvey3InfoButton(_ sender: Any) {
@@ -247,8 +271,16 @@ class MeetingSurveyViewController: UIViewController {
         
         surveyDescrLabel.sizeToFit()
         surveyDescrView.sizeToFit()
-        surveyDescrView.isHidden = false
-        surveyDescrBackground.isHidden = false
+        
+        surveyDescrView.alpha = 0
+        surveyDescrBackground.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: .transitionCrossDissolve, animations: {
+            self.surveyDescrView.isHidden = false
+            self.surveyDescrBackground.isHidden = false
+            self.surveyDescrView.alpha = 0.9
+            self.surveyDescrBackground.alpha = 0.5
+        }, completion: nil)
     }
     
     @IBAction func onSurvey1LowSwitch(_ sender: AnyObject) {

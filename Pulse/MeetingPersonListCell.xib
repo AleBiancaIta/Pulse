@@ -18,25 +18,38 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1B-HR-lGn">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1B-HR-lGn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="&lt;Select a Team Member&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0o2-63-FeB">
-                                <rect key="frame" x="8" y="11" width="177" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Select a Team Member&gt;" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0o2-63-FeB">
+                                <rect key="frame" x="8" y="12.5" width="177" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="DownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="QcT-6R-SGU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DownArrow" translatesAutoresizingMaskIntoConstraints="NO" id="QcT-6R-SGU">
                                 <rect key="frame" x="292" y="11" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="eqQ-N9-iHR"/>
+                                    <constraint firstAttribute="height" constant="20" id="qAH-i1-Zbg"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0o2-63-FeB" firstAttribute="centerY" secondItem="B1B-HR-lGn" secondAttribute="centerY" id="Ndo-36-3I7"/>
+                            <constraint firstItem="QcT-6R-SGU" firstAttribute="centerY" secondItem="0o2-63-FeB" secondAttribute="centerY" id="cOG-fh-PoU"/>
+                            <constraint firstItem="0o2-63-FeB" firstAttribute="leading" secondItem="B1B-HR-lGn" secondAttribute="leading" constant="8" id="fe9-Xg-n1x"/>
+                            <constraint firstAttribute="trailing" secondItem="QcT-6R-SGU" secondAttribute="trailing" constant="8" id="hdi-Gy-yFc"/>
+                        </constraints>
                     </view>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="B1B-HR-lGn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="LiC-KK-Ymd"/>
+                    <constraint firstAttribute="trailing" secondItem="B1B-HR-lGn" secondAttribute="trailing" id="QEb-Jx-PVq"/>
+                    <constraint firstItem="B1B-HR-lGn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="QEj-qh-q2B"/>
+                    <constraint firstAttribute="bottom" secondItem="B1B-HR-lGn" secondAttribute="bottom" id="YSl-Ua-2DK"/>
+                </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="downArrowImageView" destination="QcT-6R-SGU" id="vLF-Vj-z2v"/>

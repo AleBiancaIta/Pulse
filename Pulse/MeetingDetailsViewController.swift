@@ -433,7 +433,7 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
 extension MeetingDetailsViewController: RKDropdownAlertDelegate {
    
    func dropdownAlertWasDismissed() -> Bool {
-      self.navigationController?.popViewController(animated: true)
+      let _ = self.navigationController?.popViewController(animated: true)
       return true
    }
    
