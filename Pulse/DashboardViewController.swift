@@ -95,11 +95,16 @@ class DashboardViewController: UIViewController {
             
             // Only need to move keyboard if bottom fields are being edited
             // Currently, the only card that activates keyboard is ToDo
-            if tableView.rectForRow(at: toDoIndexPath!).origin.y > keyboardSize.height {
-                if view.frame.origin.y != 0 {
-                    view.frame.origin.y = 0
+            if let toDoIndexPath = toDoIndexPath {
+                let rectInSuperview = tableView.convert(tableView.rectForRow(at: toDoIndexPath), to: tableView.superview)
+                if rectInSuperview.origin.y > keyboardSize.height {
+                    if view.frame.origin.y != 0 {
+                        view.frame.origin.y = 0
+                    }
+                    view.frame.origin.y -= keyboardSize.height - 64
+                } else if toDoIndexPath.section == selectedCards.count - 1 {
+                    view.frame.origin.y -= keyboardSize.height - 44
                 }
-                view.frame.origin.y -= keyboardSize.height - 64
             }
         }
     }
@@ -277,6 +282,7 @@ extension DashboardViewController: UITableViewDataSource {
                 return cell
                 
             case "d":
+                toDoIndexPath = indexPath
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5

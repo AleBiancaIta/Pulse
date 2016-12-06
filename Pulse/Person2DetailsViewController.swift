@@ -22,6 +22,9 @@ class Person2DetailsViewController: UIViewController {
     var personManagerId: String?
     var userPersonId: String?
     
+    var toDoIndexPath: IndexPath? = nil
+    var notesIndexPath: IndexPath? = nil
+    
     var isPersonManager: Bool = false
     
     fileprivate let parseClient = ParseClient.sharedInstance()
@@ -85,10 +88,30 @@ class Person2DetailsViewController: UIViewController {
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             //view.frame.size.height = UIScreen.main.bounds.height - keyboardSize.height - 64
-            if view.frame.origin.y != 0 {
-                view.frame.origin.y = 0
+            
+            // Only need to move keyboard if bottom fields are being edited
+            // Currently, the only cards that activate keyboard are ToDo and Notes
+            // Since Info is always the top, no need to move view
+            if let toDoIndexPath = toDoIndexPath {
+                let rectInSuperview = tableView.convert(tableView.rectForRow(at: toDoIndexPath), to: tableView.superview)
+                if rectInSuperview.origin.y > keyboardSize.height {
+                    if view.frame.origin.y != 0 {
+                        view.frame.origin.y = 0
+                    }
+                    view.frame.origin.y -= keyboardSize.height - 64 - 44
+                } else if toDoIndexPath.section == selectedCards.count - 1 {
+                    view.frame.origin.y -= keyboardSize.height - 44
+                }
             }
-            view.frame.origin.y -= keyboardSize.height - 64*2
+            if let notesIndexPath = notesIndexPath {
+                let rectInSuperview = tableView.convert(tableView.rectForRow(at: notesIndexPath), to: tableView.superview)
+                if rectInSuperview.origin.y > keyboardSize.height {
+                    if view.frame.origin.y != 0 {
+                        view.frame.origin.y = 0
+                    }
+                    view.frame.origin.y -= keyboardSize.height - 64 - 44
+                }
+            }
         }
     }
     
@@ -264,6 +287,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 return cell
 
             case "d":
+                toDoIndexPath = indexPath
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
@@ -304,6 +328,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 return cell
                 
             case "n":
+                notesIndexPath = indexPath
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NotesContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
