@@ -376,23 +376,38 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-1N-ygW">
-                                        <rect key="frame" x="104" y="35" width="22" height="22"/>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-1N-ygW">
+                                        <rect key="frame" x="96" y="31" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="7gm-PM-nSE"/>
+                                            <constraint firstAttribute="height" constant="18" id="x4L-GQ-c8f"/>
+                                        </constraints>
                                         <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="Info"/>
                                         <connections>
                                             <action selector="onSurvey1InfoButton:" destination="d9x-k4-hXl" eventType="touchUpInside" id="ZXq-5a-rA0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKn-d4-6Jq">
-                                        <rect key="frame" x="118" y="74" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKn-d4-6Jq">
+                                        <rect key="frame" x="110" y="70" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="18" id="hQ1-WE-lfs"/>
+                                            <constraint firstAttribute="height" constant="18" id="zJf-cA-HdI"/>
+                                        </constraints>
                                         <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="Info"/>
                                         <connections>
                                             <action selector="onSurvey2InfoButton:" destination="d9x-k4-hXl" eventType="touchUpInside" id="50G-zU-IdE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfa-fD-EvC">
-                                        <rect key="frame" x="97" y="113" width="22" height="22"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfa-fD-EvC">
+                                        <rect key="frame" x="89" y="109" width="18" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="q4h-uE-Xyg"/>
+                                            <constraint firstAttribute="width" constant="18" id="wsZ-q8-KU5"/>
+                                        </constraints>
                                         <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" image="Info"/>
                                         <connections>
                                             <action selector="onSurvey3InfoButton:" destination="d9x-k4-hXl" eventType="touchUpInside" id="hij-y4-DXm"/>
                                         </connections>
@@ -410,15 +425,15 @@
                                     <constraint firstItem="1Pp-O7-YW3" firstAttribute="centerY" secondItem="IoQ-E7-yce" secondAttribute="centerY" id="Bxc-XE-rVG"/>
                                     <constraint firstItem="YAl-iX-tKQ" firstAttribute="top" secondItem="c9K-Aw-fPS" secondAttribute="bottom" constant="8" id="DNK-ip-3tw"/>
                                     <constraint firstItem="vVa-Mi-DH4" firstAttribute="top" secondItem="1Pp-O7-YW3" secondAttribute="bottom" constant="8" id="DU7-Bd-Q8u"/>
-                                    <constraint firstItem="aKn-d4-6Jq" firstAttribute="centerY" secondItem="yJH-GV-gpy" secondAttribute="centerY" id="IHW-6n-HMM"/>
+                                    <constraint firstItem="aKn-d4-6Jq" firstAttribute="centerY" secondItem="yJH-GV-gpy" secondAttribute="centerY" constant="-6" id="IHW-6n-HMM"/>
                                     <constraint firstItem="vVa-Mi-DH4" firstAttribute="centerY" secondItem="yJH-GV-gpy" secondAttribute="centerY" id="IMl-4G-rKz"/>
-                                    <constraint firstItem="CEs-1N-ygW" firstAttribute="centerY" secondItem="IoQ-E7-yce" secondAttribute="centerY" id="JMu-CW-R1X"/>
+                                    <constraint firstItem="CEs-1N-ygW" firstAttribute="centerY" secondItem="IoQ-E7-yce" secondAttribute="centerY" constant="-6" id="JMu-CW-R1X"/>
                                     <constraint firstItem="4lU-d7-2kO" firstAttribute="centerX" secondItem="vcJ-Am-Isl" secondAttribute="centerX" id="M4X-dV-aR6"/>
                                     <constraint firstItem="bs9-ae-7Tg" firstAttribute="centerY" secondItem="88e-j7-Wg2" secondAttribute="centerY" id="M5k-eT-kZJ"/>
                                     <constraint firstItem="vVa-Mi-DH4" firstAttribute="leading" secondItem="4lU-d7-2kO" secondAttribute="trailing" constant="8" id="MwN-O7-o1K"/>
                                     <constraint firstItem="1Pp-O7-YW3" firstAttribute="centerX" secondItem="hqC-Yp-mda" secondAttribute="centerX" id="PNA-WL-qiV"/>
                                     <constraint firstItem="br9-2U-0hb" firstAttribute="centerY" secondItem="IoQ-E7-yce" secondAttribute="centerY" id="PTB-5K-VTj"/>
-                                    <constraint firstItem="yfa-fD-EvC" firstAttribute="centerY" secondItem="88e-j7-Wg2" secondAttribute="centerY" id="PkF-c9-Mih"/>
+                                    <constraint firstItem="yfa-fD-EvC" firstAttribute="centerY" secondItem="88e-j7-Wg2" secondAttribute="centerY" constant="-6" id="PkF-c9-Mih"/>
                                     <constraint firstAttribute="trailing" secondItem="vVa-Mi-DH4" secondAttribute="trailing" constant="32" id="PlB-72-Ta3"/>
                                     <constraint firstItem="vVa-Mi-DH4" firstAttribute="centerX" secondItem="hqC-Yp-mda" secondAttribute="centerX" id="QE5-s4-BVI"/>
                                     <constraint firstItem="c9K-Aw-fPS" firstAttribute="top" secondItem="vGT-Gl-hcf" secondAttribute="top" constant="8" id="QpU-6m-o4j"/>
@@ -426,13 +441,13 @@
                                     <constraint firstItem="pXO-Oo-lDx" firstAttribute="centerY" secondItem="yJH-GV-gpy" secondAttribute="centerY" id="TCo-hf-XG1"/>
                                     <constraint firstItem="yJH-GV-gpy" firstAttribute="leading" secondItem="vGT-Gl-hcf" secondAttribute="leading" constant="16" id="UIw-5i-sRF"/>
                                     <constraint firstItem="pXO-Oo-lDx" firstAttribute="top" secondItem="YAl-iX-tKQ" secondAttribute="bottom" constant="8" id="Yyw-Rs-iBh"/>
-                                    <constraint firstItem="yfa-fD-EvC" firstAttribute="leading" secondItem="88e-j7-Wg2" secondAttribute="trailing" constant="8" id="Z3z-dV-diC"/>
+                                    <constraint firstItem="yfa-fD-EvC" firstAttribute="leading" secondItem="88e-j7-Wg2" secondAttribute="trailing" id="Z3z-dV-diC"/>
                                     <constraint firstAttribute="trailing" secondItem="Rbg-7T-sDt" secondAttribute="trailing" constant="32" id="ZHf-dU-WO6"/>
                                     <constraint firstItem="88e-j7-Wg2" firstAttribute="leading" secondItem="vGT-Gl-hcf" secondAttribute="leading" constant="16" id="anv-oZ-Yr3"/>
                                     <constraint firstItem="Rbg-7T-sDt" firstAttribute="centerY" secondItem="88e-j7-Wg2" secondAttribute="centerY" id="bM4-GF-OWE"/>
-                                    <constraint firstItem="CEs-1N-ygW" firstAttribute="leading" secondItem="IoQ-E7-yce" secondAttribute="trailing" constant="8" id="bZU-Ol-j0s"/>
+                                    <constraint firstItem="CEs-1N-ygW" firstAttribute="leading" secondItem="IoQ-E7-yce" secondAttribute="trailing" id="bZU-Ol-j0s"/>
                                     <constraint firstAttribute="height" constant="150" id="cS2-5Y-f81"/>
-                                    <constraint firstItem="aKn-d4-6Jq" firstAttribute="leading" secondItem="yJH-GV-gpy" secondAttribute="trailing" constant="8" id="eLY-XD-ock"/>
+                                    <constraint firstItem="aKn-d4-6Jq" firstAttribute="leading" secondItem="yJH-GV-gpy" secondAttribute="trailing" id="eLY-XD-ock"/>
                                     <constraint firstAttribute="trailing" secondItem="1Pp-O7-YW3" secondAttribute="trailing" constant="32" id="ecT-jF-b11"/>
                                     <constraint firstItem="bs9-ae-7Tg" firstAttribute="centerX" secondItem="c9K-Aw-fPS" secondAttribute="centerX" id="ecV-rt-cnV"/>
                                     <constraint firstItem="Rbg-7T-sDt" firstAttribute="leading" secondItem="NQS-Sw-PfH" secondAttribute="trailing" constant="8" id="fUj-yP-opH"/>
@@ -539,4 +554,7 @@ Great: Team member feels great!</string>
             <point key="canvasLocation" x="1877.5999999999999" y="464.6176911544228"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Info" width="60" height="60"/>
+    </resources>
 </document>
