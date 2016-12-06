@@ -433,7 +433,8 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
                     cell.firstRow = false
                     cell.selectedPerson = teamMember
                 } else { // New meeting coming from Dashboard
-                    cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                    //cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                    cell.isUserInteractionEnabled = true
                     cell.firstRow = true // only applies to new user with not yet selected team member (show carrot or not)
                     if let selectedPerson = personRowSelected {
                         cell.selectedPerson = teamMembers[selectedPerson]
@@ -463,12 +464,16 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
         
         if indexPath.section == 0 && !(isExistingMeeting!) && (teamMember == nil) {
             if isPersonExpanded { // need to collapse
-                personRowSelected = indexPath.row - 1
+                if indexPath.row > 0 {
+                    personRowSelected = indexPath.row - 1
+                }
                 isPersonExpanded = !isPersonExpanded
             } else { // need to expand
                 isPersonExpanded = !isPersonExpanded
             }
             teamListTableView.reloadData()
+        } else {
+            debugPrint("it comes here")
         }
     }
     
