@@ -119,7 +119,8 @@ extension TeamListViewController: TeamViewDataSourceDelegate {
     func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, at indexPath: IndexPath) {
         deletedPersonIndexPath = indexPath
         let personToDelete = dataSource.getSelectedPersonObjectAt(indexPath: indexPath)
-        confirmDelete(person: personToDelete!)
+        //confirmDelete(person: personToDelete!)
+        handleDeletingPerson()
     }
     
     func teamViewDataSource(_ teamViewDataSource: TeamViewDataSource, surveyButtonTap survey: PFObject) {

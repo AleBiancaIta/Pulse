@@ -475,7 +475,8 @@ extension TodoViewController: UITableViewDataSource, UITableViewDelegate {
             if editingStyle == .delete {
                 deletedItemIndexPath = indexPath
                 let todoItemToDelete = todoItems[indexPath.row]
-                confirmDelete(todoItem: todoItemToDelete)
+                //confirmDelete(todoItem: todoItemToDelete)
+                handleDeletingItem()
             }
         default:
             // do nothing
