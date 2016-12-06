@@ -64,17 +64,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ezn-fm-fA5">
-                                <rect key="frame" x="214" y="9" width="145" height="29"/>
-                                <segments>
-                                    <segment title="Team"/>
-                                    <segment title="Company"/>
-                                </segments>
-                                <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
-                                <connections>
-                                    <action selector="onSegmentedControlChange:" destination="eWK-lS-6NH" eventType="valueChanged" id="eaU-uh-JOb"/>
-                                </connections>
-                            </segmentedControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="VGS-cs-X4k" firstAttribute="top" secondItem="E2n-X7-jUQ" secondAttribute="bottom" constant="8" id="3yu-re-CqZ"/>
@@ -84,11 +73,9 @@
                             <constraint firstItem="ZQg-9M-sTy" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="7dD-is-Y4B"/>
                             <constraint firstItem="kZN-RS-gWN" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="9x9-1n-1rh"/>
                             <constraint firstItem="sjY-oB-iX6" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="24" id="BJj-oU-Rwg"/>
-                            <constraint firstAttribute="trailing" secondItem="Ezn-fm-fA5" secondAttribute="trailing" constant="16" id="BkA-hX-CAG"/>
                             <constraint firstItem="E2n-X7-jUQ" firstAttribute="leading" secondItem="nqc-DF-Fg9" secondAttribute="leading" constant="8" id="D0q-ed-Pkg"/>
                             <constraint firstAttribute="trailing" secondItem="sjY-oB-iX6" secondAttribute="trailing" constant="24" id="EQa-7j-HS2"/>
                             <constraint firstItem="Hci-68-o5z" firstAttribute="top" secondItem="NQT-G4-Nlh" secondAttribute="bottom" constant="4" id="Oh6-wQ-gmx"/>
-                            <constraint firstItem="sjY-oB-iX6" firstAttribute="top" secondItem="Ezn-fm-fA5" secondAttribute="bottom" constant="8" id="ZL0-GB-kHo"/>
                             <constraint firstItem="kZN-RS-gWN" firstAttribute="top" secondItem="VGS-cs-X4k" secondAttribute="bottom" constant="4" id="dXg-Va-nbL"/>
                             <constraint firstItem="NQT-G4-Nlh" firstAttribute="top" secondItem="kZN-RS-gWN" secondAttribute="bottom" constant="8" id="hBB-B5-ydo"/>
                             <constraint firstItem="E2n-X7-jUQ" firstAttribute="top" secondItem="sjY-oB-iX6" secondAttribute="bottom" constant="4" id="iE8-s8-ogy"/>
@@ -105,7 +92,6 @@
                         <outlet property="chart1" destination="E2n-X7-jUQ" id="8bP-Ic-E5a"/>
                         <outlet property="chart2" destination="kZN-RS-gWN" id="VjY-Rj-0wJ"/>
                         <outlet property="chart3" destination="Hci-68-o5z" id="jpg-fy-4Qi"/>
-                        <outlet property="chartSegmentedControl" destination="Ezn-fm-fA5" id="8Kn-kp-h5d"/>
                         <outlet property="chartTitleLabel" destination="ZQg-9M-sTy" id="aAO-RZ-1EU"/>
                     </connections>
                 </viewController>

@@ -9,6 +9,7 @@
 import Parse
 import DSBarChart
 import UIKit
+import HMSegmentedControl
 
 class GraphViewController: UIViewController {
 
@@ -18,7 +19,7 @@ class GraphViewController: UIViewController {
     @IBOutlet weak var chart2: UIView!
     @IBOutlet weak var chart3: UIView!
     
-    @IBOutlet weak var chartSegmentedControl: UISegmentedControl!
+    //@IBOutlet weak var chartSegmentedControl: UISegmentedControl!
     
     var barChart1: DSBarChart?
     var barChart2: DSBarChart?
@@ -42,8 +43,23 @@ class GraphViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        chartSegmentedControl.layer.cornerRadius = 5
+        //chartSegmentedControl.layer.cornerRadius = 5
         loadChartForCompany()
+        configureCustomSegmentedControl()
+    }
+    
+    fileprivate func configureCustomSegmentedControl() {
+        let control = HMSegmentedControl(sectionTitles: ["Team", "Company"])
+        control?.frame = CGRect(x: 180, y: 9, width: 180, height: 30)
+        control?.backgroundColor = UIColor.clear
+        control?.selectionIndicatorLocation = .down
+        control?.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.pulseAccentColor(), NSFontAttributeName : UIFont(name: "Helvetica Neue", size: 16.0)!]
+        control?.selectedTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.pulseLightPrimaryColor()]
+        control?.selectionStyle = .fullWidthStripe
+        control?.selectionIndicatorHeight = 2.0
+        control?.selectionIndicatorColor = UIColor.pulseAccentColor()
+        control?.addTarget(self, action: #selector(onControlChange(_:)), for: UIControlEvents.valueChanged)
+        self.view.addSubview(control!)
     }
     
     // isCompany == true, load chart for whole company
@@ -258,6 +274,7 @@ class GraphViewController: UIViewController {
         return 296 + 80 + 8
     }
 
+    /*
     @IBAction func onSegmentedControlChange(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
@@ -269,5 +286,19 @@ class GraphViewController: UIViewController {
         default:
             break
         }
+    }*/
+    
+    @objc func onControlChange(_ sender: HMSegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            isCompany = false
+            loadChartForCompany()
+        case 1:
+            isCompany = true
+            loadChartForCompany()
+        default:
+            break
+        }
     }
+    
 }
