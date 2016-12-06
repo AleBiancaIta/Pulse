@@ -472,9 +472,7 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
                 isPersonExpanded = !isPersonExpanded
             }
             teamListTableView.reloadData()
-        } else {
-            debugPrint("it comes here")
-        }
+        } 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

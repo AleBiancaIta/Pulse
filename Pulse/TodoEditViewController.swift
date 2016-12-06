@@ -203,7 +203,8 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
                 cell.firstRow = true
-                cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                //cell.isUserInteractionEnabled = isPersonExpanded ? false : true
+                cell.isUserInteractionEnabled = true
                 
                 if personRowSelected == nil {
                     if let personId = todoItem[ObjectKeys.ToDo.personId] as? String {
@@ -238,7 +239,9 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 1 {
             if isPersonExpanded { // need to collapse
-                personRowSelected = indexPath.row - 1
+                if indexPath.row > 0 {
+                    personRowSelected = indexPath.row - 1
+                }
                 isPersonExpanded = !isPersonExpanded
             } else { // need to expand
                 isPersonExpanded = !isPersonExpanded
@@ -282,7 +285,7 @@ extension TodoEditViewController: TodoEditTextCellDelegate {
 extension TodoEditViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popViewController(animated: true)
         return true
     }
     
