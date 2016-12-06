@@ -69,6 +69,7 @@ class TodoViewController: UIViewController {
         
         UIExtensions.gradientBackgroundFor(view: view)
         tableView.layer.cornerRadius = 5
+        tableView.isMultipleTouchEnabled = false
         
         registerCellNibs()
         configureRowHeight()

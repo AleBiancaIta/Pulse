@@ -27,6 +27,7 @@ class TeamListViewController: UIViewController {
         tableView.register(UINib(nibName: "TeamTableViewCell", bundle: nil), forCellReuseIdentifier: CellReuseIdentifier.Team.teamListCell)
         tableView.delegate = self
         tableView.layer.cornerRadius = 5
+        tableView.isMultipleTouchEnabled = false
         
         //dataSource.delegate = self
         

@@ -51,6 +51,7 @@ class MeetingsViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.layer.cornerRadius = 5
+        tableView.isMultipleTouchEnabled = false
         
         //tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
         tableView.register(UINib(nibName: "MeetingListCell", bundle: nil), forCellReuseIdentifier: "MeetingListCell")

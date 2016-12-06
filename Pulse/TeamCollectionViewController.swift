@@ -25,6 +25,7 @@ class TeamCollectionViewController: UIViewController {
         collectionView.register(UINib(nibName: "TeamCollectionCell", bundle: nil), forCellWithReuseIdentifier: CellReuseIdentifier.Team.teamCollectionCell)
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.clear
+        collectionView.isMultipleTouchEnabled = false
         subscribeToNotifications()
 //        dataSource.delegate = self
 //        dataSource.printTeamMembers()
