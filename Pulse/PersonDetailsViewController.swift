@@ -179,7 +179,7 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func setupViews() {
-        lastNameTextField.placeholder = isEditing ? "Last Name" : ""
+        lastNameTextField.isHidden = isEditing ? false : (lastNameTextField.text == "" ? true : false)
         
 		if isEditing {
 			UIExtensions.setupDarkViewFor(textField: firstNameTextField)
