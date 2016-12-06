@@ -24,6 +24,8 @@
 		431AF1381DEA9043007B8B8A /* MeetingSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */; };
 		431AF13D1DEA9368007B8B8A /* MeetingPersonListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */; };
 		431AF13E1DEA9368007B8B8A /* MeetingPersonListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */; };
+		432B2DC51DF6238F008C0533 /* MeetingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 432B2DC31DF6238F008C0533 /* MeetingListCell.swift */; };
+		432B2DC61DF6238F008C0533 /* MeetingListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 432B2DC41DF6238F008C0533 /* MeetingListCell.xib */; };
 		437903A11DE5069600945C63 /* TodoEditPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */; };
 		437903A21DE5069600945C63 /* TodoEditPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437903A01DE5069600945C63 /* TodoEditPersonCell.xib */; };
 		437903A51DE51BB400945C63 /* TodoEditTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437903A31DE51BB400945C63 /* TodoEditTextCell.swift */; };
@@ -102,6 +104,8 @@
 		431AF1371DEA9043007B8B8A /* MeetingSurveyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingSurveyViewController.swift; sourceTree = "<group>"; };
 		431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingPersonListCell.swift; sourceTree = "<group>"; };
 		431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingPersonListCell.xib; sourceTree = "<group>"; };
+		432B2DC31DF6238F008C0533 /* MeetingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingListCell.swift; sourceTree = "<group>"; };
+		432B2DC41DF6238F008C0533 /* MeetingListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MeetingListCell.xib; sourceTree = "<group>"; };
 		4379039F1DE5069600945C63 /* TodoEditPersonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditPersonCell.swift; sourceTree = "<group>"; };
 		437903A01DE5069600945C63 /* TodoEditPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TodoEditPersonCell.xib; sourceTree = "<group>"; };
 		437903A31DE51BB400945C63 /* TodoEditTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoEditTextCell.swift; sourceTree = "<group>"; };
@@ -265,6 +269,8 @@
 				431804AC1DD7D0F000B279C6 /* SettingsHeaderCell.swift */,
 				712FA7F81DE2332300762EB6 /* PhotoImageView.xib */,
 				712FA7FA1DE233A600762EB6 /* PhotoImageView.swift */,
+				432B2DC31DF6238F008C0533 /* MeetingListCell.swift */,
+				432B2DC41DF6238F008C0533 /* MeetingListCell.xib */,
 				431AF13B1DEA9368007B8B8A /* MeetingPersonListCell.swift */,
 				431AF13C1DEA9368007B8B8A /* MeetingPersonListCell.xib */,
 				71D471E31DEEC40900003524 /* PhoneTextFieldDelegate.swift */,
@@ -432,6 +438,7 @@
 				67D8D6241DD4E28900B6DE19 /* CustomTextCell.xib in Resources */,
 				67CE17391DEFE041008AE710 /* CardManagementCell.xib in Resources */,
 				437DE0581DD936C200B08988 /* Team.storyboard in Resources */,
+				432B2DC61DF6238F008C0533 /* MeetingListCell.xib in Resources */,
 				67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */,
 				67A2761D1DE684D500ED73B0 /* Dashboard.storyboard in Resources */,
 				676CEF471DE29429000FA406 /* Notes.storyboard in Resources */,
@@ -539,6 +546,7 @@
 				712FA7FB1DE233A600762EB6 /* PhotoImageView.swift in Sources */,
 				67D8D64A1DD56D9800B6DE19 /* Constants.swift in Sources */,
 				431804AF1DD7F2CC00B279C6 /* Person.swift in Sources */,
+				432B2DC51DF6238F008C0533 /* MeetingListCell.swift in Sources */,
 				437DE05E1DD9433E00B08988 /* TeamViewDataSource.swift in Sources */,
 				676CEF441DE26FC4000FA406 /* MeetingDetailsSelectionViewController.swift in Sources */,
 				437DE0641DD976F000B08988 /* ToDo.swift in Sources */,
