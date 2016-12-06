@@ -39,13 +39,13 @@ class GraphViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCustomSegmentedControl()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //chartSegmentedControl.layer.cornerRadius = 5
         loadChartForCompany()
-        configureCustomSegmentedControl()
     }
     
     fileprivate func configureCustomSegmentedControl() {
