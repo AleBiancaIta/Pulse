@@ -53,7 +53,7 @@ class MeetingsViewController: UIViewController {
         tableView.layer.cornerRadius = 5
         
         //tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
-        tableView.register(UINib(nibName: "MeetingListCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
+        tableView.register(UINib(nibName: "MeetingListCell", bundle: nil), forCellReuseIdentifier: "MeetingListCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +132,7 @@ class MeetingsViewController: UIViewController {
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + displayed rows height - status bar height)
         //return 95 + (56 * 3) - 20
-        return 95 + (56 * 3) - 20 + 30
+        return 95 + (88 * 3) - 20
     }
     
     // MARK: - IBAction
@@ -177,7 +177,7 @@ extension MeetingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if 0 < meetings.count {
             //let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! MeetingListCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingListCell", for: indexPath) as! MeetingListCell
             //selectAllButton.isHidden = false
             
             let formatter = DateFormatter()
@@ -257,7 +257,8 @@ extension MeetingsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 56
+        //return 56
+        return 88
     }
 }
 

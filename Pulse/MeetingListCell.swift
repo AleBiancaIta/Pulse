@@ -14,7 +14,7 @@ class MeetingListCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var submessageLabel: UILabel!
     @IBOutlet weak var cellImageView: UIImageView!
-    @IBOutlet weak var surveyView: UIView!
+    //@IBOutlet weak var surveyView: UIView!
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!
     @IBOutlet weak var surveyValue3Button: UIButton!
