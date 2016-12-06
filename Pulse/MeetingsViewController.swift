@@ -52,7 +52,8 @@ class MeetingsViewController: UIViewController {
         tableView.delegate = self
         tableView.layer.cornerRadius = 5
         
-        tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
+        //tableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
+        tableView.register(UINib(nibName: "MeetingListCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -130,7 +131,8 @@ class MeetingsViewController: UIViewController {
     
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + displayed rows height - status bar height)
-        return 95 + (56 * 3) - 20
+        //return 95 + (56 * 3) - 20
+        return 95 + (56 * 3) - 20 + 30
     }
     
     // MARK: - IBAction
@@ -174,7 +176,8 @@ class MeetingsViewController: UIViewController {
 extension MeetingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if 0 < meetings.count {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+            //let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! MeetingListCell
             //selectAllButton.isHidden = false
             
             let formatter = DateFormatter()
@@ -191,9 +194,19 @@ extension MeetingsViewController: UITableViewDataSource {
                         cell.message = firstName != lastName ? "\(firstName) \(lastName)" : firstName
                         cell.submessage = "\(meetingDate)"
                         cell.imageName = "Clipboard"
+                        
+                        self.parseClient.fetchSurveyFor(surveyId: self.meetings[indexPath.row].surveyId, isAscending: nil, orderBy: nil) { (survey: PFObject?, error: Error?) in
+                            if let error = error {
+                                debugPrint("Failed to fetch survey, error: \(error.localizedDescription)")
+                                cell.survey = nil
+                            } else {
+                                cell.survey = survey
+                            }
+                        }
                     }
                 }
             }
+            
             cell.accessoryType = .disclosureIndicator
             return cell
         }

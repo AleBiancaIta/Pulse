@@ -105,7 +105,7 @@ class GraphViewController: UIViewController {
                                 if let error = error {
                                     print(error.localizedDescription)
                                 } else {
-                                    debugPrint("in graph, members: \(members)")
+                                    //debugPrint("in graph, members: \(members)")
                                     if let members = members, members.count > 0 {
                                         for member in members {
                                             if let personId = member.objectId,
@@ -113,11 +113,11 @@ class GraphViewController: UIViewController {
                                                 self.teamMemberIds.append(personId)
                                             }
                                         }
-                                        debugPrint("in graph, teamMemberIds: \(self.teamMemberIds)")
+                                        //debugPrint("in graph, teamMemberIds: \(self.teamMemberIds)")
                                         
                                         for post in posts {
                                             if let personId = post["personId"] as? String {
-                                                debugPrint("in graph, personId: \(personId)")
+                                                //debugPrint("in graph, personId: \(personId)")
                                                 if !self.personIdValues.contains(personId) &&
                                                     self.teamMemberIds.contains(personId) {
                                                     self.survey1Values.append(post["surveyValueId1"] as! Float)
@@ -127,7 +127,7 @@ class GraphViewController: UIViewController {
                                                 }
                                             }
                                         }
-                                        debugPrint("personIdValues: \(self.personIdValues)")
+                                        //debugPrint("personIdValues: \(self.personIdValues)")
                                         self.setupCharts()
                                     } else {
                                         debugPrint("Fetch members returned 0 members")
