@@ -245,17 +245,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="31J-w2-Wg5">
-                                <rect key="frame" x="8" y="98" width="359" height="110"/>
+                                <rect key="frame" x="8" y="98" width="343" height="110"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="PM9-8X-Gda"/>
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MeetingPersonListCell" rowHeight="44" id="VcW-m1-s90" customClass="MeetingPersonListCell" customModule="Pulse" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="359" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="343" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VcW-m1-s90" id="MTG-jb-GSE">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -377,7 +377,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-1N-ygW">
-                                        <rect key="frame" x="96" y="31" width="18" height="18"/>
+                                        <rect key="frame" x="95" y="31" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="7gm-PM-nSE"/>
                                             <constraint firstAttribute="height" constant="18" id="x4L-GQ-c8f"/>
@@ -389,7 +389,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKn-d4-6Jq">
-                                        <rect key="frame" x="110" y="70" width="18" height="18"/>
+                                        <rect key="frame" x="109" y="70" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="18" id="hQ1-WE-lfs"/>
                                             <constraint firstAttribute="height" constant="18" id="zJf-cA-HdI"/>
@@ -401,7 +401,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfa-fD-EvC">
-                                        <rect key="frame" x="89" y="109" width="18" height="18"/>
+                                        <rect key="frame" x="88" y="109" width="18" height="18"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="18" id="q4h-uE-Xyg"/>
                                             <constraint firstAttribute="width" constant="18" id="wsZ-q8-KU5"/>
@@ -441,13 +441,13 @@
                                     <constraint firstItem="pXO-Oo-lDx" firstAttribute="centerY" secondItem="yJH-GV-gpy" secondAttribute="centerY" id="TCo-hf-XG1"/>
                                     <constraint firstItem="yJH-GV-gpy" firstAttribute="leading" secondItem="vGT-Gl-hcf" secondAttribute="leading" constant="16" id="UIw-5i-sRF"/>
                                     <constraint firstItem="pXO-Oo-lDx" firstAttribute="top" secondItem="YAl-iX-tKQ" secondAttribute="bottom" constant="8" id="Yyw-Rs-iBh"/>
-                                    <constraint firstItem="yfa-fD-EvC" firstAttribute="leading" secondItem="88e-j7-Wg2" secondAttribute="trailing" id="Z3z-dV-diC"/>
+                                    <constraint firstItem="yfa-fD-EvC" firstAttribute="leading" secondItem="88e-j7-Wg2" secondAttribute="trailing" constant="-1" id="Z3z-dV-diC"/>
                                     <constraint firstAttribute="trailing" secondItem="Rbg-7T-sDt" secondAttribute="trailing" constant="32" id="ZHf-dU-WO6"/>
                                     <constraint firstItem="88e-j7-Wg2" firstAttribute="leading" secondItem="vGT-Gl-hcf" secondAttribute="leading" constant="16" id="anv-oZ-Yr3"/>
                                     <constraint firstItem="Rbg-7T-sDt" firstAttribute="centerY" secondItem="88e-j7-Wg2" secondAttribute="centerY" id="bM4-GF-OWE"/>
-                                    <constraint firstItem="CEs-1N-ygW" firstAttribute="leading" secondItem="IoQ-E7-yce" secondAttribute="trailing" id="bZU-Ol-j0s"/>
+                                    <constraint firstItem="CEs-1N-ygW" firstAttribute="leading" secondItem="IoQ-E7-yce" secondAttribute="trailing" constant="-1" id="bZU-Ol-j0s"/>
                                     <constraint firstAttribute="height" constant="150" id="cS2-5Y-f81"/>
-                                    <constraint firstItem="aKn-d4-6Jq" firstAttribute="leading" secondItem="yJH-GV-gpy" secondAttribute="trailing" id="eLY-XD-ock"/>
+                                    <constraint firstItem="aKn-d4-6Jq" firstAttribute="leading" secondItem="yJH-GV-gpy" secondAttribute="trailing" constant="-1" id="eLY-XD-ock"/>
                                     <constraint firstAttribute="trailing" secondItem="1Pp-O7-YW3" secondAttribute="trailing" constant="32" id="ecT-jF-b11"/>
                                     <constraint firstItem="bs9-ae-7Tg" firstAttribute="centerX" secondItem="c9K-Aw-fPS" secondAttribute="centerX" id="ecV-rt-cnV"/>
                                     <constraint firstItem="Rbg-7T-sDt" firstAttribute="leading" secondItem="NQS-Sw-PfH" secondAttribute="trailing" constant="8" id="fUj-yP-opH"/>
@@ -516,7 +516,7 @@ Great: Team member feels great!</string>
                             <constraint firstItem="3tu-ox-GTL" firstAttribute="top" secondItem="hoo-jW-nQF" secondAttribute="bottom" constant="8" id="LGL-Jj-xEv"/>
                             <constraint firstItem="DYg-c7-Dv4" firstAttribute="top" secondItem="AjZ-oZ-jSs" secondAttribute="bottom" id="NYm-8J-INo"/>
                             <constraint firstItem="Y0E-XQ-7rj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fgC-ap-NLz" secondAttribute="leading" constant="16" id="PFJ-fU-RLN"/>
-                            <constraint firstAttribute="trailing" secondItem="31J-w2-Wg5" secondAttribute="trailing" constant="8" id="SSW-MB-4NK"/>
+                            <constraint firstAttribute="trailing" secondItem="31J-w2-Wg5" secondAttribute="trailing" constant="24" id="SSW-MB-4NK"/>
                             <constraint firstItem="31J-w2-Wg5" firstAttribute="leading" secondItem="fgC-ap-NLz" secondAttribute="leading" constant="8" id="XAE-MK-vZr"/>
                             <constraint firstItem="1tC-hC-vMF" firstAttribute="leading" secondItem="fgC-ap-NLz" secondAttribute="leading" constant="8" id="bwB-z3-iOg"/>
                             <constraint firstAttribute="trailing" secondItem="vGT-Gl-hcf" secondAttribute="trailing" id="cUa-Ca-faB"/>
