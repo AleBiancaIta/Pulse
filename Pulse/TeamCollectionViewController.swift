@@ -151,7 +151,20 @@ extension TeamCollectionViewController: TeamViewDataSourceDelegate {
                             self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to fetch survey person, error: \(error.localizedDescription)")
                         } else {
                             if let teamMember = teamMember {
-                                self.segueToMeetingDetailsVC(meeting: meeting, person: teamMember)
+                                
+                                // Cannot open meeting details for person if user is not their manager
+                                    if let managerId = teamMember["managerId"] as? String {
+                                    ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
+                                        if let error = error {
+                                            print(error.localizedDescription)
+                                        } else {
+                                            if let person = person, managerId == person.objectId {
+                                                self.segueToMeetingDetailsVC(meeting: meeting, person: teamMember)
+                                            }
+                                        }
+                                    }
+                                }
+                                
                             } else {
                                 self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Couldn't find the team member associated with survey")
                             }
