@@ -52,12 +52,22 @@ class TodoEditPersonCell: UITableViewCell {
             if firstRow! {
                 // Show down arrow
                 downArrowImageView.isHidden = false
-                downArrowImageView.image = UIImage(named: "DownArrow")
+                //downArrowImageView.image = UIImage(named: "DownArrow")
                 forLabel.isHidden = false
             } else {
                 // Hide down arrow
                 downArrowImageView.isHidden = true
                 forLabel.isHidden = true
+            }
+        }
+    }
+    
+    var isPersonExpanded: Bool? {
+        didSet {
+            if !(isPersonExpanded!) {
+                downArrowImageView.image = UIImage(named: "DownArrow")
+            } else {
+                downArrowImageView.image = UIImage(named: "UpArrow")
             }
         }
     }

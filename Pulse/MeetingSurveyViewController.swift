@@ -468,6 +468,7 @@ extension MeetingSurveyViewController: UITableViewDelegate, UITableViewDataSourc
                     //cell.isUserInteractionEnabled = isPersonExpanded ? false : true
                     cell.isUserInteractionEnabled = true
                     cell.firstRow = true // only applies to new user with not yet selected team member (show carrot or not)
+                    cell.isPersonExpanded = self.isPersonExpanded
                     if let selectedPerson = personRowSelected {
                         cell.selectedPerson = teamMembers[selectedPerson]
                     }

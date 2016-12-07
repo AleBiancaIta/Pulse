@@ -205,6 +205,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.firstRow = true
                 //cell.isUserInteractionEnabled = isPersonExpanded ? false : true
                 cell.isUserInteractionEnabled = true
+                cell.isPersonExpanded = self.isPersonExpanded
                 
                 if personRowSelected == nil {
                     if let personId = todoItem[ObjectKeys.ToDo.personId] as? String {
