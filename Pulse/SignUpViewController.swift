@@ -66,6 +66,13 @@ class SignUpViewController: UIViewController {
         emailTextField.becomeFirstResponder()
     }
     
+    // MARK: - deinit
+    
+    deinit {
+        debugPrint("SignUpViewController deinitialized")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Actions
     
     @IBAction func onSignUpButtonTap(_ sender: UIButton) {
@@ -300,7 +307,10 @@ extension SignUpViewController: UITextFieldDelegate {
 extension SignUpViewController: RKDropdownAlertDelegate {
     
     func dropdownAlertWasDismissed() -> Bool {
-        self.segueToDashboardVC()
+        self.dismiss(animated: true) {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Login"), object: self, userInfo: nil)
+        }
+        //self.segueToDashboardVC()
         return true
     }
     

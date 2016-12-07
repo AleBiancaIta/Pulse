@@ -39,6 +39,13 @@ class LoginViewController: UIViewController {
         usernameTextField.becomeFirstResponder()
     }
     
+    // MARK: - deinit
+    
+    deinit {
+        debugPrint("LoginViewController deinitialized")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Actions
     
     @IBAction func onLoginButtonTap(_ sender: UIButton) {
@@ -53,6 +60,8 @@ class LoginViewController: UIViewController {
     //        let forgetVC = ForgetPasswordViewController(nibName: "ForgetPasswordViewController", bundle: nil)
     //        self.present(forgetVC, animated: true, completion: nil)
     //    }
+    
+    // MARK: - Helpers
     
     fileprivate func loginToParse() {
         loginButton.isEnabled = false
@@ -76,16 +85,25 @@ class LoginViewController: UIViewController {
                         debugPrint("User logged in successfully")
                         SVProgressHUD.dismiss()
                         self.loginButton.isEnabled = true
-                        // Segue to Dashboard view controller
-                        let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
-                        let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
-                        self.present(dashboardNavVC, animated: true, completion: nil)
+                        self.dismiss(animated: true) {
+                            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Login"), object: self, userInfo: nil)
+                        }
+                        
+                        //self.segueToDashboardVC()
                     }
                 }
             }
         }
     }
+    
+    fileprivate func segueToDashboardVC() {
+        let storyboard = UIStoryboard.init(name: "Dashboard", bundle: nil)
+        let dashboardNavVC = storyboard.instantiateViewController(withIdentifier: StoryboardID.dashboardNavVC)
+        self.present(dashboardNavVC, animated: true, completion: nil)
+    }
 }
+
+// MARK: - UITextFieldDelegate
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

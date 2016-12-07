@@ -158,7 +158,7 @@ class TeamViewDataSource: NSObject {
                 debugPrint("Failed in fetching meetings: \(error.localizedDescription)")
                 completion(nil, error)
             } else {
-                debugPrint("Success in fetching meetings, \(meetings?.count)")
+                //debugPrint("Success in fetching meetings, \(meetings?.count)")
                 if let meetings = meetings, meetings.count > 0 {
                     let meeting = meetings[0]
                     
@@ -240,7 +240,7 @@ extension TeamViewDataSource: UITableViewDataSource {
                 debugPrint("Unable to fetch survey data: \(error.localizedDescription)")
                 cell.survey = nil
             } else {
-                debugPrint("survey is \(survey)")
+                //debugPrint("survey is \(survey)")
                 cell.survey = survey
             }
         }
@@ -277,7 +277,7 @@ extension TeamViewDataSource: UICollectionViewDataSource {
                 debugPrint("error: \(error.localizedDescription)")
                 cell.survey = nil
             } else {
-                debugPrint("survey is \(survey)")
+                //debugPrint("survey is \(survey)")
                 cell.survey = survey
             }
         }

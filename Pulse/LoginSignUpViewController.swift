@@ -26,6 +26,7 @@ class LoginSignUpViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController")
         let navController = UINavigationController(rootViewController: viewController)
+        navController.modalTransitionStyle = .flipHorizontal
         present(navController, animated: true, completion: nil)
     }
     
@@ -33,15 +34,21 @@ class LoginSignUpViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "SignupVC")
         let navController = UINavigationController(rootViewController: viewController)
+        navController.modalTransitionStyle = .flipHorizontal
         present(navController, animated: true, completion: nil)
     }
     
-//    @IBAction func onSignUpButtonTap(_ sender: UIButton) {
-//        let signUpVC = SignUpViewController(nibName: "SignUpViewController", bundle: nil)
-//        self.present(signUpVC, animated: true, completion: nil)
-//    }
+    // MARK: - deinit
     
-    
+    deinit {
+        debugPrint("LoginSignUpViewController deinitialized")
+    }
+}
+
+
+
+
+
     /*
     @IBAction func onSkipButtonTap(_ sender: UIButton) {
         // if first time login, get the device ID
@@ -77,4 +84,4 @@ class LoginSignUpViewController: UIViewController {
 //        
 
     }*/
-}
+

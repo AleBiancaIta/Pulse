@@ -53,6 +53,7 @@ class SettingsViewController: UIViewController {
     }
     
     // MARK: - Helpers
+    
     fileprivate func getCurrentPerson() {
         parseClient.getCurrentPerson { (person: PFObject?, error: Error?) in
             if let error = error {
@@ -69,8 +70,10 @@ class SettingsViewController: UIViewController {
         
     }
     
+    // MARK: - deinit
+    
     deinit {
-        print("SettingsViewController deinitialized")
+        debugPrint("SettingsViewController deinitialized")
     }
 }
 

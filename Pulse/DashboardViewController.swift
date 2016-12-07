@@ -121,6 +121,11 @@ class DashboardViewController: UIViewController {
         self.view.frame.origin.y = 64
     }
     
+    deinit {
+        debugPrint("SettingsViewController deinitialized")
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - IBAction
     
     func onManageCards() {
@@ -135,7 +140,7 @@ class DashboardViewController: UIViewController {
  
         let storyboard = UIStoryboard(name: "Login", bundle: nil)
         let settingsVC = storyboard.instantiateViewController(withIdentifier: "SettingsVC")
-        //settingsVC.modalTransitionStyle = .flipHorizontal
+        settingsVC.modalTransitionStyle = .flipHorizontal
         settingsVC.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
         let navController = UINavigationController(rootViewController: settingsVC)
         present(navController, animated: true, completion: nil)
@@ -198,6 +203,7 @@ class DashboardViewController: UIViewController {
             } else {
                 debugPrint("User log out successfully")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "Logout"), object: self, userInfo: nil)
+                //self.dismiss(animated: true, completion: nil)
                 //self.segueToStoryboard(id: StoryboardID.loginSignupVC)
             }
         }
