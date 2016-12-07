@@ -273,6 +273,7 @@ class PersonDetailsViewController: UIViewController {
 			}
 		})
 
+		SVProgressHUD.show()
 		let firstName = firstNameTextField.text!
 		let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
         lastNameTextField.text = firstName != lastName ? lastName : ""
@@ -303,6 +304,7 @@ class PersonDetailsViewController: UIViewController {
 						SVProgressHUD.dismiss()
 						NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Team.addTeamMemberSuccessful), object: self, userInfo: nil)
 					}
+					SVProgressHUD.dismiss()
 				}
 			}
 		})
