@@ -377,10 +377,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEs-1N-ygW">
-                                        <rect key="frame" x="95" y="31" width="18" height="18"/>
+                                        <rect key="frame" x="95" y="30" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="7gm-PM-nSE"/>
-                                            <constraint firstAttribute="height" constant="18" id="x4L-GQ-c8f"/>
+                                            <constraint firstAttribute="width" constant="20" id="7gm-PM-nSE"/>
+                                            <constraint firstAttribute="height" constant="20" id="x4L-GQ-c8f"/>
                                         </constraints>
                                         <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="Info"/>
@@ -389,10 +389,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKn-d4-6Jq">
-                                        <rect key="frame" x="109" y="70" width="18" height="18"/>
+                                        <rect key="frame" x="109" y="69" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="18" id="hQ1-WE-lfs"/>
-                                            <constraint firstAttribute="height" constant="18" id="zJf-cA-HdI"/>
+                                            <constraint firstAttribute="width" constant="20" id="hQ1-WE-lfs"/>
+                                            <constraint firstAttribute="height" constant="20" id="zJf-cA-HdI"/>
                                         </constraints>
                                         <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="Info"/>
@@ -401,10 +401,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfa-fD-EvC">
-                                        <rect key="frame" x="88" y="109" width="18" height="18"/>
+                                        <rect key="frame" x="88" y="108" width="20" height="20"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="q4h-uE-Xyg"/>
-                                            <constraint firstAttribute="width" constant="18" id="wsZ-q8-KU5"/>
+                                            <constraint firstAttribute="height" constant="20" id="q4h-uE-Xyg"/>
+                                            <constraint firstAttribute="width" constant="20" id="wsZ-q8-KU5"/>
                                         </constraints>
                                         <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <state key="normal" image="Info"/>
