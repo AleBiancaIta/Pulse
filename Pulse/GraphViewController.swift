@@ -34,7 +34,7 @@ class GraphViewController: UIViewController {
     var personIdValues: [String] = []
     var highLowValues = ["Poor", "Good", "Great"]
     
-    var teamMemberIds = [String]()
+    var teamMemberIds: [String] = []
     var isCompany = false
     
     override func viewDidLoad() {
@@ -72,12 +72,14 @@ class GraphViewController: UIViewController {
         survey1Values = []
         survey2Values = []
         survey3Values = []
+        teamMemberIds = []
         
         if isCompany {
             ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
                 if let person = person {
                     let query = PFQuery(className: "Survey")
                     query.whereKey("companyId", equalTo: person["companyId"])
+                    query.whereKeyDoesNotExist("deletedAt")
                     
                     // filter by last 30 days
                     var pastDate = Date() // this is current date
@@ -108,6 +110,7 @@ class GraphViewController: UIViewController {
                 if let person = person {
                     let query = PFQuery(className: "Survey")
                     query.whereKey("companyId", equalTo: person["companyId"])
+                    query.whereKeyDoesNotExist("deletedAt")
                     
                     // filter by last 30 days
                     var pastDate = Date() // this is current date

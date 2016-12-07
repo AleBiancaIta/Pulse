@@ -232,7 +232,7 @@ extension MeetingsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            // Update parse
+            // Update Meeting
             let query = PFQuery(className: "Meetings")
             let meeting = meetings[indexPath.row]
                if let meetingId = meeting.objectId {
@@ -253,6 +253,26 @@ extension MeetingsViewController: UITableViewDataSource {
                                 self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error deleting meeting, error: \(error.localizedDescription)")
                             } else {
                                 self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error deleting meeting")
+                            }
+                        }
+                    }
+                    
+                    // Update Survey
+                    if let surveyId = post["surveyId"] {
+                        let query = PFQuery(className: "Survey")
+                        query.whereKey("objectId", equalTo: surveyId)
+                        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                            if let posts = posts {
+                                let post = posts[0]
+                                post["deletedAt"] = Date()
+                                post.saveInBackground { (success: Bool, error: Error?) in
+                                    if success {
+                                        //self.ABIShowDropDownAlert(type: AlertTypes.success, title: "Success", message: "Successfully deleted meeting")
+                                        print("Successfully deleted survey")
+                                    } else {
+                                        print("Error deleting survey")
+                                    }
+                                }
                             }
                         }
                     }
