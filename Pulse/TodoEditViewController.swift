@@ -44,6 +44,11 @@ class TodoEditViewController: UIViewController {
         registerCellNibs()
         configureRowHeight()
         
+        UIExtensions.gradientBackgroundFor(view: view)
+        navigationController?.navigationBar.barStyle = .blackTranslucent
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
     }
     
@@ -194,6 +199,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
         switch EditCellTypes(rawValue: indexPath.section)! {
         case .text:
             let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditTextCell, for: indexPath) as! TodoEditTextCell
+            //cell.layer.backgroundColor = UIColor.clear.cgColor
             cell.todoItem = todoItem
             cell.delegate = self
             self.delegate = cell
@@ -202,6 +208,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
             switch indexPath.row {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
+                //cell.layer.backgroundColor = UIColor.clear.cgColor
                 cell.firstRow = true
                 //cell.isUserInteractionEnabled = isPersonExpanded ? false : true
                 cell.isUserInteractionEnabled = true
@@ -220,6 +227,7 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
                 return cell
             default:
                 let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Todo.todoEditPersonCell, for: indexPath) as! TodoEditPersonCell
+                //cell.layer.backgroundColor = UIColor.clear.cgColor
                 cell.firstRow = false
                 cell.isUserInteractionEnabled = true
                 cell.person = teamMembers[indexPath.row - 1]
@@ -252,11 +260,11 @@ extension TodoEditViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0.1
+        return 1
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
+        return 0.5
     }
 }
 
