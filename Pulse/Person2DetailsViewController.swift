@@ -156,7 +156,13 @@ class Person2DetailsViewController: UIViewController {
 	}
 
 	func onRightBarButtonTap(_ sender: UIBarButtonItem) {
-		personInfoViewController.onRightBarButtonTap(sender)
+        if let notesViewController = notesViewController,
+            let title = navigationItem.rightBarButtonItem?.title {
+            notesViewController.notesTextView.isUserInteractionEnabled = title == "Edit"
+            notesViewController.draftLabel.isHidden = title != "Edit"
+        }
+        
+        personInfoViewController.onRightBarButtonTap(sender)
 	}
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
