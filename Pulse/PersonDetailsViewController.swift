@@ -335,3 +335,23 @@ extension PersonDetailsViewController: RKDropdownAlertDelegate {
         return true
     }
 }
+
+extension PersonDetailsViewController : UITextFieldDelegate {
+
+	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+
+		textField.resignFirstResponder()
+
+		if textField == firstNameTextField {
+			lastNameTextField.becomeFirstResponder()
+		}
+		else if textField == lastNameTextField {
+			emailTextField.becomeFirstResponder()
+		}
+		else if textField == emailTextField {
+			phoneTextField.becomeFirstResponder()
+		}
+
+		return true
+	}
+}
