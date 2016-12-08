@@ -32,38 +32,13 @@ class ChangePasswordViewController: UIViewController {
         UIExtensions.setupViewFor(textField: confirmNewPasswordTextField)
         
         oldPasswordTextField.becomeFirstResponder()
+        configureTextFieldDelegate()
     }
 
     // MARK: - Actions
     
     @IBAction func onChangePasswordButtonTap(_ sender: UIButton) {
-        if validateEntry() {
-            
-            SVProgressHUD.show()
-            
-            // Re-login user to confirm they're entering the correct password
-            PFUser.logInWithUsername(inBackground: user.username!, password: oldPasswordTextField.text!) { (user: PFUser?, error: Error?) in
-                if let error = error {
-                    SVProgressHUD.dismiss()
-                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Your old password is incorrect: \(error.localizedDescription)")
-                } else {
-                    PFUser.current()?.password = self.newPasswordTextField.text!
-                    PFUser.current()?.saveInBackground { (success: Bool, error: Error?) in
-                        if success {
-                            SVProgressHUD.dismiss()
-                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully changed password", delegate: self)
-                        } else {
-                            SVProgressHUD.dismiss()
-                            if let error = error {
-                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error: \(error.localizedDescription)")
-                            } else {
-                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error")
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        changePassword()
     }
     
     // MARK: - Helpers
@@ -95,6 +70,42 @@ class ChangePasswordViewController: UIViewController {
         
         return true
     }
+    
+    fileprivate func changePassword() {
+        if validateEntry() {
+            
+            SVProgressHUD.show()
+            
+            // Re-login user to confirm they're entering the correct password
+            PFUser.logInWithUsername(inBackground: user.username!, password: oldPasswordTextField.text!) { (user: PFUser?, error: Error?) in
+                if let error = error {
+                    SVProgressHUD.dismiss()
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Your old password is incorrect: \(error.localizedDescription)")
+                } else {
+                    PFUser.current()?.password = self.newPasswordTextField.text!
+                    PFUser.current()?.saveInBackground { (success: Bool, error: Error?) in
+                        if success {
+                            SVProgressHUD.dismiss()
+                            self.ABIShowDropDownAlertWithDelegate(type: AlertTypes.success, title: "Success!", message: "Successfully changed password", delegate: self)
+                        } else {
+                            SVProgressHUD.dismiss()
+                            if let error = error {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error: \(error.localizedDescription)")
+                            } else {
+                                self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Changing password error")
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    fileprivate func configureTextFieldDelegate() {
+        oldPasswordTextField.delegate = self
+        newPasswordTextField.delegate = self
+        confirmNewPasswordTextField.delegate = self
+    }
 }
 
 // MARK: - RKDropDownAlertDelegate
@@ -107,6 +118,25 @@ extension ChangePasswordViewController: RKDropdownAlertDelegate {
     }
     
     func dropdownAlertWasTapped(_ alert: RKDropdownAlert!) -> Bool {
+        return true
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension ChangePasswordViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        if textField == oldPasswordTextField {
+            newPasswordTextField.becomeFirstResponder()
+        } else if textField == newPasswordTextField {
+            confirmNewPasswordTextField.becomeFirstResponder()
+        } else if textField == confirmNewPasswordTextField {
+            changePassword()
+        }
+        
         return true
     }
 }
