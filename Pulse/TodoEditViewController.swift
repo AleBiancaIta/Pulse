@@ -50,6 +50,8 @@ class TodoEditViewController: UIViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(onSaveButton(_:)))
+        
+        tableView.layer.cornerRadius = 5
     }
     
     override func viewWillAppear(_ animated: Bool) {
