@@ -70,6 +70,7 @@
 		67A364B21DCD8DA500BFD931 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B11DCD8DA500BFD931 /* Assets.xcassets */; };
 		67A364B51DCD8DA500BFD931 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 67A364B31DCD8DA500BFD931 /* LaunchScreen.storyboard */; };
 		67BCA1511DD6E66100E7EE74 /* MeetingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */; };
+		67C3421D1DFB7B2300615EF5 /* LineGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C3421C1DFB7B2300615EF5 /* LineGraphViewController.swift */; };
 		67CE17381DEFE041008AE710 /* CardManagementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CE17361DEFE041008AE710 /* CardManagementCell.swift */; };
 		67CE17391DEFE041008AE710 /* CardManagementCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CE17371DEFE041008AE710 /* CardManagementCell.xib */; };
 		67D8D6231DD4E28900B6DE19 /* CustomTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67D8D6211DD4E28900B6DE19 /* CustomTextCell.swift */; };
@@ -152,6 +153,7 @@
 		67A364B41DCD8DA500BFD931 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		67A364B61DCD8DA500BFD931 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		67BCA14F1DD6E66100E7EE74 /* MeetingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingsViewController.swift; sourceTree = "<group>"; };
+		67C3421C1DFB7B2300615EF5 /* LineGraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineGraphViewController.swift; sourceTree = "<group>"; };
 		67CE17361DEFE041008AE710 /* CardManagementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardManagementCell.swift; sourceTree = "<group>"; };
 		67CE17371DEFE041008AE710 /* CardManagementCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardManagementCell.xib; sourceTree = "<group>"; };
 		67D8D6211DD4E28900B6DE19 /* CustomTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextCell.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				67A276171DE65FA700ED73B0 /* PersonDetailsSelectionViewController.swift */,
 				67A276191DE662A600ED73B0 /* Person2DetailsViewController.swift */,
 				67F0DB361DE2D516006C7925 /* GraphViewController.swift */,
+				67C3421C1DFB7B2300615EF5 /* LineGraphViewController.swift */,
 				437DE0591DD9371800B08988 /* TeamCollectionViewController.swift */,
 				437DE05B1DD93E9D00B08988 /* TeamListViewController.swift */,
 				43EC9BBD1DE13870006C8703 /* TodoViewController.swift */,
@@ -518,6 +521,7 @@
 				431804B31DD83A6200B279C6 /* UpdateProfileViewController.swift in Sources */,
 				437DE0601DD9523D00B08988 /* AddTeamMemberViewController.swift in Sources */,
 				437903A11DE5069600945C63 /* TodoEditPersonCell.swift in Sources */,
+				67C3421D1DFB7B2300615EF5 /* LineGraphViewController.swift in Sources */,
 				67CE17381DEFE041008AE710 /* CardManagementCell.swift in Sources */,
 				678802A81DD44A4C001338A8 /* Card.swift in Sources */,
 				43EC9BC51DE16ECE006C8703 /* TodoShowCompletedCell.swift in Sources */,

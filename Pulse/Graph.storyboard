@@ -99,5 +99,92 @@
             </objects>
             <point key="canvasLocation" x="-514" y="108"/>
         </scene>
+        <!--Line Graph View Controller-->
+        <scene sceneID="ASi-K0-5wl">
+            <objects>
+                <viewController storyboardIdentifier="LineGraphViewController" id="qza-B9-Yu9" customClass="LineGraphViewController" customModule="Pulse" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="eUI-GK-c0p"/>
+                        <viewControllerLayoutGuide type="bottom" id="L56-LK-iN1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3cI-cd-yH2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Happiness" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Goo-BJ-51b">
+                                <rect key="frame" x="24" y="45" width="327" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Engagement" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bL8-FG-xbT">
+                                <rect key="frame" x="24" y="158" width="327" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Workload" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1l6-oV-CNE">
+                                <rect key="frame" x="24" y="271" width="327" height="21"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ovL-b3-EmZ" customClass="Chart" customModule="SwiftChart">
+                                <rect key="frame" x="8" y="70" width="359" height="80"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="fpn-1t-AD6"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RRz-gD-fao" customClass="Chart" customModule="SwiftChart">
+                                <rect key="frame" x="8" y="183" width="359" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="my2-vz-NuY"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Cd-Rl-okJ" customClass="Chart" customModule="SwiftChart">
+                                <rect key="frame" x="8" y="296" width="359" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="WXB-vE-aH9"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pulse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6S9-a5-Bax">
+                                <rect key="frame" x="8" y="8" width="55" height="29"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1l6-oV-CNE" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="24" id="1ee-wH-qrU"/>
+                            <constraint firstItem="6S9-a5-Bax" firstAttribute="top" secondItem="3cI-cd-yH2" secondAttribute="top" constant="8" id="2T2-zu-Vvd"/>
+                            <constraint firstItem="RRz-gD-fao" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="8" id="C0w-DS-KJU"/>
+                            <constraint firstAttribute="trailing" secondItem="bL8-FG-xbT" secondAttribute="trailing" constant="24" id="DbV-ZO-plV"/>
+                            <constraint firstItem="3Cd-Rl-okJ" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="8" id="ExS-t8-RWH"/>
+                            <constraint firstItem="1l6-oV-CNE" firstAttribute="top" secondItem="RRz-gD-fao" secondAttribute="bottom" constant="8" id="FxV-sy-o8o"/>
+                            <constraint firstAttribute="trailing" secondItem="Goo-BJ-51b" secondAttribute="trailing" constant="24" id="HEJ-pV-IOv"/>
+                            <constraint firstItem="Goo-BJ-51b" firstAttribute="top" secondItem="6S9-a5-Bax" secondAttribute="bottom" constant="8" id="K07-2P-Hf8"/>
+                            <constraint firstItem="Goo-BJ-51b" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="24" id="K89-p8-rBA"/>
+                            <constraint firstItem="ovL-b3-EmZ" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="8" id="KUx-4A-ctK"/>
+                            <constraint firstItem="ovL-b3-EmZ" firstAttribute="top" secondItem="Goo-BJ-51b" secondAttribute="bottom" constant="4" id="O1O-jD-mE9"/>
+                            <constraint firstAttribute="trailing" secondItem="1l6-oV-CNE" secondAttribute="trailing" constant="24" id="ShP-LC-H24"/>
+                            <constraint firstItem="bL8-FG-xbT" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="24" id="lp3-m5-ROA"/>
+                            <constraint firstItem="3Cd-Rl-okJ" firstAttribute="top" secondItem="1l6-oV-CNE" secondAttribute="bottom" constant="4" id="qvX-KE-Cp7"/>
+                            <constraint firstAttribute="trailing" secondItem="RRz-gD-fao" secondAttribute="trailing" constant="8" id="rxl-WV-3GZ"/>
+                            <constraint firstAttribute="trailing" secondItem="ovL-b3-EmZ" secondAttribute="trailing" constant="8" id="sw3-YK-YzY"/>
+                            <constraint firstAttribute="trailing" secondItem="3Cd-Rl-okJ" secondAttribute="trailing" constant="8" id="tzG-R3-tKT"/>
+                            <constraint firstItem="RRz-gD-fao" firstAttribute="top" secondItem="bL8-FG-xbT" secondAttribute="bottom" constant="4" id="vMj-hu-lCv"/>
+                            <constraint firstItem="6S9-a5-Bax" firstAttribute="leading" secondItem="3cI-cd-yH2" secondAttribute="leading" constant="8" id="xRY-Ec-rLq"/>
+                            <constraint firstItem="bL8-FG-xbT" firstAttribute="top" secondItem="ovL-b3-EmZ" secondAttribute="bottom" constant="8" id="zv1-VX-OCS"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chartTitleLabel" destination="6S9-a5-Bax" id="vMR-bb-eZ2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F1j-AG-IfE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-514" y="108"/>
+        </scene>
     </scenes>
 </document>

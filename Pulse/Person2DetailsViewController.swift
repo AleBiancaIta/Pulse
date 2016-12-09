@@ -31,6 +31,7 @@ class Person2DetailsViewController: UIViewController {
     // Card View Controllers
     var infoViewController: PersonDetailsViewController?
     var teamViewController: TeamCollectionViewController?
+    var graphViewController: LineGraphViewController?
     var toDoViewController: TodoViewController?
     var meetingsViewController: MeetingsViewController?
     var notesViewController: NotesViewController?
@@ -198,17 +199,21 @@ class Person2DetailsViewController: UIViewController {
                         
                         for c in self.selectedCardsString.characters {
                             switch c {
-                            case "d":
+                            case "g":
                                 if !self.selectedCards.contains(Constants.personCards[2]) {
                                     self.selectedCards.append(Constants.personCards[2])
                                 }
-                            case "m":
+                            case "d":
                                 if !self.selectedCards.contains(Constants.personCards[3]) {
                                     self.selectedCards.append(Constants.personCards[3])
                                 }
-                            case "n":
+                            case "m":
                                 if !self.selectedCards.contains(Constants.personCards[4]) {
                                     self.selectedCards.append(Constants.personCards[4])
+                                }
+                            case "n":
+                                if !self.selectedCards.contains(Constants.personCards[5]) {
+                                    self.selectedCards.append(Constants.personCards[5])
                                 }
                             default:
                                 break
@@ -307,6 +312,30 @@ extension Person2DetailsViewController: UITableViewDataSource {
                         cell.contentView.addSubview(teamViewController.view)
                         self.addChildViewController(teamViewController)
                         teamViewController.didMove(toParentViewController: self)
+                    }
+                }
+                
+                return cell
+                
+            case "g":
+                if graphViewController == nil {
+                    let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(withIdentifier: "LineGraphViewController") as! LineGraphViewController
+                    viewController.willMove(toParentViewController: self)
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    graphViewController = viewController
+                }
+                
+                let cell = tableView.dequeueReusableCell(withIdentifier: "GraphContainerCell", for: indexPath)
+                cell.selectionStyle = .none
+                cell.layer.cornerRadius = 5
+                cell.backgroundColor = UIColor.clear
+                
+                if let graphViewController = graphViewController {
+                    if !cell.contentView.subviews.contains(graphViewController.view) {
+                        cell.contentView.addSubview(graphViewController.view)
+                        self.addChildViewController(graphViewController)
+                        graphViewController.didMove(toParentViewController: self)
                     }
                 }
                 
@@ -452,6 +481,11 @@ extension Person2DetailsViewController: UITableViewDelegate {
         case "t":
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "TeamCollectionVC") as! TeamCollectionViewController
+            return viewController.heightForView()
+            
+        case "g":
+            let storyboard = UIStoryboard(name: "Graph", bundle: nil)
+            let viewController = storyboard.instantiateViewController(withIdentifier: "LineGraphViewController") as! LineGraphViewController
             return viewController.heightForView()
 
         case "d":
