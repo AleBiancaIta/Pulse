@@ -176,12 +176,17 @@ class GraphViewController: UIViewController {
 
         if personIdValues.count > 0 {
             for i in 0...personIdValues.count-1 {
+                // +1 so all 3 values show up in the graph (no 0s)
                 vals1.append(survey1Values[i] + 1) // Happiness
                 vals2.append(survey2Values[i] + 1) // Engagement
                 vals3.append(survey3Values[i] + 1) // Workload
                 refs.append("")
             }
         }
+        // Sort values from low to high
+        vals1.sort()
+        vals2.sort()
+        vals3.sort()
         
         // Setup chart views
         if barChart1 != nil {
