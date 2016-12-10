@@ -51,14 +51,15 @@ class PersonDetailsViewController: UIViewController {
 
 			let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
 			let lastName = pfObject[ObjectKeys.Person.lastName] as! String
+            let positionDesc = pfObject[ObjectKeys.Person.positionDesc] as? String
             
             firstNameTextField.text = firstName
 			lastNameTextField.text = firstName == lastName ? "" : lastName
-            positionDescTextField.text = pfObject[ObjectKeys.Person.positionDesc] as? String
+            positionDescTextField.text = positionDesc
             phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
-
+            
             personInfoParentViewController?.navigationItem.title = firstName != lastName ? "\(firstName) \(lastName)" : "\(firstName)"
             setEditing(false, animated: true)
         }
@@ -183,6 +184,7 @@ class PersonDetailsViewController: UIViewController {
 
 	func setupViews() {
         lastNameTextField.isHidden = isEditing ? false : (lastNameTextField.text == "" ? true : false)
+        positionDescTextField.isHidden = isEditing ? false : (positionDescTextField.text == "" ? true : false)
         
 		if isEditing {
 			UIExtensions.setupDarkViewFor(textField: firstNameTextField)
@@ -195,8 +197,8 @@ class PersonDetailsViewController: UIViewController {
 			phoneTextField.layer.sublayers?[0].removeFromSuperlayer()
 			emailTextField.layer.sublayers?[0].removeFromSuperlayer()
 			lastNameTextField.layer.sublayers?[0].removeFromSuperlayer()
-			firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
-            positionDescTextField.layer.sublayers?[0].removeFromSuperlayer()
+			positionDescTextField.layer.sublayers?[0].removeFromSuperlayer()
+            firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
 		}
 	}
 
@@ -231,11 +233,11 @@ class PersonDetailsViewController: UIViewController {
 			let lastName = (lastNameTextField.text?.isEmpty)! ? firstName : lastNameTextField.text
 			pfPerson[ObjectKeys.Person.lastName] = lastName
             lastNameTextField.text = firstName != lastName ? lastName : ""
-
+            
 			pfPerson[ObjectKeys.Person.email] = emailTextField.text
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
             pfPerson[ObjectKeys.Person.positionDesc] = positionDescTextField.text
-
+            
 			if let photoData = photoData {
 				SVProgressHUD.show()
 
