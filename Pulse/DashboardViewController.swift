@@ -63,11 +63,11 @@ class DashboardViewController: UIViewController {
                         if !self.selectedCards.contains(Constants.dashboardCards[0]) {
                             self.selectedCards.append(Constants.dashboardCards[0])
                         }
-                    case "d":
+                    case "t":
                         if !self.selectedCards.contains(Constants.dashboardCards[1]) {
                             self.selectedCards.append(Constants.dashboardCards[1])
                         }
-                    case "t":
+                    case "d":
                         if !self.selectedCards.contains(Constants.dashboardCards[2]) {
                             self.selectedCards.append(Constants.dashboardCards[2])
                         }

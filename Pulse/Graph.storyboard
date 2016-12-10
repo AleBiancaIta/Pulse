@@ -179,6 +179,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="chart1" destination="ovL-b3-EmZ" id="TiN-qr-uc4"/>
+                        <outlet property="chart2" destination="RRz-gD-fao" id="AHy-cv-c2y"/>
+                        <outlet property="chart3" destination="3Cd-Rl-okJ" id="uEK-dY-HZU"/>
                         <outlet property="chartTitleLabel" destination="6S9-a5-Bax" id="vMR-bb-eZ2"/>
                     </connections>
                 </viewController>

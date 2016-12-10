@@ -14,16 +14,13 @@ class LineGraphViewController: UIViewController {
     
     @IBOutlet weak var chartTitleLabel: UILabel!
     
-    /*@IBOutlet weak var chart1: Chart!
+    @IBOutlet weak var chart1: Chart!
     @IBOutlet weak var chart2: Chart!
-    @IBOutlet weak var chart3: Chart!*/
+    @IBOutlet weak var chart3: Chart!
     
-    /*var barChart1: DSBarChart?
-    var barChart2: DSBarChart?
-    var barChart3: DSBarChart?
-    var barChartLabel1: UILabel?
-    var barChartLabel2: UILabel?
-    var barChartLabel3: UILabel?
+    var lineChartLabel1: UILabel?
+    var lineChartLabel2: UILabel?
+    var lineChartLabel3: UILabel?
     
     var survey1Values: [Float] = []
     var survey2Values: [Float] = []
@@ -32,7 +29,7 @@ class LineGraphViewController: UIViewController {
     var highLowValues = ["Poor", "Good", "Great"]
     
     var teamMemberIds: [String] = []
-    var isCompany = false*/
+    var isCompany = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,12 +37,10 @@ class LineGraphViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadChartForCompany()
+        loadChartForPerson()
     }
     
-    // isCompany == true, load chart for whole company
-    // isCompany == false, load chart for my team only
-    func loadChartForCompany() {
+    func loadChartForPerson() {
         
         // Reset values
         /*personIdValues = []
