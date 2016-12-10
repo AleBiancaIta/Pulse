@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lb5-MA-c6m" userLabel="Add Button">
-                                <rect key="frame" x="329" y="65" width="22" height="22"/>
+                                <rect key="frame" x="337" y="65" width="22" height="22"/>
                                 <color key="tintColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal">
                                     <color key="titleColor" red="0.32549019610000002" green="0.42745098040000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,7 +74,7 @@
                             <constraint firstItem="lb5-MA-c6m" firstAttribute="top" secondItem="RXM-OU-A5o" secondAttribute="bottom" constant="8" id="FJn-Dd-vsY"/>
                             <constraint firstItem="Bsv-qF-A4D" firstAttribute="leading" secondItem="6OV-X0-hbB" secondAttribute="leading" constant="8" id="MKJ-Rj-0RP"/>
                             <constraint firstItem="FIf-2c-DMt" firstAttribute="top" secondItem="ndN-v1-9TM" secondAttribute="bottom" constant="8" id="NeO-ie-AAp"/>
-                            <constraint firstAttribute="trailing" secondItem="lb5-MA-c6m" secondAttribute="trailing" constant="24" id="Rwe-yu-Hnm"/>
+                            <constraint firstAttribute="trailing" secondItem="lb5-MA-c6m" secondAttribute="trailing" constant="16" id="Rwe-yu-Hnm"/>
                             <constraint firstItem="RXM-OU-A5o" firstAttribute="top" secondItem="jhk-YY-nrE" secondAttribute="bottom" constant="8" id="VIU-I9-IxM"/>
                             <constraint firstItem="Bsv-qF-A4D" firstAttribute="centerY" secondItem="lb5-MA-c6m" secondAttribute="centerY" id="g7s-dr-zUR"/>
                             <constraint firstAttribute="trailing" secondItem="ndN-v1-9TM" secondAttribute="trailing" constant="8" id="p3t-9S-9fJ"/>
@@ -148,18 +148,27 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="3Jo-fp-c6F" firstAttribute="top" secondItem="PcR-wY-oby" secondAttribute="top" constant="8" id="DUD-ty-HEk"/>
                             <constraint firstItem="Etq-d5-mg9" firstAttribute="top" secondItem="3Jo-fp-c6F" secondAttribute="bottom" constant="8" id="Ei9-GB-u4Z"/>
                             <constraint firstItem="3Jo-fp-c6F" firstAttribute="leading" secondItem="PcR-wY-oby" secondAttribute="leading" constant="8" id="HOx-FZ-S7x"/>
                             <constraint firstAttribute="trailing" secondItem="3Jo-fp-c6F" secondAttribute="trailing" constant="8" id="jD8-9j-Swx"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="pKj-Ra-K6n" appends="YES" id="ovI-Y6-GsN"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="3Jo-fp-c6F" id="a69-jX-IYy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJm-lh-SWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="pKj-Ra-K6n">
+                    <connections>
+                        <action selector="onLongPress:" destination="GMg-ub-aRw" id="UTi-ON-0w4"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1196" y="-189.3553223388306"/>
         </scene>
@@ -481,7 +490,7 @@
                                 </connections>
                             </view>
                             <view hidden="YES" alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y0E-XQ-7rj">
-                                <rect key="frame" x="24" y="283.5" width="327" height="100"/>
+                                <rect key="frame" x="24" y="284" width="327" height="100"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BgX-JI-JTj">
                                         <rect key="frame" x="8" y="8" width="311" height="84"/>

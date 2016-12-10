@@ -44,9 +44,9 @@ class MeetingsViewController: UIViewController {
         addButton.isHidden = expanded
         meetingsLabel.isHidden = expanded
         
+        view.layer.cornerRadius = 5
         tableViewTopConstraint.constant = expanded ? 8 : 75
         tableViewTrailingConstraint.constant = expanded ? 8 : 0
-        tableViewTrailingConstraint.constant = expanded ? 8 : 16
         
         tableView.dataSource = self
         tableView.delegate = self

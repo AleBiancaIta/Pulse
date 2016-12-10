@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vce-Wb-l7K">
-                        <rect key="frame" x="64" y="32" width="524" height="66"/>
+                        <rect key="frame" x="56" y="32" width="532" height="66"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -39,7 +39,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZ4-bK-jxN">
-                        <rect key="frame" x="64" y="8" width="524" height="24"/>
+                        <rect key="frame" x="56" y="8" width="532" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="F0d-hg-QPb"/>
                         </constraints>
@@ -52,12 +52,12 @@
                     <constraint firstItem="Vce-Wb-l7K" firstAttribute="top" secondItem="rZ4-bK-jxN" secondAttribute="bottom" id="6nh-jv-iZt"/>
                     <constraint firstItem="rZ4-bK-jxN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="BUt-Ur-1rV"/>
                     <constraint firstAttribute="trailing" secondItem="Vce-Wb-l7K" secondAttribute="trailing" constant="8" id="O6e-T0-zmi"/>
-                    <constraint firstItem="rZ4-bK-jxN" firstAttribute="leading" secondItem="FM7-Bx-g3U" secondAttribute="trailing" constant="16" id="U1w-ty-HdN"/>
+                    <constraint firstItem="rZ4-bK-jxN" firstAttribute="leading" secondItem="FM7-Bx-g3U" secondAttribute="trailing" constant="8" id="U1w-ty-HdN"/>
                     <constraint firstAttribute="bottom" secondItem="Vce-Wb-l7K" secondAttribute="bottom" constant="8" id="XkG-ro-SFo"/>
                     <constraint firstItem="FM7-Bx-g3U" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="asM-Ag-vOF"/>
                     <constraint firstItem="FM7-Bx-g3U" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="i2K-Ng-rHx"/>
                     <constraint firstAttribute="trailing" secondItem="rZ4-bK-jxN" secondAttribute="trailing" constant="8" id="ogz-Da-v6Z"/>
-                    <constraint firstItem="Vce-Wb-l7K" firstAttribute="leading" secondItem="FM7-Bx-g3U" secondAttribute="trailing" constant="16" id="xcA-v8-yQd"/>
+                    <constraint firstItem="Vce-Wb-l7K" firstAttribute="leading" secondItem="FM7-Bx-g3U" secondAttribute="trailing" constant="8" id="xcA-v8-yQd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

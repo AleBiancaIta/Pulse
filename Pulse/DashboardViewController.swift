@@ -155,6 +155,12 @@ class DashboardViewController: UIViewController {
         */
     }
     
+    @IBAction func onLongPress(_ sender: UILongPressGestureRecognizer) {
+        tableView.isEditing = true
+        // if sender.state == .began
+        // else if sender.state == .end
+    }
+    
     @IBAction func onLogoutButtonTap(_ sender: UIBarButtonItem) {
         self.ABIShowAlertWithActions(title: "", message: "Are you sure you want to log out?", actionTitle1: "Yes", actionTitle2: "No", sender: nil, handler1: { (yesAction: UIAlertAction) in
             self.logOut()
@@ -168,6 +174,14 @@ class DashboardViewController: UIViewController {
  
     @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc fileprivate func convertCardsToString() -> String {
+        var selectedCardsString = ""
+        for dashboardCard in selectedCards {
+            selectedCardsString += dashboardCard.id!
+        }
+        return selectedCardsString
     }
     
     // MARK: - Helpers
@@ -253,6 +267,7 @@ extension DashboardViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 cell.backgroundColor = UIColor.clear
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let graphViewController = graphViewController {
                     if !cell.contentView.subviews.contains(graphViewController.view) {
@@ -270,13 +285,15 @@ extension DashboardViewController: UITableViewDataSource {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "MeetingsViewController") as! MeetingsViewController
                     viewController.personId = nil
                     viewController.willMove(toParentViewController: self)
-                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width - 16, height: viewController.heightForView())
                     meetingsViewController = viewController
                 }
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
                 cell.selectionStyle = .none
+                cell.backgroundColor = UIColor.clear
                 cell.layer.cornerRadius = 5
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let meetingsViewController = meetingsViewController {
                     if !cell.contentView.subviews.contains(meetingsViewController.view) {
@@ -301,6 +318,7 @@ extension DashboardViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 cell.backgroundColor = UIColor.clear
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let teamViewController = teamViewController {
                     if !cell.contentView.subviews.contains(teamViewController.view) {
@@ -326,6 +344,7 @@ extension DashboardViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let toDoViewController = toDoViewController {
                     if !cell.contentView.subviews.contains(toDoViewController.view) {
@@ -353,6 +372,44 @@ extension DashboardViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return selectedCards.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let itemToMove = selectedCards[sourceIndexPath.section] as Card
+        selectedCards.remove(at: sourceIndexPath.section)
+        selectedCards.insert(itemToMove, at: destinationIndexPath.section)
+        
+        selectedCardsString = convertCardsToString()
+        
+        tableView.isEditing = false
+        tableView.reloadData()
+        
+        let query = PFQuery(className: "Dashboard")
+        let userId = (PFUser.current()?.objectId)! as String
+        query.whereKey("userId", equalTo: userId)
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                let post = posts[0]
+                post["selectedCards"] = self.selectedCardsString
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    if success {
+                        print("successfully saved re-ordered dashboard cards")
+                    } else {
+                        if let error = error {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered dashboard cards, error: \(error.localizedDescription)")
+                        } else {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered dashboard cards")
+                        }
+                    }
+                }
+            } else {
+                if let error = error {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered dashbaord cards, error: \(error.localizedDescription)")
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered dashboard cards")
+                }
+            }
+        }
     }
 }
 
@@ -411,6 +468,28 @@ extension DashboardViewController: UITableViewDelegate {
         if indexPath.section == selectedCards.count {
             onManageCards()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == selectedCards.count {
+            return false
+        }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.section == selectedCards.count {
+            return sourceIndexPath
+        }
+        return proposedDestinationIndexPath
     }
 }
 

@@ -50,7 +50,8 @@ class GraphViewController: UIViewController {
     
     fileprivate func configureCustomSegmentedControl() {
         let control = HMSegmentedControl(sectionTitles: ["Team", "Company"])
-        control?.frame = CGRect(x: 180, y: 9, width: 180, height: 30)
+        let originX = UIScreen.main.bounds.width - 180 - 8
+        control?.frame = CGRect(x: originX, y: 9, width: 180, height: 30)
         //control?.frame = CGRect(x: 8, y: 45, width: 352, height: 30)
         control?.backgroundColor = UIColor.clear
         control?.selectionIndicatorLocation = .down

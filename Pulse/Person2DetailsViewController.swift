@@ -226,6 +226,28 @@ class Person2DetailsViewController: UIViewController {
             }
         }
     }
+    
+    @objc fileprivate func convertCardsToString() -> String {
+        var selectedCardsString = ""
+        for meetingCard in selectedCards {
+            selectedCardsString += meetingCard.id!
+        }
+        return selectedCardsString
+    }
+    
+    func onManageCards() {
+        let storyboard = UIStoryboard(name: "Person2", bundle: nil)
+        let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsSelectionViewController") as! PersonDetailsSelectionViewController
+        viewController.delegate = self
+        viewController.selectedCards = selectedCards
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    @IBAction func onLongPress(_ sender: UILongPressGestureRecognizer) {
+        tableView.isEditing = true
+        // if sender.state == .began
+        // else if sender.state == .end
+    }
 }
 
 extension Person2DetailsViewController: UITableViewDataSource {
@@ -323,7 +345,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     let viewController = storyboard.instantiateViewController(withIdentifier: "LineGraphViewController") as! LineGraphViewController
                     viewController.personPFObject = personPFObject
                     viewController.willMove(toParentViewController: self)
-                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width - 16, height: viewController.heightForView())
                     graphViewController = viewController
                 }
                 
@@ -331,6 +353,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 cell.backgroundColor = UIColor.clear
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let graphViewController = graphViewController {
                     if !cell.contentView.subviews.contains(graphViewController.view) {
@@ -358,6 +381,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let toDoViewController = toDoViewController {
                     if cell.contentView.subviews.contains(toDoViewController.view) {
@@ -379,13 +403,15 @@ extension Person2DetailsViewController: UITableViewDataSource {
                     }
                     viewController.viewTypes = .employeeDetail
                     viewController.willMove(toParentViewController: self)
-                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
+                    viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width - 16, height: viewController.heightForView())
                     meetingsViewController = viewController
                 }
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: "MeetingsContainerCell", for: indexPath)
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
+                cell.showsReorderControl = tableView.isEditing
+                cell.backgroundColor = UIColor.clear
                 
                 if let meetingsViewController = meetingsViewController {
                     if !cell.contentView.subviews.contains(meetingsViewController.view) {
@@ -417,6 +443,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.layer.cornerRadius = 5
                 cell.backgroundColor = UIColor.clear
+                cell.showsReorderControl = tableView.isEditing
                 
                 if let notesViewController = notesViewController {
                     if !cell.contentView.subviews.contains(notesViewController.view) {
@@ -446,12 +473,44 @@ extension Person2DetailsViewController: UITableViewDataSource {
         return selectedCards.count + 1
     }
     
-    func onManageCards() {
-        let storyboard = UIStoryboard(name: "Person2", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "PersonDetailsSelectionViewController") as! PersonDetailsSelectionViewController
-        viewController.delegate = self
-        viewController.selectedCards = selectedCards
-        present(viewController, animated: true, completion: nil)
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let itemToMove = selectedCards[sourceIndexPath.section] as Card
+        selectedCards.remove(at: sourceIndexPath.section)
+        selectedCards.insert(itemToMove, at: destinationIndexPath.section)
+        
+        selectedCardsString = convertCardsToString()
+        
+        tableView.isEditing = false
+        tableView.reloadData()
+        
+        let query = PFQuery(className: "Person")
+        if let personPFObject = personPFObject,
+            let personId = personPFObject.objectId {
+            query.whereKey("objectId", equalTo: personId)
+        }
+        query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+            if let posts = posts {
+                let post = posts[0]
+                post["selectedCards"] = self.selectedCardsString
+                post.saveInBackground { (success: Bool, error: Error?) in
+                    if success {
+                        print("successfully saved re-ordered person cards")
+                    } else {
+                        if let error = error {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered person cards, error: \(error.localizedDescription)")
+                        } else {
+                            self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered person cards")
+                        }
+                    }
+                }
+            } else {
+                if let error = error {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered person cards, error: \(error.localizedDescription)")
+                } else {
+                    self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered person cards")
+                }
+            }
+        }
     }
 }
 
@@ -518,6 +577,30 @@ extension Person2DetailsViewController: UITableViewDelegate {
         if indexPath.section == selectedCards.count && personPFObject != nil && personManagerId == userPersonId {
             onManageCards()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        if indexPath.section == 0 || indexPath.section == selectedCards.count ||
+            (indexPath.section == 1 && selectedCards[1].id == "t") {
+            return false
+        }
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        if proposedDestinationIndexPath.section == 0 || proposedDestinationIndexPath.section == selectedCards.count ||
+            (proposedDestinationIndexPath.section == 1 && selectedCards[1].id == "t") {
+            return sourceIndexPath
+        }
+        return proposedDestinationIndexPath
     }
 }
 

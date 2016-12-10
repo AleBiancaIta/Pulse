@@ -142,6 +142,20 @@ class MeetingDetailsViewController: UIViewController {
       viewController.selectedCards = selectedCards
       present(viewController, animated: true, completion: nil)
    }
+   
+   @objc fileprivate func convertCardsToString() -> String {
+      var selectedCardsString = ""
+      for meetingCard in selectedCards {
+         selectedCardsString += meetingCard.id!
+      }
+      return selectedCardsString
+   }
+   
+   @IBAction func onLongPress(_ sender: UILongPressGestureRecognizer) {
+      tableView.isEditing = true
+      // if sender.state == .began
+      // else if sender.state == .end
+   }
 }
 
 // MARK: - UITableViewDataSource
@@ -191,6 +205,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "SurveyContainerCell", for: indexPath)
             cell.layer.cornerRadius = 5
             cell.selectionStyle = .none
+            cell.backgroundColor = UIColor.clear
             
             if let surveyViewController = surveyViewController {
                if !cell.contentView.subviews.contains(surveyViewController.view) {
@@ -219,6 +234,8 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoContainerCell", for: indexPath)
             cell.layer.cornerRadius = 5
             cell.selectionStyle = .none
+            cell.backgroundColor = UIColor.clear
+            cell.showsReorderControl = tableView.isEditing
             
             if let toDoViewController = toDoViewController {
                if !cell.contentView.subviews.contains(toDoViewController.view) {
@@ -249,6 +266,7 @@ extension MeetingDetailsViewController: UITableViewDataSource {
             cell.layer.cornerRadius = 5
             cell.selectionStyle = .none
             cell.backgroundColor = UIColor.clear
+            cell.showsReorderControl = tableView.isEditing
             
             if let notesViewController = notesViewController {
                if !cell.contentView.subviews.contains(notesViewController.view) {
@@ -269,6 +287,45 @@ extension MeetingDetailsViewController: UITableViewDataSource {
       }
    }
    
+   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+      let itemToMove = selectedCards[sourceIndexPath.section] as Card
+      selectedCards.remove(at: sourceIndexPath.section)
+      selectedCards.insert(itemToMove, at: destinationIndexPath.section)
+      
+      selectedCardsString = convertCardsToString()
+      
+      tableView.isEditing = false
+      tableView.reloadData()
+      
+      let query = PFQuery(className: "Meetings")
+      if let meetingId = meeting.objectId {
+         query.whereKey("objectId", equalTo: meetingId)
+      }
+      query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+         if let posts = posts {
+            let post = posts[0]
+            post["selectedCards"] = self.selectedCardsString
+            post.saveInBackground { (success: Bool, error: Error?) in
+               if success {
+                  print("successfully saved re-ordered meeting cards")
+               } else {
+                  if let error = error {
+                     self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered meeting cards, error: \(error.localizedDescription)")
+                  } else {
+                     self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered meeting cards")
+                  }
+               }
+            }
+         } else {
+            if let error = error {
+               self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered meeting cards, error: \(error.localizedDescription)")
+            } else {
+               self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Error saving re-ordered meeting cards")
+            }
+         }
+      }
+   }
+
    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return 1
    }
@@ -328,6 +385,29 @@ extension MeetingDetailsViewController: UITableViewDelegate {
       if indexPath.section == selectedCards.count && isExistingMeeting {
          onManageCards()
       }
+   }
+   
+   
+   func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+      return .none
+   }
+   
+   func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+      return false
+   }
+   
+   func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+      if indexPath.section == 0 || indexPath.section == selectedCards.count {
+         return false
+      }
+      return true
+   }
+   
+   func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath, toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+      if proposedDestinationIndexPath.section == 0 || proposedDestinationIndexPath.section == selectedCards.count {
+         return sourceIndexPath
+      }
+      return proposedDestinationIndexPath
    }
 }
 
