@@ -17,6 +17,7 @@ class TeamTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profileImageView: PhotoImageView!
     @IBOutlet weak var firstNameLabel: UILabel!
+    @IBOutlet weak var positionDescLabel: UILabel!
     @IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!

@@ -230,7 +230,9 @@ extension TeamViewDataSource: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseIdentifier.Team.teamListCell, for: indexPath) as! TeamTableViewCell
         let firstName = teamMembers[indexPath.row][ObjectKeys.Person.firstName] as? String ?? ""
         let lastName = teamMembers[indexPath.row][ObjectKeys.Person.lastName] as? String ?? ""
+        let positionDesc = teamMembers[indexPath.row][ObjectKeys.Person.positionDesc] as? String ?? ""
         cell.firstNameLabel.text = firstName != lastName ? "\(firstName) \(lastName)" : firstName
+        cell.positionDescLabel.text = positionDesc
         cell.emailButton.setTitle(teamMembers[indexPath.row][ObjectKeys.Person.email] as? String, for: .normal)
         cell.delegate = self
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
