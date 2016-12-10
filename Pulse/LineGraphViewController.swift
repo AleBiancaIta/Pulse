@@ -25,11 +25,9 @@ class LineGraphViewController: UIViewController {
     var survey1Values: [Float] = []
     var survey2Values: [Float] = []
     var survey3Values: [Float] = []
-    var personIdValues: [String] = []
     var highLowValues = ["Poor", "Good", "Great"]
     
-    var teamMemberIds: [String] = []
-    var isCompany = false
+    var personPFObject: PFObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,215 +41,167 @@ class LineGraphViewController: UIViewController {
     func loadChartForPerson() {
         
         // Reset values
-        /*personIdValues = []
         survey1Values = []
         survey2Values = []
         survey3Values = []
-        teamMemberIds = []
         
-        if isCompany {
-            ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
-                if let person = person {
-                    let query = PFQuery(className: "Survey")
-                    query.whereKey("companyId", equalTo: person["companyId"])
-                    query.whereKeyDoesNotExist("deletedAt")
-                    
-                    // filter by last 30 days
-                    var pastDate = Date() // this is current date
-                    pastDate.addTimeInterval(-30*24*60*60)
-                    query.whereKey("meetingDate", greaterThan: pastDate)
-                    query.order(byDescending: "meetingDate")
-                    query.limit = 1000
-                    
-                    query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-                        if let posts = posts {
-                            for post in posts {
-                                if let personId = post["personId"] as? String {
-                                    if !self.personIdValues.contains(personId) {
-                                        self.survey1Values.append(post["surveyValueId1"] as! Float)
-                                        self.survey2Values.append(post["surveyValueId2"] as! Float)
-                                        self.survey3Values.append(post["surveyValueId3"] as! Float)
-                                        self.personIdValues.append(personId)
-                                    }
-                                }
-                            }
-                            self.setupCharts()
-                        }
+        if let personPFObject = personPFObject,
+            let personId = personPFObject.objectId {
+            let query = PFQuery(className: "Survey")
+            query.whereKey("personId", equalTo: personId)
+            query.whereKeyDoesNotExist("deletedAt")
+            
+            // filter by last 6 months
+            var pastDate = Date() // this is current date
+            pastDate.addTimeInterval(-(365/2)*24*60*60)
+            query.whereKey("meetingDate", greaterThan: pastDate)
+            query.limit = 1000
+            
+            query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
+                if let posts = posts {
+                    for post in posts {
+                        self.survey1Values.append(post["surveyValueId1"] as! Float)
+                        self.survey2Values.append(post["surveyValueId2"] as! Float)
+                        self.survey3Values.append(post["surveyValueId3"] as! Float)
                     }
-                }
-            }
-        } else { // Team
-            ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
-                if let person = person {
-                    let query = PFQuery(className: "Survey")
-                    query.whereKey("companyId", equalTo: person["companyId"])
-                    query.whereKeyDoesNotExist("deletedAt")
-                    
-                    // filter by last 30 days
-                    var pastDate = Date() // this is current date
-                    pastDate.addTimeInterval(-30*24*60*60)
-                    query.whereKey("meetingDate", greaterThan: pastDate)
-                    query.order(byDescending: "meetingDate")
-                    query.limit = 1000
-                    
-                    query.findObjectsInBackground { (posts: [PFObject]?, error: Error?) in
-                        if let posts = posts {
-                            ParseClient.sharedInstance().fetchTeamMembersFor(managerId: person.objectId!, isAscending1: true, isAscending2: nil, orderBy1: ObjectKeys.Person.lastName, orderBy2: nil, isDeleted: false) { (members: [PFObject]?, error: Error?) in
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                } else {
-                                    //debugPrint("in graph, members: \(members)")
-                                    if let members = members, members.count > 0 {
-                                        for member in members {
-                                            if let personId = member.objectId,
-                                                !self.teamMemberIds.contains(personId) {
-                                                self.teamMemberIds.append(personId)
-                                            }
-                                        }
-                                        //debugPrint("in graph, teamMemberIds: \(self.teamMemberIds)")
-                                        
-                                        for post in posts {
-                                            if let personId = post["personId"] as? String {
-                                                //debugPrint("in graph, personId: \(personId)")
-                                                if !self.personIdValues.contains(personId) &&
-                                                    self.teamMemberIds.contains(personId) {
-                                                    self.survey1Values.append(post["surveyValueId1"] as! Float)
-                                                    self.survey2Values.append(post["surveyValueId2"] as! Float)
-                                                    self.survey3Values.append(post["surveyValueId3"] as! Float)
-                                                    self.personIdValues.append(personId)
-                                                }
-                                            }
-                                        }
-                                        //debugPrint("personIdValues: \(self.personIdValues)")
-                                        self.setupCharts()
-                                    } else {
-                                        debugPrint("Fetch members returned 0 members")
-                                        self.setupCharts()
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    self.setupCharts()
                 }
             }
         }
         
         // Initial load (or error, still show empty graph)
-        //self.setupCharts()*/
+        self.setupCharts()
     }
     
-    /*func setupCharts() {
-        var vals1: [Float] = [] // Values
-        var vals2: [Float] = [] // Values
-        var vals3: [Float] = [] // Values
-        var refs: [String] = [] // References, doesn't actually do anything in our case
+    func setupCharts() {
+        chart1.backgroundColor = UIColor.clear
+        chart2.backgroundColor = UIColor.clear
+        chart3.backgroundColor = UIColor.clear
         
-        //let vals = [2, 1, 3, 2, 3, 1, 1, 2, 3, 1, 1, 2, 2, 2]
-        //let refs = ["M", "T", "W", "Th", "F", "S", "Su", "M", "T", "W", "Th", "F", "S", "Su"]
+        chart1.removeAllSeries()
+        chart2.removeAllSeries()
+        chart3.removeAllSeries()
         
-        if personIdValues.count > 0 {
-            for i in 0...personIdValues.count-1 {
-                // +1 so all 3 values show up in the graph (no 0s)
-                vals1.append(survey1Values[i] + 1) // Happiness
-                vals2.append(survey2Values[i] + 1) // Engagement
-                vals3.append(survey3Values[i] + 1) // Workload
-                refs.append("")
+        // The 3 survey factors should have the same number of data points
+        if survey1Values.count > 0 {
+            var data1: [(x: Float, y: Float)] = []
+            var data2: [(x: Float, y: Float)] = []
+            var data3: [(x: Float, y: Float)] = []
+            
+            for i in 0...survey1Values.count-1 {
+                data1.append((x: Float(i), y: survey1Values[i])) // Happiness
+                data2.append((x: Float(i), y: survey2Values[i])) // Engagement
+                data3.append((x: Float(i), y: survey3Values[i])) // Workload
             }
+            
+            let survey1Series = ChartSeries(data: data1)
+            survey1Series.color = UIColor.pulseAccentColor()
+            survey1Series.area = true
+            chart1.add(survey1Series)
+            chart1.xLabels = [0, Float(data1.count-1)]
+            
+            let survey2Series = ChartSeries(data: data2)
+            survey2Series.color = UIColor.pulseAccentColor()
+            survey2Series.area = true
+            chart2.add(survey2Series)
+            chart2.xLabels = [0, Float(data2.count-1)]
+            
+            let survey3Series = ChartSeries(data: data3)
+            survey3Series.color = UIColor.pulseAccentColor()
+            survey3Series.area = true
+            chart3.add(survey3Series)
+            chart3.xLabels = [0, Float(data3.count-1)]
         }
-        // Sort values from low to high
-        vals1.sort()
-        vals2.sort()
-        vals3.sort()
         
-        // Setup chart views
-        if barChart1 != nil {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.barChart1?.alpha = 0
-            })
-        }
-        barChart1 = DSBarChart.init(frame: chart1.bounds, color: UIColor.pulseLightPrimaryColor(), references: refs, andValues: vals1)
-        barChart1?.backgroundColor = UIColor.clear
-        barChart1?.frame.origin.y = chart1.frame.origin.y
-        barChart1?.alpha = 0
-        view.addSubview(barChart1!)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.barChart1?.alpha = 1
+        chart1.labelColor = UIColor.pulseLightPrimaryColor()
+        chart1.lineWidth = 2
+        chart1.highlightLineColor = UIColor.clear
+        chart1.yLabels = [0, 1, 2]
+        chart1.yLabelsFormatter = { self.highLowValues[Int($1)] }
+        
+        chart2.labelColor = UIColor.pulseLightPrimaryColor()
+        chart2.lineWidth = 2
+        chart2.highlightLineColor = UIColor.clear
+        chart2.yLabels = [0, 1, 2]
+        chart2.yLabelsFormatter = { self.highLowValues[Int($1)] }
+        
+        chart3.labelColor = UIColor.pulseLightPrimaryColor()
+        chart3.lineWidth = 2
+        chart3.highlightLineColor = UIColor.clear
+        chart3.yLabels = [0, 1, 2]
+        chart3.yLabelsFormatter = { self.highLowValues[Int($1)] }
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.chart1.alpha = 1.0
+            self.chart2.alpha = 1.0
+            self.chart3.alpha = 1.0
         })
         
-        if barChart2 != nil {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.barChart2?.alpha = 0
-            })
-        }
-        barChart2 = DSBarChart.init(frame: chart2.bounds, color: UIColor.pulseLightPrimaryColor(), references: refs, andValues: vals2)
-        barChart2?.backgroundColor = UIColor.clear
-        barChart2?.frame.origin.y = chart2.frame.origin.y
-        barChart2?.alpha = 0
-        view.addSubview(barChart2!)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.barChart2?.alpha = 1
-        })
+        chart1.setNeedsDisplay()
+        UIView.transition(with: chart1, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.chart1.layer.displayIfNeeded()
+        }, completion: nil)
         
-        if barChart3 != nil {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.barChart3?.alpha = 0
-            })
-        }
-        barChart3 = DSBarChart.init(frame: chart3.bounds, color: UIColor.pulseLightPrimaryColor(), references: refs, andValues: vals3)
-        barChart3?.backgroundColor = UIColor.clear
-        barChart3?.frame.origin.y = chart3.frame.origin.y
-        barChart3?.alpha = 0
-        view.addSubview(barChart3!)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.barChart3?.alpha = 1
-        })
+        chart2.setNeedsDisplay()
+        UIView.transition(with: chart2, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.chart2.layer.displayIfNeeded()
+        }, completion: nil)
+        
+        chart3.setNeedsDisplay()
+        UIView.transition(with: chart3, duration: 0.5, options: .transitionCrossDissolve, animations: {
+            self.chart3.layer.displayIfNeeded()
+        }, completion: nil)
         
         // Setup chart labels (x-axis)
-        if barChartLabel1 != nil {
+        if let personPFObject = personPFObject,
+            let firstName = personPFObject["firstName"] as? String {
+            
+            if lineChartLabel1 != nil {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.lineChartLabel1?.alpha = 0
+                })
+            }
+            lineChartLabel1 = UILabel(frame: CGRect(x: 8, y: chart1.frame.origin.y + chart1.frame.size.height - 20, width: chart1.frame.size.width, height: 20))
+            lineChartLabel1?.text = survey1Values.count > 0 ? "Pulse for \(firstName)" : "No Pulse data available for \(firstName)"
+            lineChartLabel1?.textColor = UIColor.pulseLightPrimaryColor()
+            lineChartLabel1?.textAlignment = .center
+            lineChartLabel1?.font = lineChartLabel1?.font.withSize(12)
+            view.addSubview(lineChartLabel1!)
             UIView.animate(withDuration: 0.5, animations: {
-                self.barChartLabel1?.alpha = 0
+                self.lineChartLabel1?.alpha = 1
+            })
+            
+            if lineChartLabel2 != nil {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.lineChartLabel2?.alpha = 0
+                })
+            }
+            lineChartLabel2 = UILabel(frame: CGRect(x: 8, y: chart2.frame.origin.y + chart2.frame.size.height - 20, width: chart2.frame.size.width, height: 20))
+            lineChartLabel2?.text = survey2Values.count > 0 ? "Pulse for \(firstName)" : "No Pulse data available for \(firstName)"
+            lineChartLabel2?.textColor = UIColor.pulseLightPrimaryColor()
+            lineChartLabel2?.textAlignment = .center
+            lineChartLabel2?.font = lineChartLabel2?.font.withSize(12)
+            view.addSubview(lineChartLabel2!)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.lineChartLabel2?.alpha = 1
+            })
+ 
+            if lineChartLabel3 != nil {
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.lineChartLabel3?.alpha = 0
+                })
+            }
+            lineChartLabel3 = UILabel(frame: CGRect(x: 8, y: chart3.frame.origin.y + chart3.frame.size.height - 20, width: chart3.frame.size.width, height: 20))
+            lineChartLabel3?.text = survey3Values.count > 0 ? "Pulse for \(firstName)" : "No Pulse data available for \(firstName)"
+            lineChartLabel3?.textColor = UIColor.pulseLightPrimaryColor()
+            lineChartLabel3?.textAlignment = .center
+            lineChartLabel3?.font = lineChartLabel3?.font.withSize(12)
+            view.addSubview(lineChartLabel3!)
+            UIView.animate(withDuration: 0.5, animations: {
+                self.lineChartLabel3?.alpha = 1
             })
         }
-        barChartLabel1 = UILabel(frame: CGRect(x: 8, y: chart1.frame.origin.y + chart1.frame.size.height - 20, width: chart1.frame.size.width, height: 20))
-        barChartLabel1?.text = vals1.count > 0 ? "Pulse for \(vals1.count) employees" : "No Pulse data available"
-        barChartLabel1?.textColor = UIColor.pulseLightPrimaryColor()
-        barChartLabel1?.textAlignment = .center
-        barChartLabel1?.font = barChartLabel1?.font.withSize(12)
-        view.addSubview(barChartLabel1!)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.barChartLabel1?.alpha = 1
-        })
-        
-        if barChartLabel2 != nil {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.barChartLabel2?.alpha = 0
-            })
-        }
-        barChartLabel2 = UILabel(frame: CGRect(x: 8, y: chart2.frame.origin.y + chart2.frame.size.height - 20, width: chart2.frame.size.width, height: 20))
-        barChartLabel2?.text = vals2.count > 0 ? "Pulse for \(vals2.count) employees" : "No Pulse data available"
-        barChartLabel2?.textColor = UIColor.pulseLightPrimaryColor()
-        barChartLabel2?.textAlignment = .center
-        barChartLabel2?.font = barChartLabel2?.font.withSize(12)
-        view.addSubview(barChartLabel2!)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.barChartLabel2?.alpha = 1
-        })
-        
-        if barChartLabel3 != nil {
-            UIView.animate(withDuration: 0.5, animations: {
-                self.barChartLabel3?.alpha = 0
-            })
-        }
-        barChartLabel3 = UILabel(frame: CGRect(x: 8, y: chart3.frame.origin.y + chart3.frame.size.height - 20, width: chart3.frame.size.width, height: 20))
-        barChartLabel3?.text = vals3.count > 0 ? "Pulse for \(vals3.count) employees" : "No Pulse data available"
-        barChartLabel3?.textColor = UIColor.pulseLightPrimaryColor()
-        barChartLabel3?.textAlignment = .center
-        barChartLabel3?.font = barChartLabel3?.font.withSize(12)
-        view.addSubview(barChartLabel3!)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.barChartLabel3?.alpha = 1
-        })
-    }*/
+    }
     
     func heightForView() -> CGFloat {
         // Calculated with bottom-most element (y position + height + 8)

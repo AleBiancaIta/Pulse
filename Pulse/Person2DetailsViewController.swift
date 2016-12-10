@@ -321,6 +321,7 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 if graphViewController == nil {
                     let storyboard = UIStoryboard(name: "Graph", bundle: nil)
                     let viewController = storyboard.instantiateViewController(withIdentifier: "LineGraphViewController") as! LineGraphViewController
+                    viewController.personPFObject = personPFObject
                     viewController.willMove(toParentViewController: self)
                     viewController.view.frame = CGRect(x: 0, y: 0, width: viewController.view.frame.size.width, height: viewController.heightForView())
                     graphViewController = viewController
