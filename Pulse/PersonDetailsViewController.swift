@@ -20,6 +20,7 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var phoneTextField: UITextField!
 	@IBOutlet weak var callButton: UIButton!
 	@IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var positionDescTextField: UITextField!
 
 	var photoData: Data?
 	var person: Person?
@@ -50,9 +51,10 @@ class PersonDetailsViewController: UIViewController {
 
 			let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
 			let lastName = pfObject[ObjectKeys.Person.lastName] as! String
-
+            
             firstNameTextField.text = firstName
 			lastNameTextField.text = firstName == lastName ? "" : lastName
+            positionDescTextField.text = pfObject[ObjectKeys.Person.positionDesc] as? String
             phoneTextField.text = pfObject[ObjectKeys.Person.phone] as? String
             emailTextField.text = pfObject[ObjectKeys.Person.email] as? String
 			photoImageView.pffile = pfObject[ObjectKeys.Person.photo] as? PFFile
@@ -71,7 +73,8 @@ class PersonDetailsViewController: UIViewController {
 	}
 
 	func heightForView() -> CGFloat {
-		return 150; // TODO heightForView
+		//return 150; // TODO heightForView
+        return 178
 	}
 
 	// MARK: - UI Actions
@@ -186,12 +189,14 @@ class PersonDetailsViewController: UIViewController {
 			UIExtensions.setupDarkViewFor(textField: lastNameTextField)
 			UIExtensions.setupDarkViewFor(textField: emailTextField)
 			UIExtensions.setupDarkViewFor(textField: phoneTextField)
+            UIExtensions.setupDarkViewFor(textField: positionDescTextField)
 		}
 		else {
 			phoneTextField.layer.sublayers?[0].removeFromSuperlayer()
 			emailTextField.layer.sublayers?[0].removeFromSuperlayer()
 			lastNameTextField.layer.sublayers?[0].removeFromSuperlayer()
 			firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
+            positionDescTextField.layer.sublayers?[0].removeFromSuperlayer()
 		}
 	}
 
@@ -205,6 +210,7 @@ class PersonDetailsViewController: UIViewController {
 		emailTextField.isUserInteractionEnabled = isEditing
 		lastNameTextField.isUserInteractionEnabled = isEditing
 		firstNameTextField.isUserInteractionEnabled = isEditing
+        positionDescTextField.isUserInteractionEnabled = isEditing
 		photoImageView.isUserInteractionEnabled = isEditing
 
 		configureButton(textField: phoneTextField, button: callButton)
@@ -228,6 +234,7 @@ class PersonDetailsViewController: UIViewController {
 
 			pfPerson[ObjectKeys.Person.email] = emailTextField.text
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
+            pfPerson[ObjectKeys.Person.positionDesc] = positionDescTextField.text
 
 			if let photoData = photoData {
 				SVProgressHUD.show()
@@ -282,6 +289,7 @@ class PersonDetailsViewController: UIViewController {
 		                lastName: lastName!)
 		person?.email = emailTextField.text
 		person?.phone = phoneTextField.text
+        person?.positionDesc = positionDescTextField.text
 		person?.photo = photoData
 
 		ParseClient.sharedInstance().getCurrentPerson(completion: { (manager: PFObject?, error: Error?) in
@@ -327,7 +335,7 @@ extension PersonDetailsViewController: RKDropdownAlertDelegate {
     func dropdownAlertWasDismissed() -> Bool {
         // Temporary fix to pop page after new person was created to "hide" bugs
         // Really though, if new person is created, page shouldn't be popped so the user can still use that page to add To Do items, meetings, etc.
-        self.navigationController?.popViewController(animated: true)
+        let _ = self.navigationController?.popViewController(animated: true)
         return true
     }
     
@@ -346,8 +354,11 @@ extension PersonDetailsViewController : UITextFieldDelegate {
 			lastNameTextField.becomeFirstResponder()
 		}
 		else if textField == lastNameTextField {
-			emailTextField.becomeFirstResponder()
+			positionDescTextField.becomeFirstResponder()
 		}
+        else if textField == positionDescTextField {
+            emailTextField.becomeFirstResponder()
+        }
 		else if textField == emailTextField {
 			phoneTextField.becomeFirstResponder()
 		}

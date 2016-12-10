@@ -24,6 +24,7 @@ class Person: NSObject {
 	var photo: Data?
     var pfObject: PFObject? // TODO: need to figure out how to do this better
     var companyId: String?
+    var positionDesc: String?
 
     // TODO - this needs to be changed later since positionId is not always 2
 	init(firstName: String, lastName: String) {
@@ -54,6 +55,7 @@ class Person: NSObject {
         deletedAt = dictionary[ObjectKeys.Person.deletedAt] as? Date
 		photo = dictionary[ObjectKeys.Person.photo] as? Data
         companyId = dictionary[ObjectKeys.Person.companyId] as? String
+        positionDesc = dictionary[ObjectKeys.Person.positionDesc] as? String
     }
 
     class func savePersonToParse(person: Person, withCompletion completion: PFBooleanResultBlock?) {
@@ -101,6 +103,10 @@ class Person: NSObject {
 		if let companyId = person.companyId {
 			parsePerson[ObjectKeys.Person.companyId] = companyId
 		}
+        
+        if let positionDesc = person.positionDesc {
+            parsePerson[ObjectKeys.Person.positionDesc] = positionDesc
+        }
 
         if let photo = person.photo {
 			savePhotoInPerson(parsePerson: parsePerson, photo: photo, withCompletion: completion)

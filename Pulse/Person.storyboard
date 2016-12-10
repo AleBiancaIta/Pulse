@@ -172,6 +172,7 @@
                         <outlet property="lastNameTextField" destination="fSb-46-36I" id="2Ld-f9-7B3"/>
                         <outlet property="phoneTextField" destination="VZq-fp-qWE" id="pSV-fl-3LM"/>
                         <outlet property="photoImageView" destination="aoC-vI-Cpq" id="aCB-Lk-9AL"/>
+                        <outlet property="positionDescTextField" destination="42v-06-hJm" id="Jk4-Tr-s2o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4U4-er-MFq" userLabel="First Responder" sceneMemberID="firstResponder"/>

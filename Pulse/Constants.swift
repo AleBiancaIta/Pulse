@@ -81,6 +81,7 @@ struct ObjectKeys {
         static let selectedCards = "selectedCards"
         static let deletedAt = "deletedAt"
         static let companyId = "companyId"
+        static let positionDesc = "positionDesc"
     }
     
     struct Meeting {
