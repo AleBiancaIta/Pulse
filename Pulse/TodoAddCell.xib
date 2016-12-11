@@ -56,6 +56,8 @@
                     </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="lte-DH-eJj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3ee-DA-NPb"/>
+                    <constraint firstItem="lte-DH-eJj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Ad4-cG-uDn"/>
                     <constraint firstAttribute="bottom" secondItem="lte-DH-eJj" secondAttribute="bottom" constant="5" id="BNQ-bK-9UO"/>
                     <constraint firstAttribute="trailing" secondItem="lte-DH-eJj" secondAttribute="trailing" constant="5" id="nQC-3o-Wpc"/>
                     <constraint firstItem="lte-DH-eJj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="u6x-Tt-6dH"/>
