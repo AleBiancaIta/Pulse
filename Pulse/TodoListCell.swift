@@ -105,14 +105,17 @@ class TodoListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         configureTodoBackgroundView()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(squareImageViewTap(_:)))
-        squareImageView.addGestureRecognizer(tapGesture)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction func onCompletedButtonTap(_ sender: UIButton) {
+        squareImageViewTap()
     }
     
     // MARK: - Helpers
@@ -126,7 +129,7 @@ class TodoListCell: UITableViewCell {
         todoBackgroundView.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
     }
     
-    @objc fileprivate func squareImageViewTap(_ sender: UITapGestureRecognizer) {
+    fileprivate func squareImageViewTap() {
         delegate?.todoListCell?(self, isCompleted: isCompleted)
     }
 }
