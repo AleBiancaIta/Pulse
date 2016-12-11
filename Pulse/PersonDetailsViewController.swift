@@ -194,11 +194,13 @@ class PersonDetailsViewController: UIViewController {
             UIExtensions.setupDarkViewFor(textField: positionDescTextField)
 		}
 		else {
+            // TODO: figure out a better way to remove the lines
 			phoneTextField.layer.sublayers?[0].removeFromSuperlayer()
-			emailTextField.layer.sublayers?[0].removeFromSuperlayer()
 			lastNameTextField.layer.sublayers?[0].removeFromSuperlayer()
 			positionDescTextField.layer.sublayers?[0].removeFromSuperlayer()
             firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
+            firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
+            emailTextField.layer.sublayers?[0].removeFromSuperlayer()
 		}
 	}
 
