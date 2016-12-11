@@ -293,10 +293,9 @@ class GraphViewController: UIViewController {
                 self.pieChartLabel1?.alpha = 0
             })
         }
-        pieChartLabel1 = UILabel(frame: CGRect(x: chart1.bounds.size.height * 1.25, y: chart1.frame.origin.y, width: 200, height: 80))
+        pieChartLabel1 = UILabel(frame: CGRect(x: chart1.bounds.size.height * 1.8, y: chart1.frame.origin.y, width: 200, height: 80))
         pieChartLabel1?.text = vals1Bad > 0 ? "Pulse for \(personIdValues.count) employee\(s)\n\(scale1BadString)% Poor\n\(scale1NeutralString)% Good\n\(scale1GoodString)% Great" : "No Pulse data available"
         pieChartLabel1?.textColor = UIColor.pulseLightPrimaryColor()
-        pieChartLabel1?.textAlignment = .center
         pieChartLabel1?.numberOfLines = 0
         pieChartLabel1?.font = pieChartLabel1?.font.withSize(12)
         view.addSubview(pieChartLabel1!)
@@ -309,10 +308,9 @@ class GraphViewController: UIViewController {
                 self.pieChartLabel2?.alpha = 0
             })
         }
-        pieChartLabel2 = UILabel(frame: CGRect(x: chart2.bounds.size.height * 1.25, y: chart2.frame.origin.y, width: 200, height: 80))
+        pieChartLabel2 = UILabel(frame: CGRect(x: chart2.bounds.size.height * 1.8, y: chart2.frame.origin.y, width: 200, height: 80))
         pieChartLabel2?.text = vals2Bad > 0 ? "Pulse for \(personIdValues.count) employee\(s)\n\(scale2BadString)% Poor\n\(scale2NeutralString)% Good\n\(scale2GoodString)% Great" : "No Pulse data available"
         pieChartLabel2?.textColor = UIColor.pulseLightPrimaryColor()
-        pieChartLabel2?.textAlignment = .center
         pieChartLabel2?.numberOfLines = 0
         pieChartLabel2?.font = pieChartLabel2?.font.withSize(12)
         view.addSubview(pieChartLabel2!)
@@ -325,10 +323,9 @@ class GraphViewController: UIViewController {
                 self.pieChartLabel3?.alpha = 0
             })
         }
-        pieChartLabel3 = UILabel(frame: CGRect(x: chart3.bounds.size.height * 1.25, y: chart3.frame.origin.y, width: 200, height: 80))
+        pieChartLabel3 = UILabel(frame: CGRect(x: chart3.bounds.size.height * 1.8, y: chart3.frame.origin.y, width: 200, height: 80))
         pieChartLabel3?.text = vals3Bad > 0 ? "Pulse for \(personIdValues.count) employee\(s)\n\(scale3BadString)% Poor\n\(scale3NeutralString)% Good\n\(scale3GoodString)% Great" : "No Pulse data available"
         pieChartLabel3?.textColor = UIColor.pulseLightPrimaryColor()
-        pieChartLabel3?.textAlignment = .center
         pieChartLabel3?.numberOfLines = 0
         pieChartLabel3?.font = pieChartLabel3?.font.withSize(12)
         view.addSubview(pieChartLabel3!)
