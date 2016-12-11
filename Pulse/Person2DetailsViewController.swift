@@ -360,11 +360,12 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 cell.layer.cornerRadius = 5
                 
                 if let toDoViewController = toDoViewController {
-                    if !cell.contentView.subviews.contains(toDoViewController.view) {
-                        cell.contentView.addSubview(toDoViewController.view)
-                        self.addChildViewController(toDoViewController)
-                        toDoViewController.didMove(toParentViewController: self)
+                    if cell.contentView.subviews.contains(toDoViewController.view) {
+                        toDoViewController.view.removeFromSuperview()
                     }
+                    cell.contentView.addSubview(toDoViewController.view)
+                    self.addChildViewController(toDoViewController)
+                    toDoViewController.didMove(toParentViewController: self)
                 }
                 
                 return cell
