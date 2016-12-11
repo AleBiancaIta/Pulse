@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.8.4)
   - DSBarChart (0.4.0)
+  - DYPieChartView (0.0.2)
   - HMSegmentedControl (1.5.3)
   - Parse (1.14.2):
     - Bolts/Tasks (~> 1.8)
@@ -29,6 +30,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (= 3.0.0)
   - DSBarChart (~> 0.4.0)
+  - DYPieChartView
   - HMSegmentedControl
   - Parse
   - ParseUI
@@ -40,6 +42,7 @@ SPEC CHECKSUMS:
   AFNetworking: 932ff751f9d6fb1dad0b3af58b7e3ffba0a4e7fd
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   DSBarChart: a065a2feb580994c443446cd858f157c17079df1
+  DYPieChartView: 250a5d954a8059e1fa655e9ff2b176e4e2d62cd5
   HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
   ParseUI: af2eba584799da4a9fbdac0e178662d7438b502e
@@ -47,6 +50,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: b0830714205bea1317ea1a2ebc71e5633af334d4
   SwiftChart: 39b48ba287a9f77a2a958726ff58fc05d5d9129f
 
-PODFILE CHECKSUM: 77872ff5c571c2d46de24d644b194ff64e8191fc
+PODFILE CHECKSUM: 83c36e62750724909b64bf5291e50ab867fb2edb
 
 COCOAPODS: 1.0.1

@@ -13,5 +13,6 @@ pod 'AFNetworking', '3.0.0'
 pod 'DSBarChart', '~> 0.4.0'
 pod 'HMSegmentedControl'
 pod 'SwiftChart'
+pod 'DYPieChartView'
 
 end
