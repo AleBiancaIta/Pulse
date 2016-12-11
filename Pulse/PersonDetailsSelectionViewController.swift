@@ -9,6 +9,7 @@
 import UIKit
 
 protocol PersonDetailsSelectionViewControllerDelegate: class {
+    func personDetailsSelectionViewController(personDetailsSelectionViewController: PersonDetailsSelectionViewController, didDismissSelector _: Bool)
     func personDetailsSelectionViewController(personDetailsSelectionViewController: PersonDetailsSelectionViewController, didAddCard card: Card)
     func personDetailsSelectionViewController(personDetailsSelectionViewController: PersonDetailsSelectionViewController, didRemoveCard card: Card)
 }
@@ -38,6 +39,7 @@ class PersonDetailsSelectionViewController: UIViewController {
     
     @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
+        delegate?.personDetailsSelectionViewController(personDetailsSelectionViewController: self, didDismissSelector: true)
     }
 }
 

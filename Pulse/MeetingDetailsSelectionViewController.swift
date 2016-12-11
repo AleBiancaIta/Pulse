@@ -9,6 +9,7 @@
 import UIKit
 
 protocol MeetingDetailsSelectionViewControllerDelegate: class {
+    func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didDismissSelector _: Bool)
     func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didAddCard card: Card)
     func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didRemoveCard card: Card)
 }
@@ -41,6 +42,7 @@ class MeetingDetailsSelectionViewController: UIViewController {
     
     @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
+        delegate?.meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: self, didDismissSelector: true)
     }
 }
 

@@ -414,6 +414,9 @@ extension MeetingDetailsViewController: UITableViewDelegate {
 // MARK: - MeetingDetailsSelectionViewControllerDelegate
 
 extension MeetingDetailsViewController: MeetingDetailsSelectionViewControllerDelegate {
+   func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didDismissSelector _: Bool) {
+      tableView.reloadData()
+   }
    
    func meetingDetailsSelectionViewController(meetingDetailsSelectionViewController: MeetingDetailsSelectionViewController, didAddCard card: Card) {
       let query = PFQuery(className: "Meetings")

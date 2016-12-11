@@ -9,6 +9,7 @@
 import UIKit
 
 protocol DashboardSelectionViewControllerDelegate: class {
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didDismissSelector _: Bool)
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card)
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didRemoveCard card: Card)
 }
@@ -37,6 +38,7 @@ class DashboardSelectionViewController: UIViewController {
     
     @IBAction func onDismiss(_ sender: UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
+        delegate?.dashboardSelectionViewController(dashboardSelectionViewController: self, didDismissSelector: true)
     }
 }
 
@@ -63,10 +65,6 @@ extension DashboardSelectionViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Constants.dashboardCards.count
     }
-    
-    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
-    }*/
 }
 
 // MARK: - UITableViewDelegate

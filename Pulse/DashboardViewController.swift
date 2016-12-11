@@ -496,6 +496,9 @@ extension DashboardViewController: UITableViewDelegate {
 // MARK: - DashboardSelectionViewControllerDelegate
 
 extension DashboardViewController: DashboardSelectionViewControllerDelegate {
+    func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didDismissSelector _: Bool) {
+        tableView.reloadData()
+    }
     
     func dashboardSelectionViewController(dashboardSelectionViewController: DashboardSelectionViewController, didAddCard card: Card) {
         

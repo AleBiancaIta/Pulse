@@ -606,6 +606,9 @@ extension Person2DetailsViewController: UITableViewDelegate {
 // MARK: - PersonDetailsSelectionViewControllerDelegate
 
 extension Person2DetailsViewController: PersonDetailsSelectionViewControllerDelegate {
+    func personDetailsSelectionViewController(personDetailsSelectionViewController: PersonDetailsSelectionViewController, didDismissSelector _: Bool) {
+        tableView.reloadData()
+    }
     
     func personDetailsSelectionViewController(personDetailsSelectionViewController: PersonDetailsSelectionViewController, didAddCard card: Card) {
         let query = PFQuery(className: "Person")
