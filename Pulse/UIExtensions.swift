@@ -166,3 +166,9 @@ extension UIColor {
         return UIColor.clear
     }
 }
+
+extension Date {
+    static func months(from: Date, to: Date) -> Float {
+        return Float(Calendar.current.dateComponents([.month], from: from, to: to).month ?? 0)
+    }
+}

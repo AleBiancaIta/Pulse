@@ -75,6 +75,7 @@ class MeetingsViewController: UIViewController {
                 query.whereKey("managerId", equalTo: managerId)
                 query.whereKeyDoesNotExist("deletedAt")
                 query.order(byDescending: "meetingDate")
+                query.limit = 1000
                 
                 if self.personId != nil,
                     let personId = self.personId {

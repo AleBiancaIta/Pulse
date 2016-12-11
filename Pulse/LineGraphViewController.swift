@@ -25,6 +25,7 @@ class LineGraphViewController: UIViewController {
     var survey1Values: [Float] = []
     var survey2Values: [Float] = []
     var survey3Values: [Float] = []
+    var numMonthsAgo: [Float] = []
     var highLowValues = ["Poor", "Good", "Great"]
     
     var personPFObject: PFObject?
@@ -44,16 +45,18 @@ class LineGraphViewController: UIViewController {
         survey1Values = []
         survey2Values = []
         survey3Values = []
+        numMonthsAgo = []
         
         if let personPFObject = personPFObject,
             let personId = personPFObject.objectId {
             let query = PFQuery(className: "Survey")
             query.whereKey("personId", equalTo: personId)
             query.whereKeyDoesNotExist("deletedAt")
+            query.order(byAscending: "meetingDate")
             
             // filter by last 6 months
             var pastDate = Date() // this is current date
-            pastDate.addTimeInterval(-(365/2)*24*60*60)
+            pastDate.addTimeInterval(-365*24*60*60)
             query.whereKey("meetingDate", greaterThan: pastDate)
             query.limit = 1000
             
@@ -63,6 +66,9 @@ class LineGraphViewController: UIViewController {
                         self.survey1Values.append(post["surveyValueId1"] as! Float)
                         self.survey2Values.append(post["surveyValueId2"] as! Float)
                         self.survey3Values.append(post["surveyValueId3"] as! Float)
+                        if let meetingDate = post["meetingDate"] as? Date {
+                            self.numMonthsAgo.append(Date.months(from: Date(), to: meetingDate))
+                        }
                     }
                     self.setupCharts()
                 }
@@ -89,28 +95,31 @@ class LineGraphViewController: UIViewController {
             var data3: [(x: Float, y: Float)] = []
             
             for i in 0...survey1Values.count-1 {
-                data1.append((x: Float(i), y: survey1Values[i])) // Happiness
-                data2.append((x: Float(i), y: survey2Values[i])) // Engagement
-                data3.append((x: Float(i), y: survey3Values[i])) // Workload
+                data1.append((x: numMonthsAgo[i], y: survey1Values[i])) // Happiness
+                data2.append((x: numMonthsAgo[i], y: survey2Values[i])) // Engagement
+                data3.append((x: numMonthsAgo[i], y: survey3Values[i])) // Workload
             }
             
             let survey1Series = ChartSeries(data: data1)
             survey1Series.color = UIColor.pulseAccentColor()
             survey1Series.area = true
             chart1.add(survey1Series)
-            chart1.xLabels = [0, Float(data1.count-1)]
+            chart1.xLabels = [-12, -6, 0]
+            chart1.xLabelsFormatter = { String(-Int(round($1))) + " months ago" }
             
             let survey2Series = ChartSeries(data: data2)
             survey2Series.color = UIColor.pulseAccentColor()
             survey2Series.area = true
             chart2.add(survey2Series)
-            chart2.xLabels = [0, Float(data2.count-1)]
+            chart2.xLabels = [-12, -6, 0]
+            chart2.xLabelsFormatter = { String(-Int(round($1))) + " months ago" }
             
             let survey3Series = ChartSeries(data: data3)
             survey3Series.color = UIColor.pulseAccentColor()
             survey3Series.area = true
             chart3.add(survey3Series)
-            chart3.xLabels = [0, Float(data3.count-1)]
+            chart3.xLabels = [-12, -6, 0]
+            chart3.xLabelsFormatter = { String(-Int(round($1))) + " months ago" }
         }
         
         chart1.labelColor = UIColor.pulseLightPrimaryColor()
@@ -153,7 +162,7 @@ class LineGraphViewController: UIViewController {
         }, completion: nil)
         
         // Setup chart labels (x-axis)
-        if let personPFObject = personPFObject,
+        /*if let personPFObject = personPFObject,
             let firstName = personPFObject["firstName"] as? String {
             
             if lineChartLabel1 != nil {
@@ -200,7 +209,7 @@ class LineGraphViewController: UIViewController {
             UIView.animate(withDuration: 0.5, animations: {
                 self.lineChartLabel3?.alpha = 1
             })
-        }
+        }*/
     }
     
     func heightForView() -> CGFloat {
