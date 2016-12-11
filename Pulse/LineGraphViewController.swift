@@ -56,7 +56,7 @@ class LineGraphViewController: UIViewController {
             
             // filter by last 6 months
             var pastDate = Date() // this is current date
-            pastDate.addTimeInterval(-365*24*60*60)
+            pastDate.addTimeInterval((-365/2)*24*60*60) // this is past date now
             query.whereKey("meetingDate", greaterThan: pastDate)
             query.limit = 1000
             
@@ -104,21 +104,21 @@ class LineGraphViewController: UIViewController {
             survey1Series.color = UIColor.pulseAccentColor()
             survey1Series.area = true
             chart1.add(survey1Series)
-            chart1.xLabels = [-12, -6, 0]
+            chart1.xLabels = [-6, -3, 0]
             chart1.xLabelsFormatter = { String(-Int(round($1))) + " months ago" }
             
             let survey2Series = ChartSeries(data: data2)
             survey2Series.color = UIColor.pulseAccentColor()
             survey2Series.area = true
             chart2.add(survey2Series)
-            chart2.xLabels = [-12, -6, 0]
+            chart2.xLabels = [-6, -3, 0]
             chart2.xLabelsFormatter = { String(-Int(round($1))) + " months ago" }
             
             let survey3Series = ChartSeries(data: data3)
             survey3Series.color = UIColor.pulseAccentColor()
             survey3Series.area = true
             chart3.add(survey3Series)
-            chart3.xLabels = [-12, -6, 0]
+            chart3.xLabels = [-6, -3, 0]
             chart3.xLabelsFormatter = { String(-Int(round($1))) + " months ago" }
         }
         
