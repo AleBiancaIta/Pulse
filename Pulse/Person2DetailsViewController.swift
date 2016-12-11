@@ -384,12 +384,11 @@ extension Person2DetailsViewController: UITableViewDataSource {
                 cell.showsReorderControl = tableView.isEditing
                 
                 if let toDoViewController = toDoViewController {
-                    if cell.contentView.subviews.contains(toDoViewController.view) {
-                        toDoViewController.view.removeFromSuperview()
+                    if !cell.contentView.subviews.contains(toDoViewController.view) {
+                        cell.contentView.addSubview(toDoViewController.view)
+                        self.addChildViewController(toDoViewController)
+                        toDoViewController.didMove(toParentViewController: self)
                     }
-                    cell.contentView.addSubview(toDoViewController.view)
-                    self.addChildViewController(toDoViewController)
-                    toDoViewController.didMove(toParentViewController: self)
                 }
                 
                 return cell
