@@ -211,14 +211,12 @@ class PersonDetailsViewController: UIViewController {
             UIExtensions.setupDarkViewFor(textField: contractEndTextField)
 		}
 		else {
-            // TODO: figure out a better way to remove the lines
-			phoneTextField.layer.sublayers?[0].removeFromSuperlayer()
-			lastNameTextField.layer.sublayers?[0].removeFromSuperlayer()
-			positionDescTextField.layer.sublayers?[0].removeFromSuperlayer()
-            contractEndTextField.layer.sublayers?[0].removeFromSuperlayer()
-            firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
-            firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
-            emailTextField.layer.sublayers?[0].removeFromSuperlayer()
+            contractEndTextField.layer.sublayers?.removeAll()
+            emailTextField.layer.sublayers?.removeAll()
+            firstNameTextField.layer.sublayers?.removeAll()
+            lastNameTextField.layer.sublayers?.removeAll()
+            phoneTextField.layer.sublayers?.removeAll()
+            positionDescTextField.layer.sublayers?.removeAll()
 		}
 	}
 
