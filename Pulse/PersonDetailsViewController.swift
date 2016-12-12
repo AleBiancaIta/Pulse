@@ -59,12 +59,12 @@ class PersonDetailsViewController: UIViewController {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .none
-                contractEndTextField.text = dateFormatter.string(from: contractEnd)
+                contractEndTextField.text = "Contract Ends: \(dateFormatter.string(from: contractEnd))"
                 
                 if contractEnd >= Date() {
                     contractEndTextField.textColor = UIColor.darkGray
                 } else {
-                    contractEndTextField.textColor = UIColor.red
+                    contractEndTextField.textColor = UIColor.pulseOverdueColor()
                 }
             }
             

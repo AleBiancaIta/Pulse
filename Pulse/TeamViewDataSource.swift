@@ -239,7 +239,7 @@ extension TeamViewDataSource: UITableViewDataSource {
         
         if let contractEndDate = teamMembers[indexPath.row][ObjectKeys.Person.contractEndDate] as? Date {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateStyle = .short
+            dateFormatter.dateStyle = .medium
             dateFormatter.timeStyle = .none
             let contractEndString = dateFormatter.string(from: contractEndDate)
             cell.contractEndLabel.text = "Contract Ends: \(contractEndString)"
