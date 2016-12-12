@@ -13,13 +13,13 @@ class Constants: NSObject {
     static let dashboardCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "g", "name": "Pulse Chart", "card_type": "pulse_graph", "descr": "See, at a glance, the survey results for your company from the past 30 days", "imageName": "PulseGraph"],
         ["id" : "t", "name": "Team Members", "card_type": "team", "descr": "A preview of your team members, including their most recent survey input", "imageName": "MyTeamDark"],
-        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "Clipboard"],
+        ["id" : "d", "name": "Action Items", "card_type": "to_do", "descr": "Stay organized with this summary of your action items", "imageName": "Clipboard"],
         ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings in descending order", "imageName": "Todo"]
     ])
     
     static let meetingCards: [Card] = Card.cardsWithArray(dictionaries: [
         ["id" : "s", "name": "Pulse Survey*", "card_type": "survey", "descr": "This required module has the survey questions used to in the company pulse chart", "imageName": "Smiley"],
-        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "Clipboard"],
+        ["id" : "d", "name": "Action Items", "card_type": "to_do", "descr": "Stay organized with this summary of your action items", "imageName": "Clipboard"],
         ["id" : "n", "name": "Notes", "card_type": "notes", "descr": "Have something on your mind? Keep track of your notes here", "imageName": "DoublePaper"]
     ])
     
@@ -27,7 +27,7 @@ class Constants: NSObject {
         ["id" : "i", "name": "Info*", "card_type": "info", "descr": "This required modules includes contact information for your team member", "imageName": "DriverLicense"],
         ["id" : "t", "name": "Team(*)", "card_type": "team", "descr": "This module automatically displays if this team member is a manager-level (or higher) employee in the company", "imageName": "MyTeamDark"],
         ["id" : "g", "name": "Pulse Chart", "card_type": "pulse_graph", "descr": "See, at a glance, the survey results for this team member over the past 6 months", "imageName": "PulseGraph"],
-        ["id" : "d", "name": "Follow Up Items", "card_type": "to_do", "descr": "Stay organized with this summary of your To Do list items", "imageName": "Clipboard"],
+        ["id" : "d", "name": "Action Items", "card_type": "to_do", "descr": "Stay organized with this summary of your action items", "imageName": "Clipboard"],
         ["id" : "m", "name": "Recent Meetings", "card_type": "meetings", "descr": "A list of your meetings with this team member in descending order", "imageName": "Todo"],
         ["id" : "n", "name": "Notes", "card_type": "notes", "descr": "Have something on your mind? Keep track of your notes here", "imageName": "DoublePaper"]
     ]);

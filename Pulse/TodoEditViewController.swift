@@ -40,7 +40,7 @@ class TodoEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Follow Up Item"
+        title = "Action Item"
         registerCellNibs()
         configureRowHeight()
         
