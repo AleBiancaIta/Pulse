@@ -53,7 +53,7 @@ class PhotoImageView: UIView {
 	}
 
 	var isEditable = false 
-	let imageDefaultSize = 200.0
+	let imageDefaultSize:CGFloat = 200.0
 
 	weak var delegate:PhotoImageViewDelegate? {
 		didSet {
@@ -147,7 +147,7 @@ extension PhotoImageView : UIImagePickerControllerDelegate {
 
 		if let chosenImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
 
-			let scaledImage = resizeImage(image: chosenImage, targetSize: CGSize(width: imageDefaultSize, height: imageDefaultSize))
+			let scaledImage = chosenImage.resize(to: imageDefaultSize)
 			photoData = UIImagePNGRepresentation(scaledImage)
 
 			imageView.image = chosenImage;
@@ -159,29 +159,6 @@ extension PhotoImageView : UIImagePickerControllerDelegate {
 
 	public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
 		viewController.dismiss(animated: true, completion: nil)
-	}
-
-	func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
-		let size = image.size
-
-		let widthRatio  = targetSize.width  / image.size.width
-		let heightRatio = targetSize.height / image.size.height
-
-		var newSize: CGSize
-		if(widthRatio > heightRatio) {
-			newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
-		}
-		else {
-			newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
-		}
-
-		let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
-		UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
-		image.draw(in: rect)
-		let newImage = UIGraphicsGetImageFromCurrentImageContext()
-		UIGraphicsEndImageContext()
-
-		return newImage!
 	}
 }
 

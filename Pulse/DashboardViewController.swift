@@ -31,7 +31,9 @@ class DashboardViewController: UIViewController {
         navigationController?.navigationBar.barStyle = .blackTranslucent
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        
+
+		setupRightBarButton()
+
         tableView.dataSource = self
         tableView.delegate = self
         tableView.estimatedRowHeight = 100
@@ -125,7 +127,32 @@ class DashboardViewController: UIViewController {
         debugPrint("SettingsViewController deinitialized")
         NotificationCenter.default.removeObserver(self)
     }
-    
+
+	func setupRightBarButton() {
+		let settingsBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "InfoDark"), style: .plain, target: self, action: #selector(onSettingsButtonTap))
+		navigationItem.rightBarButtonItem = settingsBarButtonItem
+
+		ParseClient.sharedInstance().getCurrentPerson { (person: PFObject?, error: Error?) in
+			if let person = person {
+				if let pffile = person[ObjectKeys.Person.photo] as? PFFile {
+					pffile.getDataInBackground(block: { (data: Data?, error: Error?) in
+						if let data = data {
+							let image = UIImage(data: data)
+							let button = UIButton.init(type: .custom)
+							button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
+							button.setBackgroundImage(image, for: .normal)
+							button.layer.cornerRadius = button.frame.size.width/2
+							button.clipsToBounds = true
+							button.addTarget(self, action:#selector(self.onSettingsButtonTap), for: .touchUpInside)
+							let settingsBarButtonItem = UIBarButtonItem.init(customView: button)
+							self.navigationItem.rightBarButtonItem = settingsBarButtonItem
+						}
+					})
+				}
+			}
+		}
+	}
+
     // MARK: - IBAction
     
     func onManageCards() {
