@@ -242,12 +242,12 @@ extension TeamViewDataSource: UITableViewDataSource {
             dateFormatter.dateStyle = .short
             dateFormatter.timeStyle = .none
             let contractEndString = dateFormatter.string(from: contractEndDate)
-            cell.contractEndLabel.text = "Contract ends: \(contractEndString)"
+            cell.contractEndLabel.text = "Contract Ends: \(contractEndString)"
             
             if contractEndDate >= Date() {
                 cell.contractEndLabel.textColor = UIColor.darkGray
             } else {
-                cell.contractEndLabel.textColor = UIColor.red
+                cell.contractEndLabel.textColor = UIColor.pulseOverdueColor()
             }
         } else {
             cell.contractEndLabel.text = ""

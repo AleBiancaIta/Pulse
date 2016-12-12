@@ -123,6 +123,11 @@ extension UIColor {
         return UIExtensions.uiColorWith(hex: "#BDBDBD") // Light grey
     }
     
+    // Used for overdue dates
+    class func pulseOverdueColor() -> UIColor {
+        return UIExtensions.uiColorWith(hex: "#D32F2F") // Dark red
+    }
+    
     // MARK: - Alert Colors
     
     class func pulseSuccessBackgroundColor() -> UIColor {
