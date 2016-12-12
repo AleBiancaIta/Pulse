@@ -516,7 +516,7 @@ extension MeetingDetailsViewController: MeetingSurveyViewControllerDelegate {
    fileprivate func saveExistingMeeting(meeting: Meeting) {
       parseClient.fetchMeetingFor(meetingId: meeting.objectId!) { (meeting: PFObject?, error: Error?) in
          if let meeting = meeting {
-            meeting[ObjectKeys.Meeting.notes] = self.meeting.notes
+            meeting[ObjectKeys.Meeting.notes] = self.meeting.notes ?? ""
             meeting[ObjectKeys.Meeting.selectedCards] = self.selectedCardsString
             meeting.saveInBackground { (success: Bool, error: Error?) in
                if success {

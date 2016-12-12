@@ -292,6 +292,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue1 = originalSurveyValue1 {
+            //debugPrint("originalSurveyValue1: \(originalSurveyValue1)")
             if originalSurveyValue1 == 0 {
                 isValue1Changed = false
             } else {
@@ -307,6 +308,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue1 = originalSurveyValue1 {
+            //debugPrint("originalSurveyValue1: \(originalSurveyValue1)")
             if originalSurveyValue1 == 1 {
                 isValue1Changed = false
             } else {
@@ -322,6 +324,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue1 = originalSurveyValue1 {
+            //debugPrint("originalSurveyValue1: \(originalSurveyValue1)")
             if originalSurveyValue1 == 2 {
                 isValue1Changed = false
             } else {
@@ -337,6 +340,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue2 = originalSurveyValue2 {
+            //debugPrint("originalSurveyValue2: \(originalSurveyValue2)")
             if originalSurveyValue2 == 0 {
                 isValue2Changed = false
             } else {
@@ -352,6 +356,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue2 = originalSurveyValue2 {
+            //debugPrint("originalSurveyValue2: \(originalSurveyValue2)")
             if originalSurveyValue2 == 1 {
                 isValue2Changed = false
             } else {
@@ -367,6 +372,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue2 = originalSurveyValue2 {
+            //debugPrint("originalSurveyValue2: \(originalSurveyValue2)")
             if originalSurveyValue2 == 2 {
                 isValue2Changed = false
             } else {
@@ -382,6 +388,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue3 = originalSurveyValue3 {
+            //debugPrint("originalSurveyValue3: \(originalSurveyValue3)")
             if originalSurveyValue3 == 0 {
                 isValue3Changed = false
             } else {
@@ -397,6 +404,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue3 = originalSurveyValue3 {
+            //debugPrint("originalSurveyValue3: \(originalSurveyValue3)")
             if originalSurveyValue3 == 1 {
                 isValue3Changed = false
             } else {
@@ -412,6 +420,7 @@ class MeetingSurveyViewController: UIViewController {
         }
         
         if let originalSurveyValue3 = originalSurveyValue3 {
+            //debugPrint("originalSurveyValue3: \(originalSurveyValue3)")
             if originalSurveyValue3 == 2 {
                 isValue3Changed = false
             } else {
@@ -565,6 +574,9 @@ extension MeetingSurveyViewController: MeetingDetailsViewControllerDelegate {
                                 survey.saveInBackground { (success: Bool, error: Error?) in
                                     if success {
                                         self.delegate?.meetingSurveyViewController?(self, meeting: self.meeting, surveyChanged: true)
+                                        self.originalSurveyValue1 = (self.survey1Low.isOn ? 0 : (self.survey1High.isOn ? 2 : 1))
+                                        self.originalSurveyValue2 = (self.survey2Low.isOn ? 0 : (self.survey2High.isOn ? 2 : 1))
+                                        self.originalSurveyValue3 = (self.survey3Low.isOn ? 0 : (self.survey3High.isOn ? 2 : 1))
                                     } else {
                                         if let error = error {
                                             self.ABIShowDropDownAlert(type: AlertTypes.failure, title: "Error!", message: "Failed to save survey, error: \(error.localizedDescription)")
