@@ -272,7 +272,8 @@ class PersonDetailsViewController: UIViewController {
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
             pfPerson[ObjectKeys.Person.positionDesc] = positionDescTextField.text
             
-            if let contractEndDate = contractEndTextField.text {
+            if let contractEndDate = contractEndTextField.text,
+                !contractEndDate.isEmpty {
                 let date = dateFromString(dateString: contractEndDate)
                 pfPerson[ObjectKeys.Person.contractEndDate] = date
             }
