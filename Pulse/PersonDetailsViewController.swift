@@ -22,7 +22,6 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var positionDescTextField: UITextField!
     @IBOutlet weak var contractEndTextField: UITextField!
-    @IBOutlet weak var contractEndDatePicker: UIDatePicker!
 
 	var photoData: Data?
 	var person: Person?
@@ -61,6 +60,12 @@ class PersonDetailsViewController: UIViewController {
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .none
                 contractEndTextField.text = dateFormatter.string(from: contractEnd)
+                
+                if contractEnd < Date() {
+                    contractEndTextField.textColor = UIColor.red
+                } else {
+                    contractEndTextField.textColor = UIColor.black
+                }
             }
             
             firstNameTextField.text = firstName
@@ -81,26 +86,11 @@ class PersonDetailsViewController: UIViewController {
 	func initViews() {
 		callButton.layer.cornerRadius = 5
 		phoneTextField.delegate = PhoneTextFieldDelegate.shared
-        
-        configureDatePicker()
 	}
-
-    fileprivate func configureDatePicker() {
-        contractEndDatePicker.datePickerMode = UIDatePickerMode.date
-        contractEndTextField.inputView = contractEndDatePicker
-        contractEndDatePicker.addTarget(self, action: #selector(onContractEndDatePickerValueChanged(_:)), for: .valueChanged)
-    }
-    
-    @objc func onContractEndDatePickerValueChanged(_ sender: UIDatePicker) {
-        self.contractEndTextField.text = "\(sender.date)"
-    }
-    
     
 	func heightForView() -> CGFloat {
 		//return 150; // TODO heightForView
-        //return 178
-        //return 210
-        return 310
+        return 210 //return 178
 	}
 
 	// MARK: - UI Actions
@@ -232,6 +222,19 @@ class PersonDetailsViewController: UIViewController {
 		}
 	}
 
+    fileprivate func dateFromString(dateString: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM d, yyyy"
+        return dateFormatter.date(from: dateString)
+    }
+    
+    fileprivate func stringFromDate(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        return dateFormatter.string(from: date)
+    }
+    
 	// MARK: - Edit/Save
 
 	override func setEditing(_ editing: Bool, animated: Bool) {
@@ -269,7 +272,10 @@ class PersonDetailsViewController: UIViewController {
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
             pfPerson[ObjectKeys.Person.positionDesc] = positionDescTextField.text
             
-            // TODO : Handle contract end date picker
+            if let contractEndDate = contractEndTextField.text {
+                let date = dateFromString(dateString: contractEndDate)
+                pfPerson[ObjectKeys.Person.contractEndDate] = date
+            }
             
 			if let photoData = photoData {
 				SVProgressHUD.show()
@@ -304,7 +310,6 @@ class PersonDetailsViewController: UIViewController {
 		}
 	}
 
-
 	func createPerson() {
 
 		NSLog("Creating new person")
@@ -326,7 +331,10 @@ class PersonDetailsViewController: UIViewController {
 		person?.phone = phoneTextField.text
         person?.positionDesc = positionDescTextField.text
         
-        // TODO : Handle contract end date picker
+        if let contractEndDate = contractEndTextField.text {
+            let date = dateFromString(dateString: contractEndDate)
+            person?.contractEndDate = date
+        }
         
 		person?.photo = photoData
 
@@ -383,7 +391,29 @@ extension PersonDetailsViewController: RKDropdownAlertDelegate {
 }
 
 extension PersonDetailsViewController : UITextFieldDelegate {
-
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == contractEndTextField {
+            let datePicker = UIDatePicker()
+            datePicker.datePickerMode = UIDatePickerMode.date
+            datePicker.backgroundColor = UIColor.pulseLightPrimaryColor()
+            
+            if let dateString = contractEndTextField.text, let date = dateFromString(dateString: dateString) {
+                datePicker.setDate(date, animated: true)
+            } else {
+                let date = Date()
+                datePicker.setDate(date, animated: false)
+            }
+            
+            contractEndTextField.inputView = datePicker
+            datePicker.addTarget(self, action: #selector(onContractEndDatePickerValueChanged(_:)), for: .valueChanged)
+        }
+    }
+    
+    @objc func onContractEndDatePickerValueChanged(_ sender: UIDatePicker) {
+        contractEndTextField.text = stringFromDate(date: sender.date)
+    }
+    
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
 		textField.resignFirstResponder()
@@ -399,10 +429,11 @@ extension PersonDetailsViewController : UITextFieldDelegate {
         }
 		else if textField == emailTextField {
 			phoneTextField.becomeFirstResponder()
-        } //else if textField == contractEndTextField {
-          //TODO
-        //}
-
+        }
+        /*
+        else if textField == phoneTextField {
+            contractEndTextField.becomeFirstResponder()
+        }*/
 		return true
 	}
 }

@@ -105,7 +105,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="phonePad"/>
                                 <connections>
                                     <outlet property="delegate" destination="Uwy-PO-bTJ" id="N3u-i0-TCK"/>
                                 </connections>
@@ -133,7 +133,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                 <connections>
                                     <outlet property="delegate" destination="Uwy-PO-bTJ" id="Bn0-fr-Kwd"/>
                                 </connections>
@@ -144,13 +144,6 @@
                                 <color key="textColor" red="0.7725490196" green="0.79215686269999996" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="KRf-ZS-c69">
-                                <rect key="frame" x="0.0" y="204" width="320" height="94"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="503187082.811845">
-                                    <!--2016-12-11 22:11:22 +0000-->
-                                </date>
-                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -189,7 +182,6 @@
                     <navigationItem key="navigationItem" id="9mV-B5-MGU"/>
                     <connections>
                         <outlet property="callButton" destination="ouF-MC-VDc" id="vNr-CT-e6u"/>
-                        <outlet property="contractEndDatePicker" destination="KRf-ZS-c69" id="jgk-tg-3gJ"/>
                         <outlet property="contractEndTextField" destination="hlv-fh-xNL" id="SIB-B5-pgq"/>
                         <outlet property="emailButton" destination="bhr-aV-uRu" id="jiO-8a-0cN"/>
                         <outlet property="emailTextField" destination="ee3-O0-BO6" id="SM9-xy-7LD"/>
