@@ -21,6 +21,8 @@ class PersonDetailsViewController: UIViewController {
 	@IBOutlet weak var callButton: UIButton!
 	@IBOutlet weak var emailButton: UIButton!
     @IBOutlet weak var positionDescTextField: UITextField!
+    @IBOutlet weak var contractEndTextField: UITextField!
+    @IBOutlet weak var contractEndDatePicker: UIDatePicker!
 
 	var photoData: Data?
 	var person: Person?
@@ -52,6 +54,14 @@ class PersonDetailsViewController: UIViewController {
 			let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
 			let lastName = pfObject[ObjectKeys.Person.lastName] as! String
             let positionDesc = pfObject[ObjectKeys.Person.positionDesc] as? String
+            let contractEndDate = pfObject[ObjectKeys.Person.contractEndDate] as? Date
+            
+            if let contractEnd = contractEndDate {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .medium
+                dateFormatter.timeStyle = .none
+                contractEndTextField.text = dateFormatter.string(from: contractEnd)
+            }
             
             firstNameTextField.text = firstName
 			lastNameTextField.text = firstName == lastName ? "" : lastName
@@ -71,11 +81,26 @@ class PersonDetailsViewController: UIViewController {
 	func initViews() {
 		callButton.layer.cornerRadius = 5
 		phoneTextField.delegate = PhoneTextFieldDelegate.shared
+        
+        configureDatePicker()
 	}
 
+    fileprivate func configureDatePicker() {
+        contractEndDatePicker.datePickerMode = UIDatePickerMode.date
+        contractEndTextField.inputView = contractEndDatePicker
+        contractEndDatePicker.addTarget(self, action: #selector(onContractEndDatePickerValueChanged(_:)), for: .valueChanged)
+    }
+    
+    @objc func onContractEndDatePickerValueChanged(_ sender: UIDatePicker) {
+        self.contractEndTextField.text = "\(sender.date)"
+    }
+    
+    
 	func heightForView() -> CGFloat {
 		//return 150; // TODO heightForView
-        return 178
+        //return 178
+        //return 210
+        return 310
 	}
 
 	// MARK: - UI Actions
@@ -185,6 +210,7 @@ class PersonDetailsViewController: UIViewController {
 	func setupViews() {
         lastNameTextField.isHidden = isEditing ? false : (lastNameTextField.text == "" ? true : false)
         positionDescTextField.isHidden = isEditing ? false : (positionDescTextField.text == "" ? true : false)
+        contractEndTextField.isHidden = isEditing ? false : (contractEndTextField.text == "" ? true : false)
         
 		if isEditing {
 			UIExtensions.setupDarkViewFor(textField: firstNameTextField)
@@ -192,12 +218,14 @@ class PersonDetailsViewController: UIViewController {
 			UIExtensions.setupDarkViewFor(textField: emailTextField)
 			UIExtensions.setupDarkViewFor(textField: phoneTextField)
             UIExtensions.setupDarkViewFor(textField: positionDescTextField)
+            UIExtensions.setupDarkViewFor(textField: contractEndTextField)
 		}
 		else {
             // TODO: figure out a better way to remove the lines
 			phoneTextField.layer.sublayers?[0].removeFromSuperlayer()
 			lastNameTextField.layer.sublayers?[0].removeFromSuperlayer()
 			positionDescTextField.layer.sublayers?[0].removeFromSuperlayer()
+            contractEndTextField.layer.sublayers?[0].removeFromSuperlayer()
             firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
             firstNameTextField.layer.sublayers?[0].removeFromSuperlayer()
             emailTextField.layer.sublayers?[0].removeFromSuperlayer()
@@ -215,6 +243,7 @@ class PersonDetailsViewController: UIViewController {
 		lastNameTextField.isUserInteractionEnabled = isEditing
 		firstNameTextField.isUserInteractionEnabled = isEditing
         positionDescTextField.isUserInteractionEnabled = isEditing
+        contractEndTextField.isUserInteractionEnabled = isEditing
 		photoImageView.isUserInteractionEnabled = isEditing
 
 		configureButton(textField: phoneTextField, button: callButton)
@@ -239,6 +268,8 @@ class PersonDetailsViewController: UIViewController {
 			pfPerson[ObjectKeys.Person.email] = emailTextField.text
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
             pfPerson[ObjectKeys.Person.positionDesc] = positionDescTextField.text
+            
+            // TODO : Handle contract end date picker
             
 			if let photoData = photoData {
 				SVProgressHUD.show()
@@ -294,6 +325,9 @@ class PersonDetailsViewController: UIViewController {
 		person?.email = emailTextField.text
 		person?.phone = phoneTextField.text
         person?.positionDesc = positionDescTextField.text
+        
+        // TODO : Handle contract end date picker
+        
 		person?.photo = photoData
 
 		ParseClient.sharedInstance().getCurrentPerson(completion: { (manager: PFObject?, error: Error?) in
@@ -365,7 +399,9 @@ extension PersonDetailsViewController : UITextFieldDelegate {
         }
 		else if textField == emailTextField {
 			phoneTextField.becomeFirstResponder()
-		}
+        } //else if textField == contractEndTextField {
+          //TODO
+        //}
 
 		return true
 	}

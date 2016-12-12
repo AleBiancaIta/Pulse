@@ -125,18 +125,39 @@
                                     <action selector="didTapCallButton:" destination="Uwy-PO-bTJ" eventType="touchUpInside" id="igK-kA-Zae"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contract End Date" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hlv-fh-xNL">
+                                <rect key="frame" x="140" y="176" width="156" height="24"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="c06-n6-FWN"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Uwy-PO-bTJ" id="Bn0-fr-Kwd"/>
+                                </connections>
+                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="*Required Fields" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuX-EF-o5x">
-                                <rect key="frame" x="202" y="176" width="94" height="15"/>
+                                <rect key="frame" x="202" y="204" width="94" height="15"/>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="12"/>
                                 <color key="textColor" red="0.7725490196" green="0.79215686269999996" blue="0.91372549020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="KRf-ZS-c69">
+                                <rect key="frame" x="0.0" y="204" width="320" height="94"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="503187082.811845">
+                                    <!--2016-12-11 22:11:22 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ee3-O0-BO6" firstAttribute="leading" secondItem="42v-06-hJm" secondAttribute="leading" id="5mo-1c-h2U"/>
                             <constraint firstItem="ouF-MC-VDc" firstAttribute="trailing" secondItem="VZq-fp-qWE" secondAttribute="trailing" id="5ul-7J-ahc"/>
                             <constraint firstItem="GuX-EF-o5x" firstAttribute="trailing" secondItem="VZq-fp-qWE" secondAttribute="trailing" id="9BQ-Fg-FUD"/>
+                            <constraint firstItem="GuX-EF-o5x" firstAttribute="top" secondItem="hlv-fh-xNL" secondAttribute="bottom" constant="4" id="CM4-VP-CvM"/>
                             <constraint firstItem="VZq-fp-qWE" firstAttribute="trailing" secondItem="ee3-O0-BO6" secondAttribute="trailing" id="DdU-UP-jBw"/>
                             <constraint firstItem="ouF-MC-VDc" firstAttribute="bottom" secondItem="VZq-fp-qWE" secondAttribute="bottom" id="HiM-ox-hW5"/>
                             <constraint firstItem="bhr-aV-uRu" firstAttribute="trailing" secondItem="ee3-O0-BO6" secondAttribute="trailing" id="Hxc-2u-ZZc"/>
@@ -146,6 +167,7 @@
                             <constraint firstItem="UGc-GT-hsk" firstAttribute="leading" secondItem="aoC-vI-Cpq" secondAttribute="trailing" constant="8" id="RaW-cf-bOH"/>
                             <constraint firstItem="aoC-vI-Cpq" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="16" id="VEI-wg-o6L"/>
                             <constraint firstItem="bhr-aV-uRu" firstAttribute="leading" secondItem="ee3-O0-BO6" secondAttribute="leading" id="Xba-a7-nqW"/>
+                            <constraint firstItem="hlv-fh-xNL" firstAttribute="leading" secondItem="VZq-fp-qWE" secondAttribute="leading" id="YLa-uK-ML8"/>
                             <constraint firstItem="ee3-O0-BO6" firstAttribute="top" secondItem="42v-06-hJm" secondAttribute="bottom" constant="4" id="aEI-3C-X3s"/>
                             <constraint firstItem="VZq-fp-qWE" firstAttribute="top" secondItem="ee3-O0-BO6" secondAttribute="bottom" constant="4" id="bkV-zr-gvD"/>
                             <constraint firstItem="fSb-46-36I" firstAttribute="leading" secondItem="UGc-GT-hsk" secondAttribute="leading" id="gv7-zw-sNS"/>
@@ -155,17 +177,20 @@
                             <constraint firstItem="ouF-MC-VDc" firstAttribute="top" secondItem="VZq-fp-qWE" secondAttribute="top" id="jRb-Ok-k1D"/>
                             <constraint firstItem="42v-06-hJm" firstAttribute="leading" secondItem="fSb-46-36I" secondAttribute="leading" id="kL1-1e-gOa"/>
                             <constraint firstItem="aoC-vI-Cpq" firstAttribute="leading" secondItem="Dd2-dU-vf8" secondAttribute="leading" constant="12" id="nG2-A4-xAs"/>
-                            <constraint firstItem="GuX-EF-o5x" firstAttribute="top" secondItem="VZq-fp-qWE" secondAttribute="bottom" constant="4" id="o1B-p0-JiY"/>
                             <constraint firstItem="ee3-O0-BO6" firstAttribute="trailing" secondItem="42v-06-hJm" secondAttribute="trailing" id="oBW-NB-tdl"/>
                             <constraint firstItem="VZq-fp-qWE" firstAttribute="leading" secondItem="ee3-O0-BO6" secondAttribute="leading" id="rx0-Vq-j4I"/>
                             <constraint firstItem="UGc-GT-hsk" firstAttribute="top" secondItem="4Ra-l0-F2s" secondAttribute="bottom" constant="16" id="uKm-4u-sv1"/>
                             <constraint firstItem="bhr-aV-uRu" firstAttribute="top" secondItem="ee3-O0-BO6" secondAttribute="top" id="uKz-he-zam"/>
                             <constraint firstItem="ouF-MC-VDc" firstAttribute="leading" secondItem="VZq-fp-qWE" secondAttribute="leading" id="uZR-wx-sa9"/>
+                            <constraint firstItem="hlv-fh-xNL" firstAttribute="trailing" secondItem="VZq-fp-qWE" secondAttribute="trailing" id="wev-D7-HTY"/>
+                            <constraint firstItem="hlv-fh-xNL" firstAttribute="top" secondItem="ouF-MC-VDc" secondAttribute="bottom" constant="4" id="xO7-0d-16l"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="9mV-B5-MGU"/>
                     <connections>
                         <outlet property="callButton" destination="ouF-MC-VDc" id="vNr-CT-e6u"/>
+                        <outlet property="contractEndDatePicker" destination="KRf-ZS-c69" id="jgk-tg-3gJ"/>
+                        <outlet property="contractEndTextField" destination="hlv-fh-xNL" id="SIB-B5-pgq"/>
                         <outlet property="emailButton" destination="bhr-aV-uRu" id="jiO-8a-0cN"/>
                         <outlet property="emailTextField" destination="ee3-O0-BO6" id="SM9-xy-7LD"/>
                         <outlet property="firstNameTextField" destination="UGc-GT-hsk" id="b5E-tk-UbZ"/>

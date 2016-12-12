@@ -83,6 +83,7 @@ struct ObjectKeys {
         static let deletedAt = "deletedAt"
         static let companyId = "companyId"
         static let positionDesc = "positionDesc"
+        static let contractEndDate = "contractEndDate"
     }
     
     struct Meeting {
