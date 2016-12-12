@@ -236,7 +236,23 @@ extension TeamViewDataSource: UITableViewDataSource {
         cell.emailButton.setTitle(teamMembers[indexPath.row][ObjectKeys.Person.email] as? String, for: .normal)
         cell.delegate = self
 		cell.profileImageView.pffile = teamMembers[indexPath.row][ObjectKeys.Person.photo] as? PFFile
-
+        
+        if let contractEndDate = teamMembers[indexPath.row][ObjectKeys.Person.contractEndDate] as? Date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .short
+            dateFormatter.timeStyle = .none
+            let contractEndString = dateFormatter.string(from: contractEndDate)
+            cell.contractEndLabel.text = "Contract ends: \(contractEndString)"
+            
+            if contractEndDate >= Date() {
+                cell.contractEndLabel.textColor = UIColor.darkGray
+            } else {
+                cell.contractEndLabel.textColor = UIColor.red
+            }
+        } else {
+            cell.contractEndLabel.text = ""
+        }
+        
         fetchLatestSurveyFor(personId: teamMembers[indexPath.row].objectId!, orderBy: ObjectKeys.Meeting.meetingDate, limit: 1) { (survey: PFObject?, error: Error?) in
             if let error = error {
                 debugPrint("Unable to fetch survey data: \(error.localizedDescription)")

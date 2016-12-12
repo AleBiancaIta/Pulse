@@ -19,6 +19,7 @@ class TeamTableViewCell: UITableViewCell {
     @IBOutlet weak var firstNameLabel: UILabel!
     @IBOutlet weak var positionDescLabel: UILabel!
     @IBOutlet weak var emailButton: UIButton!
+    @IBOutlet weak var contractEndLabel: UILabel!
     @IBOutlet weak var surveyValue1Button: UIButton!
     @IBOutlet weak var surveyValue2Button: UIButton!
     @IBOutlet weak var surveyValue3Button: UIButton!
