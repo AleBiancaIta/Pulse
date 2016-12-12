@@ -59,13 +59,7 @@ class PersonDetailsViewController: UIViewController {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = .medium
                 dateFormatter.timeStyle = .none
-                contractEndTextField.text = "Contract Ends: \(dateFormatter.string(from: contractEnd))"
-                
-                if contractEnd >= Date() {
-                    contractEndTextField.textColor = UIColor.darkGray
-                } else {
-                    contractEndTextField.textColor = UIColor.pulseOverdueColor()
-                }
+                contractEndTextField.text = dateFormatter.string(from: contractEnd)
             }
             
             firstNameTextField.text = firstName
@@ -247,6 +241,22 @@ class PersonDetailsViewController: UIViewController {
         contractEndTextField.isUserInteractionEnabled = isEditing
 		photoImageView.isUserInteractionEnabled = isEditing
 
+        if let contractEndText = contractEndTextField.text,
+            !contractEndText.isEmpty,
+            !isEditing {
+            contractEndTextField.text = "Contract Ends: \(contractEndText)"
+            
+            if let contractEnd = dateFromString(dateString: contractEndText),
+                contractEnd >= Date() {
+                contractEndTextField.textColor = UIColor.darkGray
+            } else {
+                contractEndTextField.textColor = UIColor.pulseOverdueColor()
+            }
+            
+        } else if isEditing {
+            contractEndTextField.text = contractEndTextField.text?.replacingOccurrences(of: "Contract Ends: ", with: "")
+        }
+        
 		configureButton(textField: phoneTextField, button: callButton)
 		configureButton(textField: emailTextField, button: emailButton)
 
