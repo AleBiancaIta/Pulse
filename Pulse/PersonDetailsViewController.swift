@@ -431,17 +431,17 @@ extension PersonDetailsViewController : UITextFieldDelegate {
 			lastNameTextField.becomeFirstResponder()
 		}
 		else if textField == lastNameTextField {
-			positionDescTextField.becomeFirstResponder()
+			emailTextField.becomeFirstResponder()
 		}
-        else if textField == positionDescTextField {
-            emailTextField.becomeFirstResponder()
-        }
 		else if textField == emailTextField {
 			phoneTextField.becomeFirstResponder()
         }
+        else if textField == positionDescTextField {
+            contractEndTextField.becomeFirstResponder()
+        }
         /*
         else if textField == phoneTextField {
-            contractEndTextField.becomeFirstResponder()
+         positionDescTextField.becomeFirstResponder()
         }*/
 		return true
 	}
