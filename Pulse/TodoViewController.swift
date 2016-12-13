@@ -70,6 +70,7 @@ class TodoViewController: UIViewController {
         UIExtensions.gradientBackgroundFor(view: view)
         tableView.layer.cornerRadius = 5
         tableView.isMultipleTouchEnabled = false
+        tableView.isScrollEnabled = todoLimit == .seeAll // TODO remove this line after demo
         
         registerCellNibs()
         configureRowHeight()
@@ -84,7 +85,7 @@ class TodoViewController: UIViewController {
     }
     
     func heightForView() -> CGFloat {
-        return 290;
+        return 296;
     }
 
     // MARK: - Helpers
