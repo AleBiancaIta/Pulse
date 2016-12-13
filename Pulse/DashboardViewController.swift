@@ -142,6 +142,8 @@ class DashboardViewController: UIViewController {
 							button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
 							button.setBackgroundImage(image, for: .normal)
 							button.layer.cornerRadius = button.frame.size.width/2
+                            button.layer.borderColor = UIColor.pulseLightPrimaryColor().cgColor
+                            button.layer.borderWidth = 1.0
 							button.clipsToBounds = true
 							button.addTarget(self, action:#selector(self.onSettingsButtonTap), for: .touchUpInside)
 							let settingsBarButtonItem = UIBarButtonItem.init(customView: button)
