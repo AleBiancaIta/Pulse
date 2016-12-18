@@ -248,6 +248,10 @@ class Person2DetailsViewController: UIViewController {
         // if sender.state == .began
         // else if sender.state == .end
     }
+    
+    deinit {
+        debugPrint("Person2DetailsVC deinitialized")
+    }
 }
 
 extension Person2DetailsViewController: UITableViewDataSource {

@@ -26,7 +26,7 @@ class PersonDetailsViewController: UIViewController {
 	var photoData: Data?
 	var person: Person?
     var personPFObject: PFObject?
-	var personInfoParentViewController: Person2DetailsViewController?
+	weak var personInfoParentViewController: Person2DetailsViewController?
 
 	// MARK: - View Lifecycle
 

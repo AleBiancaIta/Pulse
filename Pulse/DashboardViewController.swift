@@ -124,7 +124,7 @@ class DashboardViewController: UIViewController {
     }
     
     deinit {
-        debugPrint("SettingsViewController deinitialized")
+        debugPrint("DashboardViewController deinitialized")
         NotificationCenter.default.removeObserver(self)
     }
 

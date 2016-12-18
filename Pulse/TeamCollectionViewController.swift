@@ -36,7 +36,7 @@ class TeamCollectionViewController: UIViewController {
         super.viewWillAppear(animated)
         collectionView.dataSource = self.dataSource
         dataSource.delegate = self
-        dataSource.printTeamMembers()
+        //dataSource.printTeamMembers()
 
         dataSource.fetchTeamMembersForCurrentPerson(person: self.person) { (success: Bool, error: Error?) in
             if success {
@@ -76,7 +76,7 @@ class TeamCollectionViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        //print("team collection view controller being deinitialized")
+        debugPrint("team collection view controller being deinitialized")
     }
     
     // MARK: - Helpers

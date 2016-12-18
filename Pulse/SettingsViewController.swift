@@ -41,7 +41,7 @@ class SettingsViewController: UIViewController {
         settingsTableView.estimatedRowHeight = 100
         settingsTableView.rowHeight = UITableViewAutomaticDimension
         getCurrentPerson()
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(onDoneButton(_:)))
         
         settingsTableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
