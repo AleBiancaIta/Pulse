@@ -25,7 +25,7 @@ class SettingsViewController: UIViewController {
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     
-    @IBOutlet var settingsTableView: UITableView!
+    @IBOutlet weak var settingsTableView: UITableView!
     var user: PFUser! = PFUser.current()
     var person: PFObject!
     
@@ -45,6 +45,7 @@ class SettingsViewController: UIViewController {
         
         settingsTableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
+    
     @IBAction func onDoneButtonTap(_ sender: UIBarButtonItem) {
         self.dismiss(animated: true, completion: nil)
     }

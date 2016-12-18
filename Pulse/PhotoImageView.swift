@@ -20,7 +20,7 @@ class PhotoImageView: UIView {
 	@IBOutlet var contentView: UIView!
 	@IBOutlet weak var cameraButton: UIButton!
 
-	var viewController: UIViewController!
+	weak var viewController: UIViewController!
 	let imagePicker = UIImagePickerController()
 	var photoData: Data? {
 		didSet {
