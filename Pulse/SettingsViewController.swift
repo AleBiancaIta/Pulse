@@ -45,12 +45,15 @@ class SettingsViewController: UIViewController {
         
         settingsTableView.register(UINib(nibName: "CustomTextCell", bundle: nil), forCellReuseIdentifier: "CustomTextCell")
     }
+    @IBAction func onDoneButtonTap(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK: - Private Methods
-    
+    /*
     @objc fileprivate func onDoneButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
-    }
+    }*/
     
     // MARK: - Helpers
     

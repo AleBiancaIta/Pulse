@@ -155,6 +155,12 @@ class UpdateProfileViewController: UIViewController {
         lastNameTextField.delegate = self
         phoneTextField.delegate = PhoneTextFieldDelegate.shared
     }
+    
+    // MARK: - deinit
+    
+    deinit {
+        debugPrint("UpdateProfileVC deinitialized")
+    }
 }
 
 // MARK: - UITextFieldDelegate

@@ -106,6 +106,12 @@ class ChangePasswordViewController: UIViewController {
         newPasswordTextField.delegate = self
         confirmNewPasswordTextField.delegate = self
     }
+    
+    // MARK: - deinit
+    
+    deinit {
+        debugPrint("ChangePasswordVC deinitialized")
+    }
 }
 
 // MARK: - RKDropDownAlertDelegate
