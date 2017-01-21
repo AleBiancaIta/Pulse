@@ -53,14 +53,14 @@ class PersonDetailsViewController: UIViewController {
 			let firstName =  pfObject[ObjectKeys.Person.firstName] as! String
 			let lastName = pfObject[ObjectKeys.Person.lastName] as! String
             let positionDesc = pfObject[ObjectKeys.Person.positionDesc] as? String
-            let contractEndDate = pfObject[ObjectKeys.Person.contractEndDate] as? Date
+            //let contractEndDate = pfObject[ObjectKeys.Person.contractEndDate] as? Date
             
-            if let contractEnd = contractEndDate {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .medium
-                dateFormatter.timeStyle = .none
-                contractEndTextField.text = dateFormatter.string(from: contractEnd)
-            }
+//            if let contractEnd = contractEndDate {
+//                let dateFormatter = DateFormatter()
+//                dateFormatter.dateStyle = .medium
+//                dateFormatter.timeStyle = .none
+//                contractEndTextField.text = dateFormatter.string(from: contractEnd)
+//            }
             
             firstNameTextField.text = firstName
 			lastNameTextField.text = firstName == lastName ? "" : lastName
@@ -194,7 +194,8 @@ class PersonDetailsViewController: UIViewController {
 	func setupViews() {
         lastNameTextField.isHidden = isEditing ? false : (lastNameTextField.text == "" ? true : false)
         positionDescTextField.isHidden = isEditing ? false : (positionDescTextField.text == "" ? true : false)
-        contractEndTextField.isHidden = isEditing ? false : (contractEndTextField.text == "" ? true : false)
+        //contractEndTextField.isHidden = isEditing ? false : (contractEndTextField.text == "" ? true : false)
+        contractEndTextField.isHidden = true
         
 		if isEditing {
 			UIExtensions.setupDarkViewFor(textField: firstNameTextField)
@@ -202,10 +203,10 @@ class PersonDetailsViewController: UIViewController {
 			UIExtensions.setupDarkViewFor(textField: emailTextField)
 			UIExtensions.setupDarkViewFor(textField: phoneTextField)
             UIExtensions.setupDarkViewFor(textField: positionDescTextField)
-            UIExtensions.setupDarkViewFor(textField: contractEndTextField)
+            //UIExtensions.setupDarkViewFor(textField: contractEndTextField)
 		}
 		else {
-            contractEndTextField.layer.sublayers?.removeAll()
+            //contractEndTextField.layer.sublayers?.removeAll()
             emailTextField.layer.sublayers?.removeAll()
             firstNameTextField.layer.sublayers?.removeAll()
             lastNameTextField.layer.sublayers?.removeAll()
@@ -238,24 +239,25 @@ class PersonDetailsViewController: UIViewController {
 		lastNameTextField.isUserInteractionEnabled = isEditing
 		firstNameTextField.isUserInteractionEnabled = isEditing
         positionDescTextField.isUserInteractionEnabled = isEditing
-        contractEndTextField.isUserInteractionEnabled = isEditing
+        //contractEndTextField.isUserInteractionEnabled = isEditing
 		photoImageView.isUserInteractionEnabled = isEditing
+        contractEndTextField.isUserInteractionEnabled = false
 
-        if let contractEndText = contractEndTextField.text,
-            !contractEndText.isEmpty,
-            !isEditing {
-            contractEndTextField.text = "Contract Ends: \(contractEndText)"
-            
-            if let contractEnd = dateFromString(dateString: contractEndText),
-                contractEnd >= Date() {
-                contractEndTextField.textColor = UIColor.darkGray
-            } else {
-                contractEndTextField.textColor = UIColor.pulseOverdueColor()
-            }
-            
-        } else if isEditing {
-            contractEndTextField.text = contractEndTextField.text?.replacingOccurrences(of: "Contract Ends: ", with: "")
-        }
+//        if let contractEndText = contractEndTextField.text,
+//            !contractEndText.isEmpty,
+//            !isEditing {
+//            contractEndTextField.text = "Contract Ends: \(contractEndText)"
+//            
+//            if let contractEnd = dateFromString(dateString: contractEndText),
+//                contractEnd >= Date() {
+//                contractEndTextField.textColor = UIColor.darkGray
+//            } else {
+//                contractEndTextField.textColor = UIColor.pulseOverdueColor()
+//            }
+//            
+//        } else if isEditing {
+//            contractEndTextField.text = contractEndTextField.text?.replacingOccurrences(of: "Contract Ends: ", with: "")
+//        }
         
 		configureButton(textField: phoneTextField, button: callButton)
 		configureButton(textField: emailTextField, button: emailButton)
@@ -280,11 +282,20 @@ class PersonDetailsViewController: UIViewController {
 			pfPerson[ObjectKeys.Person.phone] = phoneTextField.text
             pfPerson[ObjectKeys.Person.positionDesc] = positionDescTextField.text
             
-            if let contractEndDate = contractEndTextField.text,
-                !contractEndDate.isEmpty {
-                let date = dateFromString(dateString: contractEndDate)
-                pfPerson[ObjectKeys.Person.contractEndDate] = date
-            }
+//            if let contractEndDate = contractEndTextField.text,
+//                !contractEndDate.isEmpty {
+//                let date = dateFromString(dateString: contractEndDate)
+//                pfPerson[ObjectKeys.Person.contractEndDate] = date
+//            }
+
+//            if let contractEndDate = contractEndTextField.text {
+//                if !contractEndDate.isEmpty {
+//                    let date = dateFromString(dateString: contractEndDate)
+//                    pfPerson[ObjectKeys.Person.contractEndDate] = date
+//                } else {
+//                    pfPerson.remove(forKey: ObjectKeys.Person.contractEndDate)
+//                }
+//            }
             
 			if let photoData = photoData {
 				SVProgressHUD.show()
@@ -293,8 +304,7 @@ class PersonDetailsViewController: UIViewController {
 					(success: Bool, error: Error?) in
 					self.updatePersonFinished(success: success, error: error)
 				})
-			}
-			else {
+			} else {
 				pfPerson.saveInBackground(block: {
 					(success: Bool, error: Error?) in
 					self.updatePersonFinished(success: success, error: error)
@@ -340,10 +350,10 @@ class PersonDetailsViewController: UIViewController {
 		person?.phone = phoneTextField.text
         person?.positionDesc = positionDescTextField.text
         
-        if let contractEndDate = contractEndTextField.text {
-            let date = dateFromString(dateString: contractEndDate)
-            person?.contractEndDate = date
-        }
+//        if let contractEndDate = contractEndTextField.text {
+//            let date = dateFromString(dateString: contractEndDate)
+//            person?.contractEndDate = date
+//        }
         
 		person?.photo = photoData
 
@@ -400,28 +410,28 @@ extension PersonDetailsViewController: RKDropdownAlertDelegate {
 }
 
 extension PersonDetailsViewController : UITextFieldDelegate {
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField == contractEndTextField {
-            let datePicker = UIDatePicker()
-            datePicker.datePickerMode = UIDatePickerMode.date
-            datePicker.backgroundColor = UIColor.pulseLightPrimaryColor()
-            
-            if let dateString = contractEndTextField.text, let date = dateFromString(dateString: dateString) {
-                datePicker.setDate(date, animated: true)
-            } else {
-                let date = Date()
-                datePicker.setDate(date, animated: false)
-            }
-            
-            contractEndTextField.inputView = datePicker
-            datePicker.addTarget(self, action: #selector(onContractEndDatePickerValueChanged(_:)), for: .valueChanged)
-        }
-    }
-    
-    @objc func onContractEndDatePickerValueChanged(_ sender: UIDatePicker) {
-        contractEndTextField.text = stringFromDate(date: sender.date)
-    }
+//    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        if textField == contractEndTextField {
+//            let datePicker = UIDatePicker()
+//            datePicker.datePickerMode = UIDatePickerMode.date
+//            datePicker.backgroundColor = UIColor.pulseLightPrimaryColor()
+//            
+//            if let dateString = contractEndTextField.text, let date = dateFromString(dateString: dateString) {
+//                datePicker.setDate(date, animated: true)
+//            } else {
+//                let date = Date()
+//                datePicker.setDate(date, animated: false)
+//            }
+//            
+//            contractEndTextField.inputView = datePicker
+//            datePicker.addTarget(self, action: #selector(onContractEndDatePickerValueChanged(_:)), for: .valueChanged)
+//        }
+//    }
+//    
+//    @objc func onContractEndDatePickerValueChanged(_ sender: UIDatePicker) {
+//        contractEndTextField.text = stringFromDate(date: sender.date)
+//    }
     
 	func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 
@@ -436,13 +446,20 @@ extension PersonDetailsViewController : UITextFieldDelegate {
 		else if textField == emailTextField {
 			phoneTextField.becomeFirstResponder()
         }
-        else if textField == positionDescTextField {
-            contractEndTextField.becomeFirstResponder()
-        }
+//        else if textField == positionDescTextField {
+//            contractEndTextField.becomeFirstResponder()
+//        }
         /*
         else if textField == phoneTextField {
          positionDescTextField.becomeFirstResponder()
         }*/
 		return true
 	}
+    
+//    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        contractEndTextField.text = ""
+//        
+//        return true;
+//    }
 }
