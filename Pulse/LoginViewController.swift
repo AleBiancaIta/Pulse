@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
         } else {
             if var username = usernameTextField.text, let password = passwordTextField.text {
                 // Trim trailing spaces from username (email)
-                username = username.trimmingCharacters(in: .whitespacesAndNewlines)
+                username = username.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
                 
                 SVProgressHUD.show()
                 

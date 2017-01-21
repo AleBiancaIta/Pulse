@@ -85,8 +85,8 @@ class SignUpViewController: UIViewController {
             let newUser = PFUser()
             
             // Set user properties
-            newUser.username = emailTextField.text
-            newUser.email = emailTextField.text
+            newUser.username = emailTextField.text?.lowercased()
+            newUser.email = emailTextField.text?.lowercased()
             newUser.password = passwordTextField.text
             
             SVProgressHUD.show()
