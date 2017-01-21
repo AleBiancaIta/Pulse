@@ -13,6 +13,7 @@ class SettingsViewController: UIViewController {
     
     fileprivate let settingsHeaderCell = "SettingsHeaderCell"
     fileprivate let settingsContentCell = "SettingsContentCell"
+    fileprivate let settingsLabelCell = "SettingsLabelCell"
     
     fileprivate let changePasswordSegue = "changePasswordSegue"
     fileprivate let updateProfileSegue = "updateProfileSegue"
@@ -21,7 +22,7 @@ class SettingsViewController: UIViewController {
     //fileprivate let settingsContent = ["User Info", "Change Password", "Sign Up", "Log Out"]
     fileprivate let settingsContent = ["User Information", "Change Password", "FAQs", "Send Feedback"]
     fileprivate let settingsSubcontent = ["Update your Pulse user information or password with a few taps", "Change the password associated with your Pulse account", "Check out some of our Frequently Asked Questions", "Send us an email to provide feedback, ask questions, or report bugs"]
-    fileprivate let settingsImageName = ["Passport2", "Keylock2", "Help", "Help"]
+    fileprivate let settingsImageName = ["Passport2", "Keylock2", "FAQs", "Help"]
     
     fileprivate let parseClient = ParseClient.sharedInstance()
     
@@ -93,7 +94,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 1
         } else {
-            return settingsContent.count
+            return settingsContent.count+1
         }
     }
     
@@ -107,6 +108,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
 			cell.parent = self
 			cell.selectionStyle = .none
             return cell
+        } else if indexPath.section == 1 && indexPath.row == 4 {
+            var cell = tableView.dequeueReusableCell(withIdentifier: settingsLabelCell)
+            if cell == nil {
+                cell = UITableViewCell(style: .default, reuseIdentifier: settingsLabelCell)
+            }
+            cell?.textLabel?.text = "© \(Calendar.current.component(.year, from: Date())) AleBiancaIta, v1.0"
+            cell?.textLabel?.textAlignment = .center
+            cell?.selectionStyle = .none
+            return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CustomTextCell", for: indexPath) as! CustomTextCell
             cell.message = settingsContent[indexPath.row]
@@ -140,7 +150,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 {
+        if indexPath.section == 0 || (indexPath.section == 1 && indexPath.row == 4) {
             // do nothing
         } else if indexPath.section == 1 {
             if indexPath.row == 0 { // User Info
@@ -153,9 +163,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
                 UIApplication.shared.open(URL(string: "https://pu1seapp.wordpress.com/")!, options: [:], completionHandler: nil)
             } else if indexPath.row == 3 { // Help
 				UIApplication.shared.mailTo(email: "mailto:2b8wad2qg5@snkmail.com?subject=Pulse%20Feedback")
-            } //else if indexPath.row == 3 { // Log Out
-              //  logOut()
-            //}
+            }
         }
     }
 }
