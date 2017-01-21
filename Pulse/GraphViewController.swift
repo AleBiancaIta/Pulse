@@ -277,7 +277,7 @@ class GraphViewController: UIViewController {
         pieChart3?.animate(toScaleValues: [scale3Bad, scale3Neutral, scale3Good], duration: 0.5)
         
         // Setup labels
-        let s = vals1Bad > 1 ? "s" : ""
+        let s = vals1Bad > 1 || vals1Neutral > 1 || vals1Good > 1 ? "s" : ""
         let scale1BadString = String(format: "%.1f", scale1Bad * 100)
         let scale1NeutralString = String(format: "%.1f", scale1Neutral * 100)
         let scale1GoodString = String(format: "%.1f", scale1Good * 100)
