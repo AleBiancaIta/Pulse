@@ -29,6 +29,8 @@ class UpdateProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        positionLabel.isHidden = true
+        
         UIExtensions.gradientBackgroundFor(view: view)
         navigationController?.navigationBar.barStyle = .blackTranslucent
         

@@ -26,6 +26,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var companyNameTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var positionSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var positionSegmentedControlRequiredLabel: UILabel!
+    
     
     var person: Person!
 	var photoData: Data?
@@ -41,6 +43,8 @@ class SignUpViewController: UIViewController {
         profileImageView.layer.cornerRadius = 5
         profileImageView.clipsToBounds = true
         positionSegmentedControl.layer.cornerRadius = 5
+        positionSegmentedControl.isHidden = true
+        positionSegmentedControlRequiredLabel.isHidden = true
 
         configureTextFieldDelegate()
         signUpButton.isEnabled = true
